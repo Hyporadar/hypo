@@ -15,9 +15,11 @@ import {
   estimateMonthlyPayment,
   rateRange,
   renewalFunnel,
+  SEUIL_GROSSE_ECONOMIE,
 } from '@/lib/finance'
 import { prisma } from '@/lib/prisma'
 import { getReferenceRate10y } from '@/lib/rates'
+import { signalPriority } from '@/server/signals/engine'
 
 // ─── Schémas partagés ─────────────────────────────────────────────────
 
@@ -39,14 +41,21 @@ const contactSchema = z.object({
   phone: z.string().max(30).optional(),
 })
 
-// ?ref=CODE → id du partenaire B2B correspondant (insensible à la casse).
-async function resolvePartnerId(ref?: string): Promise<string | null> {
-  if (!ref) return null
+// ?ref=CODE → partenaire B2B (partnerCode) OU parrain client (referralCode).
+async function resolveReferrer(
+  ref?: string
+): Promise<{ partnerId: string | null; sponsorId: string | null }> {
+  if (!ref) return { partnerId: null, sponsorId: null }
   const partner = await prisma.user.findFirst({
     where: { partnerCode: { equals: ref, mode: 'insensitive' }, role: 'PARTNER' },
     select: { id: true },
   })
-  return partner?.id ?? null
+  if (partner) return { partnerId: partner.id, sponsorId: null }
+  const sponsor = await prisma.user.findFirst({
+    where: { referralCode: { equals: ref, mode: 'insensitive' }, role: 'CLIENT' },
+    select: { id: true },
+  })
+  return { partnerId: null, sponsorId: sponsor?.id ?? null }
 }
 
 function utmData(attribution: Attribution) {
@@ -137,7 +146,7 @@ export async function submitBuyFunnel(input: z.infer<typeof buySchema>): Promise
   const loanForMax = Math.max(0, result.maxAffordablePrice - d.ownFunds)
   const monthly = estimateMonthlyPayment(loanForMax, result.maxAffordablePrice, refRate)
 
-  const partnerId = await resolvePartnerId(d.attribution.ref)
+  const { partnerId, sponsorId } = await resolveReferrer(d.attribution.ref)
   const score = computeLeadScore(d.price, 'ACHAT')
 
   try {
@@ -152,6 +161,7 @@ export async function submitBuyFunnel(input: z.infer<typeof buySchema>): Promise
           email: d.email.toLowerCase(),
           phone: d.phone ?? null,
           partnerId,
+          sponsorId,
           ...utmData(d.attribution),
         },
       })
@@ -219,9 +229,6 @@ export type RenewalSubmitResult =
   | { ok: true; classification: 'CHAUD' | 'FROID' | 'TROP_TARD' }
   | { ok: false; error: 'invalid' | 'server' }
 
-/** Seuil de signal « grosse économie » pour la file des closers. */
-const GROSSE_ECONOMIE_CHF_AN = 2_400
-
 export async function submitRenewalFunnel(
   input: z.infer<typeof renewalSchema>
 ): Promise<RenewalSubmitResult> {
@@ -246,7 +253,7 @@ export async function submitRenewalFunnel(
     currentRate: d.currentRate,
     referenceRate: refRate,
   })
-  const partnerId = await resolvePartnerId(d.attribution.ref)
+  const { partnerId, sponsorId } = await resolveReferrer(d.attribution.ref)
 
   try {
     await prisma.$transaction(async (tx) => {
@@ -260,6 +267,7 @@ export async function submitRenewalFunnel(
           email: d.email.toLowerCase(),
           phone: d.phone ?? null,
           partnerId,
+          sponsorId,
           ...utmData(d.attribution),
         },
       })
@@ -278,10 +286,23 @@ export async function submitRenewalFunnel(
         },
       })
       if (d.wantsCallback && classification === 'CHAUD') {
-        await tx.signal.create({ data: { leadId: lead.id, type: 'CALLBACK_DEMANDE' } })
+        await tx.signal.create({
+          data: {
+            leadId: lead.id,
+            type: 'CALLBACK_DEMANDE',
+            priority: signalPriority('CALLBACK_DEMANDE', d.remainingAmount),
+          },
+        })
       }
-      if (classification === 'CHAUD' && savings >= GROSSE_ECONOMIE_CHF_AN) {
-        await tx.signal.create({ data: { leadId: lead.id, type: 'GROSSE_ECONOMIE' } })
+      if (classification === 'CHAUD' && savings > SEUIL_GROSSE_ECONOMIE) {
+        await tx.signal.create({
+          data: {
+            leadId: lead.id,
+            type: 'GROSSE_ECONOMIE',
+            priority: signalPriority('GROSSE_ECONOMIE', d.remainingAmount),
+            context: { savings: Math.round(savings) },
+          },
+        })
       }
       await tx.formDraft.updateMany({
         where: { id: d.draftId },
@@ -324,7 +345,9 @@ export async function submitContractUpload(formData: FormData): Promise<UploadRe
     JSON.parse(String(formData.get('attribution') ?? '{}'))
   )
   const locale = (await getLocale()) as Locale
-  const partnerId = await resolvePartnerId(attribution.success ? attribution.data.ref : undefined)
+  const { partnerId, sponsorId } = await resolveReferrer(
+    attribution.success ? attribution.data.ref : undefined
+  )
 
   try {
     const dir = path.join(process.cwd(), 'uploads')
@@ -343,6 +366,7 @@ export async function submitContractUpload(formData: FormData): Promise<UploadRe
           name: contact.data.name,
           email: contact.data.email.toLowerCase(),
           partnerId,
+          sponsorId,
           ...(attribution.success ? utmData(attribution.data) : {}),
         },
       })
@@ -356,7 +380,9 @@ export async function submitContractUpload(formData: FormData): Promise<UploadRe
           url: `/uploads/${filename}`,
         },
       })
-      await tx.signal.create({ data: { leadId: lead.id, type: 'CALLBACK_DEMANDE' } })
+      await tx.signal.create({
+        data: { leadId: lead.id, type: 'CALLBACK_DEMANDE', priority: 0 },
+      })
     })
 
     return { ok: true }
@@ -394,7 +420,7 @@ export async function requestCallback(
           locale,
           name: parsed.data.name,
           phone: parsed.data.phone,
-          partnerId: await resolvePartnerId(attribution?.ref),
+          partnerId: (await resolveReferrer(attribution?.ref)).partnerId,
           ...(attribution ? utmData(attribution) : {}),
           utmContent: 'callback-home',
         },
@@ -402,7 +428,9 @@ export async function requestCallback(
       await tx.leadStatusChange.create({
         data: { leadId: lead.id, fromStatus: null, toStatus: 'NOUVEAU' },
       })
-      await tx.signal.create({ data: { leadId: lead.id, type: 'CALLBACK_DEMANDE' } })
+      await tx.signal.create({
+        data: { leadId: lead.id, type: 'CALLBACK_DEMANDE', priority: 0 },
+      })
     })
     return { ok: true }
   } catch (error) {

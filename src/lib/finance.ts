@@ -208,6 +208,9 @@ export function computeLeadScore(
   return Math.round((Math.max(0, amount) * URGENCE[classification]) / 1000)
 }
 
+/** Seuil « grosse économie » (CHF/an) : signal prioritaire pour les closers. */
+export const SEUIL_GROSSE_ECONOMIE = 2_000
+
 // ─── Estimations affichées au client ──────────────────────────────────
 
 /** Fourchette de taux indicative autour du taux de référence : ± 0,15 point. */

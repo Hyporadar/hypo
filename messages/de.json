@@ -329,5 +329,27 @@
     "issuedOn": "Ausstellungsdatum",
     "maxCapacity": "Zertifizierte Kaufkraft",
     "footer": "HypoPilot stellt kostenlose Tragbarkeitszertifikate aus, berechnet nach Schweizer Bankenregeln."
+  },
+  "emails": {
+    "abandonJ1": {
+      "subject": "Ihre Simulation wartet auf Sie",
+      "body": "Guten Tag {name}\n\nSie waren nur wenige Fragen vom Ergebnis entfernt. Ihre Antworten sind gespeichert: Machen Sie genau dort weiter, wo Sie aufgehört haben.\n\n2 Minuten genügen. Kostenlos, unverbindlich.",
+      "cta": "Simulation fortsetzen"
+    },
+    "abandonJ3": {
+      "subject": "Letzte Erinnerung — Ihre Simulation ist noch offen",
+      "body": "Guten Tag {name}\n\nIhre Simulation ist noch da, zur Hälfte ausgefüllt. Nach dieser Woche archivieren wir sie.\n\nFalls der Zeitpunkt ungünstig ist, antworten Sie einfach auf diese E-Mail: Ein Berater ruft Sie zurück, wann es Ihnen passt.",
+      "cta": "Simulation abschliessen"
+    },
+    "offersUnread": {
+      "subject": "Ihre Finanzierungsofferten sind bereit",
+      "body": "Guten Tag {name}\n\nIhre Offerten sind in Ihrem Bereich online. Nehmen Sie sich Zeit zum Vergleichen — aber nicht zu viel: Jede Offerte hat ein Gültigkeitsdatum.",
+      "cta": "Meine Offerten ansehen"
+    },
+    "quarterly": {
+      "subject": "Ihr Zinssatz vs. der Markt in diesem Quartal",
+      "body": "Guten Tag {name}\n\nDas Quartals-Update Ihrer Überwachung: Sie zahlen {rate}, der 10-Jahres-Referenzzinssatz liegt bei {refRate}. Potenzielle Differenz: {savings} pro Jahr.\n\nSie müssen nichts tun — wir melden uns, sobald sich Ihr Zeitfenster öffnet.",
+      "cta": "Meine Überwachung ansehen"
+    }
   }
 }

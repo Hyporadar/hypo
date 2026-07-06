@@ -83,6 +83,20 @@ enum AppointmentType {
   VISIO
 }
 
+enum ClientEventType {
+  CONNEXION
+  OFFRE_OUVERTE
+  SIMULATION_REVUE
+  DOSSIER_MIS_A_JOUR
+  CERTIFICAT_TELECHARGE
+}
+
+enum CommissionKind {
+  APPORT_PARTENAIRE
+  VARIABLE_CLOSER
+  PARRAINAGE
+}
+
 // ─── Utilisateurs ─────────────────────────────────────────────────────
 
 model User {
@@ -94,12 +108,18 @@ model User {
   role         Role     @default(CLIENT)
   locale       Locale   @default(fr) // langue des emails, PDF et statuts affichés
   partnerCode  String?  @unique // rôle PARTNER : code d'apport (?ref=CODE sur les landings)
+  referralCode String?  @unique // rôle CLIENT : lien de parrainage (?ref=CODE, CHF 100/filleul validé)
+  partnerApprovedAt DateTime? // PARTNER : validation manuelle par l'admin
+  alertPrefs   Json? // préférences d'alerte client (email/SMS — placeholders)
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 
   leads             Lead[]            @relation("ClientLeads")
   referredLeads     Lead[]            @relation("PartnerLeads")
+  sponsoredLeads    Lead[]            @relation("SponsoredLeads")
   assignedLeads     Lead[]            @relation("CloserLeads")
+  claimedSignals    Signal[]          @relation("ClaimedSignals")
+  clientEvents      ClientEvent[]
   mortgages         Mortgage[]
   purchaseProjects  PurchaseProject[]
   appointments      Appointment[]     @relation("CloserAppointments")
@@ -134,8 +154,12 @@ model Lead {
   user      User?   @relation("ClientLeads", fields: [userId], references: [id])
   partnerId String? // apporteur B2B (User PARTNER)
   partner   User?   @relation("PartnerLeads", fields: [partnerId], references: [id])
+  sponsorId String? // parrain (User CLIENT — programme de parrainage)
+  sponsor   User?   @relation("SponsoredLeads", fields: [sponsorId], references: [id])
   closerId  String? // closer affecté (User CLOSER)
   closer    User?   @relation("CloserLeads", fields: [closerId], references: [id])
+
+  notes String? // notes internes closers
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -151,6 +175,7 @@ model Lead {
   purchaseProject   PurchaseProject?
   certificate       Certificate?
   formDrafts        FormDraft[]
+  events            ClientEvent[]
 
   @@index([status, funnel])
   @@index([closerId, status])
@@ -211,16 +236,20 @@ model PurchaseProject {
 // ─── File de travail des closers ──────────────────────────────────────
 
 model Signal {
-  id        String       @id @default(cuid())
-  leadId    String
-  lead      Lead         @relation(fields: [leadId], references: [id], onDelete: Cascade)
-  type      SignalType
-  status    SignalStatus @default(OUVERT)
-  createdAt DateTime     @default(now())
-  treatedAt DateTime?
+  id          String       @id @default(cuid())
+  leadId      String
+  lead        Lead         @relation(fields: [leadId], references: [id], onDelete: Cascade)
+  type        SignalType
+  status      SignalStatus @default(OUVERT)
+  priority    Int          @default(0) // montant × urgence du type ; CALLBACK toujours en tête
+  context     Json? // ex. { reinforced: true, savings: 3200 }
+  claimedById String? // closer qui a pris le signal (claim) — sinon pool
+  claimedBy   User?        @relation("ClaimedSignals", fields: [claimedById], references: [id])
+  createdAt   DateTime     @default(now())
+  treatedAt   DateTime?
 
-  @@index([status, createdAt])
-  @@index([leadId])
+  @@index([status, priority])
+  @@index([leadId, type, status])
 }
 
 // ─── Offres & documents ───────────────────────────────────────────────
@@ -300,19 +329,74 @@ model ReferenceRate {
 
 // ─── Commissions ──────────────────────────────────────────────────────
 
-// bénéficiaire = partner OU closer (exactement un des deux, vérifié applicativement)
+// bénéficiaire = partner, closer ou parrain (kind qualifie la commission)
 model CommissionEntry {
   id            String           @id @default(cuid())
   beneficiaryId String
   beneficiary   User             @relation(fields: [beneficiaryId], references: [id])
   leadId        String
   lead          Lead             @relation(fields: [leadId], references: [id])
+  kind          CommissionKind   @default(APPORT_PARTENAIRE)
   amount        Decimal          @db.Decimal(12, 2) // CHF
   status        CommissionStatus @default(DUE)
   paidAt        DateTime?
   createdAt     DateTime         @default(now())
 
   @@index([beneficiaryId, status])
+}
+
+// ─── Événements clients (module src/server/events.ts) ─────────────────
+
+// Chaque action importante du client — consommé par le moteur de signaux.
+model ClientEvent {
+  id        String          @id @default(cuid())
+  type      ClientEventType
+  userId    String?
+  user      User?           @relation(fields: [userId], references: [id], onDelete: SetNull)
+  leadId    String?
+  lead      Lead?           @relation(fields: [leadId], references: [id], onDelete: Cascade)
+  data      Json?
+  createdAt DateTime        @default(now())
+
+  @@index([leadId, type, createdAt])
+  @@index([userId, createdAt])
+}
+
+// ─── Historique des taux (page /taux + graphique) ──────────────────────
+
+model ReferenceRateChange {
+  id         String       @id @default(cuid())
+  type       MortgageType
+  termYears  Int
+  rate       Decimal      @db.Decimal(6, 3)
+  recordedAt DateTime     @default(now())
+
+  @@index([type, termYears, recordedAt])
+}
+
+// ─── Dépenses marketing (CAC par canal, saisie manuelle admin) ─────────
+
+model ChannelSpend {
+  id      String   @id @default(cuid())
+  channel String // correspond à utmSource (ex. google, facebook)
+  month   DateTime // 1er jour du mois
+  amount  Decimal  @db.Decimal(12, 2) // CHF
+
+  @@unique([channel, month])
+}
+
+// ─── Journal d'emails (provider mocké + idempotence du nurturing) ──────
+
+model EmailLog {
+  id       String   @id @default(cuid())
+  to       String
+  locale   Locale
+  template String // ex. "abandon-j1", "offres-non-lues", "trimestriel"
+  subject  String
+  leadId   String?
+  sentAt   DateTime @default(now())
+
+  @@index([leadId, template])
 }
 
 // ─── Agenda ───────────────────────────────────────────────────────────

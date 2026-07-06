@@ -329,5 +329,27 @@
     "issuedOn": "Data di emissione",
     "maxCapacity": "Capacità d'acquisto certificata",
     "footer": "HypoPilot emette certificati di sostenibilità gratuiti, calcolati secondo le regole bancarie svizzere."
+  },
+  "emails": {
+    "abandonJ1": {
+      "subject": "La Sua simulazione La aspetta",
+      "body": "Buongiorno {name},\n\nEra a poche domande dal risultato. Le Sue risposte sono salvate: riprenda esattamente da dove si era fermato.\n\nBastano 2 minuti. Gratuito, senza impegno.",
+      "cta": "Riprendere la simulazione"
+    },
+    "abandonJ3": {
+      "subject": "Ultimo promemoria — la Sua simulazione è ancora aperta",
+      "body": "Buongiorno {name},\n\nLa Sua simulazione è ancora lì, completata a metà. Dopo questa settimana la archivieremo.\n\nSe il momento non è quello giusto, risponda semplicemente a questa e-mail: un consulente La richiamerà quando preferisce.",
+      "cta": "Completare la simulazione"
+    },
+    "offersUnread": {
+      "subject": "Le Sue offerte di finanziamento sono pronte",
+      "body": "Buongiorno {name},\n\nLe Sue offerte sono online nella Sua area. Si prenda il tempo di confrontarle — ma non troppo: ogni offerta ha una data di validità.",
+      "cta": "Vedere le mie offerte"
+    },
+    "quarterly": {
+      "subject": "Il Suo tasso vs il mercato questo trimestre",
+      "body": "Buongiorno {name},\n\nIl punto trimestrale della Sua sorveglianza: Lei paga {rate}, il tasso di riferimento a 10 anni è {refRate}. Differenza potenziale: {savings} all'anno.\n\nNon deve fare nulla — La avviseremo quando la Sua finestra si aprirà.",
+      "cta": "Vedere la mia sorveglianza"
+    }
   }
 }

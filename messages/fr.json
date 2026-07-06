@@ -329,5 +329,27 @@
     "issuedOn": "Date d'émission",
     "maxCapacity": "Capacité d'achat certifiée",
     "footer": "HypoPilot émet des certificats de capacité d'achat gratuits, calculés selon les règles bancaires suisses."
+  },
+  "emails": {
+    "abandonJ1": {
+      "subject": "Votre simulation vous attend",
+      "body": "Bonjour {name},\n\nVous étiez à quelques questions du résultat. Vos réponses sont sauvegardées : reprenez exactement là où vous vous êtes arrêté.\n\n2 minutes suffisent. Gratuit, sans engagement.",
+      "cta": "Reprendre ma simulation"
+    },
+    "abandonJ3": {
+      "subject": "Dernier rappel — votre simulation reste ouverte",
+      "body": "Bonjour {name},\n\nVotre simulation est toujours là, complète à moitié. Après cette semaine, nous l'archivons.\n\nSi le moment est mal choisi, répondez simplement à cet email : un conseiller vous rappellera quand cela vous arrange.",
+      "cta": "Terminer ma simulation"
+    },
+    "offersUnread": {
+      "subject": "Vos offres de financement sont prêtes",
+      "body": "Bonjour {name},\n\nVos offres sont en ligne dans votre espace. Prenez le temps de les comparer — mais pas trop : chaque offre a une date de validité.",
+      "cta": "Voir mes offres"
+    },
+    "quarterly": {
+      "subject": "Votre taux vs le marché ce trimestre",
+      "body": "Bonjour {name},\n\nLe point trimestriel de votre surveillance : vous payez {rate}, le taux de référence 10 ans est à {refRate}. Écart potentiel : {savings} par an.\n\nRien à faire de votre côté — nous vous préviendrons quand votre fenêtre s'ouvrira.",
+      "cta": "Voir ma surveillance"
+    }
   }
 }
