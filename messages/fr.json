@@ -50,9 +50,9 @@
   },
   "home": {
     "hero": {
-      "overline": "Surveillance d'hypothèque",
-      "title": "3 minutes pour enregistrer. Des années de surveillance.",
-      "subtitle": "HypoPilot suit votre taux et votre date d'échéance, puis vous prévient 12 à 18 mois avant — la seule fenêtre où vous pouvez encore changer de banque.",
+      "overline": "Hypothèques suisses",
+      "title": "Votre hypothèque au meilleur taux. À l'achat comme au renouvellement.",
+      "subtitle": "Banques, assurances et caisses de pension mises en concurrence, gratuitement. Résultat immédiat — aucun rendez-vous imposé.",
       "ctaBuy": "Calculer ma capacité d'achat",
       "ctaRenew": "Enregistrer mon hypothèque"
     },
@@ -72,12 +72,12 @@
     },
     "steps": {
       "title": "Comment ça marche",
-      "step1Title": "Vous enregistrez votre hypothèque",
-      "step1Body": "Montant, taux, échéance. 3 minutes suffisent.",
-      "step2Title": "Nous surveillons pour vous",
-      "step2Body": "Votre taux et votre échéance sont suivis pendant des années. Vous ne ratez plus la fenêtre.",
-      "step3Title": "Nous mettons les prêteurs en concurrence",
-      "step3Body": "Banques, assurances et caisses de pension se disputent votre dossier. Vous choisissez.",
+      "step1Title": "Dites-nous où vous en êtes",
+      "step1Body": "Achat ou renouvellement : saisissez votre situation en 2 minutes. Le résultat s'affiche immédiatement.",
+      "step2Title": "Nous mettons les prêteurs en concurrence",
+      "step2Body": "Banques, assurances et caisses de pension remettent leur meilleure offre sur votre dossier. Vous comparez, noir sur blanc.",
+      "step3Title": "Vous choisissez — nous restons en veille",
+      "step3Body": "Vous signez la meilleure offre, chez qui vous voulez. Ensuite, votre taux et votre échéance restent suivis gratuitement.",
       "more": "Voir le fonctionnement en détail"
     },
     "transparency": {
@@ -93,6 +93,28 @@
       "phone": "Téléphone",
       "submit": "Me faire rappeler",
       "success": "C'est noté. Un conseiller vous rappelle très vite."
+    },
+    "leadWidget": {
+      "title": "Quel taux pouvez-vous obtenir ?",
+      "subtitle": "Saisissez votre situation — le résultat s'affiche immédiatement.",
+      "propertyValue": "Valeur du bien",
+      "mortgage": "Hypothèque",
+      "income": "Revenu du ménage",
+      "offersTitle": "{count} offres pour vous",
+      "saronNote": "marge comprise",
+      "fixedNote": "hypothèque fixe",
+      "years": "{years} ans",
+      "savings": "Économie potentielle",
+      "bank": "Banque",
+      "pension": "Caisse de pension",
+      "insurance": "Assurance",
+      "bullet1": "Sans ouverture de compte obligatoire",
+      "bullet2": "Taux indicatif du jour",
+      "cta": "Obtenir cette offre",
+      "savingsNote": "Économie estimée sur la durée choisie, par rapport à une offre moyenne du marché (écart moyen constaté : 0,72%). Taux définitif après mise en concurrence réelle.",
+      "emptyHint": "Renseignez votre hypothèque pour voir vos offres.",
+      "buyHint": "Vous achetez un bien ?",
+      "buyCta": "Calculer ma capacité d'achat"
     }
   },
   "buy": {

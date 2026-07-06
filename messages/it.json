@@ -50,9 +50,9 @@
   },
   "home": {
     "hero": {
-      "overline": "Sorveglianza dell'ipoteca",
-      "title": "3 minuti per registrare. Anni di sorveglianza.",
-      "subtitle": "HypoPilot segue il Suo tasso e la Sua data di scadenza, poi La avvisa da 12 a 18 mesi prima — l'unica finestra in cui può ancora cambiare banca.",
+      "overline": "Ipoteche svizzere",
+      "title": "La Sua ipoteca al miglior tasso. All'acquisto come al rinnovo.",
+      "subtitle": "Banche, assicurazioni e casse pensioni messe in concorrenza, gratuitamente. Risultato immediato — nessun appuntamento imposto.",
       "ctaBuy": "Calcolare la sostenibilità",
       "ctaRenew": "Registrare l'ipoteca"
     },
@@ -72,12 +72,12 @@
     },
     "steps": {
       "title": "Come funziona",
-      "step1Title": "Lei registra la Sua ipoteca",
-      "step1Body": "Importo, tasso, scadenza. Bastano 3 minuti.",
-      "step2Title": "Noi sorvegliamo per Lei",
-      "step2Body": "Il Suo tasso e la Sua scadenza sono seguiti per anni. Non perde più la finestra utile.",
-      "step3Title": "Mettiamo in concorrenza i finanziatori",
-      "step3Body": "Banche, assicurazioni e casse pensioni si contendono il Suo dossier. Lei sceglie.",
+      "step1Title": "Ci dica a che punto è",
+      "step1Body": "Acquisto o rinnovo: inserisca la Sua situazione in 2 minuti. Il risultato appare subito.",
+      "step2Title": "Mettiamo in concorrenza i finanziatori",
+      "step2Body": "Banche, assicurazioni e casse pensioni presentano la loro migliore offerta sul Suo dossier. Lei confronta, nero su bianco.",
+      "step3Title": "Lei sceglie — noi restiamo vigili",
+      "step3Body": "Firma l'offerta migliore, dove vuole Lei. Poi il Suo tasso e la Sua scadenza restano seguiti gratuitamente.",
       "more": "Il funzionamento in dettaglio"
     },
     "transparency": {
@@ -93,6 +93,28 @@
       "phone": "Telefono",
       "submit": "Richiedere la chiamata",
       "success": "Registrato. Un consulente La richiamerà a breve."
+    },
+    "leadWidget": {
+      "title": "Che tasso può ottenere?",
+      "subtitle": "Inserisca la Sua situazione — il risultato appare subito.",
+      "propertyValue": "Valore dell'immobile",
+      "mortgage": "Ipoteca",
+      "income": "Reddito familiare",
+      "offersTitle": "{count} offerte per Lei",
+      "saronNote": "margine incluso",
+      "fixedNote": "ipoteca fissa",
+      "years": "{years} anni",
+      "savings": "Risparmio potenziale",
+      "bank": "Banca",
+      "pension": "Cassa pensioni",
+      "insurance": "Assicurazione",
+      "bullet1": "Nessuna apertura di conto obbligatoria",
+      "bullet2": "Tasso indicativo del giorno",
+      "cta": "Ottenere questa offerta",
+      "savingsNote": "Risparmio stimato sulla durata scelta rispetto a un'offerta media del mercato (scarto medio osservato: 0,72%). Tasso definitivo dopo la gara d'offerte reale.",
+      "emptyHint": "Inserisca la Sua ipoteca per vedere le Sue offerte.",
+      "buyHint": "Sta comprando un immobile?",
+      "buyCta": "Calcolare la sostenibilità"
     }
   },
   "buy": {

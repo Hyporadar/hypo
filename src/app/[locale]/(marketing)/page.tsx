@@ -2,17 +2,35 @@ import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { ArrowRight } from 'lucide-react'
 import { Link } from '@/i18n/navigation'
 import { formatRate } from '@/lib/format'
+import { prisma } from '@/lib/prisma'
 import { getReferenceRate10y } from '@/lib/rates'
-import { MortgageTimeline } from '@/components/brand/mortgage-timeline'
 import { CallbackDialog } from '@/components/marketing/callback-dialog'
+import { HomeLeadWidget, type WidgetRates } from '@/components/marketing/home-lead-widget'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+
+// Taux du jour pour le widget de lead (repli si la table est vide).
+async function getWidgetRates(): Promise<WidgetRates> {
+  try {
+    const rates = await prisma.referenceRate.findMany()
+    const fixed: Record<number, number> = {}
+    let saron: number | null = null
+    for (const rate of rates) {
+      if (rate.type === 'SARON') saron = Number(rate.rate)
+      else fixed[rate.termYears] = Number(rate.rate)
+    }
+    fixed[15] ??= fixed[10] !== undefined ? Math.round((fixed[10] + 0.25) * 100) / 100 : 2.0
+    return { saron, fixed }
+  } catch {
+    return { saron: 0.9, fixed: { 5: 1.3, 10: 1.75, 15: 2.0 } }
+  }
+}
 
 export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params
   setRequestLocale(locale)
   const t = await getTranslations('home')
-  const refRate10y = await getReferenceRate10y()
+  const [refRate10y, widgetRates] = await Promise.all([getReferenceRate10y(), getWidgetRates()])
 
   return (
     <>
@@ -28,15 +46,16 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           <p className="text-ink-700 text-lg leading-relaxed">{t('hero.subtitle')}</p>
           <div className="flex flex-wrap gap-3 pt-2">
             <Button asChild size="lg">
-              <Link href="/renouveler">{t('hero.ctaRenew')}</Link>
+              <Link href="/acheter">{t('hero.ctaBuy')}</Link>
             </Button>
             <Button asChild size="lg" variant="outline">
-              <Link href="/acheter">{t('hero.ctaBuy')}</Link>
+              <Link href="/renouveler">{t('hero.ctaRenew')}</Link>
             </Button>
           </div>
         </div>
-        <div className="mt-16 max-w-2xl">
-          <MortgageTimeline startLabel="2024" windowLabel="12–18" endLabel="2034" />
+        {/* Le formulaire de lead : saisie immédiate, propositions dessous */}
+        <div className="mt-14">
+          <HomeLeadWidget rates={widgetRates} />
         </div>
       </section>
 

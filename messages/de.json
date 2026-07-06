@@ -50,9 +50,9 @@
   },
   "home": {
     "hero": {
-      "overline": "Hypotheken-Überwachung",
-      "title": "3 Minuten zum Erfassen. Jahre der Überwachung.",
-      "subtitle": "HypoPilot verfolgt Ihren Zinssatz und Ihren Ablauftermin und meldet sich 12 bis 18 Monate im Voraus — das einzige Zeitfenster, in dem Sie die Bank noch wechseln können.",
+      "overline": "Schweizer Hypotheken",
+      "title": "Ihre Hypothek zum besten Zinssatz. Beim Kauf wie bei der Verlängerung.",
+      "subtitle": "Banken, Versicherungen und Pensionskassen im Wettbewerb — kostenlos. Sofortiges Ergebnis, kein Termin nötig.",
       "ctaBuy": "Tragbarkeit berechnen",
       "ctaRenew": "Hypothek erfassen"
     },
@@ -72,12 +72,12 @@
     },
     "steps": {
       "title": "So funktioniert es",
-      "step1Title": "Sie erfassen Ihre Hypothek",
-      "step1Body": "Betrag, Zinssatz, Ablauf. 3 Minuten genügen.",
-      "step2Title": "Wir überwachen für Sie",
-      "step2Body": "Ihr Zinssatz und Ihr Ablauftermin werden über Jahre verfolgt. Sie verpassen das Zeitfenster nicht mehr.",
-      "step3Title": "Wir bringen die Kreditgeber in Konkurrenz",
-      "step3Body": "Banken, Versicherungen und Pensionskassen bewerben sich um Ihr Dossier. Sie wählen.",
+      "step1Title": "Sagen Sie uns, wo Sie stehen",
+      "step1Body": "Kauf oder Verlängerung: Erfassen Sie Ihre Situation in 2 Minuten. Das Ergebnis erscheint sofort.",
+      "step2Title": "Wir bringen die Kreditgeber in Konkurrenz",
+      "step2Body": "Banken, Versicherungen und Pensionskassen legen ihre beste Offerte für Ihr Dossier vor. Sie vergleichen, schwarz auf weiss.",
+      "step3Title": "Sie wählen — wir bleiben dran",
+      "step3Body": "Sie unterschreiben die beste Offerte, wo Sie wollen. Danach bleiben Zinssatz und Ablauf kostenlos überwacht.",
       "more": "Das Prinzip im Detail"
     },
     "transparency": {
@@ -93,6 +93,28 @@
       "phone": "Telefon",
       "submit": "Rückruf anfordern",
       "success": "Notiert. Ein Berater meldet sich sehr bald bei Ihnen."
+    },
+    "leadWidget": {
+      "title": "Welche Zinsen erhalten Sie?",
+      "subtitle": "Erfassen Sie Ihre Situation — das Ergebnis erscheint sofort.",
+      "propertyValue": "Immobilienwert",
+      "mortgage": "Hypothek",
+      "income": "Haushaltseinkommen",
+      "offersTitle": "{count} Offerten für Sie",
+      "saronNote": "inkl. Marge",
+      "fixedNote": "Festhypothek",
+      "years": "{years} Jahre",
+      "savings": "Sparpotenzial",
+      "bank": "Bank",
+      "pension": "Pensionskasse",
+      "insurance": "Versicherung",
+      "bullet1": "Keine Kontoeröffnung nötig",
+      "bullet2": "Indikativer Tageszinssatz",
+      "cta": "Diese Offerte erhalten",
+      "savingsNote": "Geschätzte Ersparnis über die gewählte Laufzeit gegenüber einer durchschnittlichen Marktofferte (beobachtete Differenz: 0,72%). Definitiver Zinssatz nach der eigentlichen Ausschreibung.",
+      "emptyHint": "Erfassen Sie Ihre Hypothek, um Ihre Offerten zu sehen.",
+      "buyHint": "Sie kaufen eine Immobilie?",
+      "buyCta": "Tragbarkeit berechnen"
     }
   },
   "buy": {
