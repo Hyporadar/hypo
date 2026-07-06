@@ -7,6 +7,7 @@
     "nav": {
       "buy": "Acheter un bien",
       "renew": "Renouveler mon hypothèque",
+      "howItWorks": "Comment ça marche",
       "login": "Connexion",
       "register": "Créer un compte",
       "app": "Mon espace",
@@ -14,6 +15,20 @@
     },
     "language": {
       "label": "Langue"
+    },
+    "form": {
+      "back": "Retour",
+      "continue": "Continuer",
+      "showResult": "Voir mon résultat",
+      "stepOf": "Étape {current} sur {total}",
+      "optional": "facultatif",
+      "required": "Ce champ est requis.",
+      "invalidNumber": "Veuillez saisir un montant valide.",
+      "invalidRate": "Veuillez saisir un taux valide (ex. 1,45).",
+      "invalidDate": "Veuillez saisir une date valide.",
+      "invalidEmail": "Veuillez saisir une adresse e-mail valide.",
+      "genericError": "Une erreur est survenue. Veuillez réessayer.",
+      "privacy": "Vos données restent chez HypoPilot. Aucune transmission à des tiers sans votre accord explicite."
     },
     "footer": {
       "transparency": "Gratuit pour vous. Payé par les prêteurs. Affiché noir sur blanc.",
@@ -29,6 +44,20 @@
       "ctaBuy": "Calculer ma capacité d'achat",
       "ctaRenew": "Enregistrer mon hypothèque"
     },
+    "dailyRate": {
+      "overline": "Le chiffre du jour",
+      "label": "Meilleur taux fixe 10 ans",
+      "note": "Taux de référence national, mis à jour par notre équipe."
+    },
+    "routing": {
+      "title": "Par où commencer ?",
+      "buyTitle": "Vous achetez ?",
+      "buyBody": "Calculez votre capacité d'achat et recevez votre certificat PDF gratuit. C'est le document que les agents immobiliers demandent avant toute offre.",
+      "buyCta": "Calculer ma capacité",
+      "renewTitle": "Votre hypothèque expire quand ?",
+      "renewBody": "Saisissez votre hypothèque actuelle. En 2 minutes, vous savez combien vous perdez chaque année — et ce qu'on peut faire.",
+      "renewCta": "Vérifier mon taux"
+    },
     "steps": {
       "title": "Comment ça marche",
       "step1Title": "Vous enregistrez votre hypothèque",
@@ -36,11 +65,22 @@
       "step2Title": "Nous surveillons pour vous",
       "step2Body": "Votre taux et votre échéance sont suivis pendant des années. Vous ne ratez plus la fenêtre.",
       "step3Title": "Nous mettons les prêteurs en concurrence",
-      "step3Body": "Banques, assurances et caisses de pension se disputent votre dossier. Vous choisissez."
+      "step3Body": "Banques, assurances et caisses de pension se disputent votre dossier. Vous choisissez.",
+      "more": "Voir le fonctionnement en détail"
     },
     "transparency": {
       "title": "La transparence, noir sur blanc",
-      "body": "Le service est gratuit pour vous. Nous touchons une commission du prêteur retenu — vous la voyez avant de signer."
+      "body": "Le service est gratuit pour vous. Nous touchons une commission du prêteur retenu — vous la voyez avant de signer.",
+      "more": "Pourquoi c'est gratuit"
+    },
+    "callback": {
+      "button": "Être rappelé maintenant",
+      "title": "On vous rappelle",
+      "subtitle": "Laissez votre numéro. Un conseiller vous rappelle en quelques minutes pendant les heures ouvrables.",
+      "name": "Nom complet",
+      "phone": "Téléphone",
+      "submit": "Me faire rappeler",
+      "success": "C'est noté. Un conseiller vous rappelle très vite."
     }
   },
   "buy": {
@@ -49,15 +89,182 @@
       "title": "Votre certificat de capacité d'achat, gratuit, en 2 minutes",
       "subtitle": "Le document exigé pour faire une offre sur un bien. Calculé selon les règles bancaires suisses, délivré immédiatement en PDF."
     },
-    "placeholder": "Le calculateur arrive ici."
+    "steps": {
+      "price": {
+        "label": "Quel est le prix du bien ?",
+        "help": "Le prix affiché ou estimé du bien que vous visez. Une estimation suffit."
+      },
+      "ownFunds": {
+        "label": "De combien de fonds propres disposez-vous ?",
+        "help": "Épargne, 3e pilier, donation, avancement d'hoirie — tout ce que vous pouvez apporter.",
+        "pillar2Label": "Dont 2e pilier (caisse de pension)",
+        "pillar2Help": "Les banques exigent au moins 10% du prix hors 2e pilier."
+      },
+      "income": {
+        "label": "Quel est le revenu brut annuel de votre ménage ?",
+        "help": "Salaires bruts cumulés du ménage, avant déductions, 13e salaire compris."
+      }
+    },
+    "result": {
+      "feasibleTitle": "Votre projet est finançable",
+      "feasibleBody": "Sur la base de vos chiffres, les banques peuvent suivre. Votre certificat le confirme noir sur blanc.",
+      "notFeasibleTitle": "Ce prix dépasse votre capacité actuelle",
+      "notFeasibleBody": "Rien d'anormal : la règle des 33% de charges est stricte. Voici ce que vous pouvez viser aujourd'hui.",
+      "maxCapacity": "Votre capacité d'achat maximale",
+      "rateRange": "Fourchette de taux indicative",
+      "monthly": "Mensualité estimée",
+      "monthlyNote": "Intérêts + amortissement, au taux indicatif. Hors entretien.",
+      "reasonCharge": "Les charges théoriques dépassent 33% de votre revenu.",
+      "reasonOwnFunds": "Il faut au moins 20% du prix en fonds propres.",
+      "reasonHardOwnFunds": "Au moins 10% du prix doit venir d'ailleurs que du 2e pilier.",
+      "cta": "Recevoir mon certificat PDF"
+    },
+    "emailGate": {
+      "title": "Votre certificat est prêt",
+      "subtitle": "Il ne manque que le nom à imprimer et l'adresse où l'envoyer. Gratuit, sans engagement.",
+      "name": "Nom complet (imprimé sur le certificat)",
+      "email": "Adresse e-mail",
+      "phone": "Téléphone",
+      "submit": "Obtenir mon certificat"
+    },
+    "done": {
+      "title": "Votre certificat est émis",
+      "body": "Numéro {number}. Chaque certificat porte un code QR de vérification : les agents immobiliers peuvent contrôler son authenticité en un scan.",
+      "download": "Télécharger le PDF",
+      "next": "Et maintenant ? Nous surveillons les taux pour vous. Quand votre projet se concrétise, vos offres de financement sont à un clic."
+    }
   },
   "renew": {
     "hero": {
       "overline": "Renouvellement",
       "title": "Votre hypothèque arrive à échéance. C'est maintenant que tout se joue.",
-      "subtitle": "Saisissez votre hypothèque actuelle. Selon votre échéance, nous lançons l'appel d'offres ou nous activons la surveillance gratuite."
+      "subtitle": "Saisissez votre hypothèque actuelle. En 2 minutes, vous savez combien vous perdez chaque année par rapport au marché.",
+      "uploadInstead": "Uploader mon contrat à la place"
     },
-    "placeholder": "Le formulaire d'enregistrement arrive ici."
+    "steps": {
+      "amount": {
+        "label": "Quel montant reste-t-il sur votre hypothèque ?",
+        "help": "Le solde figurant sur votre dernier relevé annuel. Une estimation suffit."
+      },
+      "rate": {
+        "label": "Quel taux payez-vous actuellement ?",
+        "help": "Il figure sur votre contrat ou votre relevé annuel. Exemple : 1,85."
+      },
+      "lender": {
+        "label": "Chez quel prêteur êtes-vous ?",
+        "help": "Banque, assurance ou caisse de pension.",
+        "other": "Autre prêteur",
+        "otherPlaceholder": "Nom de votre prêteur"
+      },
+      "endDate": {
+        "label": "Quand votre hypothèque arrive-t-elle à échéance ?",
+        "help": "La date de fin de votre taux fixe ou de votre tranche SARON."
+      },
+      "propertyValue": {
+        "label": "Quelle est la valeur estimée de votre bien ?",
+        "help": "Une estimation actuelle du marché suffit — pas la valeur d'achat d'il y a dix ans."
+      }
+    },
+    "result": {
+      "youPay": "Vous payez",
+      "market": "Le marché est à",
+      "losing": "Vous perdez environ",
+      "perYear": "par an",
+      "losingNote": "Écart entre votre taux et le taux de référence 10 ans, appliqué à votre solde de {amount}.",
+      "alreadyGoodTitle": "Votre taux est bon",
+      "alreadyGoodBody": "Vous êtes au niveau du marché, ou mieux. La bonne décision : activer la surveillance gratuite pour ne pas rater la prochaine fenêtre."
+    },
+    "routing": {
+      "hotTitle": "Votre fenêtre est ouverte",
+      "hotBody": "Votre échéance tombe dans moins de 18 mois : c'est exactement le moment de mettre les prêteurs en concurrence. Gratuit, sans engagement, vous gardez la main.",
+      "hotCta": "Lancer l'appel d'offres",
+      "callbackLabel": "Je souhaite être rappelé par un conseiller",
+      "coldTitle": "Trop tôt pour agir — parfait pour surveiller",
+      "coldBody": "Votre échéance est à plus de 18 mois. Résilier maintenant coûterait des pénalités. Nous surveillons votre taux et nous vous réveillons au bon moment, 12 à 18 mois avant l'échéance.",
+      "coldCta": "Activer la surveillance gratuite",
+      "tooLateTitle": "Soyons honnêtes : c'est probablement trop tard pour ce cycle",
+      "tooLateBody": "À moins de 4 mois de l'échéance, le préavis de résiliation est en général déjà dépassé. Forcer maintenant vous coûterait plus que ça ne rapporte. La bonne décision : préparer le prochain cycle dès aujourd'hui.",
+      "tooLateCta": "Me préparer pour le prochain cycle"
+    },
+    "emailGate": {
+      "hotTitle": "Lancez votre appel d'offres",
+      "hotSubtitle": "Un conseiller reprend votre dossier et met les prêteurs en concurrence. Vous recevez les offres, vous choisissez.",
+      "coldTitle": "Activez votre surveillance gratuite",
+      "coldSubtitle": "Nous suivons votre taux et votre échéance. Vous recevez une alerte au bon moment — pas de spam, pas de démarchage.",
+      "name": "Nom complet",
+      "email": "Adresse e-mail",
+      "phone": "Téléphone",
+      "phoneHelp": "Pour l'appel d'offres, un conseiller vous rappelle en quelques minutes.",
+      "hotSubmit": "Lancer l'appel d'offres",
+      "coldSubmit": "Activer la surveillance"
+    },
+    "done": {
+      "hotTitle": "Appel d'offres lancé",
+      "hotBody": "Un conseiller vous contacte très rapidement — comptez quelques minutes pendant les heures ouvrables. Préparez votre dernier relevé hypothécaire si vous l'avez sous la main.",
+      "coldTitle": "Surveillance activée",
+      "coldBody": "Nous suivons votre taux et votre échéance. Vous recevrez une alerte 12 à 18 mois avant l'échéance, quand tout redevient possible.",
+      "tooLateTitle": "Surveillance activée pour le prochain cycle",
+      "tooLateBody": "Nous vous réveillerons 18 mois avant votre prochaine échéance. Cette fois, vous aurez le temps de tout négocier."
+    },
+    "upload": {
+      "title": "Uploader votre contrat",
+      "subtitle": "Pas envie de chercher les chiffres ? Envoyez votre contrat ou votre dernier relevé : un conseiller extrait les données et revient vers vous.",
+      "file": "Contrat ou relevé (PDF ou photo)",
+      "name": "Nom complet",
+      "email": "Adresse e-mail",
+      "submit": "Envoyer mon contrat",
+      "success": "Document reçu. Un conseiller analyse votre contrat et vous recontacte rapidement.",
+      "fileTooLarge": "Le fichier dépasse 10 Mo.",
+      "fileType": "Formats acceptés : PDF, JPG, PNG."
+    }
+  },
+  "howItWorks": {
+    "metaTitle": "Comment ça marche",
+    "metaDescription": "Enregistrez votre hypothèque en 3 minutes, HypoPilot surveille votre taux gratuitement et met les prêteurs en concurrence au bon moment.",
+    "hero": {
+      "overline": "Le principe",
+      "title": "Personne ne surveille votre hypothèque. Nous, si.",
+      "subtitle": "C'est souvent la plus grosse dépense d'un ménage — et la moins comparée. HypoPilot s'en charge, gratuitement, pendant des années."
+    },
+    "steps": {
+      "title": "Trois étapes, et c'est réglé",
+      "step1Title": "Enregistrez votre hypothèque",
+      "step1Body": "Montant, taux, prêteur, échéance. 3 minutes, une seule fois. Pas de paperasse : vos chiffres approximatifs suffisent pour démarrer.",
+      "step2Title": "On surveille votre taux et votre échéance, gratuitement",
+      "step2Body": "Pendant des années, sans rien vous demander. Quand la fenêtre s'ouvre — 12 à 18 mois avant l'échéance — vous recevez une alerte. C'est la seule période où changer de banque est vraiment possible : avant, les pénalités mangent le gain ; après, le préavis est dépassé.",
+      "step3Title": "Au bon moment, on met les prêteurs en concurrence",
+      "step3Body": "Banques, assurances, caisses de pension : chacun remet son offre sur votre dossier. Vous comparez, vous choisissez, vous signez — ou pas. Aucune obligation."
+    },
+    "whyFree": {
+      "title": "Pourquoi c'est gratuit",
+      "who": "Qui nous paie ? Le prêteur que vous choisissez. Quand un dossier se conclut, il nous verse une commission d'apport — c'est une pratique standard du marché hypothécaire suisse.",
+      "howMuch": "Combien ? Typiquement autour de 0,5% du montant du prêt, versé une fois. Vous voyez le montant exact avant de signer, noir sur blanc.",
+      "whyItWorks": "Pourquoi ça ne change rien pour vous : la commission est la même quel que soit le prêteur retenu. Nous n'avons donc aucun intérêt à vous pousser vers l'un plutôt que l'autre — seulement à ce que vous signiez la meilleure offre.",
+      "neverSold": "Et une règle non négociable : vos données ne sont jamais vendues ni transmises brutes. Seul un dossier complet, que vous avez validé, part chez un prêteur."
+    },
+    "proof": {
+      "title": "Ce que la comparaison rapporte, en chiffres",
+      "gapStat": "0,72%",
+      "gapLabel": "l'écart moyen entre la meilleure et la pire offre pour un même dossier — soit environ CHF 4'500 par an sur une hypothèque de 650'000 francs",
+      "compareStat": "moins de 10%",
+      "compareLabel": "des propriétaires suisses comparent réellement les offres au moment du renouvellement. Les autres signent la proposition de leur banque, telle quelle."
+    },
+    "faq": {
+      "title": "Les questions qu'on nous pose",
+      "q1": "Est-ce que je m'engage à quelque chose ?",
+      "a1": "Non. La surveillance est gratuite et sans engagement. L'appel d'offres aussi : vous recevez des offres, vous restez libre de toutes les refuser — y compris pour rester chez votre banque actuelle.",
+      "q2": "Qui voit mes données ?",
+      "a2": "HypoPilot, et personne d'autre. Vos données ne sont jamais vendues. Un prêteur ne voit votre dossier que si vous décidez de le lui envoyer, une fois complet et validé par vous.",
+      "q3": "Dois-je changer de banque ?",
+      "a3": "Non. Souvent, la meilleure offre externe sert simplement d'argument pour renégocier avec votre banque actuelle — qui s'aligne. Vous gagnez dans les deux cas.",
+      "q4": "Que se passe-t-il si mon échéance est encore loin ?",
+      "a4": "C'est le scénario idéal. Nous activons la surveillance et nous vous réveillons 12 à 18 mois avant l'échéance, au moment exact où tout redevient négociable."
+    },
+    "cta": {
+      "title": "Deux minutes pour savoir où vous en êtes",
+      "buy": "Je veux acheter un bien",
+      "renew": "Mon hypothèque arrive à échéance"
+    }
   },
   "auth": {
     "login": {
@@ -89,5 +296,38 @@
     "title": "Mon espace",
     "welcome": "Bonjour {name}",
     "empty": "Votre tableau de bord arrive ici. Enregistrez votre hypothèque pour activer la surveillance."
+  },
+  "certificate": {
+    "title": "Certificat de capacité d'achat",
+    "issuer": "Émis par HypoPilot — plateforme suisse de financement hypothécaire",
+    "number": "Certificat n°",
+    "issuedOn": "Émis le",
+    "holder": "Établi pour",
+    "summaryTitle": "Éléments déclarés",
+    "price": "Prix du bien envisagé",
+    "ownFunds": "Fonds propres",
+    "ownFundsPillar2": "dont 2e pilier",
+    "income": "Revenu brut annuel du ménage",
+    "resultTitle": "Résultat",
+    "maxCapacity": "Capacité d'achat maximale",
+    "feasible": "Le financement du bien envisagé est réalisable selon les critères usuels des banques suisses (charges théoriques au maximum 33% du revenu, fonds propres au minimum 20% dont 10% hors 2e pilier).",
+    "notFeasible": "Au prix envisagé, les critères usuels ne sont pas remplis. La capacité maximale ci-dessus indique le budget finançable en l'état.",
+    "rateRange": "Fourchette de taux indicative (fixe 10 ans)",
+    "monthly": "Mensualité estimée",
+    "verify": "Vérifier l'authenticité de ce certificat :",
+    "disclaimer": "Ce certificat est établi sur la base des informations déclarées par son porteur, selon les critères de calcul usuels du marché suisse (taux théorique 5%, amortissement au 2e rang sur 15 ans, entretien 1%). Il ne constitue pas une promesse de crédit. Validité indicative : 90 jours.",
+    "validUntil": "Valable à titre indicatif jusqu'au"
+  },
+  "verify": {
+    "title": "Vérification de certificat",
+    "validBadge": "Certificat authentique",
+    "validBody": "Ce certificat a été émis par HypoPilot. Les informations ci-dessous font foi.",
+    "invalidTitle": "Certificat introuvable",
+    "invalidBody": "Aucun certificat ne correspond à cet identifiant. Le document qu'on vous a présenté n'a pas été émis par HypoPilot — ou son numéro a été altéré.",
+    "number": "Numéro",
+    "holder": "Porteur",
+    "issuedOn": "Date d'émission",
+    "maxCapacity": "Capacité d'achat certifiée",
+    "footer": "HypoPilot émet des certificats de capacité d'achat gratuits, calculés selon les règles bancaires suisses."
   }
 }

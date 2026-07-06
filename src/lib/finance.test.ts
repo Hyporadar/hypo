@@ -2,9 +2,12 @@ import { describe, expect, it } from 'vitest'
 import {
   classifyRenewal,
   computeAffordability,
+  computeLeadScore,
   computeRenewalSavings,
+  estimateMonthlyPayment,
   maxAffordablePrice,
   monthsUntil,
+  rateRange,
   renewalFunnel,
   wakeUpDate,
 } from '@/lib/finance'
@@ -179,6 +182,40 @@ describe('routage renouvellement (seuils 4 / 18 mois)', () => {
 
   it('wakeUpDate = échéance − 18 mois', () => {
     expect(wakeUpDate(new Date('2028-01-15')).toISOString().slice(0, 10)).toBe('2026-07-15')
+  })
+})
+
+describe('computeLeadScore — montant × urgence', () => {
+  it('pondère par la classification', () => {
+    expect(computeLeadScore(800_000, 'CHAUD')).toBe(1_600)
+    expect(computeLeadScore(800_000, 'ACHAT')).toBe(1_200)
+    expect(computeLeadScore(800_000, 'FROID')).toBe(800)
+    expect(computeLeadScore(800_000, 'TROP_TARD')).toBe(400)
+  })
+
+  it('ne descend jamais sous zéro', () => {
+    expect(computeLeadScore(-5_000, 'CHAUD')).toBe(0)
+  })
+})
+
+describe('rateRange — fourchette indicative ± 0,15', () => {
+  it('encadre le taux de référence', () => {
+    expect(rateRange(1.3)).toEqual({ min: 1.15, max: 1.45 })
+  })
+
+  it('ne descend pas sous zéro', () => {
+    expect(rateRange(0.1).min).toBe(0)
+  })
+})
+
+describe('estimateMonthlyPayment', () => {
+  it('intérêts au taux indicatif + amortissement, /12', () => {
+    // prêt 800k à 1,3% sur bien 1M : 10'400 intérêts + 10'000 amort = 20'400/an → 1'700/mois
+    expect(estimateMonthlyPayment(800_000, 1_000_000, 1.3)).toBeCloseTo(1_700, 5)
+  })
+
+  it('sans amortissement si prêt ≤ 65%', () => {
+    expect(estimateMonthlyPayment(600_000, 1_000_000, 1.2)).toBeCloseTo(600, 5)
   })
 })
 

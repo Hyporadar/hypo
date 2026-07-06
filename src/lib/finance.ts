@@ -190,3 +190,46 @@ export function wakeUpDate(endDate: Date): Date {
   d.setUTCMonth(d.getUTCMonth() - SEUIL_CHAUD_MOIS)
   return d
 }
+
+// ─── Score des leads ──────────────────────────────────────────────────
+
+/** score = montant × urgence (normalisé /1000 pour tenir dans un Int lisible). */
+export const URGENCE: Record<RenewalClassification | 'ACHAT', number> = {
+  CHAUD: 2, // la fenêtre est ouverte, chaque semaine compte
+  ACHAT: 1.5, // acheteur actif, intention forte
+  FROID: 1, // surveillance, valeur à terme
+  TROP_TARD: 0.5, // prochain cycle seulement
+}
+
+export function computeLeadScore(
+  amount: number,
+  classification: RenewalClassification | 'ACHAT'
+): number {
+  return Math.round((Math.max(0, amount) * URGENCE[classification]) / 1000)
+}
+
+// ─── Estimations affichées au client ──────────────────────────────────
+
+/** Fourchette de taux indicative autour du taux de référence : ± 0,15 point. */
+export const MARGE_FOURCHETTE_TAUX = 0.15
+
+export function rateRange(referenceRate: number): { min: number; max: number } {
+  const round2 = (n: number) => Math.round(n * 100) / 100
+  return {
+    min: Math.max(0, round2(referenceRate - MARGE_FOURCHETTE_TAUX)),
+    max: round2(referenceRate + MARGE_FOURCHETTE_TAUX),
+  }
+}
+
+/**
+ * Mensualité estimée au taux indicatif (pas au taux théorique de 5%) :
+ * intérêts réels + amortissement obligatoire, hors entretien.
+ */
+export function estimateMonthlyPayment(
+  loanAmount: number,
+  propertyPrice: number,
+  ratePercent: number
+): number {
+  const interest = (ratePercent / 100) * loanAmount
+  return (interest + annualAmortization(loanAmount, propertyPrice)) / 12
+}

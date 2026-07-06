@@ -18,6 +18,12 @@ export default auth((req) => {
   const { nextUrl } = req
   const user = req.auth?.user
 
+  // /verify/[id] — page publique de vérification des certificats (URL du QR,
+  // identique dans toutes les langues, rendue dans la langue du certificat).
+  if (nextUrl.pathname.startsWith('/verify/')) {
+    return
+  }
+
   // /admin — hors routing localisé (français uniquement), réservé CLOSER/PARTNER/ADMIN.
   if (nextUrl.pathname === '/admin' || nextUrl.pathname.startsWith('/admin/')) {
     if (!user) {

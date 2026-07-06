@@ -6,7 +6,8 @@
   "common": {
     "nav": {
       "buy": "Immobilie kaufen",
-      "renew": "Hypothek erneuern",
+      "renew": "Hypothek verlängern",
+      "howItWorks": "So funktioniert es",
       "login": "Anmelden",
       "register": "Konto erstellen",
       "app": "Mein Bereich",
@@ -14,6 +15,20 @@
     },
     "language": {
       "label": "Sprache"
+    },
+    "form": {
+      "back": "Zurück",
+      "continue": "Weiter",
+      "showResult": "Mein Ergebnis anzeigen",
+      "stepOf": "Schritt {current} von {total}",
+      "optional": "optional",
+      "required": "Dieses Feld ist erforderlich.",
+      "invalidNumber": "Bitte geben Sie einen gültigen Betrag ein.",
+      "invalidRate": "Bitte geben Sie einen gültigen Zinssatz ein (z. B. 1,45).",
+      "invalidDate": "Bitte geben Sie ein gültiges Datum ein.",
+      "invalidEmail": "Bitte geben Sie eine gültige E-Mail-Adresse ein.",
+      "genericError": "Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut.",
+      "privacy": "Ihre Daten bleiben bei HypoPilot. Keine Weitergabe an Dritte ohne Ihre ausdrückliche Zustimmung."
     },
     "footer": {
       "transparency": "Kostenlos für Sie. Bezahlt von den Kreditgebern. Schwarz auf weiss ausgewiesen.",
@@ -29,6 +44,20 @@
       "ctaBuy": "Tragbarkeit berechnen",
       "ctaRenew": "Hypothek erfassen"
     },
+    "dailyRate": {
+      "overline": "Die Zahl des Tages",
+      "label": "Bester Festzins 10 Jahre",
+      "note": "Nationaler Referenzzinssatz, von unserem Team aktualisiert."
+    },
+    "routing": {
+      "title": "Wo stehen Sie?",
+      "buyTitle": "Sie kaufen?",
+      "buyBody": "Berechnen Sie Ihre Tragbarkeit und erhalten Sie Ihr kostenloses PDF-Zertifikat. Das Dokument, das Makler vor jedem Kaufangebot verlangen.",
+      "buyCta": "Tragbarkeit berechnen",
+      "renewTitle": "Wann läuft Ihre Hypothek ab?",
+      "renewBody": "Erfassen Sie Ihre aktuelle Hypothek. In 2 Minuten wissen Sie, wie viel Sie jedes Jahr verlieren — und was sich dagegen tun lässt.",
+      "renewCta": "Meinen Zinssatz prüfen"
+    },
     "steps": {
       "title": "So funktioniert es",
       "step1Title": "Sie erfassen Ihre Hypothek",
@@ -36,11 +65,22 @@
       "step2Title": "Wir überwachen für Sie",
       "step2Body": "Ihr Zinssatz und Ihr Ablauftermin werden über Jahre verfolgt. Sie verpassen das Zeitfenster nicht mehr.",
       "step3Title": "Wir bringen die Kreditgeber in Konkurrenz",
-      "step3Body": "Banken, Versicherungen und Pensionskassen bewerben sich um Ihr Dossier. Sie wählen."
+      "step3Body": "Banken, Versicherungen und Pensionskassen bewerben sich um Ihr Dossier. Sie wählen.",
+      "more": "Das Prinzip im Detail"
     },
     "transparency": {
       "title": "Transparenz, schwarz auf weiss",
-      "body": "Der Service ist für Sie kostenlos. Wir erhalten eine Kommission des gewählten Kreditgebers — Sie sehen sie, bevor Sie unterschreiben."
+      "body": "Der Service ist für Sie kostenlos. Wir erhalten eine Kommission des gewählten Kreditgebers — Sie sehen sie, bevor Sie unterschreiben.",
+      "more": "Warum es kostenlos ist"
+    },
+    "callback": {
+      "button": "Jetzt zurückrufen lassen",
+      "title": "Wir rufen Sie zurück",
+      "subtitle": "Hinterlassen Sie Ihre Nummer. Ein Berater ruft Sie während der Geschäftszeiten innert Minuten zurück.",
+      "name": "Vollständiger Name",
+      "phone": "Telefon",
+      "submit": "Rückruf anfordern",
+      "success": "Notiert. Ein Berater meldet sich sehr bald bei Ihnen."
     }
   },
   "buy": {
@@ -49,15 +89,182 @@
       "title": "Ihr Tragbarkeitszertifikat, kostenlos, in 2 Minuten",
       "subtitle": "Das Dokument, das für ein Kaufangebot verlangt wird. Berechnet nach Schweizer Bankenregeln, sofort als PDF ausgestellt."
     },
-    "placeholder": "Der Rechner erscheint hier."
+    "steps": {
+      "price": {
+        "label": "Wie hoch ist der Preis der Immobilie?",
+        "help": "Der ausgeschriebene oder geschätzte Preis des Objekts. Eine Schätzung genügt."
+      },
+      "ownFunds": {
+        "label": "Über wie viel Eigenkapital verfügen Sie?",
+        "help": "Ersparnisse, Säule 3a, Schenkung, Erbvorbezug — alles, was Sie einbringen können.",
+        "pillar2Label": "Davon 2. Säule (Pensionskasse)",
+        "pillar2Help": "Die Banken verlangen mindestens 10% des Preises ausserhalb der 2. Säule."
+      },
+      "income": {
+        "label": "Wie hoch ist das Bruttojahreseinkommen Ihres Haushalts?",
+        "help": "Kumulierte Bruttolöhne des Haushalts, vor Abzügen, inklusive 13. Monatslohn."
+      }
+    },
+    "result": {
+      "feasibleTitle": "Ihr Vorhaben ist finanzierbar",
+      "feasibleBody": "Auf Basis Ihrer Zahlen können die Banken mitziehen. Ihr Zertifikat bestätigt es schwarz auf weiss.",
+      "notFeasibleTitle": "Dieser Preis übersteigt Ihre aktuelle Tragbarkeit",
+      "notFeasibleBody": "Kein Grund zur Sorge: die 33%-Regel ist streng. Das können Sie sich heute leisten.",
+      "maxCapacity": "Ihre maximale Kaufkraft",
+      "rateRange": "Indikative Zinsspanne",
+      "monthly": "Geschätzte monatliche Belastung",
+      "monthlyNote": "Zinsen + Amortisation, zum indikativen Zinssatz. Ohne Unterhalt.",
+      "reasonCharge": "Die kalkulatorischen Kosten übersteigen 33% Ihres Einkommens.",
+      "reasonOwnFunds": "Es braucht mindestens 20% des Preises als Eigenkapital.",
+      "reasonHardOwnFunds": "Mindestens 10% des Preises müssen ausserhalb der 2. Säule stammen.",
+      "cta": "Mein PDF-Zertifikat erhalten"
+    },
+    "emailGate": {
+      "title": "Ihr Zertifikat ist bereit",
+      "subtitle": "Es fehlen nur der Name für den Ausdruck und die Adresse für den Versand. Kostenlos, unverbindlich.",
+      "name": "Vollständiger Name (auf dem Zertifikat)",
+      "email": "E-Mail-Adresse",
+      "phone": "Telefon",
+      "submit": "Zertifikat erhalten"
+    },
+    "done": {
+      "title": "Ihr Zertifikat ist ausgestellt",
+      "body": "Nummer {number}. Jedes Zertifikat trägt einen QR-Code zur Verifizierung: Makler können die Echtheit mit einem Scan prüfen.",
+      "download": "PDF herunterladen",
+      "next": "Und jetzt? Wir beobachten die Zinsen für Sie. Wenn Ihr Projekt konkret wird, sind Ihre Finanzierungsofferten einen Klick entfernt."
+    }
   },
   "renew": {
     "hero": {
-      "overline": "Erneuerung",
+      "overline": "Verlängerung",
       "title": "Ihre Hypothek läuft ab. Jetzt entscheidet sich alles.",
-      "subtitle": "Erfassen Sie Ihre aktuelle Hypothek. Je nach Ablauftermin starten wir die Ausschreibung oder aktivieren die kostenlose Überwachung."
+      "subtitle": "Erfassen Sie Ihre aktuelle Hypothek. In 2 Minuten wissen Sie, wie viel Sie gegenüber dem Markt jedes Jahr verlieren.",
+      "uploadInstead": "Stattdessen meinen Vertrag hochladen"
     },
-    "placeholder": "Das Erfassungsformular erscheint hier."
+    "steps": {
+      "amount": {
+        "label": "Welcher Betrag ist auf Ihrer Hypothek noch offen?",
+        "help": "Der Saldo auf Ihrem letzten Jahresauszug. Eine Schätzung genügt."
+      },
+      "rate": {
+        "label": "Welchen Zinssatz zahlen Sie aktuell?",
+        "help": "Er steht in Ihrem Vertrag oder Jahresauszug. Beispiel: 1,85."
+      },
+      "lender": {
+        "label": "Bei welchem Kreditgeber sind Sie?",
+        "help": "Bank, Versicherung oder Pensionskasse.",
+        "other": "Anderer Kreditgeber",
+        "otherPlaceholder": "Name Ihres Kreditgebers"
+      },
+      "endDate": {
+        "label": "Wann läuft Ihre Hypothek ab?",
+        "help": "Das Enddatum Ihrer Festhypothek oder Ihrer SARON-Tranche."
+      },
+      "propertyValue": {
+        "label": "Wie hoch ist der geschätzte Wert Ihrer Immobilie?",
+        "help": "Eine aktuelle Marktschätzung genügt — nicht der Kaufpreis von vor zehn Jahren."
+      }
+    },
+    "result": {
+      "youPay": "Sie zahlen",
+      "market": "Der Markt liegt bei",
+      "losing": "Sie verlieren rund",
+      "perYear": "pro Jahr",
+      "losingNote": "Differenz zwischen Ihrem Zinssatz und dem 10-Jahres-Referenzzinssatz, angewendet auf Ihren Saldo von {amount}.",
+      "alreadyGoodTitle": "Ihr Zinssatz ist gut",
+      "alreadyGoodBody": "Sie liegen auf Marktniveau oder besser. Die richtige Entscheidung: die kostenlose Überwachung aktivieren, um das nächste Zeitfenster nicht zu verpassen."
+    },
+    "routing": {
+      "hotTitle": "Ihr Zeitfenster ist offen",
+      "hotBody": "Ihr Ablauf liegt in weniger als 18 Monaten: genau der richtige Moment, um die Kreditgeber in Konkurrenz zu bringen. Kostenlos, unverbindlich, Sie behalten die Kontrolle.",
+      "hotCta": "Ausschreibung starten",
+      "callbackLabel": "Ich möchte von einem Berater zurückgerufen werden",
+      "coldTitle": "Zu früh zum Handeln — perfekt zum Überwachen",
+      "coldBody": "Ihr Ablauf liegt mehr als 18 Monate entfernt. Jetzt zu kündigen würde Vorfälligkeitsentschädigungen kosten. Wir überwachen Ihren Zinssatz und wecken Sie zum richtigen Zeitpunkt, 12 bis 18 Monate vor Ablauf.",
+      "coldCta": "Kostenlose Überwachung aktivieren",
+      "tooLateTitle": "Ehrlich gesagt: für diesen Zyklus ist es wohl zu spät",
+      "tooLateBody": "Weniger als 4 Monate vor Ablauf ist die Kündigungsfrist in der Regel bereits verstrichen. Jetzt zu forcieren würde mehr kosten, als es einbringt. Die richtige Entscheidung: den nächsten Zyklus heute schon vorbereiten.",
+      "tooLateCta": "Für den nächsten Zyklus vormerken"
+    },
+    "emailGate": {
+      "hotTitle": "Starten Sie Ihre Ausschreibung",
+      "hotSubtitle": "Ein Berater übernimmt Ihr Dossier und bringt die Kreditgeber in Konkurrenz. Sie erhalten die Offerten, Sie wählen.",
+      "coldTitle": "Aktivieren Sie Ihre kostenlose Überwachung",
+      "coldSubtitle": "Wir verfolgen Ihren Zinssatz und Ihren Ablauf. Sie erhalten eine Meldung zum richtigen Zeitpunkt — kein Spam, keine Kaltakquise.",
+      "name": "Vollständiger Name",
+      "email": "E-Mail-Adresse",
+      "phone": "Telefon",
+      "phoneHelp": "Für die Ausschreibung ruft Sie ein Berater innert Minuten zurück.",
+      "hotSubmit": "Ausschreibung starten",
+      "coldSubmit": "Überwachung aktivieren"
+    },
+    "done": {
+      "hotTitle": "Ausschreibung gestartet",
+      "hotBody": "Ein Berater kontaktiert Sie sehr rasch — rechnen Sie mit wenigen Minuten während der Geschäftszeiten. Halten Sie wenn möglich Ihren letzten Hypothekarauszug bereit.",
+      "coldTitle": "Überwachung aktiviert",
+      "coldBody": "Wir verfolgen Ihren Zinssatz und Ihren Ablauf. Sie erhalten eine Meldung 12 bis 18 Monate vor Ablauf, wenn wieder alles möglich ist.",
+      "tooLateTitle": "Überwachung für den nächsten Zyklus aktiviert",
+      "tooLateBody": "Wir wecken Sie 18 Monate vor Ihrem nächsten Ablauf. Dieses Mal haben Sie Zeit, alles zu verhandeln."
+    },
+    "upload": {
+      "title": "Ihren Vertrag hochladen",
+      "subtitle": "Keine Lust, die Zahlen zu suchen? Senden Sie Ihren Vertrag oder letzten Auszug: ein Berater extrahiert die Daten und meldet sich bei Ihnen.",
+      "file": "Vertrag oder Auszug (PDF oder Foto)",
+      "name": "Vollständiger Name",
+      "email": "E-Mail-Adresse",
+      "submit": "Vertrag senden",
+      "success": "Dokument erhalten. Ein Berater analysiert Ihren Vertrag und meldet sich rasch bei Ihnen.",
+      "fileTooLarge": "Die Datei überschreitet 10 MB.",
+      "fileType": "Akzeptierte Formate: PDF, JPG, PNG."
+    }
+  },
+  "howItWorks": {
+    "metaTitle": "So funktioniert es",
+    "metaDescription": "Erfassen Sie Ihre Hypothek in 3 Minuten. HypoPilot überwacht Ihren Zinssatz kostenlos und bringt die Kreditgeber zum richtigen Zeitpunkt in Konkurrenz.",
+    "hero": {
+      "overline": "Das Prinzip",
+      "title": "Niemand überwacht Ihre Hypothek. Wir schon.",
+      "subtitle": "Sie ist oft die grösste Ausgabe eines Haushalts — und die am wenigsten verglichene. HypoPilot übernimmt das, kostenlos, über Jahre."
+    },
+    "steps": {
+      "title": "Drei Schritte, mehr braucht es nicht",
+      "step1Title": "Erfassen Sie Ihre Hypothek",
+      "step1Body": "Betrag, Zinssatz, Kreditgeber, Ablauf. 3 Minuten, ein einziges Mal. Kein Papierkram: ungefähre Zahlen genügen für den Start.",
+      "step2Title": "Wir überwachen Zinssatz und Ablauf, kostenlos",
+      "step2Body": "Über Jahre, ohne dass Sie etwas tun müssen. Wenn sich das Zeitfenster öffnet — 12 bis 18 Monate vor Ablauf — erhalten Sie eine Meldung. Es ist die einzige Phase, in der ein Bankwechsel wirklich möglich ist: vorher fressen die Entschädigungen den Gewinn, nachher ist die Frist verstrichen.",
+      "step3Title": "Zum richtigen Zeitpunkt bringen wir die Kreditgeber in Konkurrenz",
+      "step3Body": "Banken, Versicherungen, Pensionskassen: alle legen ihre Offerte für Ihr Dossier vor. Sie vergleichen, Sie wählen, Sie unterschreiben — oder nicht. Keinerlei Verpflichtung."
+    },
+    "whyFree": {
+      "title": "Warum es kostenlos ist",
+      "who": "Wer bezahlt uns? Der Kreditgeber, den Sie wählen. Kommt ein Dossier zum Abschluss, zahlt er uns eine Vermittlungskommission — im Schweizer Hypothekarmarkt gängige Praxis.",
+      "howMuch": "Wie viel? Typischerweise rund 0,5% der Kreditsumme, einmalig. Den genauen Betrag sehen Sie vor der Unterschrift, schwarz auf weiss.",
+      "whyItWorks": "Warum das für Sie nichts ändert: die Kommission ist bei jedem Kreditgeber gleich hoch. Wir haben also kein Interesse, Sie zu einem bestimmten Anbieter zu drängen — nur daran, dass Sie die beste Offerte unterschreiben.",
+      "neverSold": "Und eine nicht verhandelbare Regel: Ihre Daten werden nie verkauft und nie roh weitergegeben. Nur ein vollständiges, von Ihnen freigegebenes Dossier geht an einen Kreditgeber."
+    },
+    "proof": {
+      "title": "Was Vergleichen bringt, in Zahlen",
+      "gapStat": "0,72%",
+      "gapLabel": "beträgt die durchschnittliche Differenz zwischen der besten und der schlechtesten Offerte für dasselbe Dossier — rund CHF 4'500 pro Jahr bei einer Hypothek von 650'000 Franken",
+      "compareStat": "weniger als 10%",
+      "compareLabel": "der Schweizer Eigentümer vergleichen bei der Verlängerung tatsächlich Offerten. Die anderen unterschreiben den Vorschlag ihrer Bank, unverändert."
+    },
+    "faq": {
+      "title": "Häufige Fragen",
+      "q1": "Verpflichte ich mich zu etwas?",
+      "a1": "Nein. Die Überwachung ist kostenlos und unverbindlich. Die Ausschreibung ebenfalls: Sie erhalten Offerten und können alle ablehnen — auch um bei Ihrer aktuellen Bank zu bleiben.",
+      "q2": "Wer sieht meine Daten?",
+      "a2": "HypoPilot, sonst niemand. Ihre Daten werden nie verkauft. Ein Kreditgeber sieht Ihr Dossier nur, wenn Sie es ihm senden — vollständig und von Ihnen freigegeben.",
+      "q3": "Muss ich die Bank wechseln?",
+      "a3": "Nein. Oft dient die beste externe Offerte schlicht als Argument, um mit der eigenen Bank nachzuverhandeln — die dann nachzieht. Sie gewinnen in beiden Fällen.",
+      "q4": "Was passiert, wenn mein Ablauf noch weit entfernt ist?",
+      "a4": "Das ist das ideale Szenario. Wir aktivieren die Überwachung und wecken Sie 12 bis 18 Monate vor Ablauf — genau dann, wenn wieder alles verhandelbar ist."
+    },
+    "cta": {
+      "title": "Zwei Minuten, um zu wissen, wo Sie stehen",
+      "buy": "Ich will eine Immobilie kaufen",
+      "renew": "Meine Hypothek läuft ab"
+    }
   },
   "auth": {
     "login": {
@@ -89,5 +296,38 @@
     "title": "Mein Bereich",
     "welcome": "Guten Tag {name}",
     "empty": "Ihr Dashboard erscheint hier. Erfassen Sie Ihre Hypothek, um die Überwachung zu aktivieren."
+  },
+  "certificate": {
+    "title": "Tragbarkeitszertifikat",
+    "issuer": "Ausgestellt von HypoPilot — Schweizer Plattform für Hypothekarfinanzierung",
+    "number": "Zertifikat Nr.",
+    "issuedOn": "Ausgestellt am",
+    "holder": "Ausgestellt für",
+    "summaryTitle": "Deklarierte Angaben",
+    "price": "Preis der gewünschten Immobilie",
+    "ownFunds": "Eigenkapital",
+    "ownFundsPillar2": "davon 2. Säule",
+    "income": "Bruttojahreseinkommen des Haushalts",
+    "resultTitle": "Ergebnis",
+    "maxCapacity": "Maximale Kaufkraft",
+    "feasible": "Die Finanzierung der gewünschten Immobilie ist nach den üblichen Kriterien der Schweizer Banken tragbar (kalkulatorische Kosten höchstens 33% des Einkommens, Eigenkapital mindestens 20%, davon 10% ausserhalb der 2. Säule).",
+    "notFeasible": "Zum gewünschten Preis sind die üblichen Kriterien nicht erfüllt. Die obenstehende maximale Kaufkraft zeigt das derzeit finanzierbare Budget.",
+    "rateRange": "Indikative Zinsspanne (Festhypothek 10 Jahre)",
+    "monthly": "Geschätzte monatliche Belastung",
+    "verify": "Echtheit dieses Zertifikats prüfen:",
+    "disclaimer": "Dieses Zertifikat basiert auf den Angaben seines Inhabers und den üblichen Berechnungskriterien des Schweizer Marktes (kalkulatorischer Zinssatz 5%, Amortisation der 2. Hypothek über 15 Jahre, Unterhalt 1%). Es stellt keine Kreditzusage dar. Indikative Gültigkeit: 90 Tage.",
+    "validUntil": "Indikativ gültig bis"
+  },
+  "verify": {
+    "title": "Zertifikatsprüfung",
+    "validBadge": "Echtes Zertifikat",
+    "validBody": "Dieses Zertifikat wurde von HypoPilot ausgestellt. Die untenstehenden Angaben sind massgebend.",
+    "invalidTitle": "Zertifikat nicht gefunden",
+    "invalidBody": "Kein Zertifikat entspricht dieser Kennung. Das Ihnen vorgelegte Dokument wurde nicht von HypoPilot ausgestellt — oder seine Nummer wurde verändert.",
+    "number": "Nummer",
+    "holder": "Inhaber",
+    "issuedOn": "Ausstellungsdatum",
+    "maxCapacity": "Zertifizierte Kaufkraft",
+    "footer": "HypoPilot stellt kostenlose Tragbarkeitszertifikate aus, berechnet nach Schweizer Bankenregeln."
   }
 }

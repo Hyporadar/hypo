@@ -14,8 +14,13 @@ export const routing = defineRouting({
     },
     '/renouveler': {
       fr: '/renouveler',
-      de: '/erneuern',
+      de: '/verlaengern',
       it: '/rinnovare',
+    },
+    '/comment-ca-marche': {
+      fr: '/comment-ca-marche',
+      de: '/so-funktionierts',
+      it: '/come-funziona',
     },
     '/connexion': {
       fr: '/connexion',

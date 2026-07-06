@@ -7,6 +7,7 @@
     "nav": {
       "buy": "Comprare un immobile",
       "renew": "Rinnovare l'ipoteca",
+      "howItWorks": "Come funziona",
       "login": "Accedere",
       "register": "Creare un conto",
       "app": "La mia area",
@@ -14,6 +15,20 @@
     },
     "language": {
       "label": "Lingua"
+    },
+    "form": {
+      "back": "Indietro",
+      "continue": "Continuare",
+      "showResult": "Vedere il mio risultato",
+      "stepOf": "Passo {current} di {total}",
+      "optional": "facoltativo",
+      "required": "Questo campo è obbligatorio.",
+      "invalidNumber": "Inserisca un importo valido.",
+      "invalidRate": "Inserisca un tasso valido (es. 1,45).",
+      "invalidDate": "Inserisca una data valida.",
+      "invalidEmail": "Inserisca un indirizzo e-mail valido.",
+      "genericError": "Si è verificato un errore. Riprovi.",
+      "privacy": "I Suoi dati restano presso HypoPilot. Nessuna trasmissione a terzi senza il Suo consenso esplicito."
     },
     "footer": {
       "transparency": "Gratuito per Lei. Pagato dai finanziatori. Indicato nero su bianco.",
@@ -29,6 +44,20 @@
       "ctaBuy": "Calcolare la sostenibilità",
       "ctaRenew": "Registrare l'ipoteca"
     },
+    "dailyRate": {
+      "overline": "La cifra del giorno",
+      "label": "Miglior tasso fisso 10 anni",
+      "note": "Tasso di riferimento nazionale, aggiornato dal nostro team."
+    },
+    "routing": {
+      "title": "Da dove cominciare?",
+      "buyTitle": "Sta comprando?",
+      "buyBody": "Calcoli la Sua sostenibilità e riceva il certificato PDF gratuito. È il documento che le agenzie immobiliari richiedono prima di ogni offerta.",
+      "buyCta": "Calcolare la sostenibilità",
+      "renewTitle": "Quando scade la Sua ipoteca?",
+      "renewBody": "Registri la Sua ipoteca attuale. In 2 minuti saprà quanto perde ogni anno — e cosa si può fare.",
+      "renewCta": "Verificare il mio tasso"
+    },
     "steps": {
       "title": "Come funziona",
       "step1Title": "Lei registra la Sua ipoteca",
@@ -36,11 +65,22 @@
       "step2Title": "Noi sorvegliamo per Lei",
       "step2Body": "Il Suo tasso e la Sua scadenza sono seguiti per anni. Non perde più la finestra utile.",
       "step3Title": "Mettiamo in concorrenza i finanziatori",
-      "step3Body": "Banche, assicurazioni e casse pensioni si contendono il Suo dossier. Lei sceglie."
+      "step3Body": "Banche, assicurazioni e casse pensioni si contendono il Suo dossier. Lei sceglie.",
+      "more": "Il funzionamento in dettaglio"
     },
     "transparency": {
       "title": "La trasparenza, nero su bianco",
-      "body": "Il servizio è gratuito per Lei. Riceviamo una commissione dal finanziatore scelto — la vede prima di firmare."
+      "body": "Il servizio è gratuito per Lei. Riceviamo una commissione dal finanziatore scelto — la vede prima di firmare.",
+      "more": "Perché è gratuito"
+    },
+    "callback": {
+      "button": "Farsi richiamare subito",
+      "title": "La richiamiamo noi",
+      "subtitle": "Lasci il Suo numero. Un consulente La richiama in pochi minuti durante gli orari d'ufficio.",
+      "name": "Nome completo",
+      "phone": "Telefono",
+      "submit": "Richiedere la chiamata",
+      "success": "Registrato. Un consulente La richiamerà a breve."
     }
   },
   "buy": {
@@ -49,15 +89,182 @@
       "title": "Il Suo certificato di sostenibilità, gratuito, in 2 minuti",
       "subtitle": "Il documento richiesto per fare un'offerta su un immobile. Calcolato secondo le regole bancarie svizzere, rilasciato subito in PDF."
     },
-    "placeholder": "Il calcolatore arriverà qui."
+    "steps": {
+      "price": {
+        "label": "Qual è il prezzo dell'immobile?",
+        "help": "Il prezzo pubblicato o stimato dell'immobile che ha in vista. Una stima è sufficiente."
+      },
+      "ownFunds": {
+        "label": "Di quanti fondi propri dispone?",
+        "help": "Risparmi, terzo pilastro, donazione, anticipo ereditario — tutto ciò che può apportare.",
+        "pillar2Label": "Di cui 2° pilastro (cassa pensioni)",
+        "pillar2Help": "Le banche esigono almeno il 10% del prezzo al di fuori del 2° pilastro."
+      },
+      "income": {
+        "label": "Qual è il reddito lordo annuo della Sua economia domestica?",
+        "help": "Salari lordi cumulati, prima delle deduzioni, tredicesima compresa."
+      }
+    },
+    "result": {
+      "feasibleTitle": "Il Suo progetto è finanziabile",
+      "feasibleBody": "Sulla base dei Suoi dati, le banche possono seguirLa. Il Suo certificato lo conferma nero su bianco.",
+      "notFeasibleTitle": "Questo prezzo supera la Sua capacità attuale",
+      "notFeasibleBody": "Nulla di anomalo: la regola del 33% di oneri è severa. Ecco cosa può puntare oggi.",
+      "maxCapacity": "La Sua capacità d'acquisto massima",
+      "rateRange": "Fascia di tassi indicativa",
+      "monthly": "Rata mensile stimata",
+      "monthlyNote": "Interessi + ammortamento, al tasso indicativo. Manutenzione esclusa.",
+      "reasonCharge": "Gli oneri teorici superano il 33% del Suo reddito.",
+      "reasonOwnFunds": "Servono almeno il 20% del prezzo in fondi propri.",
+      "reasonHardOwnFunds": "Almeno il 10% del prezzo deve provenire da fonti diverse dal 2° pilastro.",
+      "cta": "Ricevere il mio certificato PDF"
+    },
+    "emailGate": {
+      "title": "Il Suo certificato è pronto",
+      "subtitle": "Mancano solo il nome da stampare e l'indirizzo a cui inviarlo. Gratuito, senza impegno.",
+      "name": "Nome completo (stampato sul certificato)",
+      "email": "Indirizzo e-mail",
+      "phone": "Telefono",
+      "submit": "Ottenere il certificato"
+    },
+    "done": {
+      "title": "Il Suo certificato è emesso",
+      "body": "Numero {number}. Ogni certificato porta un codice QR di verifica: le agenzie immobiliari possono controllarne l'autenticità con una scansione.",
+      "download": "Scaricare il PDF",
+      "next": "E adesso? Sorvegliamo i tassi per Lei. Quando il Suo progetto si concretizza, le offerte di finanziamento sono a un clic."
+    }
   },
   "renew": {
     "hero": {
       "overline": "Rinnovo",
       "title": "La Sua ipoteca sta per scadere. È ora che si decide tutto.",
-      "subtitle": "Registri la Sua ipoteca attuale. In base alla scadenza, lanciamo la gara d'offerte o attiviamo la sorveglianza gratuita."
+      "subtitle": "Registri la Sua ipoteca attuale. In 2 minuti saprà quanto perde ogni anno rispetto al mercato.",
+      "uploadInstead": "Caricare invece il mio contratto"
     },
-    "placeholder": "Il modulo di registrazione arriverà qui."
+    "steps": {
+      "amount": {
+        "label": "Quale importo resta sulla Sua ipoteca?",
+        "help": "Il saldo indicato sull'ultimo estratto annuale. Una stima è sufficiente."
+      },
+      "rate": {
+        "label": "Che tasso paga attualmente?",
+        "help": "Figura nel Suo contratto o nell'estratto annuale. Esempio: 1,85."
+      },
+      "lender": {
+        "label": "Presso quale finanziatore si trova?",
+        "help": "Banca, assicurazione o cassa pensioni.",
+        "other": "Altro finanziatore",
+        "otherPlaceholder": "Nome del Suo finanziatore"
+      },
+      "endDate": {
+        "label": "Quando scade la Sua ipoteca?",
+        "help": "La data di fine del Suo tasso fisso o della Sua tranche SARON."
+      },
+      "propertyValue": {
+        "label": "Qual è il valore stimato del Suo immobile?",
+        "help": "Basta una stima attuale di mercato — non il prezzo d'acquisto di dieci anni fa."
+      }
+    },
+    "result": {
+      "youPay": "Lei paga",
+      "market": "Il mercato è a",
+      "losing": "Perde circa",
+      "perYear": "all'anno",
+      "losingNote": "Differenza tra il Suo tasso e il tasso di riferimento a 10 anni, applicata al Suo saldo di {amount}.",
+      "alreadyGoodTitle": "Il Suo tasso è buono",
+      "alreadyGoodBody": "È al livello del mercato, o meglio. La decisione giusta: attivare la sorveglianza gratuita per non perdere la prossima finestra."
+    },
+    "routing": {
+      "hotTitle": "La Sua finestra è aperta",
+      "hotBody": "La Sua scadenza cade tra meno di 18 mesi: è esattamente il momento di mettere in concorrenza i finanziatori. Gratuito, senza impegno, Lei mantiene il controllo.",
+      "hotCta": "Lanciare la gara d'offerte",
+      "callbackLabel": "Desidero essere richiamato da un consulente",
+      "coldTitle": "Troppo presto per agire — perfetto per sorvegliare",
+      "coldBody": "La Sua scadenza è a più di 18 mesi. Disdire ora costerebbe penali. Sorvegliamo il Suo tasso e La svegliamo al momento giusto, da 12 a 18 mesi prima della scadenza.",
+      "coldCta": "Attivare la sorveglianza gratuita",
+      "tooLateTitle": "Siamo onesti: per questo ciclo è probabilmente troppo tardi",
+      "tooLateBody": "A meno di 4 mesi dalla scadenza, il termine di disdetta è in genere già superato. Forzare ora costerebbe più di quanto renda. La decisione giusta: preparare il prossimo ciclo da oggi.",
+      "tooLateCta": "Prepararmi per il prossimo ciclo"
+    },
+    "emailGate": {
+      "hotTitle": "Lanci la Sua gara d'offerte",
+      "hotSubtitle": "Un consulente riprende il Suo dossier e mette in concorrenza i finanziatori. Lei riceve le offerte, Lei sceglie.",
+      "coldTitle": "Attivi la Sua sorveglianza gratuita",
+      "coldSubtitle": "Seguiamo il Suo tasso e la Sua scadenza. Riceverà un avviso al momento giusto — niente spam, niente telefonate indesiderate.",
+      "name": "Nome completo",
+      "email": "Indirizzo e-mail",
+      "phone": "Telefono",
+      "phoneHelp": "Per la gara d'offerte, un consulente La richiama in pochi minuti.",
+      "hotSubmit": "Lanciare la gara d'offerte",
+      "coldSubmit": "Attivare la sorveglianza"
+    },
+    "done": {
+      "hotTitle": "Gara d'offerte lanciata",
+      "hotBody": "Un consulente La contatterà molto rapidamente — conti pochi minuti durante gli orari d'ufficio. Tenga a portata di mano l'ultimo estratto ipotecario, se possibile.",
+      "coldTitle": "Sorveglianza attivata",
+      "coldBody": "Seguiamo il Suo tasso e la Sua scadenza. Riceverà un avviso da 12 a 18 mesi prima della scadenza, quando tutto tornerà possibile.",
+      "tooLateTitle": "Sorveglianza attivata per il prossimo ciclo",
+      "tooLateBody": "La sveglieremo 18 mesi prima della Sua prossima scadenza. Questa volta avrà il tempo di negoziare tutto."
+    },
+    "upload": {
+      "title": "Caricare il Suo contratto",
+      "subtitle": "Non ha voglia di cercare i dati? Invii il Suo contratto o l'ultimo estratto: un consulente estrae i dati e La ricontatta.",
+      "file": "Contratto o estratto (PDF o foto)",
+      "name": "Nome completo",
+      "email": "Indirizzo e-mail",
+      "submit": "Inviare il contratto",
+      "success": "Documento ricevuto. Un consulente analizza il Suo contratto e La ricontatterà rapidamente.",
+      "fileTooLarge": "Il file supera i 10 MB.",
+      "fileType": "Formati accettati: PDF, JPG, PNG."
+    }
+  },
+  "howItWorks": {
+    "metaTitle": "Come funziona",
+    "metaDescription": "Registri la Sua ipoteca in 3 minuti. HypoPilot sorveglia il Suo tasso gratuitamente e mette in concorrenza i finanziatori al momento giusto.",
+    "hero": {
+      "overline": "Il principio",
+      "title": "Nessuno sorveglia la Sua ipoteca. Noi sì.",
+      "subtitle": "È spesso la spesa più grande di una famiglia — e la meno confrontata. HypoPilot se ne occupa, gratuitamente, per anni."
+    },
+    "steps": {
+      "title": "Tre passi, e basta",
+      "step1Title": "Registri la Sua ipoteca",
+      "step1Body": "Importo, tasso, finanziatore, scadenza. 3 minuti, una sola volta. Niente scartoffie: bastano cifre approssimative per iniziare.",
+      "step2Title": "Sorvegliamo tasso e scadenza, gratuitamente",
+      "step2Body": "Per anni, senza chiederLe nulla. Quando la finestra si apre — da 12 a 18 mesi prima della scadenza — riceve un avviso. È l'unico periodo in cui cambiare banca è davvero possibile: prima, le penali mangiano il guadagno; dopo, il termine di disdetta è superato.",
+      "step3Title": "Al momento giusto, mettiamo in concorrenza i finanziatori",
+      "step3Body": "Banche, assicurazioni, casse pensioni: ognuno presenta la propria offerta sul Suo dossier. Lei confronta, Lei sceglie, Lei firma — o no. Nessun obbligo."
+    },
+    "whyFree": {
+      "title": "Perché è gratuito",
+      "who": "Chi ci paga? Il finanziatore che Lei sceglie. Quando un dossier si conclude, ci versa una commissione di intermediazione — prassi standard del mercato ipotecario svizzero.",
+      "howMuch": "Quanto? Tipicamente attorno allo 0,5% dell'importo del prestito, una tantum. Vede l'importo esatto prima di firmare, nero su bianco.",
+      "whyItWorks": "Perché per Lei non cambia nulla: la commissione è la stessa qualunque sia il finanziatore scelto. Non abbiamo quindi alcun interesse a spingerLa verso l'uno piuttosto che l'altro — solo a farLe firmare l'offerta migliore.",
+      "neverSold": "E una regola non negoziabile: i Suoi dati non sono mai venduti né trasmessi grezzi. Solo un dossier completo, da Lei validato, parte verso un finanziatore."
+    },
+    "proof": {
+      "title": "Quanto rende confrontare, in cifre",
+      "gapStat": "0,72%",
+      "gapLabel": "è lo scarto medio tra la migliore e la peggiore offerta per lo stesso dossier — circa CHF 4'500 all'anno su un'ipoteca di 650'000 franchi",
+      "compareStat": "meno del 10%",
+      "compareLabel": "dei proprietari svizzeri confronta davvero le offerte al momento del rinnovo. Gli altri firmano la proposta della loro banca, così com'è."
+    },
+    "faq": {
+      "title": "Le domande che ci fanno",
+      "q1": "Mi impegno a qualcosa?",
+      "a1": "No. La sorveglianza è gratuita e senza impegno. Anche la gara d'offerte: riceve le offerte e resta libero di rifiutarle tutte — anche per restare presso la Sua banca attuale.",
+      "q2": "Chi vede i miei dati?",
+      "a2": "HypoPilot, e nessun altro. I Suoi dati non sono mai venduti. Un finanziatore vede il Suo dossier solo se decide Lei di inviarglielo, una volta completo e da Lei validato.",
+      "q3": "Devo cambiare banca?",
+      "a3": "No. Spesso la migliore offerta esterna serve semplicemente da argomento per rinegoziare con la Sua banca attuale — che si allinea. Lei vince in entrambi i casi.",
+      "q4": "Cosa succede se la mia scadenza è ancora lontana?",
+      "a4": "È lo scenario ideale. Attiviamo la sorveglianza e La svegliamo da 12 a 18 mesi prima della scadenza, nel momento esatto in cui tutto torna negoziabile."
+    },
+    "cta": {
+      "title": "Due minuti per sapere a che punto è",
+      "buy": "Voglio comprare un immobile",
+      "renew": "La mia ipoteca sta per scadere"
+    }
   },
   "auth": {
     "login": {
@@ -89,5 +296,38 @@
     "title": "La mia area",
     "welcome": "Buongiorno {name}",
     "empty": "La Sua dashboard arriverà qui. Registri la Sua ipoteca per attivare la sorveglianza."
+  },
+  "certificate": {
+    "title": "Certificato di sostenibilità",
+    "issuer": "Emesso da HypoPilot — piattaforma svizzera di finanziamento ipotecario",
+    "number": "Certificato n.",
+    "issuedOn": "Emesso il",
+    "holder": "Intestato a",
+    "summaryTitle": "Elementi dichiarati",
+    "price": "Prezzo dell'immobile previsto",
+    "ownFunds": "Fondi propri",
+    "ownFundsPillar2": "di cui 2° pilastro",
+    "income": "Reddito lordo annuo dell'economia domestica",
+    "resultTitle": "Risultato",
+    "maxCapacity": "Capacità d'acquisto massima",
+    "feasible": "Il finanziamento dell'immobile previsto è sostenibile secondo i criteri usuali delle banche svizzere (oneri teorici al massimo il 33% del reddito, fondi propri almeno il 20% di cui 10% fuori dal 2° pilastro).",
+    "notFeasible": "Al prezzo previsto, i criteri usuali non sono soddisfatti. La capacità massima sopra indicata mostra il budget attualmente finanziabile.",
+    "rateRange": "Fascia di tassi indicativa (fisso 10 anni)",
+    "monthly": "Rata mensile stimata",
+    "verify": "Verificare l'autenticità di questo certificato:",
+    "disclaimer": "Questo certificato è redatto sulla base delle informazioni dichiarate dal suo titolare, secondo i criteri di calcolo usuali del mercato svizzero (tasso teorico 5%, ammortamento di 2° grado su 15 anni, manutenzione 1%). Non costituisce una promessa di credito. Validità indicativa: 90 giorni.",
+    "validUntil": "Valido a titolo indicativo fino al"
+  },
+  "verify": {
+    "title": "Verifica del certificato",
+    "validBadge": "Certificato autentico",
+    "validBody": "Questo certificato è stato emesso da HypoPilot. Le informazioni sottostanti fanno fede.",
+    "invalidTitle": "Certificato non trovato",
+    "invalidBody": "Nessun certificato corrisponde a questo identificativo. Il documento presentatoLe non è stato emesso da HypoPilot — o il suo numero è stato alterato.",
+    "number": "Numero",
+    "holder": "Titolare",
+    "issuedOn": "Data di emissione",
+    "maxCapacity": "Capacità d'acquisto certificata",
+    "footer": "HypoPilot emette certificati di sostenibilità gratuiti, calcolati secondo le regole bancarie svizzere."
   }
 }
