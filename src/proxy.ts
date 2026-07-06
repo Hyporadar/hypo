@@ -1,10 +1,44 @@
-import createMiddleware from 'next-intl/middleware'
-import { routing } from '@/i18n/routing'
+import NextAuth from 'next-auth'
+import createIntlMiddleware from 'next-intl/middleware'
+import { authConfig } from '@/lib/auth.config'
+import { routing, type Locale } from '@/i18n/routing'
 
-// Détection Accept-Language au premier visit, puis cookie NEXT_LOCALE (bascule manuelle persistée).
-export default createMiddleware(routing)
+const intlMiddleware = createIntlMiddleware(routing)
+const { auth } = NextAuth(authConfig)
+
+const ADMIN_ROLES = new Set(['CLOSER', 'PARTNER', 'ADMIN'])
+
+// Slug de la page de connexion par locale (les pathnames sont traduits).
+function loginPath(locale: Locale): string {
+  const slugs = routing.pathnames['/connexion']
+  return `/${locale}${slugs[locale]}`
+}
+
+export default auth((req) => {
+  const { nextUrl } = req
+  const user = req.auth?.user
+
+  // /admin — hors routing localisé (français uniquement), réservé CLOSER/PARTNER/ADMIN.
+  if (nextUrl.pathname === '/admin' || nextUrl.pathname.startsWith('/admin/')) {
+    if (!user) {
+      return Response.redirect(new URL(loginPath(routing.defaultLocale), nextUrl))
+    }
+    if (!ADMIN_ROLES.has(user.role)) {
+      return Response.redirect(new URL(`/${user.locale}/app`, nextUrl))
+    }
+    return
+  }
+
+  // /{locale}/app — espace client, connexion requise.
+  const appMatch = nextUrl.pathname.match(/^\/(fr|de|it)\/app(?:\/|$)/)
+  if (appMatch && !user) {
+    return Response.redirect(new URL(loginPath(appMatch[1] as Locale), nextUrl))
+  }
+
+  // Détection Accept-Language au premier visit, cookie NEXT_LOCALE persisté.
+  return intlMiddleware(req)
+})
 
 export const config = {
-  // Tout sauf : /admin (français only, hors routing localisé), API, assets Next et fichiers statiques.
-  matcher: ['/((?!api|admin|_next|_vercel|.*\\..*).*)'],
+  matcher: ['/((?!api|_next|_vercel|.*\\..*).*)'],
 }
