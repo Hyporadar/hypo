@@ -1,0 +1,93 @@
+{
+  "metadata": {
+    "title": "HypoPilot — la Sua ipoteca, sotto sorveglianza",
+    "description": "HypoPilot sorveglia gratuitamente la Sua ipoteca e La avvisa da 12 a 18 mesi prima della scadenza. Certificato di sostenibilità gratuito in 2 minuti."
+  },
+  "common": {
+    "nav": {
+      "buy": "Comprare un immobile",
+      "renew": "Rinnovare l'ipoteca",
+      "login": "Accedere",
+      "register": "Creare un conto",
+      "app": "La mia area",
+      "logout": "Disconnettersi"
+    },
+    "language": {
+      "label": "Lingua"
+    },
+    "footer": {
+      "transparency": "Gratuito per Lei. Pagato dai finanziatori. Indicato nero su bianco.",
+      "legal": "HypoPilot è remunerato da una commissione del finanziatore scelto. La vede prima di firmare.",
+      "copyright": "HypoPilot — fintech svizzera"
+    }
+  },
+  "home": {
+    "hero": {
+      "overline": "Sorveglianza dell'ipoteca",
+      "title": "3 minuti per registrare. Anni di sorveglianza.",
+      "subtitle": "HypoPilot segue il Suo tasso e la Sua data di scadenza, poi La avvisa da 12 a 18 mesi prima — l'unica finestra in cui può ancora cambiare banca.",
+      "ctaBuy": "Calcolare la sostenibilità",
+      "ctaRenew": "Registrare l'ipoteca"
+    },
+    "steps": {
+      "title": "Come funziona",
+      "step1Title": "Lei registra la Sua ipoteca",
+      "step1Body": "Importo, tasso, scadenza. Bastano 3 minuti.",
+      "step2Title": "Noi sorvegliamo per Lei",
+      "step2Body": "Il Suo tasso e la Sua scadenza sono seguiti per anni. Non perde più la finestra utile.",
+      "step3Title": "Mettiamo in concorrenza i finanziatori",
+      "step3Body": "Banche, assicurazioni e casse pensioni si contendono il Suo dossier. Lei sceglie."
+    },
+    "transparency": {
+      "title": "La trasparenza, nero su bianco",
+      "body": "Il servizio è gratuito per Lei. Riceviamo una commissione dal finanziatore scelto — la vede prima di firmare."
+    }
+  },
+  "buy": {
+    "hero": {
+      "overline": "Sostenibilità",
+      "title": "Il Suo certificato di sostenibilità, gratuito, in 2 minuti",
+      "subtitle": "Il documento richiesto per fare un'offerta su un immobile. Calcolato secondo le regole bancarie svizzere, rilasciato subito in PDF."
+    },
+    "placeholder": "Il calcolatore arriverà qui."
+  },
+  "renew": {
+    "hero": {
+      "overline": "Rinnovo",
+      "title": "La Sua ipoteca sta per scadere. È ora che si decide tutto.",
+      "subtitle": "Registri la Sua ipoteca attuale. In base alla scadenza, lanciamo la gara d'offerte o attiviamo la sorveglianza gratuita."
+    },
+    "placeholder": "Il modulo di registrazione arriverà qui."
+  },
+  "auth": {
+    "login": {
+      "title": "Accedere",
+      "subtitle": "Acceda alla Sua area di sorveglianza.",
+      "email": "Indirizzo e-mail",
+      "password": "Password",
+      "submit": "Accedere",
+      "noAccount": "Non ha ancora un conto?",
+      "toRegister": "Creare un conto",
+      "invalidCredentials": "Indirizzo e-mail o password errati."
+    },
+    "register": {
+      "title": "Creare un conto",
+      "subtitle": "La Sua ipoteca sorvegliata gratuitamente, per anni.",
+      "name": "Nome completo",
+      "email": "Indirizzo e-mail",
+      "phone": "Telefono",
+      "password": "Password",
+      "passwordHint": "Minimo 8 caratteri",
+      "submit": "Creare il mio conto",
+      "hasAccount": "Ha già un conto?",
+      "toLogin": "Accedere",
+      "emailTaken": "Esiste già un conto con questo indirizzo e-mail.",
+      "invalidData": "Verifichi i campi del modulo."
+    }
+  },
+  "app": {
+    "title": "La mia area",
+    "welcome": "Buongiorno {name}",
+    "empty": "La Sua dashboard arriverà qui. Registri la Sua ipoteca per attivare la sorveglianza."
+  }
+}

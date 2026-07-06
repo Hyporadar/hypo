@@ -1,0 +1,93 @@
+{
+  "metadata": {
+    "title": "HypoPilot — Ihre Hypothek, unter Beobachtung",
+    "description": "HypoPilot überwacht Ihre Hypothek kostenlos und meldet sich 12 bis 18 Monate vor Ablauf. Kostenloses Tragbarkeitszertifikat in 2 Minuten."
+  },
+  "common": {
+    "nav": {
+      "buy": "Immobilie kaufen",
+      "renew": "Hypothek erneuern",
+      "login": "Anmelden",
+      "register": "Konto erstellen",
+      "app": "Mein Bereich",
+      "logout": "Abmelden"
+    },
+    "language": {
+      "label": "Sprache"
+    },
+    "footer": {
+      "transparency": "Kostenlos für Sie. Bezahlt von den Kreditgebern. Schwarz auf weiss ausgewiesen.",
+      "legal": "HypoPilot wird durch eine Kommission des gewählten Kreditgebers vergütet. Sie sehen sie, bevor Sie unterschreiben.",
+      "copyright": "HypoPilot — Schweizer Fintech"
+    }
+  },
+  "home": {
+    "hero": {
+      "overline": "Hypotheken-Überwachung",
+      "title": "3 Minuten zum Erfassen. Jahre der Überwachung.",
+      "subtitle": "HypoPilot verfolgt Ihren Zinssatz und Ihren Ablauftermin und meldet sich 12 bis 18 Monate im Voraus — das einzige Zeitfenster, in dem Sie die Bank noch wechseln können.",
+      "ctaBuy": "Tragbarkeit berechnen",
+      "ctaRenew": "Hypothek erfassen"
+    },
+    "steps": {
+      "title": "So funktioniert es",
+      "step1Title": "Sie erfassen Ihre Hypothek",
+      "step1Body": "Betrag, Zinssatz, Ablauf. 3 Minuten genügen.",
+      "step2Title": "Wir überwachen für Sie",
+      "step2Body": "Ihr Zinssatz und Ihr Ablauftermin werden über Jahre verfolgt. Sie verpassen das Zeitfenster nicht mehr.",
+      "step3Title": "Wir bringen die Kreditgeber in Konkurrenz",
+      "step3Body": "Banken, Versicherungen und Pensionskassen bewerben sich um Ihr Dossier. Sie wählen."
+    },
+    "transparency": {
+      "title": "Transparenz, schwarz auf weiss",
+      "body": "Der Service ist für Sie kostenlos. Wir erhalten eine Kommission des gewählten Kreditgebers — Sie sehen sie, bevor Sie unterschreiben."
+    }
+  },
+  "buy": {
+    "hero": {
+      "overline": "Tragbarkeit",
+      "title": "Ihr Tragbarkeitszertifikat, kostenlos, in 2 Minuten",
+      "subtitle": "Das Dokument, das für ein Kaufangebot verlangt wird. Berechnet nach Schweizer Bankenregeln, sofort als PDF ausgestellt."
+    },
+    "placeholder": "Der Rechner erscheint hier."
+  },
+  "renew": {
+    "hero": {
+      "overline": "Erneuerung",
+      "title": "Ihre Hypothek läuft ab. Jetzt entscheidet sich alles.",
+      "subtitle": "Erfassen Sie Ihre aktuelle Hypothek. Je nach Ablauftermin starten wir die Ausschreibung oder aktivieren die kostenlose Überwachung."
+    },
+    "placeholder": "Das Erfassungsformular erscheint hier."
+  },
+  "auth": {
+    "login": {
+      "title": "Anmelden",
+      "subtitle": "Zugang zu Ihrem Überwachungsbereich.",
+      "email": "E-Mail-Adresse",
+      "password": "Passwort",
+      "submit": "Anmelden",
+      "noAccount": "Noch kein Konto?",
+      "toRegister": "Konto erstellen",
+      "invalidCredentials": "E-Mail-Adresse oder Passwort falsch."
+    },
+    "register": {
+      "title": "Konto erstellen",
+      "subtitle": "Ihre Hypothek kostenlos überwacht, über Jahre.",
+      "name": "Vollständiger Name",
+      "email": "E-Mail-Adresse",
+      "phone": "Telefon",
+      "password": "Passwort",
+      "passwordHint": "Mindestens 8 Zeichen",
+      "submit": "Konto erstellen",
+      "hasAccount": "Bereits ein Konto?",
+      "toLogin": "Anmelden",
+      "emailTaken": "Mit dieser E-Mail-Adresse besteht bereits ein Konto.",
+      "invalidData": "Bitte überprüfen Sie die Formularfelder."
+    }
+  },
+  "app": {
+    "title": "Mein Bereich",
+    "welcome": "Guten Tag {name}",
+    "empty": "Ihr Dashboard erscheint hier. Erfassen Sie Ihre Hypothek, um die Überwachung zu aktivieren."
+  }
+}

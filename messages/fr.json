@@ -1,0 +1,93 @@
+{
+  "metadata": {
+    "title": "HypoPilot — votre hypothèque, sous surveillance",
+    "description": "HypoPilot surveille gratuitement votre hypothèque et vous prévient 12 à 18 mois avant l'échéance. Certificat de capacité d'achat gratuit en 2 minutes."
+  },
+  "common": {
+    "nav": {
+      "buy": "Acheter un bien",
+      "renew": "Renouveler mon hypothèque",
+      "login": "Connexion",
+      "register": "Créer un compte",
+      "app": "Mon espace",
+      "logout": "Se déconnecter"
+    },
+    "language": {
+      "label": "Langue"
+    },
+    "footer": {
+      "transparency": "Gratuit pour vous. Payé par les prêteurs. Affiché noir sur blanc.",
+      "legal": "HypoPilot est rémunéré par une commission du prêteur retenu. Vous la voyez avant de signer.",
+      "copyright": "HypoPilot — fintech suisse"
+    }
+  },
+  "home": {
+    "hero": {
+      "overline": "Surveillance d'hypothèque",
+      "title": "3 minutes pour enregistrer. Des années de surveillance.",
+      "subtitle": "HypoPilot suit votre taux et votre date d'échéance, puis vous prévient 12 à 18 mois avant — la seule fenêtre où vous pouvez encore changer de banque.",
+      "ctaBuy": "Calculer ma capacité d'achat",
+      "ctaRenew": "Enregistrer mon hypothèque"
+    },
+    "steps": {
+      "title": "Comment ça marche",
+      "step1Title": "Vous enregistrez votre hypothèque",
+      "step1Body": "Montant, taux, échéance. 3 minutes suffisent.",
+      "step2Title": "Nous surveillons pour vous",
+      "step2Body": "Votre taux et votre échéance sont suivis pendant des années. Vous ne ratez plus la fenêtre.",
+      "step3Title": "Nous mettons les prêteurs en concurrence",
+      "step3Body": "Banques, assurances et caisses de pension se disputent votre dossier. Vous choisissez."
+    },
+    "transparency": {
+      "title": "La transparence, noir sur blanc",
+      "body": "Le service est gratuit pour vous. Nous touchons une commission du prêteur retenu — vous la voyez avant de signer."
+    }
+  },
+  "buy": {
+    "hero": {
+      "overline": "Capacité d'achat",
+      "title": "Votre certificat de capacité d'achat, gratuit, en 2 minutes",
+      "subtitle": "Le document exigé pour faire une offre sur un bien. Calculé selon les règles bancaires suisses, délivré immédiatement en PDF."
+    },
+    "placeholder": "Le calculateur arrive ici."
+  },
+  "renew": {
+    "hero": {
+      "overline": "Renouvellement",
+      "title": "Votre hypothèque arrive à échéance. C'est maintenant que tout se joue.",
+      "subtitle": "Saisissez votre hypothèque actuelle. Selon votre échéance, nous lançons l'appel d'offres ou nous activons la surveillance gratuite."
+    },
+    "placeholder": "Le formulaire d'enregistrement arrive ici."
+  },
+  "auth": {
+    "login": {
+      "title": "Connexion",
+      "subtitle": "Accédez à votre espace de surveillance.",
+      "email": "Adresse e-mail",
+      "password": "Mot de passe",
+      "submit": "Se connecter",
+      "noAccount": "Pas encore de compte ?",
+      "toRegister": "Créer un compte",
+      "invalidCredentials": "Adresse e-mail ou mot de passe incorrect."
+    },
+    "register": {
+      "title": "Créer un compte",
+      "subtitle": "Votre hypothèque surveillée gratuitement, pendant des années.",
+      "name": "Nom complet",
+      "email": "Adresse e-mail",
+      "phone": "Téléphone",
+      "password": "Mot de passe",
+      "passwordHint": "8 caractères minimum",
+      "submit": "Créer mon compte",
+      "hasAccount": "Déjà un compte ?",
+      "toLogin": "Se connecter",
+      "emailTaken": "Un compte existe déjà avec cette adresse e-mail.",
+      "invalidData": "Veuillez vérifier les champs du formulaire."
+    }
+  },
+  "app": {
+    "title": "Mon espace",
+    "welcome": "Bonjour {name}",
+    "empty": "Votre tableau de bord arrive ici. Enregistrez votre hypothèque pour activer la surveillance."
+  }
+}
