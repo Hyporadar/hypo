@@ -1,0 +1,718 @@
+// Seed de développement — données réalistes, déterministes.
+// Mot de passe de tous les comptes : « Password123! »
+//   admin@hypopilot.ch, closer1/2@hypopilot.ch, partner1/2@hypopilot.ch,
+//   client1..10@exemple.ch
+import { PrismaClient, type Funnel, type LeadStatus, type Locale } from '@prisma/client'
+import bcrypt from 'bcryptjs'
+import { renewalFunnel } from '../src/lib/finance'
+
+const prisma = new PrismaClient()
+
+const NOW = new Date()
+
+function monthsFromNow(months: number): Date {
+  const d = new Date(NOW)
+  d.setUTCMonth(d.getUTCMonth() + months)
+  return d
+}
+
+function daysAgo(days: number): Date {
+  return new Date(NOW.getTime() - days * 24 * 60 * 60 * 1000)
+}
+
+function minutesAfter(date: Date, minutes: number): Date {
+  return new Date(date.getTime() + minutes * 60 * 1000)
+}
+
+// Pipeline ordonné pour reconstituer un historique de statuts plausible.
+const PIPELINE: LeadStatus[] = [
+  'NOUVEAU',
+  'CONTACTE',
+  'RDV',
+  'DOSSIER_EN_COURS',
+  'DOSSIER_COMPLET',
+  'ENVOYE_PARTENAIRE',
+  'OFFRES_RECUES',
+  'SIGNE',
+]
+
+async function main() {
+  console.log('Seed HypoPilot…')
+
+  // ─── Nettoyage (ordre : enfants → parents) ──────────────────────────
+  await prisma.appointment.deleteMany()
+  await prisma.commissionEntry.deleteMany()
+  await prisma.document.deleteMany()
+  await prisma.offer.deleteMany()
+  await prisma.signal.deleteMany()
+  await prisma.leadStatusChange.deleteMany()
+  await prisma.lead.deleteMany()
+  await prisma.purchaseProject.deleteMany()
+  await prisma.mortgage.deleteMany()
+  await prisma.referenceRate.deleteMany()
+  await prisma.user.deleteMany()
+
+  const passwordHash = await bcrypt.hash('Password123!', 12)
+
+  // ─── Utilisateurs ────────────────────────────────────────────────────
+  const admin = await prisma.user.create({
+    data: {
+      email: 'admin@hypopilot.ch',
+      passwordHash,
+      name: 'Alice Berthoud',
+      phone: '+41 21 555 00 01',
+      role: 'ADMIN',
+      locale: 'fr',
+    },
+  })
+
+  const [closer1, closer2] = await Promise.all([
+    prisma.user.create({
+      data: {
+        email: 'closer1@hypopilot.ch',
+        passwordHash,
+        name: 'Marc Dubois',
+        phone: '+41 21 555 00 02',
+        role: 'CLOSER',
+        locale: 'fr',
+      },
+    }),
+    prisma.user.create({
+      data: {
+        email: 'closer2@hypopilot.ch',
+        passwordHash,
+        name: 'Sandra Keller',
+        phone: '+41 44 555 00 03',
+        role: 'CLOSER',
+        locale: 'de',
+      },
+    }),
+  ])
+
+  const [partner1, partner2] = await Promise.all([
+    prisma.user.create({
+      data: {
+        email: 'partner1@hypopilot.ch',
+        passwordHash,
+        name: 'Régie Lambert SA',
+        phone: '+41 22 555 00 04',
+        role: 'PARTNER',
+        locale: 'fr',
+      },
+    }),
+    prisma.user.create({
+      data: {
+        email: 'partner2@hypopilot.ch',
+        passwordHash,
+        name: 'Fiduciaria Bernasconi',
+        phone: '+41 91 555 00 05',
+        role: 'PARTNER',
+        locale: 'it',
+      },
+    }),
+  ])
+
+  const clientSpecs: Array<{ name: string; locale: Locale; phone: string }> = [
+    { name: 'Jean Rochat', locale: 'fr', phone: '+41 79 555 10 01' },
+    { name: 'Marie Favre', locale: 'fr', phone: '+41 79 555 10 02' },
+    { name: 'Luc Perrin', locale: 'fr', phone: '+41 78 555 10 03' },
+    { name: 'Sophie Maillard', locale: 'fr', phone: '+41 76 555 10 04' },
+    { name: 'Nicolas Chevalley', locale: 'fr', phone: '+41 79 555 10 05' },
+    { name: 'Thomas Brunner', locale: 'de', phone: '+41 79 555 10 06' },
+    { name: 'Anna Meier', locale: 'de', phone: '+41 78 555 10 07' },
+    { name: 'Stefan Huber', locale: 'de', phone: '+41 76 555 10 08' },
+    { name: 'Giulia Ferrari', locale: 'it', phone: '+41 79 555 10 09' },
+    { name: 'Marco Rossi', locale: 'it', phone: '+41 78 555 10 10' },
+  ]
+
+  const clients = []
+  for (const [i, spec] of clientSpecs.entries()) {
+    clients.push(
+      await prisma.user.create({
+        data: {
+          email: `client${i + 1}@exemple.ch`,
+          passwordHash,
+          name: spec.name,
+          phone: spec.phone,
+          role: 'CLIENT',
+          locale: spec.locale,
+        },
+      })
+    )
+  }
+
+  // ─── Taux de référence nationaux ─────────────────────────────────────
+  // SARON : termYears = 0.
+  const rates: Array<{ termYears: number; rate: number; type: 'FIXE' | 'SARON' }> = [
+    { type: 'SARON', termYears: 0, rate: 0.9 },
+    { type: 'FIXE', termYears: 2, rate: 1.1 },
+    { type: 'FIXE', termYears: 3, rate: 1.15 },
+    { type: 'FIXE', termYears: 4, rate: 1.22 },
+    { type: 'FIXE', termYears: 5, rate: 1.3 },
+    { type: 'FIXE', termYears: 6, rate: 1.38 },
+    { type: 'FIXE', termYears: 7, rate: 1.45 },
+    { type: 'FIXE', termYears: 8, rate: 1.55 },
+    { type: 'FIXE', termYears: 9, rate: 1.65 },
+    { type: 'FIXE', termYears: 10, rate: 1.75 },
+  ]
+  for (const r of rates) {
+    await prisma.referenceRate.create({ data: r })
+  }
+
+  // ─── Hypothèques (clients renouvellement) & projets d'achat ──────────
+  const lenders = ['UBS', 'Raiffeisen', 'Banque Cantonale Vaudoise', 'ZKB', 'PostFinance']
+  const mortgageSpecs = [
+    { client: 0, remaining: 650_000, rate: 1.85, endMonths: 9, value: 1_050_000 }, // chaud
+    { client: 1, remaining: 480_000, rate: 2.1, endMonths: 14, value: 820_000 }, // chaud, grosse économie
+    { client: 3, remaining: 720_000, rate: 1.65, endMonths: 16, value: 1_200_000 }, // chaud
+    { client: 5, remaining: 550_000, rate: 1.4, endMonths: 26, value: 900_000 }, // froid
+    { client: 6, remaining: 830_000, rate: 1.95, endMonths: 3, value: 1_300_000 }, // trop tard
+    { client: 8, remaining: 400_000, rate: 1.55, endMonths: 36, value: 700_000 }, // froid
+  ] as const
+  const mortgages = []
+  for (const [i, m] of mortgageSpecs.entries()) {
+    mortgages.push(
+      await prisma.mortgage.create({
+        data: {
+          userId: clients[m.client]!.id,
+          remainingAmount: m.remaining,
+          currentRate: m.rate,
+          currentLender: lenders[i % lenders.length]!,
+          endDate: monthsFromNow(m.endMonths),
+          type: i % 3 === 2 ? 'SARON' : 'FIXE',
+          propertyValue: m.value,
+        },
+      })
+    )
+  }
+
+  const projectSpecs = [
+    { client: 2, price: 850_000, ownFunds: 180_000, pillar2: 60_000, income: 165_000 },
+    { client: 4, price: 1_000_000, ownFunds: 200_000, pillar2: 0, income: 180_000 }, // cas du brief
+    { client: 7, price: 1_250_000, ownFunds: 320_000, pillar2: 100_000, income: 240_000 },
+    { client: 9, price: 620_000, ownFunds: 130_000, pillar2: 40_000, income: 120_000 },
+  ] as const
+  for (const p of projectSpecs) {
+    await prisma.purchaseProject.create({
+      data: {
+        userId: clients[p.client]!.id,
+        price: p.price,
+        ownFunds: p.ownFunds,
+        ownFundsPillar2: p.pillar2,
+        annualGrossIncome: p.income,
+      },
+    })
+  }
+
+  // ─── Leads ───────────────────────────────────────────────────────────
+  const UTM = [
+    {
+      utmSource: 'google',
+      utmMedium: 'cpc',
+      utmCampaign: 'capacite-achat-fr',
+      utmTerm: 'hypotheque calcul',
+      utmContent: 'annonce-a',
+    },
+    {
+      utmSource: 'google',
+      utmMedium: 'cpc',
+      utmCampaign: 'renouvellement-fr',
+      utmTerm: 'renouveler hypotheque',
+      utmContent: 'annonce-b',
+    },
+    {
+      utmSource: 'facebook',
+      utmMedium: 'paid-social',
+      utmCampaign: 'proprietaires-40-60',
+      utmTerm: null,
+      utmContent: 'video-timeline',
+    },
+    {
+      utmSource: 'newsletter',
+      utmMedium: 'email',
+      utmCampaign: 'alerte-taux-q3',
+      utmTerm: null,
+      utmContent: null,
+    },
+    {
+      utmSource: 'partenaire',
+      utmMedium: 'referral',
+      utmCampaign: 'apporteurs',
+      utmTerm: null,
+      utmContent: null,
+    },
+    { utmSource: null, utmMedium: null, utmCampaign: null, utmTerm: null, utmContent: null }, // organique
+  ]
+
+  type LeadSpec = {
+    funnel: Funnel | 'AUTO' // AUTO = routé par renewalFunnel() sur l'échéance
+    status: LeadStatus
+    client: number
+    closer?: 1 | 2
+    partner?: 1 | 2
+    utm: number
+    createdDaysAgo: number
+    // minutes entre NOUVEAU et CONTACTE (speed-to-lead) ; défaut 5 min
+    contactMinutes?: number
+    mortgageMonths?: number // pour funnel AUTO
+  }
+
+  const specs: LeadSpec[] = [
+    // ── ACHAT (10)
+    { funnel: 'ACHAT', status: 'NOUVEAU', client: 2, utm: 0, createdDaysAgo: 0 },
+    { funnel: 'ACHAT', status: 'NOUVEAU', client: 4, utm: 2, createdDaysAgo: 1 },
+    {
+      funnel: 'ACHAT',
+      status: 'CONTACTE',
+      client: 7,
+      closer: 2,
+      utm: 0,
+      createdDaysAgo: 2,
+      contactMinutes: 4,
+    },
+    {
+      funnel: 'ACHAT',
+      status: 'CONTACTE',
+      client: 9,
+      closer: 1,
+      utm: 5,
+      createdDaysAgo: 3,
+      contactMinutes: 7,
+    },
+    {
+      funnel: 'ACHAT',
+      status: 'RDV',
+      client: 2,
+      closer: 1,
+      utm: 1,
+      createdDaysAgo: 6,
+      contactMinutes: 3,
+    },
+    {
+      funnel: 'ACHAT',
+      status: 'DOSSIER_EN_COURS',
+      client: 4,
+      closer: 2,
+      utm: 3,
+      createdDaysAgo: 12,
+      contactMinutes: 5,
+    },
+    {
+      funnel: 'ACHAT',
+      status: 'DOSSIER_COMPLET',
+      client: 7,
+      closer: 2,
+      utm: 0,
+      createdDaysAgo: 20,
+      contactMinutes: 6,
+    },
+    {
+      funnel: 'ACHAT',
+      status: 'ENVOYE_PARTENAIRE',
+      client: 9,
+      closer: 1,
+      partner: 2,
+      utm: 4,
+      createdDaysAgo: 30,
+      contactMinutes: 4,
+    },
+    {
+      funnel: 'ACHAT',
+      status: 'SIGNE',
+      client: 2,
+      closer: 1,
+      partner: 1,
+      utm: 4,
+      createdDaysAgo: 60,
+      contactMinutes: 5,
+    },
+    {
+      funnel: 'ACHAT',
+      status: 'PERDU',
+      client: 4,
+      closer: 2,
+      utm: 2,
+      createdDaysAgo: 45,
+      contactMinutes: 90,
+    },
+    // ── RENOUVELLEMENT CHAUD (12)
+    { funnel: 'AUTO', status: 'NOUVEAU', client: 0, utm: 1, createdDaysAgo: 0, mortgageMonths: 9 },
+    { funnel: 'AUTO', status: 'NOUVEAU', client: 1, utm: 3, createdDaysAgo: 0, mortgageMonths: 14 },
+    { funnel: 'AUTO', status: 'NOUVEAU', client: 3, utm: 5, createdDaysAgo: 1, mortgageMonths: 16 },
+    {
+      funnel: 'AUTO',
+      status: 'CONTACTE',
+      client: 0,
+      closer: 1,
+      utm: 1,
+      createdDaysAgo: 3,
+      contactMinutes: 4,
+      mortgageMonths: 9,
+    },
+    {
+      funnel: 'AUTO',
+      status: 'CONTACTE',
+      client: 1,
+      closer: 2,
+      utm: 2,
+      createdDaysAgo: 4,
+      contactMinutes: 12,
+      mortgageMonths: 14,
+    },
+    {
+      funnel: 'AUTO',
+      status: 'RDV',
+      client: 3,
+      closer: 1,
+      utm: 1,
+      createdDaysAgo: 8,
+      contactMinutes: 5,
+      mortgageMonths: 16,
+    },
+    {
+      funnel: 'AUTO',
+      status: 'RDV',
+      client: 0,
+      closer: 2,
+      utm: 5,
+      createdDaysAgo: 10,
+      contactMinutes: 3,
+      mortgageMonths: 9,
+    },
+    {
+      funnel: 'AUTO',
+      status: 'DOSSIER_EN_COURS',
+      client: 1,
+      closer: 1,
+      utm: 3,
+      createdDaysAgo: 15,
+      contactMinutes: 6,
+      mortgageMonths: 14,
+    },
+    {
+      funnel: 'AUTO',
+      status: 'DOSSIER_COMPLET',
+      client: 3,
+      closer: 2,
+      partner: 1,
+      utm: 4,
+      createdDaysAgo: 25,
+      contactMinutes: 5,
+      mortgageMonths: 16,
+    },
+    {
+      funnel: 'AUTO',
+      status: 'OFFRES_RECUES',
+      client: 0,
+      closer: 1,
+      utm: 1,
+      createdDaysAgo: 35,
+      contactMinutes: 4,
+      mortgageMonths: 9,
+    },
+    {
+      funnel: 'AUTO',
+      status: 'OFFRES_RECUES',
+      client: 1,
+      closer: 2,
+      utm: 0,
+      createdDaysAgo: 40,
+      contactMinutes: 8,
+      mortgageMonths: 14,
+    },
+    {
+      funnel: 'AUTO',
+      status: 'SIGNE',
+      client: 3,
+      closer: 1,
+      partner: 1,
+      utm: 4,
+      createdDaysAgo: 90,
+      contactMinutes: 5,
+      mortgageMonths: 16,
+    },
+    // ── RENOUVELLEMENT FROID (8) — surveillance
+    {
+      funnel: 'AUTO',
+      status: 'NURTURING',
+      client: 5,
+      utm: 2,
+      createdDaysAgo: 5,
+      mortgageMonths: 26,
+    },
+    {
+      funnel: 'AUTO',
+      status: 'NURTURING',
+      client: 8,
+      utm: 3,
+      createdDaysAgo: 10,
+      mortgageMonths: 36,
+    },
+    {
+      funnel: 'AUTO',
+      status: 'NURTURING',
+      client: 5,
+      utm: 5,
+      createdDaysAgo: 30,
+      mortgageMonths: 26,
+    },
+    {
+      funnel: 'AUTO',
+      status: 'NURTURING',
+      client: 8,
+      utm: 0,
+      createdDaysAgo: 50,
+      mortgageMonths: 36,
+    },
+    {
+      funnel: 'AUTO',
+      status: 'NURTURING',
+      client: 6,
+      utm: 1,
+      createdDaysAgo: 2,
+      mortgageMonths: 3,
+    }, // trop tard → prochain cycle
+    {
+      funnel: 'AUTO',
+      status: 'NURTURING',
+      client: 6,
+      utm: 2,
+      createdDaysAgo: 70,
+      mortgageMonths: 3,
+    },
+    { funnel: 'AUTO', status: 'NOUVEAU', client: 5, utm: 3, createdDaysAgo: 0, mortgageMonths: 26 },
+    {
+      funnel: 'AUTO',
+      status: 'PERDU',
+      client: 8,
+      closer: 2,
+      utm: 2,
+      createdDaysAgo: 120,
+      contactMinutes: 45,
+      mortgageMonths: 36,
+    },
+  ]
+
+  const closers = { 1: closer1, 2: closer2 }
+  const partners = { 1: partner1, 2: partner2 }
+  const leads = []
+
+  for (const spec of specs) {
+    const client = clients[spec.client]!
+    const funnel: Funnel =
+      spec.funnel === 'AUTO'
+        ? renewalFunnel(monthsFromNow(spec.mortgageMonths ?? 24), NOW)
+        : spec.funnel
+    const createdAt = daysAgo(spec.createdDaysAgo)
+
+    const lead = await prisma.lead.create({
+      data: {
+        funnel,
+        status: spec.status,
+        score: Math.min(95, 20 + spec.createdDaysAgo + (spec.closer ? 25 : 0)),
+        locale: client.locale,
+        ...UTM[spec.utm]!,
+        userId: client.id,
+        closerId: spec.closer ? closers[spec.closer].id : null,
+        partnerId: spec.partner ? partners[spec.partner].id : null,
+        createdAt,
+      },
+    })
+    leads.push(lead)
+
+    // Historique de statuts horodaté (speed-to-lead = NOUVEAU → CONTACTE).
+    const targetIndex =
+      spec.status === 'PERDU' || spec.status === 'NURTURING'
+        ? PIPELINE.indexOf('CONTACTE') // parcours minimal avant sortie de pipeline
+        : PIPELINE.indexOf(spec.status)
+
+    let previous: LeadStatus | null = null
+    let at = createdAt
+    const reached: LeadStatus[] = ['NOUVEAU']
+    if (spec.status !== 'NOUVEAU' && spec.status !== 'NURTURING') {
+      for (let i = 1; i <= targetIndex; i++) reached.push(PIPELINE[i]!)
+      if (spec.status === 'PERDU') reached.push('PERDU')
+    }
+    if (spec.status === 'NURTURING') reached.push('NURTURING')
+
+    for (const [i, status] of reached.entries()) {
+      if (i === 1) {
+        // premier contact : le SLA < 5 min se mesure ici
+        at = minutesAfter(createdAt, spec.contactMinutes ?? 5)
+      } else if (i > 1) {
+        at = minutesAfter(at, 60 * 24 * 2) // ~2 jours entre les étapes suivantes
+      }
+      await prisma.leadStatusChange.create({
+        data: {
+          leadId: lead.id,
+          fromStatus: previous,
+          toStatus: status,
+          changedById: i === 0 ? null : spec.closer ? closers[spec.closer].id : null,
+          changedAt: at,
+        },
+      })
+      previous = status
+    }
+  }
+
+  // ─── Signaux (file de travail des closers) ───────────────────────────
+  const signalSpecs = [
+    { lead: 5, type: 'ABANDON_DOSSIER', status: 'OUVERT' },
+    { lead: 19, type: 'OFFRES_NON_LUES', status: 'OUVERT' },
+    { lead: 20, type: 'OFFRE_EXPIRE_BIENTOT', status: 'OUVERT' },
+    { lead: 22, type: 'ENTREE_FENETRE', status: 'OUVERT' },
+    { lead: 11, type: 'GROSSE_ECONOMIE', status: 'OUVERT' }, // 480k à 2,10% vs 1,30%
+    { lead: 13, type: 'CALLBACK_DEMANDE', status: 'TRAITE' },
+    { lead: 23, type: 'ENTREE_FENETRE', status: 'TRAITE' },
+  ] as const
+  for (const s of signalSpecs) {
+    await prisma.signal.create({
+      data: {
+        leadId: leads[s.lead]!.id,
+        type: s.type,
+        status: s.status,
+        treatedAt: s.status === 'TRAITE' ? daysAgo(1) : null,
+      },
+    })
+  }
+
+  // ─── Offres (leads OFFRES_RECUES et SIGNE) ───────────────────────────
+  const offerSpecs = [
+    { lead: 19, lender: 'Raiffeisen', rate: 1.28, termYears: 10, validDays: 14, status: 'ACTIVE' },
+    { lead: 19, lender: 'Swiss Life', rate: 1.32, termYears: 10, validDays: 10, status: 'ACTIVE' },
+    { lead: 19, lender: 'Migros Bank', rate: 1.35, termYears: 5, validDays: 3, status: 'ACTIVE' },
+    { lead: 20, lender: 'ZKB', rate: 1.25, termYears: 10, validDays: 12, status: 'ACTIVE' },
+    { lead: 20, lender: 'UBS', rate: 1.38, termYears: 5, validDays: -2, status: 'EXPIREE' },
+    {
+      lead: 21,
+      lender: 'Banque Cantonale Vaudoise',
+      rate: 1.22,
+      termYears: 10,
+      validDays: -30,
+      status: 'ACCEPTEE',
+    },
+    {
+      lead: 21,
+      lender: 'PostFinance',
+      rate: 1.34,
+      termYears: 10,
+      validDays: -30,
+      status: 'REFUSEE',
+    },
+    {
+      lead: 8,
+      lender: 'Raiffeisen',
+      rate: 1.45,
+      termYears: 10,
+      validDays: -45,
+      status: 'ACCEPTEE',
+    },
+  ] as const
+  for (const o of offerSpecs) {
+    await prisma.offer.create({
+      data: {
+        leadId: leads[o.lead]!.id,
+        lender: o.lender,
+        rate: o.rate,
+        termYears: o.termYears,
+        validUntil: daysAgo(-o.validDays),
+        status: o.status,
+      },
+    })
+  }
+
+  // ─── Documents ───────────────────────────────────────────────────────
+  const docSpecs = [
+    { lead: 5, type: 'piece-identite', status: 'VALIDE' },
+    { lead: 5, type: 'certificat-salaire', status: 'EN_ATTENTE' },
+    { lead: 6, type: 'piece-identite', status: 'VALIDE' },
+    { lead: 6, type: 'certificat-salaire', status: 'VALIDE' },
+    { lead: 6, type: 'attestation-2e-pilier', status: 'VALIDE' },
+    { lead: 17, type: 'contrat-hypothecaire-actuel', status: 'VALIDE' },
+    { lead: 18, type: 'contrat-hypothecaire-actuel', status: 'REFUSE' },
+  ] as const
+  for (const d of docSpecs) {
+    await prisma.document.create({
+      data: {
+        leadId: leads[d.lead]!.id,
+        type: d.type,
+        url: `https://storage.hypopilot.ch/dev/${leads[d.lead]!.id}/${d.type}.pdf`,
+        verificationStatus: d.status,
+      },
+    })
+  }
+
+  // ─── Rendez-vous ─────────────────────────────────────────────────────
+  const appointmentSpecs = [
+    {
+      lead: 4,
+      closer: closer1,
+      inDays: 1,
+      type: 'APPEL',
+      notes: 'Premier échange capacité d’achat',
+    },
+    {
+      lead: 15,
+      closer: closer1,
+      inDays: 2,
+      type: 'VISIO',
+      notes: 'Présentation de la démarche d’appel d’offres',
+    },
+    {
+      lead: 16,
+      closer: closer2,
+      inDays: 3,
+      type: 'APPEL',
+      notes: 'Rappel demandé en fin de journée',
+    },
+    { lead: 19, closer: closer1, inDays: 5, type: 'VISIO', notes: 'Revue des 3 offres reçues' },
+  ] as const
+  for (const a of appointmentSpecs) {
+    await prisma.appointment.create({
+      data: {
+        leadId: leads[a.lead]!.id,
+        closerId: a.closer.id,
+        date: daysAgo(-a.inDays),
+        type: a.type,
+        notes: a.notes,
+      },
+    })
+  }
+
+  // ─── Commissions ─────────────────────────────────────────────────────
+  const commissionSpecs = [
+    { beneficiary: partner1.id, lead: 8, amount: 1_912.5, status: 'PAYEE' }, // apporteur, lead achat signé
+    { beneficiary: partner1.id, lead: 21, amount: 3_240, status: 'DUE' }, // apporteur, renouvellement signé
+    { beneficiary: closer1.id, lead: 8, amount: 850, status: 'PAYEE' },
+    { beneficiary: closer1.id, lead: 21, amount: 1_080, status: 'DUE' },
+  ] as const
+  for (const c of commissionSpecs) {
+    await prisma.commissionEntry.create({
+      data: {
+        beneficiaryId: c.beneficiary,
+        leadId: leads[c.lead]!.id,
+        amount: c.amount,
+        status: c.status,
+        paidAt: c.status === 'PAYEE' ? daysAgo(15) : null,
+      },
+    })
+  }
+
+  const counts = {
+    users: await prisma.user.count(),
+    leads: await prisma.lead.count(),
+    statusChanges: await prisma.leadStatusChange.count(),
+    signals: await prisma.signal.count(),
+    offers: await prisma.offer.count(),
+    rates: await prisma.referenceRate.count(),
+  }
+  console.log('Seed terminé :', counts)
+  console.log(`(admin : ${admin.email} / Password123!)`)
+}
+
+main()
+  .catch((e) => {
+    console.error(e)
+    process.exit(1)
+  })
+  .finally(() => prisma.$disconnect())

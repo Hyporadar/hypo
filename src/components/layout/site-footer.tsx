@@ -9,8 +9,8 @@ export async function SiteFooter() {
       <div className="mx-auto max-w-[1120px] space-y-6 px-6 py-12">
         <Wordmark onDark />
         <p className="font-display text-lg">{t('transparency')}</p>
-        <p className="max-w-xl text-sm text-pilot-200">{t('legal')}</p>
-        <p className="text-xs text-pilot-200">
+        <p className="text-pilot-200 max-w-xl text-sm">{t('legal')}</p>
+        <p className="text-pilot-200 text-xs">
           © {new Date().getFullYear()} {t('copyright')}
         </p>
       </div>

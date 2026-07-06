@@ -11,10 +11,10 @@ export function MortgageTimeline({
 }) {
   return (
     <div className="w-full" aria-hidden>
-      <div className="relative h-px w-full bg-line-strong">
-        <span className="bg-pilot-600 absolute left-0 top-1/2 size-2.5 -translate-y-1/2 rounded-full" />
-        <span className="bg-ambre-500 ring-ambre-100 absolute left-[68%] top-1/2 size-3 -translate-y-1/2 rounded-full ring-4" />
-        <span className="border-line-strong absolute right-0 top-1/2 size-2.5 -translate-y-1/2 rounded-full border bg-white" />
+      <div className="bg-line-strong relative h-px w-full">
+        <span className="bg-pilot-600 absolute top-1/2 left-0 size-2.5 -translate-y-1/2 rounded-full" />
+        <span className="bg-ambre-500 ring-ambre-100 absolute top-1/2 left-[68%] size-3 -translate-y-1/2 rounded-full ring-4" />
+        <span className="border-line-strong absolute top-1/2 right-0 size-2.5 -translate-y-1/2 rounded-full border bg-white" />
       </div>
       <div className="text-ink-500 mt-3 flex justify-between text-xs">
         <span className="text-data">{startLabel}</span>

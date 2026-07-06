@@ -181,9 +181,7 @@ export function renewalFunnel(
   endDate: Date,
   now: Date
 ): 'RENOUVELLEMENT_CHAUD' | 'RENOUVELLEMENT_FROID' {
-  return classifyRenewal(endDate, now) === 'CHAUD'
-    ? 'RENOUVELLEMENT_CHAUD'
-    : 'RENOUVELLEMENT_FROID'
+  return classifyRenewal(endDate, now) === 'CHAUD' ? 'RENOUVELLEMENT_CHAUD' : 'RENOUVELLEMENT_FROID'
 }
 
 /** Date de réveil d'un lead froid : 18 mois avant l'échéance (entrée de fenêtre). */

@@ -1,36 +1,58 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# HypoPilot
 
-## Getting Started
+Plateforme de surveillance d'hypothèques — fintech suisse. Next.js (App Router) · TypeScript strict · Tailwind 4 · shadcn/ui · next-intl (fr/de/it) · PostgreSQL + Prisma · Auth.js.
 
-First, run the development server:
+Le contexte produit complet est dans [CLAUDE.md](CLAUDE.md). Le design system est dans `.claude/skills/hypopilot-design/`.
+
+## Démarrage
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+# 1. Dépendances
+pnpm install
+
+# 2. Environnement
+cp .env.example .env
+# → renseigner DATABASE_URL et AUTH_SECRET (openssl rand -base64 32)
+
+# 3. Base de données (PostgreSQL requis, ex. brew install postgresql@17)
+createdb hypopilot
+pnpm db:migrate     # applique les migrations
+pnpm db:seed        # données de démo (comptes : Password123!)
+
+# 4. Lancer
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Comptes de démo (après seed)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| Rôle    | Email                 | Accès                       |
+| ------- | --------------------- | --------------------------- |
+| ADMIN   | admin@hypopilot.ch    | /admin (tout)               |
+| CLOSER  | closer1@hypopilot.ch  | /admin (sa file de leads)   |
+| PARTNER | partner1@hypopilot.ch | /admin (ses leads apportés) |
+| CLIENT  | client1@exemple.ch    | /fr/app (espace client)     |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Mot de passe commun : `Password123!`
 
-## Learn More
+## Commandes
 
-To learn more about Next.js, take a look at the following resources:
+| Commande          | Effet                                   |
+| ----------------- | --------------------------------------- |
+| `pnpm dev`        | Serveur de développement                |
+| `pnpm build`      | Build de production                     |
+| `pnpm test`       | Tests Vitest (règles métier finance.ts) |
+| `pnpm lint`       | ESLint                                  |
+| `pnpm format`     | Prettier                                |
+| `pnpm db:migrate` | Migrations Prisma                       |
+| `pnpm db:seed`    | Seed de démo                            |
+| `pnpm db:studio`  | Prisma Studio                           |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Architecture
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- `src/app/[locale]/` — pages publiques et espace client, trilingues (slugs traduits : `/fr/acheter`, `/de/kaufen`, `/it/comprare`)
+- `src/app/admin/` — panel interne (français uniquement), accès CLOSER/PARTNER/ADMIN filtré par rôle
+- `src/lib/finance.ts` — **toutes** les règles métier suisses (pur, testé) ; aucun calcul financier ailleurs
+- `src/lib/format.ts` — formats suisses (`CHF 1'250'000`, `1,25%`, `JJ.MM.AAAA`)
+- `src/proxy.ts` — routing i18n + protection par rôle
+- `messages/` — fr.json (source) / de.json / it.json ; aucune chaîne en dur dans les composants
+- `prisma/` — schéma, migrations, seed

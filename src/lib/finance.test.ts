@@ -183,7 +183,7 @@ describe('routage renouvellement (seuils 4 / 18 mois)', () => {
 })
 
 describe('formats suisses', () => {
-  it("montants : apostrophe pour les milliers, CHF devant", () => {
+  it('montants : apostrophe pour les milliers, CHF devant', () => {
     expect(formatCHF(1_250_000)).toBe("CHF 1'250'000")
     expect(formatCHF(950)).toBe('CHF 950')
     expect(formatCHF(1234.5, 2)).toBe("CHF 1'234,50")

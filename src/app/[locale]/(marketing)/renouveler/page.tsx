@@ -26,10 +26,10 @@ export default async function RenewPage({ params }: { params: Promise<{ locale: 
   return (
     <section className="mx-auto max-w-[1120px] px-6 py-20">
       <div className="max-w-2xl space-y-6">
-        <p className="text-ambre-700 text-xs font-semibold uppercase tracking-[0.08em]">
+        <p className="text-ambre-700 text-xs font-semibold tracking-[0.08em] uppercase">
           {t('hero.overline')}
         </p>
-        <h1 className="font-display text-4xl font-semibold leading-[1.1] md:text-5xl">
+        <h1 className="font-display text-4xl leading-[1.1] font-semibold md:text-5xl">
           {t('hero.title')}
         </h1>
         <p className="text-ink-700 text-lg leading-relaxed">{t('hero.subtitle')}</p>

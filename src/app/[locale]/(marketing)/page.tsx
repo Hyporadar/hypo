@@ -14,10 +14,10 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       {/* Hero */}
       <section className="mx-auto max-w-[1120px] px-6 py-20 md:py-28">
         <div className="max-w-2xl space-y-6">
-          <p className="text-pilot-600 text-xs font-semibold uppercase tracking-[0.08em]">
+          <p className="text-pilot-600 text-xs font-semibold tracking-[0.08em] uppercase">
             {t('hero.overline')}
           </p>
-          <h1 className="font-display text-4xl font-semibold leading-[1.05] md:text-6xl">
+          <h1 className="font-display text-4xl leading-[1.05] font-semibold md:text-6xl">
             {t('hero.title')}
           </h1>
           <p className="text-ink-700 text-lg leading-relaxed">{t('hero.subtitle')}</p>
