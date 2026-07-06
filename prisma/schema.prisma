@@ -1,0 +1,280 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ─── Enums ────────────────────────────────────────────────────────────
+
+enum Role {
+  CLIENT
+  CLOSER
+  PARTNER
+  ADMIN
+}
+
+enum Locale {
+  fr
+  de
+  it
+}
+
+enum Funnel {
+  ACHAT
+  RENOUVELLEMENT_CHAUD
+  RENOUVELLEMENT_FROID
+}
+
+enum LeadStatus {
+  NOUVEAU
+  CONTACTE
+  RDV
+  DOSSIER_EN_COURS
+  DOSSIER_COMPLET
+  ENVOYE_PARTENAIRE // règle d'or : uniquement dossier complété ET consenti
+  OFFRES_RECUES
+  SIGNE
+  PERDU
+  NURTURING // surveillance — réveillé 12–18 mois avant l'échéance
+}
+
+enum MortgageType {
+  FIXE
+  SARON
+}
+
+enum SignalType {
+  ABANDON_DOSSIER
+  OFFRES_NON_LUES
+  OFFRE_EXPIRE_BIENTOT
+  ENTREE_FENETRE
+  GROSSE_ECONOMIE
+  CALLBACK_DEMANDE
+}
+
+enum SignalStatus {
+  OUVERT
+  TRAITE
+}
+
+enum OfferStatus {
+  ACTIVE
+  ACCEPTEE
+  REFUSEE
+  EXPIREE
+}
+
+enum DocumentVerificationStatus {
+  EN_ATTENTE
+  VALIDE
+  REFUSE
+}
+
+enum CommissionStatus {
+  DUE
+  PAYEE
+}
+
+enum AppointmentType {
+  APPEL
+  VISIO
+}
+
+// ─── Utilisateurs ─────────────────────────────────────────────────────
+
+model User {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  passwordHash String
+  name         String
+  phone        String?
+  role         Role     @default(CLIENT)
+  locale       Locale   @default(fr) // langue des emails, PDF et statuts affichés
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  leads             Lead[]            @relation("ClientLeads")
+  referredLeads     Lead[]            @relation("PartnerLeads")
+  assignedLeads     Lead[]            @relation("CloserLeads")
+  mortgages         Mortgage[]
+  purchaseProjects  PurchaseProject[]
+  appointments      Appointment[]     @relation("CloserAppointments")
+  commissionEntries CommissionEntry[]
+  statusChanges     LeadStatusChange[]
+}
+
+// ─── Leads (entité centrale) ──────────────────────────────────────────
+
+model Lead {
+  id     String     @id @default(cuid())
+  funnel Funnel
+  status LeadStatus @default(NOUVEAU)
+  score  Int        @default(0)
+  locale Locale     @default(fr)
+
+  // Source UTM complète
+  utmSource   String?
+  utmMedium   String?
+  utmCampaign String?
+  utmTerm     String?
+  utmContent  String?
+
+  // Rattachements (tous nullables : un lead peut précéder le compte client)
+  userId    String?
+  user      User?   @relation("ClientLeads", fields: [userId], references: [id])
+  partnerId String? // apporteur B2B (User PARTNER)
+  partner   User?   @relation("PartnerLeads", fields: [partnerId], references: [id])
+  closerId  String? // closer affecté (User CLOSER)
+  closer    User?   @relation("CloserLeads", fields: [closerId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Horodatage de chaque changement de statut (mesure du speed-to-lead)
+  statusHistory     LeadStatusChange[]
+  signals           Signal[]
+  offers            Offer[]
+  documents         Document[]
+  commissionEntries CommissionEntry[]
+  appointments      Appointment[]
+
+  @@index([status, funnel])
+  @@index([closerId, status])
+  @@index([partnerId])
+}
+
+// Chaque transition de statut est journalisée avec son horodatage.
+// speed-to-lead = premier passage NOUVEAU → CONTACTE.
+model LeadStatusChange {
+  id          String      @id @default(cuid())
+  leadId      String
+  lead        Lead        @relation(fields: [leadId], references: [id], onDelete: Cascade)
+  fromStatus  LeadStatus? // null à la création du lead
+  toStatus    LeadStatus
+  changedById String? // null = transition automatique (système)
+  changedBy   User?       @relation(fields: [changedById], references: [id])
+  changedAt   DateTime    @default(now())
+
+  @@index([leadId, changedAt])
+}
+
+// ─── Hypothèque & projet d'achat ──────────────────────────────────────
+
+model Mortgage {
+  id              String       @id @default(cuid())
+  userId          String
+  user            User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  remainingAmount Decimal      @db.Decimal(12, 2) // montant restant dû, CHF
+  currentRate     Decimal      @db.Decimal(6, 3) // taux actuel, en % (ex. 1.250)
+  currentLender   String // prêteur actuel
+  endDate         DateTime // échéance — pilote tout le routage
+  type            MortgageType
+  propertyValue   Decimal      @db.Decimal(12, 2) // valeur estimée du bien, CHF
+  createdAt       DateTime     @default(now())
+  updatedAt       DateTime     @updatedAt
+
+  @@index([endDate])
+}
+
+model PurchaseProject {
+  id                String   @id @default(cuid())
+  userId            String
+  user              User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  price             Decimal  @db.Decimal(12, 2) // prix du bien, CHF
+  ownFunds          Decimal  @db.Decimal(12, 2) // fonds propres totaux, CHF
+  ownFundsPillar2   Decimal  @db.Decimal(12, 2) // dont 2e pilier, CHF
+  annualGrossIncome Decimal  @db.Decimal(12, 2) // revenu brut annuel du ménage, CHF
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+}
+
+// ─── File de travail des closers ──────────────────────────────────────
+
+model Signal {
+  id        String       @id @default(cuid())
+  leadId    String
+  lead      Lead         @relation(fields: [leadId], references: [id], onDelete: Cascade)
+  type      SignalType
+  status    SignalStatus @default(OUVERT)
+  createdAt DateTime     @default(now())
+  treatedAt DateTime?
+
+  @@index([status, createdAt])
+  @@index([leadId])
+}
+
+// ─── Offres & documents ───────────────────────────────────────────────
+
+model Offer {
+  id         String      @id @default(cuid())
+  leadId     String
+  lead       Lead        @relation(fields: [leadId], references: [id], onDelete: Cascade)
+  lender     String // prêteur
+  rate       Decimal     @db.Decimal(6, 3) // taux proposé, en %
+  termYears  Int // durée en années
+  validUntil DateTime // validité de l'offre
+  status     OfferStatus @default(ACTIVE)
+  createdAt  DateTime    @default(now())
+
+  @@index([leadId, status])
+}
+
+model Document {
+  id                 String                     @id @default(cuid())
+  leadId             String
+  lead               Lead                       @relation(fields: [leadId], references: [id], onDelete: Cascade)
+  type               String // ex. "piece-identite", "certificat-salaire", "extrait-rf"
+  url                String
+  verificationStatus DocumentVerificationStatus @default(EN_ATTENTE)
+  createdAt          DateTime                   @default(now())
+
+  @@index([leadId])
+}
+
+// ─── Taux de référence nationaux (gérés par l'admin) ──────────────────
+
+model ReferenceRate {
+  id        String       @id @default(cuid())
+  type      MortgageType @default(FIXE)
+  termYears Int // durée en années (0 = SARON)
+  rate      Decimal      @db.Decimal(6, 3) // taux, en %
+  updatedAt DateTime     @updatedAt
+
+  @@unique([type, termYears])
+}
+
+// ─── Commissions ──────────────────────────────────────────────────────
+
+// bénéficiaire = partner OU closer (exactement un des deux, vérifié applicativement)
+model CommissionEntry {
+  id            String           @id @default(cuid())
+  beneficiaryId String
+  beneficiary   User             @relation(fields: [beneficiaryId], references: [id])
+  leadId        String
+  lead          Lead             @relation(fields: [leadId], references: [id])
+  amount        Decimal          @db.Decimal(12, 2) // CHF
+  status        CommissionStatus @default(DUE)
+  paidAt        DateTime?
+  createdAt     DateTime         @default(now())
+
+  @@index([beneficiaryId, status])
+}
+
+// ─── Agenda ───────────────────────────────────────────────────────────
+
+model Appointment {
+  id        String          @id @default(cuid())
+  closerId  String
+  closer    User            @relation("CloserAppointments", fields: [closerId], references: [id])
+  leadId    String
+  lead      Lead            @relation(fields: [leadId], references: [id], onDelete: Cascade)
+  date      DateTime
+  type      AppointmentType
+  notes     String?
+  createdAt DateTime        @default(now())
+
+  @@index([closerId, date])
+}
