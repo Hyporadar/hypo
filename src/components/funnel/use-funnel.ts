@@ -52,6 +52,7 @@ export function useFunnel<T extends Record<string, unknown>>(storageKey: string,
   const initialRef = useRef(initial)
 
   // Restauration + capture d'attribution, une seule fois côté client.
+  /* eslint-disable react-hooks/set-state-in-effect -- restauration du brouillon au montage, volontairement synchrone */
   useEffect(() => {
     let stored: StoredDraft<T> | null = null
     try {
@@ -73,6 +74,7 @@ export function useFunnel<T extends Record<string, unknown>>(storageKey: string,
     }
     setHydrated(true)
   }, [key])
+  /* eslint-enable react-hooks/set-state-in-effect */
 
   // Persistance locale à chaque changement.
   useEffect(() => {
