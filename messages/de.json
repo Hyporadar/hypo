@@ -351,5 +351,112 @@
       "body": "Guten Tag {name}\n\nDas Quartals-Update Ihrer Überwachung: Sie zahlen {rate}, der 10-Jahres-Referenzzinssatz liegt bei {refRate}. Potenzielle Differenz: {savings} pro Jahr.\n\nSie müssen nichts tun — wir melden uns, sobald sich Ihr Zeitfenster öffnet.",
       "cta": "Meine Überwachung ansehen"
     }
+  },
+  "clientApp": {
+    "nav": {
+      "dashboard": "Meine Hypothek",
+      "dossier": "Mein Dossier",
+      "referral": "Empfehlen",
+      "account": "Konto"
+    },
+    "dashboard": {
+      "title": "Meine Hypothek",
+      "noMortgageTitle": "Keine Hypothek erfasst",
+      "noMortgageBody": "Erfassen Sie Ihre Hypothek, um die kostenlose Überwachung zu aktivieren. 3 Minuten genügen.",
+      "noMortgageCta": "Hypothek erfassen",
+      "yourRate": "Ihr Zinssatz",
+      "marketRate": "Der Markt (Festzins 10 Jahre)",
+      "gapLabel": "Differenz auf Ihrem Saldo von {amount}",
+      "gapLosing": "{amount} potenzielle Differenz pro Jahr",
+      "gapGood": "Sie liegen auf Marktniveau oder besser",
+      "lender": "Aktueller Kreditgeber",
+      "remaining": "Restsaldo",
+      "countdown": {
+        "title": "Ihre Zeitachse",
+        "windowEntry": "Fenster öffnet sich",
+        "lastNotice": "Letzte Kündigungsfrist",
+        "deadline": "Ablauf",
+        "today": "Heute",
+        "stateBeforeTitle": "Zu früh zum Handeln — wir überwachen",
+        "stateBeforeBody": "Ihr Zeitfenster öffnet sich am {date}. Wir melden uns — bis dahin ist nichts zu tun.",
+        "stateWindowTitle": "Ihr Zeitfenster ist offen",
+        "stateWindowBody": "Jetzt entscheidet sich alles, bis zur Kündigungsfrist (~{date}). Starten Sie die Ausschreibung.",
+        "stateWindowCta": "Ausschreibung starten",
+        "stateLateTitle": "Kündigungsfrist wohl verstrichen",
+        "stateLateBody": "Weniger als 4 Monate vor Ablauf ist dieser Zyklus kaum noch zu spielen. Wir bereiten den nächsten vor.",
+        "monthsLeft": "{months} Monate bis zum Ablauf"
+      },
+      "certificate": {
+        "title": "Ihr Tragbarkeitszertifikat",
+        "number": "Zertifikat",
+        "issuedOn": "Ausgestellt am",
+        "download": "PDF erneut herunterladen",
+        "dossierStatus": "Dossier-Status"
+      }
+    },
+    "dossier": {
+      "title": "Mein Dossier",
+      "documentsTitle": "Dokumente",
+      "missing": "Es fehlt: {list}",
+      "complete": "Dossier vollständig — nichts mehr zu tun.",
+      "upload": "Dokument hinzufügen",
+      "uploadType": "Dokumenttyp",
+      "uploadFile": "Datei (PDF oder Foto)",
+      "uploadSubmit": "Senden",
+      "uploadSuccess": "Dokument erhalten. Wir prüfen es.",
+      "status": {
+        "EN_ATTENTE": "In Prüfung",
+        "VALIDE": "Validiert",
+        "REFUSE": "Erneut nötig"
+      },
+      "docTypes": {
+        "piece-identite": "Ausweisdokument",
+        "certificat-salaire": "Lohnausweis",
+        "taxation": "Letzte Steuerveranlagung",
+        "contrat-hypothecaire": "Aktueller Hypothekarvertrag",
+        "attestation-2e-pilier": "Ausweis 2. Säule"
+      },
+      "offersTitle": "Ihre Offerten",
+      "offersEmpty": "Noch keine Offerten. Sie erscheinen hier, sobald die Kreditgeber geantwortet haben.",
+      "offerRate": "Zinssatz",
+      "offerTerm": "Laufzeit",
+      "offerTermYears": "{years} Jahre",
+      "offerValidity": "Verbleibende Gültigkeit",
+      "offerDaysLeft": "{days} Tage",
+      "offerExpired": "Abgelaufen",
+      "offerStatus": {
+        "ACTIVE": "Aktiv",
+        "ACCEPTEE": "Angenommen",
+        "REFUSEE": "Abgelehnt",
+        "EXPIREE": "Abgelaufen"
+      },
+      "noLead": "Kein laufendes Dossier. Beginnen Sie mit einer Simulation."
+    },
+    "referral": {
+      "title": "Empfehlen",
+      "subtitle": "Empfehlen Sie HypoPilot: CHF 100 pro geworbene Person mit validierter Hypothek.",
+      "yourLink": "Ihr persönlicher Link",
+      "copy": "Kopieren",
+      "copied": "Kopiert",
+      "signedUp": "Geworbene angemeldet",
+      "validated": "Validierte Hypotheken",
+      "earnings": "Ihre Gutschriften",
+      "earningsPerReferral": "CHF 100 pro validierte Empfehlung",
+      "status": {
+        "DUE": "Ausstehend",
+        "PAYEE": "Ausbezahlt"
+      }
+    },
+    "account": {
+      "title": "Konto",
+      "name": "Vollständiger Name",
+      "phone": "Telefon",
+      "language": "Sprache",
+      "alertsTitle": "Benachrichtigungen",
+      "alertEmail": "Benachrichtigung per E-Mail",
+      "alertSms": "Benachrichtigung per SMS (bald)",
+      "save": "Speichern",
+      "saved": "Änderungen gespeichert."
+    }
   }
 }

@@ -9,6 +9,7 @@ import { redirect } from '@/i18n/navigation'
 import type { Locale } from '@/i18n/routing'
 import { signIn, signOut } from '@/lib/auth'
 import { prisma } from '@/lib/prisma'
+import { emitClientEvent } from '@/server/events'
 
 export type AuthFormState = {
   error?: string
@@ -104,7 +105,10 @@ export async function loginAction(
   }
 
   // Les rôles internes atterrissent sur le panel (hors i18n), les clients sur leur espace.
-  const user = await prisma.user.findUnique({ where: { email }, select: { role: true } })
+  const user = await prisma.user.findUnique({ where: { email }, select: { id: true, role: true } })
+  if (user?.role === 'CLIENT') {
+    await emitClientEvent({ type: 'CONNEXION', userId: user.id })
+  }
   if (user && user.role !== 'CLIENT') {
     nextRedirect('/admin')
   }

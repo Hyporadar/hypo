@@ -351,5 +351,112 @@
       "body": "Buongiorno {name},\n\nIl punto trimestrale della Sua sorveglianza: Lei paga {rate}, il tasso di riferimento a 10 anni è {refRate}. Differenza potenziale: {savings} all'anno.\n\nNon deve fare nulla — La avviseremo quando la Sua finestra si aprirà.",
       "cta": "Vedere la mia sorveglianza"
     }
+  },
+  "clientApp": {
+    "nav": {
+      "dashboard": "La mia ipoteca",
+      "dossier": "Il mio dossier",
+      "referral": "Passaparola",
+      "account": "Conto"
+    },
+    "dashboard": {
+      "title": "La mia ipoteca",
+      "noMortgageTitle": "Nessuna ipoteca registrata",
+      "noMortgageBody": "Registri la Sua ipoteca per attivare la sorveglianza gratuita. Bastano 3 minuti.",
+      "noMortgageCta": "Registrare l'ipoteca",
+      "yourRate": "Il Suo tasso",
+      "marketRate": "Il mercato (fisso 10 anni)",
+      "gapLabel": "Differenza sul Suo saldo di {amount}",
+      "gapLosing": "{amount} di differenza potenziale all'anno",
+      "gapGood": "È al livello del mercato, o meglio",
+      "lender": "Finanziatore attuale",
+      "remaining": "Saldo residuo",
+      "countdown": {
+        "title": "La Sua linea del tempo",
+        "windowEntry": "Apertura della finestra",
+        "lastNotice": "Ultimo termine di disdetta",
+        "deadline": "Scadenza",
+        "today": "Oggi",
+        "stateBeforeTitle": "Troppo presto per agire — sorvegliamo noi",
+        "stateBeforeBody": "La Sua finestra si apre il {date}. La avviseremo: fino ad allora non deve fare nulla.",
+        "stateWindowTitle": "La Sua finestra è aperta",
+        "stateWindowBody": "È ora che si decide tutto, fino al termine di disdetta (~{date}). Lanci la gara d'offerte.",
+        "stateWindowCta": "Lanciare la gara d'offerte",
+        "stateLateTitle": "Termine di disdetta probabilmente superato",
+        "stateLateBody": "A meno di 4 mesi dalla scadenza questo ciclo è difficile da giocare. Prepariamo il prossimo.",
+        "monthsLeft": "{months} mesi alla scadenza"
+      },
+      "certificate": {
+        "title": "Il Suo certificato di sostenibilità",
+        "number": "Certificato",
+        "issuedOn": "Emesso il",
+        "download": "Riscaricare il PDF",
+        "dossierStatus": "Stato del dossier"
+      }
+    },
+    "dossier": {
+      "title": "Il mio dossier",
+      "documentsTitle": "Documenti",
+      "missing": "Manca: {list}",
+      "complete": "Dossier completo — niente da aggiungere.",
+      "upload": "Aggiungere un documento",
+      "uploadType": "Tipo di documento",
+      "uploadFile": "File (PDF o foto)",
+      "uploadSubmit": "Inviare",
+      "uploadSuccess": "Documento ricevuto. Lo stiamo verificando.",
+      "status": {
+        "EN_ATTENTE": "In verifica",
+        "VALIDE": "Validato",
+        "REFUSE": "Da rifare"
+      },
+      "docTypes": {
+        "piece-identite": "Documento d'identità",
+        "certificat-salaire": "Certificato di salario",
+        "taxation": "Ultima tassazione fiscale",
+        "contrat-hypothecaire": "Contratto ipotecario attuale",
+        "attestation-2e-pilier": "Attestato 2° pilastro"
+      },
+      "offersTitle": "Le Sue offerte",
+      "offersEmpty": "Ancora nessuna offerta. Appariranno qui appena i finanziatori avranno risposto.",
+      "offerRate": "Tasso",
+      "offerTerm": "Durata",
+      "offerTermYears": "{years} anni",
+      "offerValidity": "Validità rimanente",
+      "offerDaysLeft": "{days} giorni",
+      "offerExpired": "Scaduta",
+      "offerStatus": {
+        "ACTIVE": "Attiva",
+        "ACCEPTEE": "Accettata",
+        "REFUSEE": "Rifiutata",
+        "EXPIREE": "Scaduta"
+      },
+      "noLead": "Nessun dossier in corso. Cominci con una simulazione."
+    },
+    "referral": {
+      "title": "Passaparola",
+      "subtitle": "Raccomandi HypoPilot: CHF 100 per ogni persona presentata con ipoteca validata.",
+      "yourLink": "Il Suo link personale",
+      "copy": "Copiare",
+      "copied": "Copiato",
+      "signedUp": "Presentati iscritti",
+      "validated": "Ipoteche validate",
+      "earnings": "I Suoi guadagni",
+      "earningsPerReferral": "CHF 100 per presentato validato",
+      "status": {
+        "DUE": "Da versare",
+        "PAYEE": "Versato"
+      }
+    },
+    "account": {
+      "title": "Conto",
+      "name": "Nome completo",
+      "phone": "Telefono",
+      "language": "Lingua",
+      "alertsTitle": "Preferenze di avviso",
+      "alertEmail": "Avvisi via e-mail",
+      "alertSms": "Avvisi via SMS (presto)",
+      "save": "Salvare",
+      "saved": "Modifiche salvate."
+    }
   }
 }

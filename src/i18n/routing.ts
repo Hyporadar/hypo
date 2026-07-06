@@ -32,7 +32,11 @@ export const routing = defineRouting({
       de: '/registrieren',
       it: '/registrati',
     },
+    // Espace client : contenu localisé, slugs techniques stables.
     '/app': '/app',
+    '/app/dossier': '/app/dossier',
+    '/app/parrainage': '/app/parrainage',
+    '/app/compte': '/app/compte',
   },
 })
 

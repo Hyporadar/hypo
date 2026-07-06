@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
+import { emitClientEvent } from '@/server/events'
 import { renderCertificatePdf } from '@/server/pdf/certificate'
 
 export async function GET(_req: Request, { params }: { params: Promise<{ id: string }> }) {
@@ -9,6 +10,7 @@ export async function GET(_req: Request, { params }: { params: Promise<{ id: str
     return NextResponse.json({ error: 'not_found' }, { status: 404 })
   }
 
+  await emitClientEvent({ type: 'CERTIFICAT_TELECHARGE', leadId: certificate.leadId })
   const pdf = await renderCertificatePdf(certificate)
   return new NextResponse(Buffer.from(pdf), {
     headers: {

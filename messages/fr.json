@@ -351,5 +351,112 @@
       "body": "Bonjour {name},\n\nLe point trimestriel de votre surveillance : vous payez {rate}, le taux de référence 10 ans est à {refRate}. Écart potentiel : {savings} par an.\n\nRien à faire de votre côté — nous vous préviendrons quand votre fenêtre s'ouvrira.",
       "cta": "Voir ma surveillance"
     }
+  },
+  "clientApp": {
+    "nav": {
+      "dashboard": "Mon hypothèque",
+      "dossier": "Mon dossier",
+      "referral": "Parrainage",
+      "account": "Compte"
+    },
+    "dashboard": {
+      "title": "Mon hypothèque",
+      "noMortgageTitle": "Aucune hypothèque enregistrée",
+      "noMortgageBody": "Enregistrez votre hypothèque pour activer la surveillance gratuite. 3 minutes suffisent.",
+      "noMortgageCta": "Enregistrer mon hypothèque",
+      "yourRate": "Votre taux",
+      "marketRate": "Le marché (fixe 10 ans)",
+      "gapLabel": "Écart sur votre solde de {amount}",
+      "gapLosing": "{amount} par an d'écart potentiel",
+      "gapGood": "Vous êtes au niveau du marché, ou mieux",
+      "lender": "Prêteur actuel",
+      "remaining": "Solde restant",
+      "countdown": {
+        "title": "Votre ligne de temps",
+        "windowEntry": "Entrée en fenêtre",
+        "lastNotice": "Dernier préavis",
+        "deadline": "Échéance",
+        "today": "Aujourd'hui",
+        "stateBeforeTitle": "Trop tôt pour agir — on surveille",
+        "stateBeforeBody": "Votre fenêtre s'ouvre le {date}. Nous vous préviendrons : rien à faire d'ici là.",
+        "stateWindowTitle": "Votre fenêtre est ouverte",
+        "stateWindowBody": "C'est maintenant que tout se joue, jusqu'au préavis (~{date}). Lancez l'appel d'offres.",
+        "stateWindowCta": "Lancer l'appel d'offres",
+        "stateLateTitle": "Préavis probablement dépassé",
+        "stateLateBody": "À moins de 4 mois de l'échéance, ce cycle est difficile à jouer. Nous préparons le prochain.",
+        "monthsLeft": "{months} mois avant l'échéance"
+      },
+      "certificate": {
+        "title": "Votre certificat de capacité d'achat",
+        "number": "Certificat",
+        "issuedOn": "Émis le",
+        "download": "Re-télécharger le PDF",
+        "dossierStatus": "Statut du dossier"
+      }
+    },
+    "dossier": {
+      "title": "Mon dossier",
+      "documentsTitle": "Documents",
+      "missing": "Il manque : {list}",
+      "complete": "Dossier complet — rien à ajouter.",
+      "upload": "Ajouter un document",
+      "uploadType": "Type de document",
+      "uploadFile": "Fichier (PDF ou photo)",
+      "uploadSubmit": "Envoyer",
+      "uploadSuccess": "Document reçu. Nous le vérifions.",
+      "status": {
+        "EN_ATTENTE": "En vérification",
+        "VALIDE": "Validé",
+        "REFUSE": "À refaire"
+      },
+      "docTypes": {
+        "piece-identite": "Pièce d'identité",
+        "certificat-salaire": "Certificat de salaire",
+        "taxation": "Dernière taxation fiscale",
+        "contrat-hypothecaire": "Contrat hypothécaire actuel",
+        "attestation-2e-pilier": "Attestation 2e pilier"
+      },
+      "offersTitle": "Vos offres",
+      "offersEmpty": "Pas encore d'offres. Elles apparaîtront ici dès que les prêteurs auront répondu.",
+      "offerRate": "Taux",
+      "offerTerm": "Durée",
+      "offerTermYears": "{years} ans",
+      "offerValidity": "Validité restante",
+      "offerDaysLeft": "{days} jours",
+      "offerExpired": "Expirée",
+      "offerStatus": {
+        "ACTIVE": "Active",
+        "ACCEPTEE": "Acceptée",
+        "REFUSEE": "Refusée",
+        "EXPIREE": "Expirée"
+      },
+      "noLead": "Aucun dossier en cours. Commencez par une simulation."
+    },
+    "referral": {
+      "title": "Parrainage",
+      "subtitle": "Recommandez HypoPilot : CHF 100 par filleul dont l'hypothèque est validée.",
+      "yourLink": "Votre lien personnel",
+      "copy": "Copier",
+      "copied": "Copié",
+      "signedUp": "Filleuls inscrits",
+      "validated": "Hypothèques validées",
+      "earnings": "Vos gains",
+      "earningsPerReferral": "CHF 100 par filleul validé",
+      "status": {
+        "DUE": "À verser",
+        "PAYEE": "Versé"
+      }
+    },
+    "account": {
+      "title": "Compte",
+      "name": "Nom complet",
+      "phone": "Téléphone",
+      "language": "Langue",
+      "alertsTitle": "Préférences d'alerte",
+      "alertEmail": "Alertes par e-mail",
+      "alertSms": "Alertes par SMS (bientôt)",
+      "save": "Enregistrer",
+      "saved": "Modifications enregistrées."
+    }
   }
 }

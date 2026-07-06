@@ -1,9 +1,21 @@
+import fs from 'node:fs'
 import path from 'node:path'
-import { defineConfig, loadEnv } from 'vite'
+import { defineConfig } from 'vitest/config'
 
-export default defineConfig(({ mode }) => {
-  // Charge .env (DATABASE_URL) pour les tests d'intégration Prisma.
-  process.env = { ...process.env, ...loadEnv(mode, process.cwd(), '') }
+// Charge .env (DATABASE_URL) pour les tests d'intégration Prisma.
+function loadDotEnv() {
+  const file = path.resolve(__dirname, '.env')
+  if (!fs.existsSync(file)) return
+  for (const line of fs.readFileSync(file, 'utf8').split('\n')) {
+    const match = line.match(/^([A-Z0-9_]+)="?([^"]*)"?$/)
+    if (match && process.env[match[1]!] === undefined) {
+      process.env[match[1]!] = match[2]
+    }
+  }
+}
+
+export default defineConfig(() => {
+  loadDotEnv()
 
   return {
     test: {
