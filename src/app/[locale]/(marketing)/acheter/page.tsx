@@ -28,10 +28,10 @@ export default async function BuyPage({ params }: { params: Promise<{ locale: st
   return (
     <section className="mx-auto max-w-[1120px] px-4 py-10 sm:px-6 sm:py-16">
       <div className="mx-auto max-w-xl space-y-4 text-center">
-        <p className="text-pilot-600 text-xs font-semibold uppercase tracking-[0.08em]">
+        <p className="text-pilot-600 text-xs font-semibold tracking-[0.08em] uppercase">
           {t('hero.overline')}
         </p>
-        <h1 className="font-display text-3xl font-semibold leading-[1.1] sm:text-4xl">
+        <h1 className="font-display text-3xl leading-[1.1] font-semibold sm:text-4xl">
           {t('hero.title')}
         </h1>
         <p className="text-ink-700 leading-relaxed">{t('hero.subtitle')}</p>

@@ -3,7 +3,7 @@ import { getPathname } from '@/i18n/navigation'
 import { routing, type AppPathname } from '@/i18n/routing'
 import { BASE_URL } from '@/lib/seo'
 
-const PUBLIC_PATHS: AppPathname[] = ['/', '/acheter', '/renouveler']
+const PUBLIC_PATHS: AppPathname[] = ['/', '/acheter', '/renouveler', '/comment-ca-marche']
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return PUBLIC_PATHS.map((pathname) => {

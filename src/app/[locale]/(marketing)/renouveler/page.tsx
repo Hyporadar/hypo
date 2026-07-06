@@ -1,8 +1,9 @@
 import type { Metadata } from 'next'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
 import type { Locale } from '@/i18n/routing'
+import { getReferenceRate10y } from '@/lib/rates'
 import { localizedAlternates } from '@/lib/seo'
-import { Card, CardContent } from '@/components/ui/card'
+import { RenewalFunnel } from '@/components/funnel/renewal-funnel'
 
 export async function generateMetadata({
   params,
@@ -22,23 +23,22 @@ export default async function RenewPage({ params }: { params: Promise<{ locale: 
   const { locale } = await params
   setRequestLocale(locale)
   const t = await getTranslations('renew')
+  const refRate10y = await getReferenceRate10y()
 
   return (
-    <section className="mx-auto max-w-[1120px] px-6 py-20">
-      <div className="max-w-2xl space-y-6">
+    <section className="mx-auto max-w-[1120px] px-4 py-10 sm:px-6 sm:py-16">
+      <div className="mx-auto max-w-xl space-y-4 text-center">
         <p className="text-ambre-700 text-xs font-semibold tracking-[0.08em] uppercase">
           {t('hero.overline')}
         </p>
-        <h1 className="font-display text-4xl leading-[1.1] font-semibold md:text-5xl">
+        <h1 className="font-display text-3xl leading-[1.1] font-semibold sm:text-4xl">
           {t('hero.title')}
         </h1>
-        <p className="text-ink-700 text-lg leading-relaxed">{t('hero.subtitle')}</p>
+        <p className="text-ink-700 leading-relaxed">{t('hero.subtitle')}</p>
       </div>
-      <Card className="mt-12 max-w-2xl">
-        <CardContent className="text-ink-500 py-12 text-center text-sm">
-          {t('placeholder')}
-        </CardContent>
-      </Card>
+      <div className="mt-10">
+        <RenewalFunnel refRate10y={refRate10y} />
+      </div>
     </section>
   )
 }

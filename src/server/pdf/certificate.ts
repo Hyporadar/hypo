@@ -47,13 +47,27 @@ function wrap(text: string, font: PDFFont, size: number, maxWidth: number): stri
 function drawWrapped(
   page: PDFPage,
   text: string,
-  opts: { x: number; y: number; font: PDFFont; size: number; maxWidth: number; color?: ReturnType<typeof rgb>; lineHeight?: number }
+  opts: {
+    x: number
+    y: number
+    font: PDFFont
+    size: number
+    maxWidth: number
+    color?: ReturnType<typeof rgb>
+    lineHeight?: number
+  }
 ): number {
   const lines = wrap(text, opts.font, opts.size, opts.maxWidth)
   const lh = opts.lineHeight ?? opts.size * 1.45
   let y = opts.y
   for (const line of lines) {
-    page.drawText(line, { x: opts.x, y, font: opts.font, size: opts.size, color: opts.color ?? INK })
+    page.drawText(line, {
+      x: opts.x,
+      y,
+      font: opts.font,
+      size: opts.size,
+      color: opts.color ?? INK,
+    })
     y -= lh
   }
   return y
@@ -105,7 +119,13 @@ export async function renderCertificatePdf(certificate: Certificate): Promise<Ui
   ]
   metaRight.forEach((line, i) => {
     const w = regular.widthOfTextAtSize(line, 9.5)
-    page.drawText(line, { x: W - MARGIN - w, y: y + 8 - i * 13, size: 9.5, font: regular, color: INK_MUTED })
+    page.drawText(line, {
+      x: W - MARGIN - w,
+      y: y + 8 - i * 13,
+      size: 9.5,
+      font: regular,
+      color: INK_MUTED,
+    })
   })
 
   y -= 18
@@ -119,7 +139,13 @@ export async function renderCertificatePdf(certificate: Certificate): Promise<Ui
 
   // ── Porteur
   y -= 40
-  page.drawText(sanitize(t('holder')).toUpperCase(), { x: MARGIN, y, size: 8.5, font: bold, color: INK_MUTED })
+  page.drawText(sanitize(t('holder')).toUpperCase(), {
+    x: MARGIN,
+    y,
+    size: 8.5,
+    font: bold,
+    color: INK_MUTED,
+  })
   y -= 18
   page.drawText(sanitize(certificate.holder), { x: MARGIN, y, size: 16, font: bold, color: INK })
 
@@ -162,7 +188,13 @@ export async function renderCertificatePdf(certificate: Certificate): Promise<Ui
 
   // ── Éléments déclarés
   y -= 20
-  page.drawText(sanitize(t('summaryTitle')).toUpperCase(), { x: MARGIN, y, size: 8.5, font: bold, color: INK_MUTED })
+  page.drawText(sanitize(t('summaryTitle')).toUpperCase(), {
+    x: MARGIN,
+    y,
+    size: 8.5,
+    font: bold,
+    color: INK_MUTED,
+  })
   y -= 8
   const rows: Array<[string, string]> = [
     [t('price'), formatCHF(d.price)],
@@ -174,7 +206,12 @@ export async function renderCertificatePdf(certificate: Certificate): Promise<Ui
   ]
   for (const [label, value] of rows) {
     y -= 22
-    page.drawLine({ start: { x: MARGIN, y: y + 15 }, end: { x: W - MARGIN, y: y + 15 }, thickness: 0.5, color: LINE })
+    page.drawLine({
+      start: { x: MARGIN, y: y + 15 },
+      end: { x: W - MARGIN, y: y + 15 },
+      thickness: 0.5,
+      color: LINE,
+    })
     page.drawText(sanitize(label), { x: MARGIN, y, size: 10, font: regular, color: INK_MUTED })
     const w = bold.widthOfTextAtSize(sanitize(value), 10.5)
     page.drawText(sanitize(value), { x: W - MARGIN - w, y, size: 10.5, font: bold, color: INK })
@@ -182,14 +219,35 @@ export async function renderCertificatePdf(certificate: Certificate): Promise<Ui
 
   // ── QR de vérification (bas droite) + texte
   const verifyUrl = `${BASE_URL}/verify/${certificate.id}`
-  const qrDataUrl = await QRCode.toDataURL(verifyUrl, { margin: 0, width: 240, color: { dark: '#211E1A', light: '#FFFFFF' } })
+  const qrDataUrl = await QRCode.toDataURL(verifyUrl, {
+    margin: 0,
+    width: 240,
+    color: { dark: '#211E1A', light: '#FFFFFF' },
+  })
   const qrImage = await doc.embedPng(qrDataUrl)
   const qrSize = 84
   const footerTop = 168
-  page.drawImage(qrImage, { x: W - MARGIN - qrSize, y: footerTop - qrSize + 60, width: qrSize, height: qrSize })
+  page.drawImage(qrImage, {
+    x: W - MARGIN - qrSize,
+    y: footerTop - qrSize + 60,
+    width: qrSize,
+    height: qrSize,
+  })
 
-  page.drawText(sanitize(t('verify')), { x: MARGIN, y: footerTop + 36, size: 9, font: bold, color: INK })
-  page.drawText(verifyUrl, { x: MARGIN, y: footerTop + 22, size: 9, font: regular, color: GREEN_DARK })
+  page.drawText(sanitize(t('verify')), {
+    x: MARGIN,
+    y: footerTop + 36,
+    size: 9,
+    font: bold,
+    color: INK,
+  })
+  page.drawText(verifyUrl, {
+    x: MARGIN,
+    y: footerTop + 22,
+    size: 9,
+    font: regular,
+    color: GREEN_DARK,
+  })
 
   const validUntil = new Date(issued)
   validUntil.setUTCDate(validUntil.getUTCDate() + 90)
@@ -202,7 +260,12 @@ export async function renderCertificatePdf(certificate: Certificate): Promise<Ui
   })
 
   // ── Disclaimer
-  page.drawLine({ start: { x: MARGIN, y: footerTop - 42 }, end: { x: W - MARGIN, y: footerTop - 42 }, thickness: 0.5, color: LINE })
+  page.drawLine({
+    start: { x: MARGIN, y: footerTop - 42 },
+    end: { x: W - MARGIN, y: footerTop - 42 },
+    thickness: 0.5,
+    color: LINE,
+  })
   drawWrapped(page, t('disclaimer'), {
     x: MARGIN,
     y: footerTop - 58,

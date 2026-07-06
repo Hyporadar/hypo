@@ -3,19 +3,11 @@
 import { useMemo, useState, useTransition } from 'react'
 import { useTranslations } from 'next-intl'
 import { CircleCheck, CircleAlert, Download } from 'lucide-react'
-import {
-  computeAffordability,
-  estimateMonthlyPayment,
-  rateRange,
-} from '@/lib/finance'
+import { computeAffordability, estimateMonthlyPayment, rateRange } from '@/lib/finance'
 import { formatCHF, formatRate } from '@/lib/format'
 import { saveDraft, submitBuyFunnel } from '@/server/actions/funnels'
 import { FunnelShell } from '@/components/funnel/funnel-shell'
-import {
-  FieldError,
-  MoneyField,
-  PrivacyNote,
-} from '@/components/funnel/inputs'
+import { FieldError, MoneyField, PrivacyNote } from '@/components/funnel/inputs'
 import { useFunnel } from '@/components/funnel/use-funnel'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -133,7 +125,11 @@ export function BuyFunnel({ refRate10y }: { refRate10y: number }) {
   }
 
   if (!hydrated) {
-    return <FunnelShell current={0} total={QUESTIONS}>{null}</FunnelShell>
+    return (
+      <FunnelShell current={0} total={QUESTIONS}>
+        {null}
+      </FunnelShell>
+    )
   }
 
   // ── Écran final : certificat émis
@@ -163,7 +159,11 @@ export function BuyFunnel({ refRate10y }: { refRate10y: number }) {
   }
 
   return (
-    <FunnelShell current={step} total={QUESTIONS} onBack={step > 0 && step <= QUESTIONS ? back : undefined}>
+    <FunnelShell
+      current={step}
+      total={QUESTIONS}
+      onBack={step > 0 && step <= QUESTIONS ? back : undefined}
+    >
       {step === 0 ? (
         <div>
           <MoneyField
@@ -265,7 +265,7 @@ export function BuyFunnel({ refRate10y }: { refRate10y: number }) {
           ) : null}
 
           <div className="border-line bg-surface-alt/50 rounded-xl border p-5">
-            <p className="text-ink-500 text-xs font-semibold uppercase tracking-[0.08em]">
+            <p className="text-ink-500 text-xs font-semibold tracking-[0.08em] uppercase">
               {t('result.maxCapacity')}
             </p>
             <p className="text-data text-pilot-700 mt-1 text-3xl sm:text-4xl">

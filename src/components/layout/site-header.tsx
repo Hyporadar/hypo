@@ -20,6 +20,12 @@ export async function SiteHeader() {
           <Link href="/renouveler" className="text-ink-700 hover:text-ink-900 hover:underline">
             {t('renew')}
           </Link>
+          <Link
+            href="/comment-ca-marche"
+            className="text-ink-700 hover:text-ink-900 hover:underline"
+          >
+            {t('howItWorks')}
+          </Link>
         </nav>
         <div className="flex items-center gap-3">
           <LocaleSwitcher />

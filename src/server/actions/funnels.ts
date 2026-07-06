@@ -324,9 +324,7 @@ export async function submitContractUpload(formData: FormData): Promise<UploadRe
     JSON.parse(String(formData.get('attribution') ?? '{}'))
   )
   const locale = (await getLocale()) as Locale
-  const partnerId = await resolvePartnerId(
-    attribution.success ? attribution.data.ref : undefined
-  )
+  const partnerId = await resolvePartnerId(attribution.success ? attribution.data.ref : undefined)
 
   try {
     const dir = path.join(process.cwd(), 'uploads')
