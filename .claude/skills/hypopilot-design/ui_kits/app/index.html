@@ -1,0 +1,147 @@
+<!-- @dsCard group="App" viewport="1280x800" subtitle="Tableau de bord — suivi de l'hypothèque" name="App de suivi" -->
+<!-- @startingPoint section="App" subtitle="Dashboard de suivi hypothèque" viewport="1280x800" -->
+<!doctype html><html lang="fr"><head>
+<meta charset="utf-8">
+<title>HypoPilot — Mon hypothèque</title>
+<link rel="stylesheet" href="../../styles.css">
+<script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone@7/babel.min.js"></script>
+<script src="../../hp-preview.js" data-root="../../"></script>
+<style>body{margin:0;font-family:var(--font-ui);background:var(--paper);color:var(--ink-900)}</style>
+</head><body>
+<div id="root"></div>
+<script type="text/babel">
+let NS = null;
+
+const OFFERS = [
+  { lender:'Banque cantonale', type:'Fixe 10 ans', rate:'1,38 %', commission:'CHF 2 925', best:true },
+  { lender:'Caisse de pension', type:'Fixe 10 ans', rate:'1,41 %', commission:'CHF 2 600', best:false },
+  { lender:'Assurance', type:'Fixe 8 ans', rate:'1,45 %', commission:'CHF 3 250', best:false },
+];
+
+function App() {
+  if (!NS) return <div style={{padding:40}}>Bundle non compilé — rechargez après compilation du design system.</div>;
+  const { Button, Card, Badge, Tabs, Switch, Wordmark, Toast, Dialog } = NS;
+  const [tab, setTab] = React.useState('Mon hypothèque');
+  const [alertOn, setAlertOn] = React.useState(true);
+  const [toast, setToast] = React.useState(false);
+  const [confirm, setConfirm] = React.useState(null);
+  return (
+    <div>
+      <header style={{display:'flex', alignItems:'center', justifyContent:'space-between', background:'var(--surface)', borderBottom:'1px solid var(--line)', padding:'14px 32px'}}>
+        <Wordmark size={22} />
+        <div style={{display:'flex', alignItems:'center', gap:16}}>
+          <span style={{fontSize:14, color:'var(--text-muted)'}}>claire.dubois@bluewin.ch</span>
+          <span style={{width:36, height:36, borderRadius:'50%', background:'var(--green-100)', color:'var(--green-700)', display:'inline-flex', alignItems:'center', justifyContent:'center', fontWeight:600, fontSize:14}}>CD</span>
+        </div>
+      </header>
+
+      <main style={{maxWidth:'var(--container-max)', margin:'0 auto', padding:'28px 32px 48px'}}>
+        <div style={{display:'flex', alignItems:'center', justifyContent:'space-between', marginBottom:8}}>
+          <h1 style={{font:'var(--text-h2)', fontFamily:'var(--font-display)', margin:0}}>Rue du Lac 14, 1006 Lausanne</h1>
+          <Badge tone="warning">Échéance dans 14 mois</Badge>
+        </div>
+        <Tabs tabs={["Mon hypothèque","Offres","Documents","Réglages"]} value={tab} onChange={setTab} style={{marginBottom:24}} />
+
+        {tab === 'Mon hypothèque' && (
+          <div style={{display:'flex', flexDirection:'column', gap:20}}>
+            <div style={{display:'grid', gridTemplateColumns:'1fr 1fr 1fr', gap:20}}>
+              <Card>
+                <div style={{font:'var(--text-overline)', letterSpacing:'.08em', textTransform:'uppercase', color:'var(--text-muted)'}}>Taux actuel</div>
+                <div style={{font:'var(--text-data-lg)', marginTop:10}}>1,42&nbsp;%</div>
+                <div style={{fontSize:13, color:'var(--text-muted)', marginTop:6}}>Fixe 10 ans</div>
+              </Card>
+              <Card>
+                <div style={{font:'var(--text-overline)', letterSpacing:'.08em', textTransform:'uppercase', color:'var(--text-muted)'}}>Montant restant</div>
+                <div style={{font:'var(--text-data-lg)', marginTop:10}}>CHF&nbsp;650&nbsp;000</div>
+                <div style={{fontSize:13, color:'var(--text-muted)', marginTop:6}}>Amortissement indirect</div>
+              </Card>
+              <Card>
+                <div style={{font:'var(--text-overline)', letterSpacing:'.08em', textTransform:'uppercase', color:'var(--text-muted)'}}>Échéance</div>
+                <div style={{font:'var(--text-data-lg)', marginTop:10}}>31.03.2028</div>
+                <div style={{fontSize:13, color:'var(--text-muted)', marginTop:6}}>Banque actuelle : BCV</div>
+              </Card>
+            </div>
+
+            <Card tone="alert" padding={24}>
+              <div style={{display:'flex', alignItems:'center', justifyContent:'space-between', gap:24}}>
+                <div>
+                  <div style={{font:'var(--text-h3)', fontFamily:'var(--font-display)'}}>Votre fenêtre de renégociation est ouverte.</div>
+                  <div style={{font:'var(--text-body-md)', color:'var(--ink-700)', marginTop:6}}>Vous avez jusqu'au <b style={{fontFamily:'var(--font-mono)'}}>31.03.2027</b> pour changer de banque sans pénalité. Nous pouvons lancer la mise en concurrence dès maintenant.</div>
+                </div>
+                <Button variant="primary" onClick={()=>{setTab('Offres'); setToast(true);}}>Voir les offres</Button>
+              </div>
+              <div style={{position:'relative', height:6, borderRadius:3, background:'rgba(33,30,26,0.1)', marginTop:20}}>
+                <div style={{position:'absolute', left:0, top:0, bottom:0, width:'62%', background:'var(--green-600)', borderRadius:3}}></div>
+                <div style={{position:'absolute', left:'62%', top:0, bottom:0, width:'18%', background:'var(--amber-500)'}}></div>
+                <div style={{position:'absolute', left:'70%', top:-5, width:16, height:16, borderRadius:'50%', background:'var(--ink-900)', border:'3px solid #fff', boxShadow:'var(--shadow-card)'}}></div>
+              </div>
+              <div style={{display:'flex', justifyContent:'space-between', marginTop:10, fontSize:13, color:'var(--ink-700)'}}>
+                <span>2018 — signature</span><span style={{fontWeight:600}}>aujourd'hui</span><span style={{fontFamily:'var(--font-mono)'}}>31.03.2028</span>
+              </div>
+            </Card>
+
+            <Card padding={20}>
+              <Switch label="M'alerter par email à chaque étape de la fenêtre" checked={alertOn} onChange={setAlertOn} />
+            </Card>
+          </div>
+        )}
+
+        {tab === 'Offres' && (
+          <div style={{display:'flex', flexDirection:'column', gap:14}}>
+            {OFFERS.map((o) => (
+              <Card key={o.lender} padding={20}>
+                <div style={{display:'grid', gridTemplateColumns:'1.4fr 1fr 0.8fr 1fr auto', gap:16, alignItems:'center'}}>
+                  <div>
+                    <div style={{fontWeight:600, fontSize:15}}>{o.lender}</div>
+                    <div style={{fontSize:13, color:'var(--text-muted)'}}>{o.type}</div>
+                  </div>
+                  <div style={{font:'var(--text-data-md)'}}>{o.rate}</div>
+                  <div>{o.best ? <Badge tone="success">Meilleur taux</Badge> : <span></span>}</div>
+                  <div>
+                    <div style={{fontSize:13, color:'var(--text-muted)'}}>Notre commission</div>
+                    <div style={{font:'var(--text-data-sm)'}}>{o.commission}</div>
+                  </div>
+                  <Button variant={o.best ? 'primary' : 'secondary'} size="sm" onClick={()=>setConfirm(o.lender)}>Choisir</Button>
+                </div>
+              </Card>
+            ))}
+            <div style={{fontSize:13, color:'var(--text-muted)'}}>La commission est payée par le prêteur. Elle ne change pas votre taux.</div>
+          </div>
+        )}
+
+        {tab === 'Documents' && (
+          <Card padding={24}>
+            <div style={{display:'flex', alignItems:'center', justifyContent:'space-between'}}>
+              <div>
+                <div style={{fontWeight:600, fontSize:15}}>Certificat de capacité d'achat</div>
+                <div style={{fontSize:13, color:'var(--text-muted)', marginTop:4}}>Émis le <span style={{fontFamily:'var(--font-mono)'}}>12.05.2026</span> · valable 3 mois</div>
+              </div>
+              <Button variant="secondary" size="sm">Télécharger le PDF</Button>
+            </div>
+          </Card>
+        )}
+
+        {tab === 'Réglages' && (
+          <Card padding={24} style={{display:'flex', flexDirection:'column', gap:16}}>
+            <Switch label="Alertes email" checked={alertOn} onChange={setAlertOn} />
+            <Switch label="Rappel SMS avant la fin de la fenêtre" checked={false} onChange={()=>{}} />
+          </Card>
+        )}
+      </main>
+
+      {toast && (
+        <div style={{position:'fixed', bottom:24, right:24, zIndex:200}}>
+          <Toast tone="success" title="3 offres reçues" onClose={()=>setToast(false)}>Banques, assurance et caisse de pension comparées.</Toast>
+        </div>
+      )}
+      <Dialog open={!!confirm} title={'Choisir ' + (confirm || '') + ' ?'} confirmLabel="Confirmer mon choix" onConfirm={()=>setConfirm(null)} onCancel={()=>setConfirm(null)}>
+        Un conseiller vous rappelle sous 24 h pour finaliser le transfert. La commission vous sera présentée en francs avant toute signature.
+      </Dialog>
+    </div>
+  );
+}
+window.__HP_NS.then((ns) => { NS = ns; ReactDOM.createRoot(document.getElementById('root')).render(<App />); });
+</script>
+</body></html>

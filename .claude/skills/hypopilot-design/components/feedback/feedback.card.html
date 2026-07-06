@@ -1,0 +1,37 @@
+<!-- @dsCard group="Components" viewport="700x300" subtitle="Toast, Tooltip, Dialog" name="Feedback" -->
+<!doctype html><html><head>
+<link rel="stylesheet" href="../../styles.css">
+<script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone@7/babel.min.js"></script>
+<script src="../../hp-preview.js" data-root="../../"></script>
+<style>body{margin:0;font-family:var(--font-ui);background:var(--surface)}</style>
+</head><body>
+<div id="root"></div>
+<script type="text/babel">
+let NS = null;
+function Demo() {
+  if (!NS) return <div style={{padding:20}}>Bundle non compilé.</div>;
+  const { Toast, Tooltip, Button, Dialog } = NS;
+  const [open, setOpen] = React.useState(false);
+  return (
+    <div style={{display:'flex', flexDirection:'column', gap:14, padding:20}}>
+      <div style={{display:'flex', gap:12, flexWrap:'wrap'}}>
+        <Toast tone="success" title="Hypothèque enregistrée" onClose={()=>{}}>Surveillance activée. Prochain point : votre échéance.</Toast>
+        <Toast tone="warning" title="Échéance dans 14 mois" onClose={()=>{}}>La fenêtre de renégociation est ouverte.</Toast>
+      </div>
+      <div style={{display:'flex', gap:20, alignItems:'center'}}>
+        <Tooltip content="Commission versée par le prêteur : 0,45 %" side="bottom">
+          <span style={{textDecoration:'underline dotted', color:'var(--green-700)', cursor:'help', fontSize:15}}>Comment sommes-nous payés ?</span>
+        </Tooltip>
+        <Button variant="secondary" size="sm" onClick={()=>setOpen(true)}>Ouvrir une modale</Button>
+      </div>
+      <Dialog open={open} title="Arrêter la surveillance ?" confirmLabel="Arrêter" onConfirm={()=>setOpen(false)} onCancel={()=>setOpen(false)}>
+        Vous ne recevrez plus d'alerte avant votre échéance du <b style={{fontFamily:'var(--font-mono)'}}>31.03.2028</b>.
+      </Dialog>
+    </div>
+  );
+}
+window.__HP_NS.then((ns) => { NS = ns; ReactDOM.createRoot(document.getElementById('root')).render(<Demo />); });
+</script>
+</body></html>

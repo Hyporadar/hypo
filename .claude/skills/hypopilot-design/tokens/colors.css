@@ -1,0 +1,53 @@
+/* HypoPilot — couleurs
+   Tonalité chaude. Vert Pilote = confiance + « feu vert ».
+   Ambre = moments d'alerte utile (la fenêtre 12–18 mois). */
+:root {
+  /* Encre (noirs chauds) */
+  --ink-900: #211E1A;
+  --ink-700: #45413A;
+  --ink-500: #6F6960;
+  --ink-400: #8D867B;
+
+  /* Papier (blancs chauds) */
+  --paper: #FAF7F1;
+  --surface: #FFFFFF;
+  --surface-alt: #F2EDE4;
+  --line: #E6E0D4;
+  --line-strong: #CFC7B8;
+
+  /* Vert Pilote (primaire) */
+  --green-900: #0D3A2E;
+  --green-700: #155843;
+  --green-600: #1B6B52;
+  --green-500: #248064;
+  --green-200: #BFDECE;
+  --green-100: #DDEEE4;
+  --green-50:  #EEF6F0;
+
+  /* Ambre (accent — alertes utiles, échéances) */
+  --amber-700: #96651A;
+  --amber-600: #B97E1E;
+  --amber-500: #D99A33;
+  --amber-100: #F8E8C8;
+  --amber-50:  #FBF3E2;
+
+  /* Sémantique */
+  --success: var(--green-500);
+  --success-ink: var(--green-700);
+  --success-bg: var(--green-50);
+  --warning: var(--amber-600);
+  --warning-bg: var(--amber-50);
+  --error: #B0443C;
+  --error-bg: #F9ECEA;
+
+  /* Alias sémantiques */
+  --text-body: var(--ink-900);
+  --text-muted: var(--ink-500);
+  --text-on-dark: #F7F4EC;
+  --surface-page: var(--paper);
+  --surface-card: var(--surface);
+  --surface-brand: var(--green-700);
+  --interactive: var(--green-600);
+  --interactive-hover: var(--green-700);
+  --focus-ring: 0 0 0 3px var(--green-200);
+}

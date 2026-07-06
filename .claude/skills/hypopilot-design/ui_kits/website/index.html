@@ -1,0 +1,142 @@
+<!-- @dsCard group="Site web" viewport="1280x800" subtitle="Landing — hero, comment ça marche, transparence" name="Site marketing" -->
+<!-- @startingPoint section="Site web" subtitle="Page d'accueil marketing HypoPilot" viewport="1280x800" -->
+<!doctype html><html lang="fr"><head>
+<meta charset="utf-8">
+<title>HypoPilot — Votre hypothèque, pilotée</title>
+<link rel="stylesheet" href="../../styles.css">
+<script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone@7/babel.min.js"></script>
+<script src="../../hp-preview.js" data-root="../../"></script>
+<style>body{margin:0;font-family:var(--font-ui);background:var(--paper);color:var(--ink-900)}</style>
+</head><body>
+<div id="root"></div>
+<script type="text/babel">
+let NS = null;
+
+function Placeholder({label, height, radius=16}) {
+  return (
+    <div style={{height, borderRadius:radius, border:'1px solid var(--line-strong)',
+      background:'repeating-linear-gradient(45deg, var(--surface-alt) 0 12px, var(--paper) 12px 24px)',
+      display:'flex', alignItems:'center', justifyContent:'center'}}>
+      <span style={{fontFamily:'var(--font-mono)', fontSize:13, color:'var(--ink-500)', background:'var(--surface)', padding:'6px 12px', borderRadius:8, border:'1px solid var(--line)'}}>{label}</span>
+    </div>
+  );
+}
+
+function Timeline() {
+  return (
+    <div>
+      <div style={{position:'relative', height:6, borderRadius:3, background:'var(--line)'}}>
+        <div style={{position:'absolute', left:0, top:0, bottom:0, width:'62%', background:'var(--green-600)', borderRadius:3}}></div>
+        <div style={{position:'absolute', left:'62%', top:0, bottom:0, width:'18%', background:'var(--amber-500)'}}></div>
+        <div style={{position:'absolute', left:'62%', top:-5, width:16, height:16, borderRadius:'50%', background:'var(--amber-500)', border:'3px solid #fff', boxShadow:'var(--shadow-card)'}}></div>
+      </div>
+      <div style={{display:'flex', justifyContent:'space-between', marginTop:10, fontSize:13, color:'var(--text-muted)'}}>
+        <span>signature</span>
+        <span style={{color:'var(--amber-700)', fontWeight:600}}>on vous prévient ici</span>
+        <span style={{fontFamily:'var(--font-mono)'}}>échéance</span>
+      </div>
+    </div>
+  );
+}
+
+function Page() {
+  if (!NS) return <div style={{padding:40}}>Bundle non compilé — rechargez après compilation du design system.</div>;
+  const { Button, Card, Badge, Wordmark, Tag } = NS;
+  const [tab, setTab] = React.useState('Banques');
+  return (
+    <div>
+      {/* Header */}
+      <header style={{display:'flex', alignItems:'center', justifyContent:'space-between', maxWidth:'var(--container-max)', margin:'0 auto', padding:'20px 32px'}}>
+        <Wordmark size={26} />
+        <nav style={{display:'flex', gap:28, alignItems:'center', fontSize:15, fontWeight:500}}>
+          <a href="#" style={{color:'var(--ink-700)', textDecoration:'none'}}>Comment ça marche</a>
+          <a href="#" style={{color:'var(--ink-700)', textDecoration:'none'}}>Certificat d'achat</a>
+          <a href="#" style={{color:'var(--ink-700)', textDecoration:'none'}}>Transparence</a>
+          <Button variant="primary" size="md">Enregistrer mon hypothèque</Button>
+        </nav>
+      </header>
+
+      {/* Hero */}
+      <section style={{maxWidth:'var(--container-max)', margin:'0 auto', padding:'56px 32px 72px', display:'grid', gridTemplateColumns:'1.1fr 0.9fr', gap:56, alignItems:'center'}}>
+        <div style={{display:'flex', flexDirection:'column', gap:24}}>
+          <Badge tone="success">100 % gratuit, commission affichée</Badge>
+          <h1 style={{font:'var(--text-hero)', letterSpacing:'-0.02em', margin:0}}>Votre hypothèque, pilotée.</h1>
+          <p style={{font:'var(--text-body-lg)', color:'var(--ink-700)', margin:0, maxWidth:480}}>
+            Enregistrez votre hypothèque en 3 minutes. Nous suivons votre taux pendant des années
+            et nous vous prévenons 12 à 18 mois avant l'échéance — le seul moment où tout se joue.
+          </p>
+          <div style={{display:'flex', gap:12}}>
+            <Button variant="primary" size="lg">Enregistrer mon hypothèque</Button>
+            <Button variant="secondary" size="lg">Obtenir mon certificat</Button>
+          </div>
+          <Card style={{marginTop:8}} padding={20}><Timeline /></Card>
+        </div>
+        <Placeholder label="photo — famille devant sa maison, lumière chaude" height={460} />
+      </section>
+
+      {/* Comment ça marche */}
+      <section style={{background:'var(--surface)', borderTop:'1px solid var(--line)', borderBottom:'1px solid var(--line)'}}>
+        <div style={{maxWidth:'var(--container-max)', margin:'0 auto', padding:'64px 32px'}}>
+          <h2 style={{font:'var(--text-h1)', fontFamily:'var(--font-display)', letterSpacing:'-0.02em', margin:'0 0 40px'}}>3 minutes maintenant. Des années de surveillance.</h2>
+          <div style={{display:'grid', gridTemplateColumns:'1fr 1fr 1fr', gap:20}}>
+            <Card padding={28}>
+              <div style={{font:'var(--text-data-lg)', color:'var(--green-600)'}}>01</div>
+              <h3 style={{font:'var(--text-h3)', fontFamily:'var(--font-display)', margin:'14px 0 8px'}}>Enregistrez</h3>
+              <p style={{font:'var(--text-body-md)', color:'var(--ink-700)', margin:0}}>Montant, taux, échéance. 3 minutes, aucun document requis.</p>
+            </Card>
+            <Card padding={28}>
+              <div style={{font:'var(--text-data-lg)', color:'var(--green-600)'}}>02</div>
+              <h3 style={{font:'var(--text-h3)', fontFamily:'var(--font-display)', margin:'14px 0 8px'}}>On surveille</h3>
+              <p style={{font:'var(--text-body-md)', color:'var(--ink-700)', margin:0}}>Nous suivons votre taux et votre échéance. Vous ne pensez plus à rien.</p>
+            </Card>
+            <Card padding={28}>
+              <div style={{font:'var(--text-data-lg)', color:'var(--green-600)'}}>03</div>
+              <h3 style={{font:'var(--text-h3)', fontFamily:'var(--font-display)', margin:'14px 0 8px'}}>On vous prévient</h3>
+              <p style={{font:'var(--text-body-md)', color:'var(--ink-700)', margin:0}}>12–18 mois avant l'échéance, nous mettons banques, assurances et caisses de pension en concurrence.</p>
+            </Card>
+          </div>
+          <div style={{display:'flex', gap:8, marginTop:24}}>
+            <Tag selected={tab==='Banques'} onClick={()=>setTab('Banques')}>Banques</Tag>
+            <Tag selected={tab==='Assurances'} onClick={()=>setTab('Assurances')}>Assurances</Tag>
+            <Tag selected={tab==='Caisses de pension'} onClick={()=>setTab('Caisses de pension')}>Caisses de pension</Tag>
+          </div>
+        </div>
+      </section>
+
+      {/* Transparence */}
+      <section style={{background:'var(--green-700)', color:'var(--text-on-dark)'}}>
+        <div style={{maxWidth:'var(--container-max)', margin:'0 auto', padding:'64px 32px', display:'grid', gridTemplateColumns:'1fr 1fr', gap:56, alignItems:'center'}}>
+          <div>
+            <h2 style={{font:'var(--text-h1)', fontFamily:'var(--font-display)', letterSpacing:'-0.02em', margin:'0 0 16px'}}>Gratuit pour vous. Payé par les prêteurs. Affiché noir sur blanc.</h2>
+            <p style={{font:'var(--text-body-lg)', opacity:.85, margin:0}}>
+              Nous touchons une commission du prêteur que vous choisissez. Vous la voyez, en francs, avant de signer. C'est notre seule rémunération.
+            </p>
+          </div>
+          <Card padding={28}>
+            <div style={{font:'var(--text-overline)', letterSpacing:'.08em', textTransform:'uppercase', color:'var(--text-muted)'}}>Exemple d'offre</div>
+            <div style={{display:'flex', justifyContent:'space-between', alignItems:'baseline', marginTop:16, paddingBottom:14, borderBottom:'1px solid var(--line)'}}>
+              <span style={{fontSize:15}}>Taux fixe 10 ans</span>
+              <span style={{font:'var(--text-data-lg)'}}>1,38&nbsp;%</span>
+            </div>
+            <div style={{display:'flex', justifyContent:'space-between', alignItems:'baseline', marginTop:14}}>
+              <span style={{fontSize:15, color:'var(--ink-700)'}}>Notre commission</span>
+              <span style={{font:'var(--text-data-md)', color:'var(--green-700)'}}>CHF&nbsp;2&nbsp;925 (0,45&nbsp;%)</span>
+            </div>
+            <div style={{fontSize:13, color:'var(--text-muted)', marginTop:10}}>Payée par le prêteur. Rien ne vous est facturé.</div>
+          </Card>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer style={{maxWidth:'var(--container-max)', margin:'0 auto', padding:'40px 32px', display:'flex', justifyContent:'space-between', alignItems:'center'}}>
+        <Wordmark size={20} />
+        <div style={{fontSize:13, color:'var(--text-muted)'}}>© 2026 HypoPilot SA · Suisse · Conditions · Confidentialité</div>
+      </footer>
+    </div>
+  );
+}
+window.__HP_NS.then((ns) => { NS = ns; ReactDOM.createRoot(document.getElementById('root')).render(<Page />); });
+</script>
+</body></html>

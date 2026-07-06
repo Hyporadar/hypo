@@ -1,0 +1,44 @@
+<!-- @dsCard group="Components" viewport="700x360" subtitle="Button, IconButton, Input, Select, Checkbox, Radio, Switch" name="Formulaires" -->
+<!doctype html><html><head>
+<link rel="stylesheet" href="../../styles.css">
+<script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone@7/babel.min.js"></script>
+<script src="../../hp-preview.js" data-root="../../"></script>
+<style>body{margin:0;font-family:var(--font-ui);background:var(--surface)}</style>
+</head><body>
+<div id="root"></div>
+<script type="text/babel">
+let NS = null;
+function Demo() {
+  if (!NS) return <div style={{padding:20,fontFamily:'var(--font-ui)'}}>Bundle non compilé.</div>;
+  const { Button, IconButton, Input, Select, Checkbox, Radio, Switch } = NS;
+  const [ok, setOk] = React.useState(true);
+  const [type, setType] = React.useState('fixe');
+  const [on, setOn] = React.useState(true);
+  return (
+    <div style={{display:'flex', flexDirection:'column', gap:16, padding:20}}>
+      <div style={{display:'flex', gap:10, alignItems:'center', flexWrap:'wrap'}}>
+        <Button variant="primary">Enregistrer mon hypothèque</Button>
+        <Button variant="secondary">Voir les offres</Button>
+        <Button variant="ghost">En savoir plus</Button>
+        <Button variant="danger" size="sm">Supprimer</Button>
+        <Button variant="primary" disabled>Désactivé</Button>
+        <IconButton label="Notifications"><span style={{fontSize:16}}>✕</span></IconButton>
+      </div>
+      <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:12}}>
+        <Input label="Montant de l'hypothèque" prefix="CHF" mono defaultValue="650 000" hint="Le montant restant dû." />
+        <Select label="Type d'hypothèque" options={["Taux fixe","SARON","Taux variable"]} />
+      </div>
+      <div style={{display:'flex', gap:24, alignItems:'center', flexWrap:'wrap'}}>
+        <Checkbox label="Alerte échéance" checked={ok} onChange={setOk} />
+        <Radio label="Taux fixe" checked={type==='fixe'} onChange={()=>setType('fixe')} />
+        <Radio label="SARON" checked={type==='saron'} onChange={()=>setType('saron')} />
+        <Switch label="Surveillance active" checked={on} onChange={setOn} />
+      </div>
+    </div>
+  );
+}
+window.__HP_NS.then((ns) => { NS = ns; ReactDOM.createRoot(document.getElementById('root')).render(<Demo />); });
+</script>
+</body></html>
