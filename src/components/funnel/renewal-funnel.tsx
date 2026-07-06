@@ -497,13 +497,16 @@ export function RenewalFunnel({ refRate10y }: { refRate10y: number }) {
             ) : null}
           </div>
           {classification === 'CHAUD' ? (
-            <label className="flex items-center gap-2 text-sm">
+            <div className="flex items-center gap-2">
               <Checkbox
+                id="r-callback"
                 checked={values.wantsCallback}
                 onCheckedChange={(v) => setValue('wantsCallback', v === true)}
               />
-              {t('routing.callbackLabel')}
-            </label>
+              <Label htmlFor="r-callback" className="text-sm font-normal">
+                {t('routing.callbackLabel')}
+              </Label>
+            </div>
           ) : null}
           <FieldError message={error} />
           <Button size="lg" className="w-full" onClick={submit} disabled={pending}>
