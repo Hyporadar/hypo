@@ -22,6 +22,36 @@ export const routing = defineRouting({
       de: '/so-funktionierts',
       it: '/come-funziona',
     },
+    '/taux': {
+      fr: '/taux',
+      de: '/zinsen',
+      it: '/tassi',
+    },
+    '/guides': '/guides',
+    '/guides/[slug]': '/guides/[slug]',
+    '/transparence': {
+      fr: '/transparence',
+      de: '/transparenz',
+      it: '/trasparenza',
+    },
+    '/partenaires': {
+      fr: '/partenaires',
+      de: '/partner',
+      it: '/partner',
+    },
+    '/contact': '/contact',
+    '/faq': '/faq',
+    '/impressum': '/impressum',
+    '/confidentialite': {
+      fr: '/confidentialite',
+      de: '/datenschutz',
+      it: '/privacy',
+    },
+    '/cgu': {
+      fr: '/cgu',
+      de: '/agb',
+      it: '/cg',
+    },
     '/connexion': {
       fr: '/connexion',
       de: '/anmelden',
@@ -42,3 +72,5 @@ export const routing = defineRouting({
 
 export type Locale = (typeof routing.locales)[number]
 export type AppPathname = keyof typeof routing.pathnames
+// Chemins sans paramètre dynamique — utilisables tels quels dans Link/sitemap.
+export type StaticPathname = Exclude<AppPathname, '/guides/[slug]'>

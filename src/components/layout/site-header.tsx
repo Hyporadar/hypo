@@ -26,6 +26,9 @@ export async function SiteHeader() {
           >
             {t('howItWorks')}
           </Link>
+          <Link href="/taux" className="text-ink-700 hover:text-ink-900 hover:underline">
+            {t('rates')}
+          </Link>
         </nav>
         <div className="flex items-center gap-3">
           <LocaleSwitcher />

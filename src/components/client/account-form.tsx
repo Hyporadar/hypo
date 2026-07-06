@@ -2,7 +2,7 @@
 
 import { useActionState } from 'react'
 import { useTranslations } from 'next-intl'
-import { useRouter, usePathname } from '@/i18n/navigation'
+import { useRouter } from '@/i18n/navigation'
 import { updateAccount, type AccountFormState } from '@/server/actions/client'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -32,7 +32,6 @@ export function AccountForm({
 }) {
   const t = useTranslations('clientApp.account')
   const router = useRouter()
-  const pathname = usePathname()
   const [locale, setLocale] = useState(defaults.locale)
   const [state, formAction, pending] = useActionState<AccountFormState, FormData>(
     async (prev, fd) => {
@@ -40,7 +39,7 @@ export function AccountForm({
       const res = await updateAccount(prev, fd)
       if (res.ok && locale !== defaults.locale) {
         // La langue du compte pilote les emails et le PDF ; l'UI suit immédiatement.
-        router.replace(pathname, { locale })
+        router.replace('/app/compte', { locale })
       }
       return res
     },

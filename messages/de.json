@@ -11,7 +11,8 @@
       "login": "Anmelden",
       "register": "Konto erstellen",
       "app": "Mein Bereich",
-      "logout": "Abmelden"
+      "logout": "Abmelden",
+      "rates": "Zinsen heute"
     },
     "language": {
       "label": "Sprache"
@@ -33,7 +34,18 @@
     "footer": {
       "transparency": "Kostenlos für Sie. Bezahlt von den Kreditgebern. Schwarz auf weiss ausgewiesen.",
       "legal": "HypoPilot wird durch eine Kommission des gewählten Kreditgebers vergütet. Sie sehen sie, bevor Sie unterschreiben.",
-      "copyright": "HypoPilot — Schweizer Fintech"
+      "copyright": "HypoPilot — Schweizer Fintech",
+      "nav": {
+        "rates": "Zinsen heute",
+        "guides": "Leitfäden",
+        "transparency": "Transparenz",
+        "partners": "Vermittler",
+        "contact": "Kontakt",
+        "faq": "FAQ",
+        "impressum": "Impressum",
+        "privacy": "Datenschutz",
+        "terms": "AGB"
+      }
     }
   },
   "home": {
@@ -457,6 +469,97 @@
       "alertSms": "Benachrichtigung per SMS (bald)",
       "save": "Speichern",
       "saved": "Änderungen gespeichert."
+    }
+  },
+  "content": {
+    "rates": {
+      "metaTitle": "Hypothekarzinsen von heute",
+      "metaDescription": "Die Schweizer Referenzzinssätze von heute, nach Laufzeit: Festhypothek 1 bis 15 Jahre und SARON. Von unserem Team aktualisiert.",
+      "title": "Die Hypothekarzinsen von heute",
+      "subtitle": "Nationale Referenzzinssätze, nach Laufzeit. Die Grundlage all unserer Berechnungen — und Ihrer Ersparnisse.",
+      "updated": "Aktualisiert am {date}",
+      "duration": "Laufzeit",
+      "rate": "Referenzzinssatz",
+      "saron": "SARON",
+      "fixed": "Fest {years} Jahre",
+      "chartTitle": "Entwicklung Festzins 10 Jahre",
+      "chartEmpty": "Die Historie entsteht mit jeder Zinsaktualisierung.",
+      "faqTitle": "Fragen zu den Zinsen",
+      "faq1q": "Woher stammen diese Zinssätze?",
+      "faq1a": "Es sind nationale Referenzwerte, die unser Team anhand der tatsächlich praktizierten Konditionen der Schweizer Kreditgeber aktuell hält. Ihr persönlicher Zinssatz hängt von Ihrem Dossier ab — die Ausschreibung dient genau dazu, ihn unter die Referenz zu bringen.",
+      "faq2q": "Warum eine Spanne statt eines exakten Zinssatzes?",
+      "faq2a": "Weil ein exakter Zinssatz ohne Dossier ein Marketingargument ist, keine Offerte. Wir zeigen die Marktreferenz und verhandeln dann Ihren realen Zinssatz, mit Dossier in der Hand.",
+      "faq3q": "Fest oder SARON?",
+      "faq3a": "SARON ist historisch günstiger, schwankt aber; die Festhypothek fixiert Ihr Budget. Die richtige Antwort hängt von Ihrer Risikotoleranz und Ihrem Horizont ab — unser Leitfaden erklärt die Abwägung.",
+      "ctaRenew": "Mit meinem Zinssatz vergleichen",
+      "ctaBuy": "Tragbarkeit berechnen"
+    },
+    "guides": {
+      "metaTitle": "Hypotheken-Leitfäden",
+      "metaDescription": "Verlängerung, Tragbarkeitszertifikat, SARON oder Festzins: die HypoPilot-Leitfäden, ohne Fachjargon.",
+      "title": "Leitfäden",
+      "subtitle": "Die Schweizer Hypothek ohne Fachjargon erklärt. Das Nötige zum Entscheiden, nicht mehr.",
+      "readMore": "Leitfaden lesen"
+    },
+    "transparency": {
+      "metaTitle": "Wie HypoPilot bezahlt wird",
+      "metaDescription": "Unser Modell schwarz auf weiss: kostenlos für Sie, bezahlt von den Kreditgebern, gleiche Kommission bei jedem Anbieter.",
+      "title": "Wie wir bezahlt werden",
+      "subtitle": "Transparenz ist keine weitere Seite auf dieser Website. Sie ist das Produkt.",
+      "s1Title": "Kostenlos für Sie, wirklich",
+      "s1Body": "Überwachung, Simulation, Zertifikat, Ausschreibung: alles ist kostenlos, ohne verstecktes Abo und ohne Dossiergebühren. Wir stellen Ihnen nie etwas in Rechnung.",
+      "s2Title": "Wer uns bezahlt, und wie viel",
+      "s2Body": "Der von Ihnen gewählte Kreditgeber zahlt uns bei der Unterzeichnung eine Vermittlungskommission — typischerweise rund 0,5% der Kreditsumme, einmalig. Bei einer Hypothek von CHF 650'000 sind das etwa CHF 3'250. Den genauen Betrag sehen Sie vor der Unterschrift.",
+      "s3Title": "Warum das unsere Beratung nicht verzerrt",
+      "s3Body": "Die Kommission ist bei jedem Kreditgeber gleichwertig. Wir haben also kein Interesse, einen bestimmten Anbieter zu pushen — nur daran, dass Sie die beste Offerte unterschreiben, wo Sie wollen. Auch bei Ihrer aktuellen Bank, wenn sie nachzieht.",
+      "s4Title": "Was wir nie tun",
+      "s4Items": "Ihre Daten verkaufen|Einen rohen Lead an Dritte weitergeben|Dem Kunden etwas verrechnen|Eine Vergütung verschweigen",
+      "cta": "Meinen Zinssatz jetzt prüfen"
+    },
+    "partnersPublic": {
+      "metaTitle": "HypoPilot-Vermittler werden",
+      "metaDescription": "Makler, Treuhänder: Senden Sie Ihre Kunden an HypoPilot und verfolgen Sie Ihre Kommissionen in voller Transparenz.",
+      "title": "Vermittler: Ihre Kunden verdienen einen besseren Zinssatz",
+      "subtitle": "Makler, Treuhänder, Verwalter: Senden Sie uns Ihre Eigentümer-Kunden. Wir rufen sie in Minuten zurück, Sie verfolgen alles — Status und Kommissionen — in Ihrem Bereich.",
+      "how1": "Sie senden einen Kunden (persönlicher Link, QR oder Direkterfassung)",
+      "how2": "Ein HypoPilot-Berater ruft ihn innert Minuten zurück",
+      "how3": "Dossier unterschrieben: Ihre Kommission erscheint in Ihrem Bereich, fällig und dann bezahlt",
+      "simTitle": "Was das bedeutet",
+      "simLabel": "Gesendete Kunden pro Jahr",
+      "simResult": "{amount} geschätzte Jahreskommissionen",
+      "simNote": "Basis: CHF 500 pro unterschriebenes Dossier, durchschnittliche Abschlussquote 40%.",
+      "formTitle": "Vermittlerkonto erstellen",
+      "formSubtitle": "Manuelle Validierung durch unser Team innert 24 Arbeitsstunden.",
+      "company": "Firma / Einzelunternehmen",
+      "submit": "Zugang anfordern",
+      "success": "Anfrage erhalten. Wir validieren Ihr Konto innert 24 Arbeitsstunden und benachrichtigen Sie per E-Mail.",
+      "loginHint": "Bereits Vermittler?"
+    },
+    "contact": {
+      "metaTitle": "Kontakt",
+      "title": "Kontakt",
+      "body": "Eine Frage zu Ihrem Dossier, Ihrer Überwachung oder unserem Modell? Antwort innert eines Arbeitstages.",
+      "emailLabel": "E-Mail",
+      "phoneLabel": "Telefon",
+      "addressLabel": "Adresse",
+      "callback": "Oder hinterlassen Sie Ihre Nummer: ein Berater ruft Sie zurück."
+    },
+    "faqPage": {
+      "metaTitle": "Häufige Fragen",
+      "title": "Häufige Fragen",
+      "q5": "Was kostet HypoPilot?",
+      "a5": "Nichts, nie. Der Service wird durch eine Kommission des gewählten Kreditgebers finanziert, die vor der Unterschrift ausgewiesen wird. Siehe unsere Transparenz-Seite.",
+      "q6": "In welchen Sprachen arbeiten Sie?",
+      "a6": "Deutsch, Französisch und Italienisch — Formulare, Dokumente, PDF-Zertifikate und Berater."
+    },
+    "legal": {
+      "impressumTitle": "Impressum",
+      "privacyTitle": "Datenschutz (DSG)",
+      "termsTitle": "Allgemeine Geschäftsbedingungen",
+      "lawyerNote": "PROVISORISCHER INHALT — VOM ANWALT ZU PRÜFEN",
+      "impressumBody": "HypoPilot AG (in Gründung)|Betreiberin der Plattform hypopilot.ch|Adresse: zu ergänzen, Schweiz|E-Mail: contact@hypopilot.ch|Verantwortlich für die Publikation: zu ergänzen|Handelsregistereintrag: zu ergänzen",
+      "privacyBody": "Ihre Daten werden gemäss dem schweizerischen Datenschutzgesetz (DSG) bearbeitet.|Zwecke: Berechnung Ihrer Simulationen, Überwachung Ihrer Hypothek, Ausschreibung bei Kreditgebern mit Ihrer ausdrücklichen Einwilligung, Verbesserung des Dienstes.|Ihre Daten werden nie verkauft. Ein Dossier geht nur vollständig und von Ihnen freigegeben an einen Kreditgeber.|Datenhosting: zu ergänzen (Schweiz/EU).|Ihre Rechte: Auskunft, Berichtigung, Löschung — contact@hypopilot.ch.|Aufbewahrungsdauer: zu ergänzen.",
+      "termsBody": "Der HypoPilot-Service ist für Nutzende kostenlos und wird «wie besehen» bereitgestellt.|Simulationen, Zertifikate und Zinsspannen sind indikativ und stellen weder eine persönliche Finanzberatung noch eine Kreditzusage dar.|Der Kreditentscheid liegt ausschliesslich bei den Kreditgebern.|Die Nutzenden garantieren die Richtigkeit der erfassten Angaben.|Gerichtsstand und anwendbares Recht: Schweiz, zu ergänzen."
     }
   }
 }

@@ -11,7 +11,8 @@
       "login": "Connexion",
       "register": "Créer un compte",
       "app": "Mon espace",
-      "logout": "Se déconnecter"
+      "logout": "Se déconnecter",
+      "rates": "Taux du jour"
     },
     "language": {
       "label": "Langue"
@@ -33,7 +34,18 @@
     "footer": {
       "transparency": "Gratuit pour vous. Payé par les prêteurs. Affiché noir sur blanc.",
       "legal": "HypoPilot est rémunéré par une commission du prêteur retenu. Vous la voyez avant de signer.",
-      "copyright": "HypoPilot — fintech suisse"
+      "copyright": "HypoPilot — fintech suisse",
+      "nav": {
+        "rates": "Taux du jour",
+        "guides": "Guides",
+        "transparency": "Transparence",
+        "partners": "Apporteurs",
+        "contact": "Contact",
+        "faq": "FAQ",
+        "impressum": "Impressum",
+        "privacy": "Confidentialité",
+        "terms": "CGU"
+      }
     }
   },
   "home": {
@@ -457,6 +469,97 @@
       "alertSms": "Alertes par SMS (bientôt)",
       "save": "Enregistrer",
       "saved": "Modifications enregistrées."
+    }
+  },
+  "content": {
+    "rates": {
+      "metaTitle": "Taux hypothécaires du jour",
+      "metaDescription": "Les taux de référence hypothécaires suisses du jour, par durée : fixe 1 à 15 ans et SARON. Mis à jour par notre équipe.",
+      "title": "Les taux hypothécaires du jour",
+      "subtitle": "Taux de référence nationaux, par durée. C'est la base de tous nos calculs — et de vos économies.",
+      "updated": "Mis à jour le {date}",
+      "duration": "Durée",
+      "rate": "Taux de référence",
+      "saron": "SARON",
+      "fixed": "Fixe {years} ans",
+      "chartTitle": "Évolution du fixe 10 ans",
+      "chartEmpty": "L'historique se construit à chaque mise à jour des taux.",
+      "faqTitle": "Questions sur les taux",
+      "faq1q": "D'où viennent ces taux ?",
+      "faq1a": "Ce sont des taux de référence nationaux, tenus à jour par notre équipe à partir des conditions réellement pratiquées par les prêteurs suisses. Votre taux personnel dépend de votre dossier — la mise en concurrence sert précisément à l'obtenir sous la référence.",
+      "faq2q": "Pourquoi une fourchette plutôt qu'un taux exact ?",
+      "faq2a": "Parce qu'un taux exact sans dossier est un argument marketing, pas une offre. Nous affichons la référence du marché et négocions ensuite votre taux réel, dossier en main.",
+      "faq3q": "Fixe ou SARON ?",
+      "faq3a": "Le SARON est historiquement moins cher mais fluctue ; le fixe verrouille votre budget. La bonne réponse dépend de votre tolérance au risque et de votre horizon — notre guide détaille l'arbitrage.",
+      "ctaRenew": "Comparer avec mon taux actuel",
+      "ctaBuy": "Calculer ma capacité d'achat"
+    },
+    "guides": {
+      "metaTitle": "Guides hypothécaires",
+      "metaDescription": "Renouvellement, certificat de capacité d'achat, SARON ou taux fixe : les guides HypoPilot, sans jargon.",
+      "title": "Guides",
+      "subtitle": "L'hypothèque suisse expliquée sans jargon. Le nécessaire pour décider, rien de plus.",
+      "readMore": "Lire le guide"
+    },
+    "transparency": {
+      "metaTitle": "Comment HypoPilot est payé",
+      "metaDescription": "Notre modèle noir sur blanc : gratuit pour vous, payé par les prêteurs, commission identique quel que soit le prêteur retenu.",
+      "title": "Comment nous sommes payés",
+      "subtitle": "La transparence n'est pas une page de plus sur ce site. C'est le produit.",
+      "s1Title": "Gratuit pour vous, vraiment",
+      "s1Body": "Surveillance, simulation, certificat, appel d'offres : tout est gratuit, sans abonnement caché ni frais de dossier. Nous ne vous facturons jamais rien.",
+      "s2Title": "Qui nous paie, et combien",
+      "s2Body": "Le prêteur que vous choisissez nous verse une commission d'apport à la signature — typiquement autour de 0,5% du montant du prêt, une fois. Sur une hypothèque de CHF 650'000, cela représente environ CHF 3'250. Vous voyez le montant exact avant de signer.",
+      "s3Title": "Pourquoi ça ne biaise pas nos conseils",
+      "s3Body": "La commission est équivalente quel que soit le prêteur retenu. Nous n'avons donc aucun intérêt à pousser l'un plutôt que l'autre — seulement à ce que vous signiez la meilleure offre, chez qui vous voulez. Y compris chez votre banque actuelle si elle s'aligne.",
+      "s4Title": "Ce que nous ne faisons jamais",
+      "s4Items": "Vendre vos données|Transmettre un lead brut à un tiers|Facturer le client|Cacher une rémunération",
+      "cta": "Vérifier mon taux maintenant"
+    },
+    "partnersPublic": {
+      "metaTitle": "Devenir apporteur HypoPilot",
+      "metaDescription": "Agents immobiliers, fiduciaires : envoyez vos clients à HypoPilot et suivez vos commissions en toute transparence.",
+      "title": "Apporteurs : vos clients méritent un meilleur taux",
+      "subtitle": "Agents immobiliers, fiduciaires, gérants : envoyez-nous vos clients propriétaires. Nous les rappelons en minutes, vous suivez tout — statuts et commissions — dans votre espace.",
+      "how1": "Vous envoyez un client (lien personnel, QR ou saisie directe)",
+      "how2": "Un conseiller HypoPilot le rappelle en quelques minutes",
+      "how3": "Dossier signé : votre commission apparaît dans votre espace, due puis payée",
+      "simTitle": "Ce que ça représente",
+      "simLabel": "Clients envoyés par an",
+      "simResult": "{amount} de commissions annuelles estimées",
+      "simNote": "Base : CHF 500 par dossier signé, taux de signature moyen de 40%.",
+      "formTitle": "Créer mon compte apporteur",
+      "formSubtitle": "Validation manuelle par notre équipe sous 24 h ouvrables.",
+      "company": "Société / raison individuelle",
+      "submit": "Demander mon accès",
+      "success": "Demande reçue. Nous validons votre compte sous 24 h ouvrables et vous prévenons par e-mail.",
+      "loginHint": "Déjà apporteur ?"
+    },
+    "contact": {
+      "metaTitle": "Contact",
+      "title": "Contact",
+      "body": "Une question sur votre dossier, votre surveillance ou notre modèle ? Réponse sous un jour ouvrable.",
+      "emailLabel": "E-mail",
+      "phoneLabel": "Téléphone",
+      "addressLabel": "Adresse",
+      "callback": "Ou laissez votre numéro : un conseiller vous rappelle."
+    },
+    "faqPage": {
+      "metaTitle": "Questions fréquentes",
+      "title": "Questions fréquentes",
+      "q5": "Combien coûte HypoPilot ?",
+      "a5": "Rien, jamais. Le service est financé par une commission du prêteur retenu, affichée avant signature. Voir notre page transparence.",
+      "q6": "Dans quelles langues travaillez-vous ?",
+      "a6": "Français, allemand et italien — formulaires, documents, certificats PDF et conseillers."
+    },
+    "legal": {
+      "impressumTitle": "Impressum",
+      "privacyTitle": "Protection des données (LPD)",
+      "termsTitle": "Conditions générales d'utilisation",
+      "lawyerNote": "CONTENU PROVISOIRE — À VALIDER PAR AVOCAT",
+      "impressumBody": "HypoPilot SA (en constitution)|Exploitant de la plateforme hypopilot.ch|Adresse : à compléter, Suisse|E-mail : contact@hypopilot.ch|Responsable de la publication : à compléter|Inscription au registre du commerce : à compléter",
+      "privacyBody": "Vos données sont traitées conformément à la loi fédérale suisse sur la protection des données (LPD).|Finalités : calcul de vos simulations, surveillance de votre hypothèque, mise en concurrence des prêteurs avec votre consentement explicite, amélioration du service.|Vos données ne sont jamais vendues. Un dossier n'est transmis à un prêteur que complet et validé par vous.|Hébergement des données : à compléter (Suisse/UE).|Vos droits : accès, rectification, effacement — contact@hypopilot.ch.|Durée de conservation : à compléter.",
+      "termsBody": "Le service HypoPilot est gratuit pour l'utilisateur et fourni « en l'état ».|Les simulations, certificats et fourchettes de taux sont indicatifs et ne constituent ni un conseil financier personnalisé ni une promesse de crédit.|La décision d'octroi appartient exclusivement aux prêteurs.|L'utilisateur garantit l'exactitude des informations saisies.|For juridique et droit applicable : Suisse, à compléter."
     }
   }
 }

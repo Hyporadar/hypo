@@ -11,7 +11,8 @@
       "login": "Accedere",
       "register": "Creare un conto",
       "app": "La mia area",
-      "logout": "Disconnettersi"
+      "logout": "Disconnettersi",
+      "rates": "Tassi di oggi"
     },
     "language": {
       "label": "Lingua"
@@ -33,7 +34,18 @@
     "footer": {
       "transparency": "Gratuito per Lei. Pagato dai finanziatori. Indicato nero su bianco.",
       "legal": "HypoPilot è remunerato da una commissione del finanziatore scelto. La vede prima di firmare.",
-      "copyright": "HypoPilot — fintech svizzera"
+      "copyright": "HypoPilot — fintech svizzera",
+      "nav": {
+        "rates": "Tassi di oggi",
+        "guides": "Guide",
+        "transparency": "Trasparenza",
+        "partners": "Segnalatori",
+        "contact": "Contatto",
+        "faq": "FAQ",
+        "impressum": "Impressum",
+        "privacy": "Privacy",
+        "terms": "CG"
+      }
     }
   },
   "home": {
@@ -457,6 +469,97 @@
       "alertSms": "Avvisi via SMS (presto)",
       "save": "Salvare",
       "saved": "Modifiche salvate."
+    }
+  },
+  "content": {
+    "rates": {
+      "metaTitle": "Tassi ipotecari di oggi",
+      "metaDescription": "I tassi di riferimento ipotecari svizzeri di oggi, per durata: fisso da 1 a 15 anni e SARON. Aggiornati dal nostro team.",
+      "title": "I tassi ipotecari di oggi",
+      "subtitle": "Tassi di riferimento nazionali, per durata. La base di tutti i nostri calcoli — e dei Suoi risparmi.",
+      "updated": "Aggiornato il {date}",
+      "duration": "Durata",
+      "rate": "Tasso di riferimento",
+      "saron": "SARON",
+      "fixed": "Fisso {years} anni",
+      "chartTitle": "Evoluzione del fisso 10 anni",
+      "chartEmpty": "Lo storico si costruisce a ogni aggiornamento dei tassi.",
+      "faqTitle": "Domande sui tassi",
+      "faq1q": "Da dove provengono questi tassi?",
+      "faq1a": "Sono riferimenti nazionali, aggiornati dal nostro team sulla base delle condizioni realmente praticate dai finanziatori svizzeri. Il Suo tasso personale dipende dal Suo dossier — la gara d'offerte serve proprio a ottenerlo sotto il riferimento.",
+      "faq2q": "Perché una fascia invece di un tasso esatto?",
+      "faq2a": "Perché un tasso esatto senza dossier è un argomento di marketing, non un'offerta. Mostriamo il riferimento del mercato e negoziamo poi il Suo tasso reale, dossier alla mano.",
+      "faq3q": "Fisso o SARON?",
+      "faq3a": "Il SARON è storicamente più conveniente ma fluttua; il fisso blocca il Suo budget. La risposta giusta dipende dalla Sua tolleranza al rischio e dal Suo orizzonte — la nostra guida spiega la scelta.",
+      "ctaRenew": "Confrontare con il mio tasso",
+      "ctaBuy": "Calcolare la sostenibilità"
+    },
+    "guides": {
+      "metaTitle": "Guide ipotecarie",
+      "metaDescription": "Rinnovo, certificato di sostenibilità, SARON o tasso fisso: le guide HypoPilot, senza gergo.",
+      "title": "Guide",
+      "subtitle": "L'ipoteca svizzera spiegata senza gergo. L'essenziale per decidere, nient'altro.",
+      "readMore": "Leggere la guida"
+    },
+    "transparency": {
+      "metaTitle": "Come viene pagato HypoPilot",
+      "metaDescription": "Il nostro modello nero su bianco: gratuito per Lei, pagato dai finanziatori, commissione identica qualunque sia il finanziatore scelto.",
+      "title": "Come siamo pagati",
+      "subtitle": "La trasparenza non è una pagina in più di questo sito. È il prodotto.",
+      "s1Title": "Gratuito per Lei, davvero",
+      "s1Body": "Sorveglianza, simulazione, certificato, gara d'offerte: tutto è gratuito, senza abbonamenti nascosti né spese di dossier. Non Le fatturiamo mai nulla.",
+      "s2Title": "Chi ci paga, e quanto",
+      "s2Body": "Il finanziatore che Lei sceglie ci versa una commissione di intermediazione alla firma — tipicamente attorno allo 0,5% dell'importo del prestito, una tantum. Su un'ipoteca di CHF 650'000 sono circa CHF 3'250. Vede l'importo esatto prima di firmare.",
+      "s3Title": "Perché questo non distorce i nostri consigli",
+      "s3Body": "La commissione è equivalente qualunque sia il finanziatore scelto. Non abbiamo quindi alcun interesse a spingerne uno piuttosto che un altro — solo a farLe firmare l'offerta migliore, dove vuole Lei. Anche presso la Sua banca attuale, se si allinea.",
+      "s4Title": "Ciò che non facciamo mai",
+      "s4Items": "Vendere i Suoi dati|Trasmettere un lead grezzo a terzi|Fatturare al cliente|Nascondere una remunerazione",
+      "cta": "Verificare il mio tasso ora"
+    },
+    "partnersPublic": {
+      "metaTitle": "Diventare segnalatore HypoPilot",
+      "metaDescription": "Agenzie immobiliari, fiduciarie: inviate i vostri clienti a HypoPilot e seguite le vostre commissioni in piena trasparenza.",
+      "title": "Segnalatori: i vostri clienti meritano un tasso migliore",
+      "subtitle": "Agenzie immobiliari, fiduciarie, amministratori: inviateci i vostri clienti proprietari. Li richiamiamo in pochi minuti, voi seguite tutto — stati e commissioni — nella vostra area.",
+      "how1": "Inviate un cliente (link personale, QR o inserimento diretto)",
+      "how2": "Un consulente HypoPilot lo richiama in pochi minuti",
+      "how3": "Dossier firmato: la vostra commissione appare nella vostra area, dovuta poi pagata",
+      "simTitle": "Cosa significa in cifre",
+      "simLabel": "Clienti inviati all'anno",
+      "simResult": "{amount} di commissioni annuali stimate",
+      "simNote": "Base: CHF 500 per dossier firmato, tasso di firma medio del 40%.",
+      "formTitle": "Creare il mio conto segnalatore",
+      "formSubtitle": "Validazione manuale da parte del nostro team entro 24 ore lavorative.",
+      "company": "Società / ditta individuale",
+      "submit": "Richiedere l'accesso",
+      "success": "Richiesta ricevuta. Validiamo il Suo conto entro 24 ore lavorative e La avvisiamo via e-mail.",
+      "loginHint": "Già segnalatore?"
+    },
+    "contact": {
+      "metaTitle": "Contatto",
+      "title": "Contatto",
+      "body": "Una domanda sul Suo dossier, sulla Sua sorveglianza o sul nostro modello? Risposta entro un giorno lavorativo.",
+      "emailLabel": "E-mail",
+      "phoneLabel": "Telefono",
+      "addressLabel": "Indirizzo",
+      "callback": "Oppure lasci il Suo numero: un consulente La richiama."
+    },
+    "faqPage": {
+      "metaTitle": "Domande frequenti",
+      "title": "Domande frequenti",
+      "q5": "Quanto costa HypoPilot?",
+      "a5": "Nulla, mai. Il servizio è finanziato da una commissione del finanziatore scelto, indicata prima della firma. Veda la nostra pagina trasparenza.",
+      "q6": "In quali lingue lavorate?",
+      "a6": "Italiano, francese e tedesco — moduli, documenti, certificati PDF e consulenti."
+    },
+    "legal": {
+      "impressumTitle": "Impressum",
+      "privacyTitle": "Protezione dei dati (LPD)",
+      "termsTitle": "Condizioni generali d'uso",
+      "lawyerNote": "CONTENUTO PROVVISORIO — DA VALIDARE CON UN AVVOCATO",
+      "impressumBody": "HypoPilot SA (in costituzione)|Gestore della piattaforma hypopilot.ch|Indirizzo: da completare, Svizzera|E-mail: contact@hypopilot.ch|Responsabile della pubblicazione: da completare|Iscrizione al registro di commercio: da completare",
+      "privacyBody": "I Suoi dati sono trattati conformemente alla legge federale svizzera sulla protezione dei dati (LPD).|Finalità: calcolo delle simulazioni, sorveglianza dell'ipoteca, gara d'offerte presso i finanziatori con il Suo consenso esplicito, miglioramento del servizio.|I Suoi dati non sono mai venduti. Un dossier è trasmesso a un finanziatore solo completo e da Lei validato.|Hosting dei dati: da completare (Svizzera/UE).|I Suoi diritti: accesso, rettifica, cancellazione — contact@hypopilot.ch.|Durata di conservazione: da completare.",
+      "termsBody": "Il servizio HypoPilot è gratuito per l'utente e fornito «così com'è».|Simulazioni, certificati e fasce di tassi sono indicativi e non costituiscono né una consulenza finanziaria personalizzata né una promessa di credito.|La decisione di concessione spetta esclusivamente ai finanziatori.|L'utente garantisce l'esattezza delle informazioni inserite.|Foro competente e diritto applicabile: Svizzera, da completare."
     }
   }
 }
