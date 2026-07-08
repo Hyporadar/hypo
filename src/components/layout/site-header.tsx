@@ -17,11 +17,12 @@ export async function SiteHeader() {
 
   return (
     <header className="border-line bg-paper/95 sticky top-0 z-40 border-b backdrop-blur-sm">
-      <div className="mx-auto flex h-16 max-w-[1120px] items-center gap-6 px-6">
+      <div className="relative mx-auto flex h-16 max-w-[1120px] items-center gap-6 px-6">
         <Link href="/" aria-label="HypoPilot — accueil" className="shrink-0">
           <Wordmark />
         </Link>
-        <nav className="hidden items-center gap-6 text-sm md:flex">
+        {/* Nav centrée sur la largeur du header, indépendamment du logo et des actions */}
+        <nav className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-6 text-sm md:flex">
           {NAV.map((item) => (
             <Link
               key={item.key}
