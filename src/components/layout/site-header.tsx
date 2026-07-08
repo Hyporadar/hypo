@@ -17,12 +17,14 @@ export async function SiteHeader() {
 
   return (
     <header className="border-line bg-paper/95 sticky top-0 z-40 border-b backdrop-blur-sm">
-      <div className="relative mx-auto flex h-16 max-w-[1120px] items-center gap-6 px-6">
-        <Link href="/" aria-label="HypoPilot — accueil" className="shrink-0">
-          <Wordmark />
-        </Link>
-        {/* Nav centrée sur la largeur du header, indépendamment du logo et des actions */}
-        <nav className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-6 text-sm md:flex">
+      <div className="mx-auto flex h-16 max-w-[1120px] items-center gap-6 px-6">
+        <div className="flex flex-1 items-center">
+          <Link href="/" aria-label="HypoPilot — accueil" className="shrink-0">
+            <Wordmark />
+          </Link>
+        </div>
+        {/* Nav centrée : flanquée de deux zones flex-1 égales, jamais de chevauchement */}
+        <nav className="hidden items-center gap-6 text-sm md:flex">
           {NAV.map((item) => (
             <Link
               key={item.key}
@@ -33,7 +35,7 @@ export async function SiteHeader() {
             </Link>
           ))}
         </nav>
-        <div className="ml-auto flex shrink-0 items-center gap-2">
+        <div className="flex flex-1 shrink-0 items-center justify-end gap-2">
           <Button asChild variant="ghost" size="sm">
             <Link href="/connexion">{t('login')}</Link>
           </Button>

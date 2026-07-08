@@ -19,27 +19,28 @@ export interface WidgetRates {
   fixed: Record<number, number> // durée en années → taux
 }
 
-interface SliderRowProps {
+interface AmountRowProps {
   id: string
   label: string
   value: number
   max: number
-  step: number
   onChange: (v: number) => void
 }
 
-function SliderRow({ id, label, value, max, step, onChange }: SliderRowProps) {
+// Ligne minimaliste : libellé à gauche, champ CHF à droite (sans curseur).
+function AmountRow({ id, label, value, max, onChange }: AmountRowProps) {
   return (
-    <div className="grid items-center gap-2 sm:grid-cols-[140px_170px_1fr] sm:gap-4">
+    <div className="flex items-center justify-between gap-4">
       <label htmlFor={id} className="text-ink-700 text-sm">
         {label}
       </label>
-      <div className="relative">
+      <div className="relative w-48 shrink-0">
         <input
           id={id}
           inputMode="numeric"
-          className="border-input text-data focus-visible:ring-ring/50 h-11 w-full rounded-full border bg-white pr-14 pl-4 text-right text-base focus-visible:ring-3 focus-visible:outline-none"
-          value={value === 0 ? '0' : String(value).replace(/\B(?=(\d{3})+(?!\d))/g, "'")}
+          placeholder="0"
+          className="border-input text-data focus-visible:ring-ring/50 placeholder:text-ink-400 h-11 w-full rounded-full border bg-white pr-14 pl-4 text-right text-base focus-visible:ring-3 focus-visible:outline-none"
+          value={value === 0 ? '' : String(value).replace(/\B(?=(\d{3})+(?!\d))/g, "'")}
           onChange={(e) => {
             const digits = e.target.value.replace(/[^\d]/g, '')
             onChange(Math.min(max, digits ? Number(digits) : 0))
@@ -49,16 +50,6 @@ function SliderRow({ id, label, value, max, step, onChange }: SliderRowProps) {
           CHF
         </span>
       </div>
-      <input
-        type="range"
-        aria-label={label}
-        min={0}
-        max={max}
-        step={step}
-        value={value}
-        onChange={(e) => onChange(Number(e.target.value))}
-        className="accent-pilot-600 h-2 w-full"
-      />
     </div>
   )
 }
@@ -157,47 +148,44 @@ export function HomeLeadWidget({ rates }: { rates: WidgetRates }) {
 
   return (
     <Card id="simulateur" className="border-line scroll-mt-24 shadow-sm">
-      <CardContent className="p-6 sm:p-10">
+      <CardContent className="p-6 sm:p-8">
         <div className="text-center">
           <h2 className="font-display text-2xl font-semibold sm:text-3xl">{t('title')}</h2>
           <p className="text-ink-700 mt-1">{t('subtitle')}</p>
         </div>
 
-        <div className="mx-auto mt-8 max-w-2xl space-y-4">
-          <SliderRow
+        <div className="mx-auto mt-6 max-w-md space-y-3">
+          <AmountRow
             id="hw-property"
             label={t('propertyValue')}
             value={propertyValue}
             max={3_000_000}
-            step={50_000}
             onChange={(v) => {
               setPropertyValue(v)
               if (mortgage === 0 && v > 0) setMortgage(Math.round((v * 0.65) / 25_000) * 25_000)
             }}
           />
-          <SliderRow
+          <AmountRow
             id="hw-mortgage"
             label={t('mortgage')}
             value={mortgage}
             max={2_400_000}
-            step={25_000}
             onChange={setMortgage}
           />
-          <SliderRow
+          <AmountRow
             id="hw-income"
             label={t('income')}
             value={income}
             max={500_000}
-            step={5_000}
             onChange={setIncome}
           />
-          <div className="grid items-center gap-2 sm:grid-cols-[140px_1fr] sm:gap-4">
+          <div className="flex items-center justify-between gap-4">
             <label htmlFor="hw-plz" className="text-ink-700 text-sm">
               {t('plz')}
             </label>
             <Input
               id="hw-plz"
-              className="h-11 rounded-full bg-white px-4"
+              className="h-11 w-48 shrink-0 rounded-full bg-white px-4"
               placeholder={t('plzPlaceholder')}
               autoComplete="postal-code"
               value={plz}
