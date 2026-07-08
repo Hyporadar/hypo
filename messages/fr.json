@@ -5,8 +5,8 @@
   },
   "common": {
     "nav": {
-      "buy": "Acheter un bien",
-      "renew": "Renouveler mon hypothèque",
+      "buy": "Acheter",
+      "renew": "Renouveler",
       "howItWorks": "Comment ça marche",
       "login": "Connexion",
       "register": "Créer un compte",
@@ -135,7 +135,7 @@
       "updated": "mis à jour le {date}"
     },
     "lenders": {
-      "more": "et 26 autres prêteurs"
+      "more": "+29 prêteurs"
     }
   },
   "buy": {

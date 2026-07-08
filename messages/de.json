@@ -5,8 +5,8 @@
   },
   "common": {
     "nav": {
-      "buy": "Immobilie kaufen",
-      "renew": "Hypothek verlängern",
+      "buy": "Kaufen",
+      "renew": "Verlängern",
       "howItWorks": "So funktioniert es",
       "login": "Anmelden",
       "register": "Konto erstellen",
@@ -135,7 +135,7 @@
       "updated": "aktualisiert am {date}"
     },
     "lenders": {
-      "more": "und 26 weitere Kreditgeber"
+      "more": "+29 Anbieter"
     }
   },
   "buy": {

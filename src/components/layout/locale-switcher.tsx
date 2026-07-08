@@ -4,13 +4,7 @@ import { useLocale, useTranslations } from 'next-intl'
 import { useParams } from 'next/navigation'
 import { routing } from '@/i18n/routing'
 import { usePathname, useRouter } from '@/i18n/navigation'
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select'
+import { Select, SelectContent, SelectItem, SelectTrigger } from '@/components/ui/select'
 
 const LOCALE_LABELS: Record<string, string> = {
   fr: 'Français',
@@ -36,10 +30,11 @@ export function LocaleSwitcher() {
 
   return (
     <Select value={locale} onValueChange={onChange}>
-      <SelectTrigger className="w-[130px]" aria-label={t('label')} size="sm">
-        <SelectValue />
+      {/* Déclencheur compact : abréviation seule (FR / DE / IT) */}
+      <SelectTrigger className="text-data w-auto min-w-0 px-2.5" aria-label={t('label')} size="sm">
+        <span className="uppercase">{locale}</span>
       </SelectTrigger>
-      <SelectContent>
+      <SelectContent align="end">
         {routing.locales.map((l) => (
           <SelectItem key={l} value={l}>
             {LOCALE_LABELS[l]}

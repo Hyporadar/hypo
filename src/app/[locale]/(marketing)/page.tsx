@@ -9,21 +9,19 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 
 // Taux du jour pour le bandeau et le widget (repli si la table est vide).
-async function getWidgetRates(): Promise<{ rates: WidgetRates; updatedAt: Date | null }> {
+async function getWidgetRates(): Promise<WidgetRates> {
   try {
     const rows = await prisma.referenceRate.findMany()
     const fixed: Record<number, number> = {}
     let saron: number | null = null
-    let updatedAt: Date | null = null
     for (const rate of rows) {
       if (rate.type === 'SARON') saron = Number(rate.rate)
       else fixed[rate.termYears] = Number(rate.rate)
-      if (!updatedAt || rate.updatedAt > updatedAt) updatedAt = rate.updatedAt
     }
     fixed[15] ??= fixed[10] !== undefined ? Math.round((fixed[10] + 0.25) * 100) / 100 : 2.0
-    return { rates: { saron, fixed }, updatedAt }
+    return { saron, fixed }
   } catch {
-    return { rates: { saron: 0.9, fixed: { 5: 1.3, 10: 1.75, 15: 2.0 } }, updatedAt: null }
+    return { saron: 0.9, fixed: { 5: 1.3, 10: 1.75, 15: 2.0 } }
   }
 }
 
@@ -31,7 +29,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
   const { locale } = await params
   setRequestLocale(locale)
   const t = await getTranslations('home')
-  const { rates, updatedAt } = await getWidgetRates()
+  const rates = await getWidgetRates()
 
   return (
     <>
@@ -41,7 +39,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           <p className="text-pilot-600 text-xs font-semibold tracking-[0.08em] uppercase">
             {t('hero.overline')}
           </p>
-          <h1 className="font-display text-4xl leading-[1.05] font-semibold md:text-6xl">
+          <h1 className="font-display text-3xl leading-[1.1] font-semibold md:text-5xl">
             {t('hero.title')}
           </h1>
           <p className="text-ink-700 text-lg leading-relaxed">{t('hero.subtitle')}</p>
@@ -54,7 +52,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
 
         {/* Bandeau des 3 taux : SARON / 10 ans / 5 ans */}
         <div className="mt-14">
-          <RateCards rates={rates} updatedAt={updatedAt} />
+          <RateCards rates={rates} />
         </div>
 
         {/* Prêteurs (placeholders — logos réels à venir) */}

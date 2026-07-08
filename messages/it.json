@@ -5,8 +5,8 @@
   },
   "common": {
     "nav": {
-      "buy": "Comprare un immobile",
-      "renew": "Rinnovare l'ipoteca",
+      "buy": "Comprare",
+      "renew": "Rinnovare",
       "howItWorks": "Come funziona",
       "login": "Accedere",
       "register": "Creare un conto",
@@ -135,7 +135,7 @@
       "updated": "aggiornato il {date}"
     },
     "lenders": {
-      "more": "e altri 26 finanziatori"
+      "more": "+29 finanziatori"
     }
   },
   "buy": {

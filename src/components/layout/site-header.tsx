@@ -1,43 +1,46 @@
 import { getTranslations } from 'next-intl/server'
 import { Link } from '@/i18n/navigation'
+import type { StaticPathname } from '@/i18n/routing'
 import { Wordmark } from '@/components/brand/wordmark'
 import { LocaleSwitcher } from '@/components/layout/locale-switcher'
 import { Button } from '@/components/ui/button'
+
+const NAV: Array<{ key: string; href: StaticPathname }> = [
+  { key: 'buy', href: '/acheter' },
+  { key: 'renew', href: '/renouveler' },
+  { key: 'howItWorks', href: '/comment-ca-marche' },
+  { key: 'rates', href: '/taux' },
+]
 
 export async function SiteHeader() {
   const t = await getTranslations('common.nav')
 
   return (
     <header className="border-line bg-paper/95 sticky top-0 z-40 border-b backdrop-blur-sm">
-      <div className="mx-auto flex h-16 max-w-[1120px] items-center justify-between gap-6 px-6">
-        <Link href="/" aria-label="HypoPilot — accueil">
+      <div className="mx-auto flex h-16 max-w-[1120px] items-center gap-6 px-6">
+        <Link href="/" aria-label="HypoPilot — accueil" className="shrink-0">
           <Wordmark />
         </Link>
         <nav className="hidden items-center gap-6 text-sm md:flex">
-          <Link href="/acheter" className="text-ink-700 hover:text-ink-900 hover:underline">
-            {t('buy')}
-          </Link>
-          <Link href="/renouveler" className="text-ink-700 hover:text-ink-900 hover:underline">
-            {t('renew')}
-          </Link>
-          <Link
-            href="/comment-ca-marche"
-            className="text-ink-700 hover:text-ink-900 hover:underline"
-          >
-            {t('howItWorks')}
-          </Link>
-          <Link href="/taux" className="text-ink-700 hover:text-ink-900 hover:underline">
-            {t('rates')}
-          </Link>
+          {NAV.map((item) => (
+            <Link
+              key={item.key}
+              href={item.href}
+              className="text-ink-700 hover:text-ink-900 whitespace-nowrap hover:underline"
+            >
+              {t(item.key)}
+            </Link>
+          ))}
         </nav>
-        <div className="flex items-center gap-3">
-          <LocaleSwitcher />
+        <div className="ml-auto flex shrink-0 items-center gap-2">
           <Button asChild variant="ghost" size="sm">
             <Link href="/connexion">{t('login')}</Link>
           </Button>
           <Button asChild size="sm">
             <Link href="/inscription">{t('register')}</Link>
           </Button>
+          {/* Sélecteur de langue compact, tout à droite */}
+          <LocaleSwitcher />
         </div>
       </div>
     </header>
