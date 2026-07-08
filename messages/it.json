@@ -124,7 +124,16 @@
       "insuranceDesc": "Condizioni stabili e solide sul lungo periodo.",
       "from": "da",
       "perYear": "all'anno",
-      "categoryCta": "Continuare"
+      "categoryCta": "Continuare",
+      "subscribeTitle": "Abbonarsi agli aggiornamenti dei tassi",
+      "subscribeSubtitle": "Non perda il momento giusto.",
+      "frequency": "Frequenza",
+      "freqDaily": "Giornaliera",
+      "freqWeekly": "Settimanale",
+      "freqMonthly": "Mensile",
+      "subscribeEmail": "Il Suo indirizzo e-mail",
+      "subscribeCta": "Abbonarsi",
+      "subscribeSuccess": "Registrato. Il primo aggiornamento arriverà alla prossima pubblicazione."
     },
     "rateCards": {
       "saronLabel": "SARON",
@@ -405,6 +414,11 @@
       "subject": "Il Suo tasso vs il mercato questo trimestre",
       "body": "Buongiorno {name},\n\nIl punto trimestrale della Sua sorveglianza: Lei paga {rate}, il tasso di riferimento a 10 anni è {refRate}. Differenza potenziale: {savings} all'anno.\n\nNon deve fare nulla — La avviseremo quando la Sua finestra si aprirà.",
       "cta": "Vedere la mia sorveglianza"
+    },
+    "rateUpdate": {
+      "subject": "I tassi ipotecari di oggi",
+      "body": "Il tasso di riferimento fisso a 10 anni è {refRate}.\n\nIl Suo aggiornamento tassi HypoPilot — confronti con il Suo tasso attuale in 2 minuti, senza iscrizione.",
+      "cta": "Confrontare con il mio tasso"
     }
   },
   "clientApp": {

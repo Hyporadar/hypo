@@ -124,7 +124,16 @@
       "insuranceDesc": "Stabile und solide Konditionen auf lange Sicht.",
       "from": "ab",
       "perYear": "pro Jahr",
-      "categoryCta": "Weiter"
+      "categoryCta": "Weiter",
+      "subscribeTitle": "Zins-Update abonnieren",
+      "subscribeSubtitle": "Verpassen Sie nicht den richtigen Moment.",
+      "frequency": "Frequenz",
+      "freqDaily": "Täglich",
+      "freqWeekly": "Wöchentlich",
+      "freqMonthly": "Monatlich",
+      "subscribeEmail": "Ihre E-Mail-Adresse",
+      "subscribeCta": "Abonnieren",
+      "subscribeSuccess": "Notiert. Das erste Zinsupdate kommt bei der nächsten Aktualisierung."
     },
     "rateCards": {
       "saronLabel": "SARON",
@@ -405,6 +414,11 @@
       "subject": "Ihr Zinssatz vs. der Markt in diesem Quartal",
       "body": "Guten Tag {name}\n\nDas Quartals-Update Ihrer Überwachung: Sie zahlen {rate}, der 10-Jahres-Referenzzinssatz liegt bei {refRate}. Potenzielle Differenz: {savings} pro Jahr.\n\nSie müssen nichts tun — wir melden uns, sobald sich Ihr Zeitfenster öffnet.",
       "cta": "Meine Überwachung ansehen"
+    },
+    "rateUpdate": {
+      "subject": "Die Hypothekarzinsen von heute",
+      "body": "Der 10-Jahres-Referenzzinssatz liegt bei {refRate}.\n\nIhr HypoPilot-Zinsupdate — vergleichen Sie mit Ihrem aktuellen Zinssatz in 2 Minuten, ohne Anmeldung.",
+      "cta": "Mit meinem Zinssatz vergleichen"
     }
   },
   "clientApp": {

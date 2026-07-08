@@ -385,6 +385,26 @@ model ChannelSpend {
   @@unique([channel, month])
 }
 
+// ─── Abonnements aux mises à jour de taux (widget home) ───────────────
+
+enum RateAlertFrequency {
+  QUOTIDIEN
+  HEBDOMADAIRE
+  MENSUEL
+}
+
+model RateSubscription {
+  id             String             @id @default(cuid())
+  email          String             @unique
+  locale         Locale             @default(fr)
+  frequency      RateAlertFrequency @default(HEBDOMADAIRE)
+  lastSentAt     DateTime?
+  unsubscribedAt DateTime?
+  createdAt      DateTime           @default(now())
+
+  @@index([frequency, lastSentAt])
+}
+
 // ─── Journal d'emails (provider mocké + idempotence du nurturing) ──────
 
 model EmailLog {

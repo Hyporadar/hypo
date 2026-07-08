@@ -5,6 +5,7 @@ import { prisma } from '@/lib/prisma'
 import { CallbackDialog } from '@/components/marketing/callback-dialog'
 import { HomeLeadWidget, type WidgetRates } from '@/components/marketing/home-lead-widget'
 import { LendersRow, RateCards } from '@/components/marketing/rate-cards'
+import { RateSubscribe } from '@/components/marketing/rate-subscribe'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 
@@ -60,9 +61,14 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           <LendersRow />
         </div>
 
-        {/* L'outil : bien, hypothèque, revenu, NPA → 3 propositions */}
+        {/* L'outil : bien, hypothèque, revenu, NPA → offres par durée */}
         <div className="mt-14">
           <HomeLeadWidget rates={rates} />
+        </div>
+
+        {/* Abonnement aux mises à jour de taux */}
+        <div className="mt-16">
+          <RateSubscribe />
         </div>
       </section>
 

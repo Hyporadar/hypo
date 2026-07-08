@@ -24,10 +24,17 @@ export interface NurturingSummary {
   abandonJ3: number
   offersUnread: number
   quarterly: number
+  rateUpdates: number
 }
 
 export async function runNurturing(now: Date = new Date()): Promise<NurturingSummary> {
-  const summary: NurturingSummary = { abandonJ1: 0, abandonJ3: 0, offersUnread: 0, quarterly: 0 }
+  const summary: NurturingSummary = {
+    abandonJ1: 0,
+    abandonJ3: 0,
+    offersUnread: 0,
+    quarterly: 0,
+    rateUpdates: 0,
+  }
   const refRate = await getReferenceRate10y()
 
   // ── Abandon de brouillon : J+1 puis J+3
@@ -145,6 +152,37 @@ export async function runNurturing(now: Date = new Date()): Promise<NurturingSum
       leadId: lead.id,
     })
     summary.quarterly++
+  }
+
+  // ── Abonnés aux mises à jour de taux (widget home) : selon leur fréquence
+  const FREQUENCY_MS: Record<string, number> = {
+    QUOTIDIEN: 20 * 60 * 60 * 1000, // marge sur les 24h pour absorber l'heure du cron
+    HEBDOMADAIRE: 6.5 * DAY_MS,
+    MENSUEL: 28 * DAY_MS,
+  }
+  const subscriptions = await prisma.rateSubscription.findMany({
+    where: { unsubscribedAt: null },
+  })
+  for (const sub of subscriptions) {
+    const last = sub.lastSentAt ?? sub.createdAt
+    if (now.getTime() - last.getTime() < FREQUENCY_MS[sub.frequency]!) continue
+
+    const locale = sub.locale as Locale
+    const t = await getTranslations({ locale, namespace: 'emails' })
+    await sendAndLog({
+      to: sub.email,
+      locale,
+      template: `zins-update-${sub.frequency.toLowerCase()}`,
+      subject: t('rateUpdate.subject'),
+      body: t('rateUpdate.body', { refRate: formatRate(refRate) }),
+      ctaLabel: t('rateUpdate.cta'),
+      ctaUrl: funnelUrl(locale, '/renouveler'),
+    })
+    await prisma.rateSubscription.update({
+      where: { id: sub.id },
+      data: { lastSentAt: now },
+    })
+    summary.rateUpdates++
   }
 
   return summary

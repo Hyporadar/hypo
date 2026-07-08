@@ -67,10 +67,30 @@ function SliderRow({ id, label, value, max, step, onChange }: SliderRowProps) {
 // moyenne se situe ~0,36 point au-dessus de la référence.
 const AVERAGE_MARKET_PREMIUM = 0.36
 
+const TERMS = ['saron', 5, 10, 15] as const
+type Term = (typeof TERMS)[number]
+
+// Primes indicatives par type de prêteur ET par durée : les banques dominent
+// le court/moyen terme, les caisses de pension les longues durées.
 const CATEGORIES = [
-  { key: 'bank', type: 'banque', icon: Landmark, premium: 0 },
-  { key: 'insurance', type: 'assurance', icon: Umbrella, premium: 0.15 },
-  { key: 'pension', type: 'caisse-pension', icon: PiggyBank, premium: 0.09 },
+  {
+    key: 'bank',
+    type: 'banque',
+    icon: Landmark,
+    premiums: { saron: 0, 5: 0, 10: 0, 15: 0.1 } as Record<Term, number>,
+  },
+  {
+    key: 'insurance',
+    type: 'assurance',
+    icon: Umbrella,
+    premiums: { saron: 0.12, 5: 0.1, 10: 0.08, 15: 0.05 } as Record<Term, number>,
+  },
+  {
+    key: 'pension',
+    type: 'caisse-pension',
+    icon: PiggyBank,
+    premiums: { saron: 0.15, 5: 0.12, 10: 0.05, 15: -0.02 } as Record<Term, number>,
+  },
 ] as const
 
 export function HomeLeadWidget({ rates }: { rates: WidgetRates }) {
@@ -80,9 +100,26 @@ export function HomeLeadWidget({ rates }: { rates: WidgetRates }) {
   const [mortgage, setMortgage] = useState(0)
   const [income, setIncome] = useState(0)
   const [plz, setPlz] = useState('')
+  const [term, setTerm] = useState<Term>(10)
 
-  const baseRate = rates.fixed[10] ?? 1.75
+  const termRate = (option: Term) =>
+    option === 'saron' ? (rates.saron ?? 0.9) : (rates.fixed[option] ?? rates.fixed[10] ?? 1.75)
+  const selectedRate = termRate(term)
+  const horizonYears = term === 'saron' ? 10 : term
   const showOffers = mortgage >= 100_000
+
+  // Les offres se recalculent selon la durée choisie, triées par taux.
+  const offers = [...CATEGORIES]
+    .map((category) => {
+      const premium = category.premiums[term]
+      const rate = Math.round((selectedRate + premium) * 100) / 100
+      const savings = Math.max(
+        0,
+        Math.round(((AVERAGE_MARKET_PREMIUM - premium) / 100) * mortgage * horizonYears)
+      )
+      return { ...category, rate, savings }
+    })
+    .sort((a, b) => a.rate - b.rate)
 
   function continueWith(category: (typeof CATEGORIES)[number]['type']) {
     // Préremplit le brouillon partagé — la demande détaillée et le funnel
@@ -172,51 +209,82 @@ export function HomeLeadWidget({ rates }: { rates: WidgetRates }) {
         {showOffers ? (
           <div className="mt-10">
             <p className="font-display text-center text-lg font-semibold">{t('categoriesTitle')}</p>
-            <div className="mt-6 grid gap-4 md:grid-cols-3">
-              {CATEGORIES.map((category) => {
-                const Icon = category.icon
-                const rate = Math.round((baseRate + category.premium) * 100) / 100
-                const savings = Math.max(
-                  0,
-                  Math.round(((AVERAGE_MARKET_PREMIUM - category.premium) / 100) * mortgage)
-                )
-                return (
-                  <button
-                    key={category.key}
-                    type="button"
-                    onClick={() => continueWith(category.type)}
-                    className="border-line hover:border-pilot-600 group flex flex-col rounded-2xl border bg-white p-6 text-left transition-colors"
-                  >
-                    <span className="bg-pilot-50 text-pilot-700 flex size-11 items-center justify-center rounded-full">
-                      <Icon className="size-5" strokeWidth={1.8} />
-                    </span>
-                    <span className="font-display mt-4 text-lg font-semibold">
-                      {t(category.key)}
-                    </span>
-                    <span className="text-ink-700 mt-1 flex-1 text-sm leading-relaxed">
-                      {t(`${category.key}Desc`)}
-                    </span>
-                    <span className="text-data text-pilot-700 mt-4 text-3xl">
-                      <span className="text-ink-500 mr-1.5 font-sans text-sm">{t('from')}</span>
-                      {formatRate(rate)}
-                    </span>
-                    {savings > 0 ? (
-                      <span className="text-ink-500 mt-1 text-xs">
-                        {t('savings')} : <span className="text-data">{formatCHF(savings)}</span>{' '}
-                        {t('perYear')}
+            <div className="mt-6 grid gap-4 lg:grid-cols-[250px_1fr]">
+              {/* Sélecteur de durée — change les offres à droite */}
+              <ul className="border-line divide-line h-fit divide-y overflow-hidden rounded-xl border bg-white">
+                {TERMS.map((option) => {
+                  const active = term === option
+                  return (
+                    <li key={String(option)}>
+                      <button
+                        type="button"
+                        onClick={() => setTerm(option)}
+                        aria-pressed={active}
+                        className={
+                          active
+                            ? 'bg-pilot-50 flex w-full items-center justify-between px-4 py-3 text-left'
+                            : 'hover:bg-surface-alt flex w-full items-center justify-between px-4 py-3 text-left transition-colors'
+                        }
+                      >
+                        <span>
+                          <span className="block text-sm font-semibold">
+                            {option === 'saron' ? 'SARON' : t('years', { years: option })}
+                          </span>
+                          <span className="text-ink-500 text-xs">
+                            {option === 'saron' ? t('saronNote') : t('fixedNote')}
+                          </span>
+                        </span>
+                        <span className="flex items-center gap-2.5">
+                          <span className="text-data text-lg">{formatRate(termRate(option))}</span>
+                          <span
+                            className={
+                              active
+                                ? 'border-pilot-600 size-3.5 rounded-full border-4 bg-white'
+                                : 'border-pilot-200 bg-pilot-50 size-3.5 rounded-full border-2'
+                            }
+                          />
+                        </span>
+                      </button>
+                    </li>
+                  )
+                })}
+              </ul>
+
+              {/* Propositions par type de prêteur — recalculées selon la durée */}
+              <div className="space-y-3">
+                {offers.map((offer) => {
+                  const Icon = offer.icon
+                  return (
+                    <div
+                      key={offer.key}
+                      className="border-line flex flex-wrap items-center gap-x-5 gap-y-3 rounded-xl border bg-white p-4"
+                    >
+                      <span className="bg-pilot-50 text-pilot-700 flex size-10 shrink-0 items-center justify-center rounded-full">
+                        <Icon className="size-5" strokeWidth={1.8} />
                       </span>
-                    ) : null}
-                    <span className="text-pilot-700 mt-4 inline-flex items-center gap-1 text-sm font-medium group-hover:underline">
-                      {t('categoryCta')}
-                      <ArrowRight className="size-4" />
-                    </span>
-                  </button>
-                )
-              })}
+                      <div className="min-w-40 flex-1">
+                        <p className="font-display font-semibold">{t(offer.key)}</p>
+                        <p className="text-ink-500 mt-0.5 text-xs leading-relaxed">
+                          {t(`${offer.key}Desc`)}
+                        </p>
+                      </div>
+                      <p className="text-data text-xl">{formatRate(offer.rate)}</p>
+                      <div className="text-right">
+                        <p className="text-data text-pilot-700 text-lg">
+                          {formatCHF(offer.savings)}
+                        </p>
+                        <p className="text-ink-500 text-xs">{t('savings')}</p>
+                        <Button size="sm" className="mt-2" onClick={() => continueWith(offer.type)}>
+                          {t('categoryCta')}
+                          <ArrowRight data-icon="inline-end" />
+                        </Button>
+                      </div>
+                    </div>
+                  )
+                })}
+                <p className="text-ink-400 text-xs leading-relaxed">{t('savingsNote')}</p>
+              </div>
             </div>
-            <p className="text-ink-400 mt-4 text-center text-xs leading-relaxed">
-              {t('savingsNote')}
-            </p>
           </div>
         ) : (
           <p className="text-ink-500 mt-8 text-center text-sm">{t('emptyHint')}</p>

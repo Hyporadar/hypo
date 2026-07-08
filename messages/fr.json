@@ -124,7 +124,16 @@
       "insuranceDesc": "Conditions stables et solides sur le long terme.",
       "from": "dès",
       "perYear": "par an",
-      "categoryCta": "Continuer"
+      "categoryCta": "Continuer",
+      "subscribeTitle": "S'abonner aux mises à jour de taux",
+      "subscribeSubtitle": "Ne ratez pas le bon moment.",
+      "frequency": "Fréquence",
+      "freqDaily": "Journalière",
+      "freqWeekly": "Hebdomadaire",
+      "freqMonthly": "Mensuelle",
+      "subscribeEmail": "Votre adresse e-mail",
+      "subscribeCta": "S'abonner",
+      "subscribeSuccess": "C'est noté. Premier point taux dans votre boîte à la prochaine mise à jour."
     },
     "rateCards": {
       "saronLabel": "SARON",
@@ -405,6 +414,11 @@
       "subject": "Votre taux vs le marché ce trimestre",
       "body": "Bonjour {name},\n\nLe point trimestriel de votre surveillance : vous payez {rate}, le taux de référence 10 ans est à {refRate}. Écart potentiel : {savings} par an.\n\nRien à faire de votre côté — nous vous préviendrons quand votre fenêtre s'ouvrira.",
       "cta": "Voir ma surveillance"
+    },
+    "rateUpdate": {
+      "subject": "Les taux hypothécaires du jour",
+      "body": "Le taux de référence fixe 10 ans est à {refRate}.\n\nVotre point taux HypoPilot — comparez avec votre taux actuel en 2 minutes, sans inscription.",
+      "cta": "Comparer avec mon taux"
     }
   },
   "clientApp": {
