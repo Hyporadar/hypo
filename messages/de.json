@@ -644,7 +644,7 @@
   "wizard": {
     "meta": {
       "title": "Ihr Hypothekardossier",
-      "description": "Erfassen Sie Ihr Dossier online — Offerten in Echtzeit kalibriert, ohne E-Mail und ohne Termin."
+      "description": "Erstellen Sie Ihr Dossier online, in Ihrem Tempo — ohne E-Mail und ohne Termin. Automatisch gespeichert, jederzeit fortsetzbar."
     },
     "steps": {
       "bien": "1. Die Liegenschaft",
@@ -660,7 +660,7 @@
       "back": "Zurück",
       "next": "Weiter",
       "save": "Wird gespeichert…",
-      "saved": "Dossier automatisch gespeichert",
+      "saved": "Gespeichert",
       "switchFunnel": "Transaktionsart wechseln",
       "switchWarning": "Beim Wechsel der Transaktionsart müssen einzelne Angaben ergänzt oder neu erfasst werden. Fortfahren?",
       "toBuy": "Zum Kauf wechseln",

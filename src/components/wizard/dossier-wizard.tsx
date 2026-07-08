@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react'
 import { useTranslations } from 'next-intl'
-import { ArrowLeft, ArrowRight, Check, CloudUpload } from 'lucide-react'
+import { ArrowLeft, ArrowRight, Check, Loader2 } from 'lucide-react'
 import type { Funnel } from '@prisma/client'
 import { cn } from '@/lib/utils'
 import { detectComplexReasons } from '@/lib/dossier/schema'
@@ -11,32 +11,18 @@ import { useDossierWizard } from '@/components/wizard/use-dossier-wizard'
 import { BienSection } from '@/components/wizard/bien-section'
 import { EmprunteursSection } from '@/components/wizard/emprunteurs-section'
 import { HypothequeSection } from '@/components/wizard/hypotheque-section'
-import { OffersPanel } from '@/components/wizard/offers-panel'
 import { AssistantWidget } from '@/components/wizard/assistant-widget'
-import { MissingInfoBadge } from '@/components/wizard/missing-info-badge'
 import { Button } from '@/components/ui/button'
 
 const SECTIONS: DossierSection[] = ['bien', 'emprunteurs', 'hypotheque']
 
-/** Section d'appartenance d'une clé de question (clés complétude). */
-function sectionOfKey(key: string): DossierSection {
-  const base = key.replace(/#\d+$/, '')
-  if (base.startsWith('emprunteur')) return 'emprunteurs'
-  if (base === 'montantTotal' || base === 'tranchesSouhaitees' || base === 'dateDebut') {
-    return 'hypotheque'
-  }
-  return 'bien'
-}
-
 // ─── Assemblage du wizard /dossier ─────────────────────────────────────
-// Barre d'étapes en haut, questions à gauche, panneau offres permanent à
-// droite (sticky) / bandeau bas (mobile), assistant flottant, badge
-// « informations manquantes ». Sections 2 et 3 : lot suivant.
+// Barre d'étapes en haut, questions en colonne unique, assistant flottant.
+// Sauvegarde locale instantanée (indicateur façon Google Docs).
 export function DossierWizard({ initialFunnel }: { initialFunnel?: Funnel }) {
   const t = useTranslations('wizard')
   const wizard = useDossierWizard(initialFunnel)
   const [section, setSection] = useState<DossierSection>('bien')
-  const [highlightKey, setHighlightKey] = useState<string | null>(null)
   const trackedSections = useRef(new Set<string>())
 
   const complex = detectComplexReasons(wizard.data).length > 0
@@ -55,19 +41,6 @@ export function DossierWizard({ initialFunnel }: { initialFunnel?: Funnel }) {
       }
     }
   }, [wizard])
-
-
-  function navigateTo(questionKey: string) {
-    const target = sectionOfKey(questionKey)
-    setSection(target)
-    setHighlightKey(null)
-    // Reposer la clé au tick suivant pour re-déclencher la surbrillance.
-    requestAnimationFrame(() => setHighlightKey(questionKey.replace(/#\d+$/, '')))
-  }
-
-  function showOffers() {
-    document.getElementById('offres')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
-  }
 
   function switchFunnel() {
     const target: Funnel = wizard.funnel === 'ACHAT' ? 'RENOUVELLEMENT_CHAUD' : 'ACHAT'
@@ -113,23 +86,27 @@ export function DossierWizard({ initialFunnel }: { initialFunnel?: Funnel }) {
               )
             })}
           </nav>
-          <div className="flex items-center gap-2">
-            <MissingInfoBadge completeness={wizard.completeness} onNavigate={navigateTo} />
-            <span
-              aria-live="polite"
-              className={cn(
-                'text-ink-400 hidden items-center gap-1.5 text-xs sm:flex',
-                wizard.saving && 'text-pilot-700'
-              )}
-            >
-              <CloudUpload className="size-3.5" />
-              {wizard.saving ? t('nav.save') : t('nav.saved')}
-            </span>
-          </div>
+          {/* État de sauvegarde façon Google Docs : instantané, discret */}
+          <span
+            aria-live="polite"
+            className="text-ink-400 flex shrink-0 items-center gap-1.5 text-xs"
+          >
+            {wizard.saveStatus === 'saving' ? (
+              <>
+                <Loader2 className="size-3.5 animate-spin" />
+                {t('nav.save')}
+              </>
+            ) : (
+              <>
+                <Check className="text-pilot-600 size-3.5" />
+                {t('nav.saved')}
+              </>
+            )}
+          </span>
         </div>
       </div>
 
-      <div className="mx-auto mt-8 grid max-w-[1120px] gap-10 lg:grid-cols-[minmax(0,1fr)_320px]">
+      <div className="mx-auto mt-8 max-w-2xl">
         <div>
           {section === 'bien' ? (
             <BienSection
@@ -137,8 +114,8 @@ export function DossierWizard({ initialFunnel }: { initialFunnel?: Funnel }) {
               data={wizard.data}
               setBien={wizard.setBien}
               patch={wizard.patch}
-              highlightKey={highlightKey}
-              onAnswered={() => setHighlightKey(null)}
+              highlightKey={null}
+              onAnswered={() => undefined}
               complex={complex}
             />
           ) : section === 'emprunteurs' ? (
@@ -146,7 +123,7 @@ export function DossierWizard({ initialFunnel }: { initialFunnel?: Funnel }) {
               funnel={wizard.funnel}
               data={wizard.data}
               patch={wizard.patch}
-              highlightKey={highlightKey}
+              highlightKey={null}
             />
           ) : (
             <HypothequeSection
@@ -154,7 +131,7 @@ export function DossierWizard({ initialFunnel }: { initialFunnel?: Funnel }) {
               data={wizard.data}
               dossierId={wizard.dossierId}
               patch={wizard.patch}
-              highlightKey={highlightKey}
+              highlightKey={null}
             />
           )}
 
@@ -186,15 +163,12 @@ export function DossierWizard({ initialFunnel }: { initialFunnel?: Funnel }) {
             </Button>
           </div>
         </div>
-
-        <OffersPanel calibration={wizard.calibration} />
       </div>
 
       <AssistantWidget
         percent={wizard.completeness.percent}
         minutesLeft={wizard.minutesLeft}
         tips={wizard.tips}
-        onShowOffers={showOffers}
       />
     </div>
   )

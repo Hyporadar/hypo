@@ -644,7 +644,7 @@
   "wizard": {
     "meta": {
       "title": "Il vostro dossier ipotecario",
-      "description": "Compilate il vostro dossier online — offerte calibrate in tempo reale, senza email né appuntamento."
+      "description": "Compilate il vostro dossier online, al vostro ritmo — senza email né appuntamento. Salvataggio automatico, ripresa in qualsiasi momento."
     },
     "steps": {
       "bien": "1. L'immobile",
@@ -659,8 +659,8 @@
     "nav": {
       "back": "Indietro",
       "next": "Avanti",
-      "save": "Salvataggio in corso…",
-      "saved": "Dossier salvato automaticamente",
+      "save": "Salvataggio…",
+      "saved": "Salvato",
       "switchFunnel": "Cambiare tipo di operazione",
       "switchWarning": "Cambiando tipo di operazione, alcune informazioni dovranno essere completate o reinserite. Continuare?",
       "toBuy": "Passare all'acquisto",

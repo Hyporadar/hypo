@@ -644,7 +644,7 @@
   "wizard": {
     "meta": {
       "title": "Votre dossier hypothécaire",
-      "description": "Constituez votre dossier en ligne — offres calibrées en temps réel, sans email ni rendez-vous."
+      "description": "Constituez votre dossier en ligne, à votre rythme — sans email ni rendez-vous. Enregistrement automatique, reprise à tout moment."
     },
     "steps": {
       "bien": "1. Le bien",
@@ -659,8 +659,8 @@
     "nav": {
       "back": "Précédent",
       "next": "Suivant",
-      "save": "Sauvegarder mon dossier",
-      "saved": "Dossier sauvegardé automatiquement",
+      "save": "Enregistrement…",
+      "saved": "Enregistré",
       "switchFunnel": "Changer de parcours",
       "switchWarning": "En changeant de parcours, certaines informations devront être complétées. Vos réponses sont conservées.",
       "toBuy": "Passer en achat",

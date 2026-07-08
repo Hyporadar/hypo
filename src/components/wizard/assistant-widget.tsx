@@ -18,7 +18,8 @@ export function AssistantWidget({
   percent: number
   minutesLeft: number
   tips: WizardTip[]
-  onShowOffers: () => void
+  /** Raccourci « Vos taux » — masqué s'il n'y a pas de panneau d'offres. */
+  onShowOffers?: () => void
 }) {
   const t = useTranslations('wizard.assistant')
   const [open, setOpen] = useState(false)
@@ -94,20 +95,22 @@ export function AssistantWidget({
             </div>
           </div>
 
-          {/* Raccourci offres */}
-          <button
-            type="button"
-            onClick={() => {
-              setOpen(false)
-              onShowOffers()
-            }}
-            className="border-line hover:border-pilot-600 mt-6 flex items-center gap-3 rounded-xl border p-4 text-left transition-colors"
-          >
-            <span className="bg-pilot-50 text-pilot-700 flex size-9 items-center justify-center rounded-full">
-              <Percent className="size-4.5" strokeWidth={1.8} />
-            </span>
-            <span className="text-sm font-medium">{t('yourRates')}</span>
-          </button>
+          {/* Raccourci offres (si un panneau d'offres existe) */}
+          {onShowOffers ? (
+            <button
+              type="button"
+              onClick={() => {
+                setOpen(false)
+                onShowOffers()
+              }}
+              className="border-line hover:border-pilot-600 mt-6 flex items-center gap-3 rounded-xl border p-4 text-left transition-colors"
+            >
+              <span className="bg-pilot-50 text-pilot-700 flex size-9 items-center justify-center rounded-full">
+                <Percent className="size-4.5" strokeWidth={1.8} />
+              </span>
+              <span className="text-sm font-medium">{t('yourRates')}</span>
+            </button>
+          ) : null}
 
           {/* Conseils contextuels — jamais bloquants */}
           <div className="mt-6 flex-1 overflow-auto">

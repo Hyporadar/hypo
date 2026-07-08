@@ -5,18 +5,16 @@ import type { Funnel } from '@prisma/client'
 import { classifyRenewal } from '@/lib/finance'
 import { dossierDataSchema, type DossierData } from '@/lib/dossier/schema'
 import { computeCompleteness, type Completeness } from '@/lib/dossier/completeness'
-import type { CalibrationResult } from '@/lib/dossier/calibration'
 import { saveDossierAction, trackDossierEvent } from '@/server/actions/dossier'
 
 // ─── Moteur d'état du Dossier Wizard ───────────────────────────────────
 // État complet en localStorage (dossier anonyme, uuid) + reprise auto.
-// Sauvegarde serveur versionnée (debounce 5s — chaque save = une version
-// « Client ») et recalcul des offres calibrées (debounce 400ms).
+// Persistance locale instantanée + sauvegarde serveur versionnée (debounce
+// 5s — chaque save = une version « Client »).
 
 const STORAGE_KEY = 'hp-dossier'
 const TEASER_KEY = 'hp-draft-renouvellement'
 const SAVE_DEBOUNCE_MS = 5_000
-const CALIBRATE_DEBOUNCE_MS = 400
 
 interface StoredWizard {
   dossierId: string
@@ -119,11 +117,15 @@ export function useDossierWizard(initialFunnel?: Funnel) {
   const [dossierId, setDossierId] = useState('')
   const [funnel, setFunnel] = useState<Funnel>(initialFunnel ?? 'RENOUVELLEMENT_CHAUD')
   const [data, setData] = useState<DossierData>(EMPTY_DATA)
-  const [calibration, setCalibration] = useState<CalibrationResult | null>(null)
   const [saving, setSaving] = useState(false)
+  // Indicateur façon Google Docs : « Enregistrement… » très bref (le temps
+  // d'un rendu) puis « Enregistré » — piloté par l'écriture localStorage
+  // (instantanée), pas par la sauvegarde serveur versionnée (debounce 5s).
+  const [saveStatus, setSaveStatus] = useState<'saved' | 'saving'>('saved')
   const saveTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
-  const calibrateTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const flashTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
   const lastSaved = useRef('')
+  const firstPersist = useRef(true)
 
   // ── Restauration / préremplissage (une fois, côté client)
   /* eslint-disable react-hooks/set-state-in-effect -- restauration au montage */
@@ -157,7 +159,7 @@ export function useDossierWizard(initialFunnel?: Funnel) {
   }, [])
   /* eslint-enable react-hooks/set-state-in-effect */
 
-  // ── Persistance locale + sauvegarde serveur versionnée (debounce)
+  // ── Persistance locale (instantanée) + sauvegarde serveur versionnée
   useEffect(() => {
     if (!hydrated || !dossierId) return
     const stored: StoredWizard = { dossierId, funnel, data, updatedAt: new Date().toISOString() }
@@ -165,6 +167,16 @@ export function useDossierWizard(initialFunnel?: Funnel) {
       window.localStorage.setItem(STORAGE_KEY, JSON.stringify(stored))
     } catch {
       // stockage indisponible
+    }
+
+    // Enregistré localement : micro-flash « Enregistrement… » → « Enregistré »
+    // (on saute le premier passage = restauration au montage).
+    if (firstPersist.current) {
+      firstPersist.current = false
+    } else {
+      setSaveStatus('saving')
+      if (flashTimer.current) clearTimeout(flashTimer.current)
+      flashTimer.current = setTimeout(() => setSaveStatus('saved'), 350)
     }
 
     const payload = JSON.stringify({ funnel, data })
@@ -180,27 +192,6 @@ export function useDossierWizard(initialFunnel?: Funnel) {
       if (saveTimer.current) clearTimeout(saveTimer.current)
     }
   }, [hydrated, dossierId, funnel, data])
-
-  // ── Offres calibrées (debounce 400ms à CHAQUE réponse)
-  useEffect(() => {
-    if (!hydrated) return
-    if (calibrateTimer.current) clearTimeout(calibrateTimer.current)
-    calibrateTimer.current = setTimeout(async () => {
-      try {
-        const res = await fetch('/api/rates/calibrated', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ funnel, data }),
-        })
-        if (res.ok) setCalibration((await res.json()) as CalibrationResult)
-      } catch {
-        // hors ligne : on garde la dernière calibration
-      }
-    }, CALIBRATE_DEBOUNCE_MS)
-    return () => {
-      if (calibrateTimer.current) clearTimeout(calibrateTimer.current)
-    }
-  }, [hydrated, funnel, data])
 
   const completeness: Completeness = useMemo(
     () => computeCompleteness(funnel, data),
@@ -261,10 +252,10 @@ export function useDossierWizard(initialFunnel?: Funnel) {
     setBien,
     patch,
     completeness,
-    calibration,
     tips,
     minutesLeft,
     saving,
+    saveStatus,
     trackStep,
   }
 }

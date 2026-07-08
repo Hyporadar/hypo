@@ -51,8 +51,8 @@ test.describe('wizard /dossier (public, anonyme)', () => {
     await page.locator('#w-autres-biens-non').click()
     await expect(page.locator('[id^="question-"][data-status="required"]')).toHaveCount(0)
 
-    // Le panneau d'offres affiche une fourchette (rabais éco + LTV basse)
-    await expect(page.locator('#offres, div.fixed.inset-x-0.bottom-0').first()).toContainText('%')
+    // Indicateur de sauvegarde façon Google Docs
+    await expect(page.getByText('Enregistré')).toBeVisible()
 
     // La sauvegarde serveur versionnée part en arrière-plan (debounce 5s)
     await page.waitForTimeout(5_600)
