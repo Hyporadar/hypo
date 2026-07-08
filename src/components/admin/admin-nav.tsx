@@ -6,6 +6,7 @@ import {
   BarChart3,
   CalendarClock,
   CalendarDays,
+  FolderOpen,
   Handshake,
   Inbox,
   KanbanSquare,
@@ -23,6 +24,7 @@ const NAV: Record<
   ADMIN: [
     { href: '/admin', label: 'Vue d’ensemble', icon: Inbox, exact: true },
     { href: '/admin/leads', label: 'Leads', icon: UsersRound },
+    { href: '/admin/dossiers', label: 'Dossiers', icon: FolderOpen },
     { href: '/admin/pipeline', label: 'Pipeline', icon: KanbanSquare },
     { href: '/admin/stats', label: 'Stats', icon: BarChart3 },
     { href: '/admin/echeancier', label: 'Échéancier', icon: CalendarClock },
@@ -32,6 +34,7 @@ const NAV: Record<
   ],
   CLOSER: [
     { href: '/admin', label: 'Ma file', icon: Inbox, exact: true },
+    { href: '/admin/dossiers', label: 'Dossiers', icon: FolderOpen },
     { href: '/admin/agenda', label: 'Agenda', icon: CalendarDays },
     { href: '/admin/mes-stats', label: 'Mes stats', icon: BarChart3 },
   ],

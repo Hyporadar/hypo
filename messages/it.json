@@ -419,6 +419,16 @@
       "subject": "I tassi ipotecari di oggi",
       "body": "Il tasso di riferimento fisso a 10 anni è {refRate}.\n\nIl Suo aggiornamento tassi HypoPilot — confronti con il Suo tasso attuale in 2 minuti, senza iscrizione.",
       "cta": "Confrontare con il mio tasso"
+    },
+    "magicLink": {
+      "subject": "Il vostro link di accesso HypoPilot",
+      "body": "Cliccate sul pulsante qui sotto per ritrovare il vostro dossier ipotecario. Il link è valido un'ora e può essere utilizzato una sola volta.\nSe non avete richiesto questo accesso, ignorate semplicemente questa email.",
+      "cta": "Aprire il mio dossier"
+    },
+    "rateAlertConfirm": {
+      "subject": "Confermate il vostro abbonamento ai tassi HypoPilot",
+      "body": "Ancora un clic: confermate il vostro indirizzo per ricevere l'evoluzione dei tassi ipotecari alla frequenza scelta. Disiscrizione con un clic in ogni email.",
+      "cta": "Confermare il mio abbonamento"
     }
   },
   "clientApp": {
@@ -630,5 +640,497 @@
     },
     "placeholder": "Il modulo dettagliato arriverà qui. Nel frattempo, la simulazione di 2 minuti Le dà già il Suo risultato.",
     "fallbackCta": "Fare la simulazione in 2 minuti"
+  },
+  "wizard": {
+    "meta": {
+      "title": "Il vostro dossier ipotecario",
+      "description": "Compilate il vostro dossier online — offerte calibrate in tempo reale, senza email né appuntamento."
+    },
+    "steps": {
+      "bien": "1. L'immobile",
+      "emprunteurs": "2. I mutuatari",
+      "hypotheque": "3. L'ipoteca"
+    },
+    "sections": {
+      "bien": "L'immobile",
+      "emprunteurs": "I mutuatari",
+      "hypotheque": "L'ipoteca"
+    },
+    "nav": {
+      "back": "Indietro",
+      "next": "Avanti",
+      "save": "Salvataggio in corso…",
+      "saved": "Dossier salvato automaticamente",
+      "switchFunnel": "Cambiare tipo di operazione",
+      "switchWarning": "Cambiando tipo di operazione, alcune informazioni dovranno essere completate o reinserite. Continuare?",
+      "toBuy": "Passare all'acquisto",
+      "toRenewal": "Passare al rinnovo"
+    },
+    "missing": {
+      "title": "Informazioni mancanti"
+    },
+    "assistant": {
+      "open": "Aprire l'assistente",
+      "close": "Chiudere",
+      "title": "Il vostro assistente",
+      "minutesLeft": "Ancora circa {minutes} min.",
+      "yourRates": "I vostri tassi",
+      "tipsTitle": "Consigli",
+      "noTips": "Tutto in ordine — continuate pure.",
+      "tips": {
+        "lpp": "Inserite il vostro capitale della cassa pensioni: rafforza la vostra situazione finanziaria e può portare a tassi migliori.",
+        "coldMonitoring": "La vostra scadenza è ancora lontana — attivate la sorveglianza gratuita, vi contatteremo al momento giusto.",
+        "ecoLabel": "Da sapere: alcuni finanziatori offrono uno sconto per gli immobili certificati (ipoteca verde)."
+      }
+    },
+    "offers": {
+      "title": "Le vostre offerte",
+      "calibrated": "Fascia calibrata",
+      "estimate": "Stima",
+      "duration": "Durata",
+      "years": "{years} anni",
+      "from": "da",
+      "empty": "Rispondete alle prime domande per vedere le vostre fasce.",
+      "savings": "Potenziale di risparmio",
+      "perYear": "all'anno",
+      "noteEstimate": "Stima — si affina con ogni risposta.",
+      "noteCalibrated": "Fascia calibrata sulla base del vostro dossier completo. L'identità dei finanziatori è rivelata dopo la creazione del conto.",
+      "lenderTypes": {
+        "BANQUE": "Banche",
+        "ASSURANCE": "Assicurazioni",
+        "CAISSE_PENSION": "Casse pensioni"
+      }
+    },
+    "common": {
+      "yes": "Sì",
+      "no": "No",
+      "done": "Fatto",
+      "add": "+ Aggiungere",
+      "edit": "Modificare",
+      "remove": "Rimuovere",
+      "total": "Totale",
+      "sensitive": "Dato protetto — mai trasmesso a un finanziatore senza il vostro consenso esplicito.",
+      "invalidDate": "Formato atteso: GG.MM.AAAA",
+      "invalidYear": "Anno non valido",
+      "decrement": "Diminuire",
+      "increment": "Aumentare",
+      "comingSoon": "Questa sezione arriva subito dopo. Le vostre risposte sono già salvate — continuate con la sezione «L'immobile» o tornate più tardi."
+    },
+    "complexCard": {
+      "title": "La vostra situazione merita un consulente",
+      "body": "Nessun problema: il vostro caso richiede semplicemente uno sguardo personalizzato. Un esperto vi contatterà — potete comunque completare il dossier.",
+      "cta": "Pianificare un colloquio"
+    },
+    "rateAlert": {
+      "title": "Restate informati sui tassi",
+      "body": "Ricevete l'evoluzione dei tassi al vostro ritmo. Doppia conferma via email, disiscrizione con un clic.",
+      "emailPlaceholder": "vostra@email.ch",
+      "frequency": "Frequenza",
+      "frequencies": {
+        "QUOTIDIEN": "Ogni giorno",
+        "HEBDOMADAIRE": "Ogni settimana",
+        "MENSUEL": "Ogni mese"
+      },
+      "cta": "Abbonarmi",
+      "sent": "Quasi fatto! Cliccate sul link inviato a {email} per confermare l'abbonamento.",
+      "confirmed": "Abbonamento confermato — riceverete i prossimi aggiornamenti dei tassi.",
+      "alreadyConfirmed": "Il vostro abbonamento è già attivo — frequenza aggiornata.",
+      "error": "L'abbonamento non è riuscito. Verificate l'indirizzo email e riprovate."
+    },
+    "account": {
+      "title": "Ritrovate il vostro dossier ovunque",
+      "body": "Ricevete un link di accesso via email: il vostro dossier vi segue, senza password. Nessun dato è trasmesso a un finanziatore senza il vostro consenso.",
+      "emailPlaceholder": "vostra@email.ch",
+      "cta": "Ricevere il mio link di accesso",
+      "sent": "Link inviato a {email} — è valido un'ora.",
+      "throttled": "Un link è appena partito. Controllate la posta in arrivo (e la cartella spam).",
+      "error": "L'invio non è riuscito. Verificate l'indirizzo email e riprovate."
+    },
+    "questions": {
+      "usage": {
+        "title": "Come utilizzate questo immobile?",
+        "short": "Uso dell'immobile",
+        "subtitle": "L'uso determina le regole di finanziamento applicabili.",
+        "info": "Residenza principale, casa di vacanza o immobile a reddito: i finanziatori applicano tassi di anticipo ed esigenze di fondi propri diversi.",
+        "options": {
+          "RESIDENCE_PRINCIPALE": "Residenza principale",
+          "RESIDENCE_PRINCIPALE_sub": "Occupata dal proprietario",
+          "VACANCES": "Casa di vacanza",
+          "RENDEMENT": "Immobile locato (reddito)",
+          "LOUE_PARTIEL": "Locato e parzialmente abitato"
+        },
+        "vacancesOccupation": "Occupazione o locazione?",
+        "vacancesOptions": {
+          "OCCUPE": "Interamente occupato dal proprietario",
+          "LOUE_ET_OCCUPE": "Locato e occupato dal proprietario",
+          "LOUE": "Interamente locato"
+        },
+        "locatifUsage": "Come è utilizzato l'immobile locato?",
+        "locatifUsageOptions": {
+          "RESIDENTIEL": "Puramente residenziale",
+          "MIXTE": "Residenziale e commerciale (misto)",
+          "COMMERCIAL": "Puramente commerciale (uffici, depositi…)"
+        },
+        "locatifTypeLocation": "Tipo di locazione?",
+        "locatifTypeLocationOptions": {
+          "PERMANENT": "Stesso inquilino tutto l'anno (locazione permanente)",
+          "TEMPORAIRE": "Inquilini diversi (locazione temporanea)"
+        },
+        "revenuLocatif": "Reddito locativo netto annuo (spese escluse)"
+      },
+      "typeBien": {
+        "title": "Che tipo di immobile?",
+        "short": "Tipo di immobile",
+        "subtitle": "L'immagine vi aiuta: scegliete ciò che assomiglia di più al vostro immobile.",
+        "info": "Il tipo di immobile influenza la valutazione e la cerchia dei finanziatori interessati.",
+        "options": {
+          "MAISON": "Casa unifamiliare",
+          "APPARTEMENT_PPE": "Appartamento",
+          "APPARTEMENT_PPE_sub": "Proprietà per piani (PPP)",
+          "MAISON_MITOYENNE": "Casa a schiera",
+          "PLUSIEURS_APPARTEMENTS": "Più appartamenti in un edificio",
+          "GRAND_ENSEMBLE": "Grande complesso",
+          "GRAND_ENSEMBLE_sub": "Immobile a reddito"
+        },
+        "annexe": "L'immobile ha un appartamento annesso?",
+        "annexeInfo": "Un appartamento annesso è un'unità abitativa indipendente nella casa — il suo affitto può contare come reddito.",
+        "annexeLouee": "L'appartamento annesso è locato?",
+        "revenuAnnexe": "Reddito locativo dell'annesso (netto/anno)"
+      },
+      "adresse": {
+        "title": "Dove si trova l'immobile?",
+        "short": "Ubicazione",
+        "subtitle": "NPA o località — i tassi variano secondo la regione.",
+        "info": "L'ubicazione serve alla valutazione dell'immobile e alla scelta dei finanziatori attivi nel vostro cantone.",
+        "npaPlaceholder": "es. 6900 o Lugano"
+      },
+      "labelEco": {
+        "title": "L'immobile ha uno standard ecologico?",
+        "short": "Standard ecologico",
+        "info": "Un marchio riconosciuto (Minergie, CECE…) può dare diritto a un'«ipoteca verde»: alcuni finanziatori offrono uno sconto sul tasso.",
+        "options": {
+          "non": "No",
+          "minergie": "Minergie",
+          "geak-cecb": "CECE",
+          "snbs": "SNBS",
+          "autre": "Altro standard"
+        }
+      },
+      "chauffage": {
+        "title": "Come è riscaldato l'immobile?",
+        "short": "Riscaldamento",
+        "options": {
+          "mazout": "Nafta",
+          "gaz": "Gas",
+          "pac": "Pompa di calore (aria-acqua o geotermica)",
+          "distance": "Teleriscaldamento",
+          "bois": "Legna (cippato, pellet, ciocchi)",
+          "electrique": "Elettrico / ad accumulo",
+          "autre": "Altro / sconosciuto"
+        }
+      },
+      "casSpeciaux": {
+        "title": "Situazioni particolari",
+        "short": "Casi speciali",
+        "subtitle": "Un «sì» non blocca nulla — ci aiuta a scegliere i finanziatori giusti.",
+        "droitHabitation": "È iscritto un diritto di abitazione?",
+        "usufruit": "È iscritto un usufrutto?",
+        "droitSuperficie": "L'immobile è in diritto di superficie?",
+        "zoneAgricole": "L'immobile è in zona agricola (fuori zona edificabile)?",
+        "noteRF": "Gli immobili con iscrizioni a registro fondiario (diritto di prelazione…) non sono sempre intermediabili; per un credito di costruzione un consulente vi contatta direttamente."
+      },
+      "achatInfos": {
+        "title": "Informazioni sull'acquisto",
+        "short": "Dati d'acquisto",
+        "existant": "L'immobile è esistente o una nuova costruzione?",
+        "existantOptions": {
+          "existant": "Immobile esistente",
+          "neuf": "Nuova costruzione"
+        },
+        "prixAchat": "Prezzo d'acquisto",
+        "dateFixee": "La data d'acquisto è già fissata?",
+        "dateFixeeInfo": "Si tratta della data di iscrizione a registro fondiario.",
+        "dateAchat": "Data d'acquisto",
+        "renovation": "L'immobile sarà ristrutturato o ampliato subito dopo l'acquisto?"
+      },
+      "valeur": {
+        "title": "Qual è il valore dell'immobile?",
+        "short": "Valore dell'immobile",
+        "subtitle": "La vostra migliore stima basta per iniziare.",
+        "info": "Il valore determina il tasso di anticipo (LTV). Una valutazione online dettagliata arriverà presto — nel frattempo indicate la vostra stima e la sua fonte.",
+        "source": "Fonte della stima",
+        "sources": {
+          "banque": "Banca",
+          "en-ligne": "Stima online",
+          "agent": "Agente immobiliare",
+          "expert": "Perito accreditato",
+          "propre": "Altra / stima propria"
+        }
+      },
+      "fondsPropres": {
+        "title": "Determinate i vostri fondi propri",
+        "short": "Fondi propri",
+        "subtitle": "Spostate la maniglia tra ipoteca e fondi propri — entrambi i campi sono modificabili.",
+        "mortgageLabel": "Nuova ipoteca",
+        "ownFundsLabel": "Fondi propri",
+        "totalLabel": "Prezzo d'acquisto",
+        "note": "La composizione dei fondi propri (contanti, 2° pilastro, 3a) sarà precisata durante l'elaborazione del dossier."
+      },
+      "tranchesExistantes": {
+        "title": "Le vostre ipoteche attuali",
+        "short": "Ipoteche esistenti",
+        "subtitle": "Tranche con scadenze diverse? Inseritele separatamente.",
+        "info": "La scadenza più vicina determina il momento ideale per il rinnovo — e il vostro margine di negoziazione.",
+        "lender": "Finanziatore attuale",
+        "lenderPlaceholder": "es. UBS, BancaStato, Raiffeisen…",
+        "montant": "Importo",
+        "taux": "Tasso (%)",
+        "produit": "Modello della tranche",
+        "produits": {
+          "FIXE": "Tasso fisso",
+          "SARON": "SARON",
+          "VARIABLE": "Variabile"
+        },
+        "echeance": "Data di scadenza",
+        "totalLabel": "Totale delle tranche"
+      },
+      "autresPrets": {
+        "title": "Ci sono altri prestiti legati all'immobile?",
+        "short": "Altri prestiti",
+        "subtitle": "Solo prestiti che servono a finanziare l'immobile — es. prestito privato o del venditore.",
+        "montant": "Importo del prestito",
+        "libelle": "Descrizione (facoltativa)"
+      },
+      "autresBiens": {
+        "title": "Uno dei mutuatari possiede altri immobili?",
+        "short": "Altri immobili",
+        "usage": "Che tipo di immobile?",
+        "usageOptions": {
+          "OCCUPE": "Occupato dal proprietario",
+          "VACANCES": "Casa di vacanza (uso proprio)",
+          "LOUE": "Locato (investimento)",
+          "PARTIEL": "Parzialmente locato"
+        },
+        "locatifUsage": "Tipo di locazione",
+        "locatifUsageOptions": {
+          "RESIDENTIEL": "Puramente residenziale",
+          "MIXTE": "Residenziale e commerciale (misto)",
+          "COMMERCIAL": "Puramente commerciale (uffici, depositi)"
+        },
+        "enSuisse": "L'immobile si trova in Svizzera?",
+        "genre": "Genere di oggetto",
+        "genreOptions": {
+          "MAISON": "Casa",
+          "APPARTEMENT": "Appartamento",
+          "MITOYENNE": "Casa a schiera",
+          "IMMEUBLE": "Edificio",
+          "PLUSIEURS_APPARTEMENTS": "Più appartamenti"
+        },
+        "annexe": "Appartamento annesso?",
+        "valeur": "Valore attuale stimato",
+        "aHypotheque": "Ipoteche o prestiti su questo immobile?",
+        "totalHypotheques": "Totale delle ipoteche e dei prestiti",
+        "amortissementRequis": "Devono essere ammortizzati? (rimborsi contrattuali)",
+        "amortissementAnnuel": "Importo di ammortamento annuo",
+        "revenuLocatif": "Reddito locativo netto annuo"
+      },
+      "nombreEmprunteurs": {
+        "title": "Chi sarà mutuatario?",
+        "short": "Numero di mutuatari",
+        "subtitle": "Tutti i mutuatari devono essere registrati — anche senza reddito.",
+        "options": {
+          "UNE": "Una persona",
+          "PLUSIEURS": "Due o più persone"
+        }
+      },
+      "emprunteurIdentite": {
+        "title": "Dati personali",
+        "short": "Identità del mutuatario",
+        "nationalite": "Nazionalità",
+        "nationaliteOptions": {
+          "SUISSE": "Svizzera",
+          "AUTRE": "Altra nazionalità",
+          "PLUSIEURS": "Più nazionalità"
+        },
+        "permis": "Permesso di dimora",
+        "permisOptions": {
+          "C": "Permesso C",
+          "B": "Permesso B",
+          "AUTRE": "Altro"
+        },
+        "fatca": "La persona è cittadina statunitense o ha un legame fiscale con gli USA?",
+        "fatcaInfo": "Domanda richiesta dalla regolamentazione FATCA: alcuni finanziatori non accettano persone assoggettate al fisco americano.",
+        "residenceFuture": "Residenza futura",
+        "residenceOptions": {
+          "HABITE_LE_BIEN": "Abiterà l'immobile",
+          "AUTRE_ADRESSE": "In futuro a un altro indirizzo"
+        },
+        "anneeNaissance": "Anno di nascita"
+      },
+      "emprunteurRevenus": {
+        "title": "Il mutuatario ha un reddito?",
+        "short": "Redditi del mutuatario",
+        "subtitle": "Aggiungete ogni fonte di reddito separatamente — il totale si aggiorna in continuo.",
+        "info": "I redditi determinano la sostenibilità: interessi teorici al 5% + ammortamento + manutenzione non devono superare un terzo dei redditi.",
+        "categorie": "Tipo di reddito",
+        "categories": {
+          "ACTIVITE": "Reddito da attività",
+          "RENTE": "Reddito da rendita",
+          "AUTRE": "Altro reddito"
+        },
+        "typeActivite": "Tipo di attività",
+        "typesActivite": {
+          "SALARIE": "Dipendente",
+          "INDEPENDANT": "Indipendente",
+          "ACCESSOIRE": "Attività accessoria",
+          "CHOMAGE": "Indennità di disoccupazione",
+          "ETRANGER": "Reddito estero"
+        },
+        "typeRente": "Tipo di rendita",
+        "typesRente": {
+          "AVS_AI": "AI / AVS (1° o 2° pilastro)",
+          "AI_3E_PILIER": "AI 3° pilastro (3a o 3b)",
+          "SURVIVANT": "Rendita per superstiti (vedova, vedovo, orfano)",
+          "ENFANT": "Rendita per figli (AI o vecchiaia)",
+          "VIAGERE": "Rendita vitalizia / temporanea",
+          "ETRANGERE": "Rendita estera"
+        },
+        "typeAutre": "Tipo",
+        "typesAutre": {
+          "PENSION_ALIMENTAIRE": "Alimenti",
+          "DIVIDENDES": "Redditi da dividendi (partecipazione)",
+          "LOCATIF": "Reddito locativo"
+        },
+        "montantSalarie": "Reddito annuo lordo",
+        "montantSalarieInfo": "13a mensilità inclusa, bonus irregolari esclusi.",
+        "montantIndependant": "Reddito annuo",
+        "montantIndependantInfo": "Stimate se necessario.",
+        "montant": "Importo annuo",
+        "bonus3Ans": "Bonus negli ultimi 3 anni?",
+        "bonusMontant": "Bonus anno {n}",
+        "independantDepuis": "Da quando siete indipendente?",
+        "independantOptions": {
+          "plus3": "Più di 3 anni",
+          "moins3": "Meno di 3 anni"
+        },
+        "independantCurseur": "L'attività dura da meno di…",
+        "durees": {
+          "3m": "3 mesi",
+          "6m": "6 mesi",
+          "1a": "1 anno",
+          "2a": "2 anni",
+          "3a": "3 anni"
+        },
+        "totalLabel": "Totale dei redditi annui"
+      },
+      "emprunteurAvoirs": {
+        "title": "Il mutuatario possiede degli averi?",
+        "short": "Averi del mutuatario",
+        "subtitle": "Conti, pilastro 3a, titoli… Gli averi influenzano i tassi offerti da alcuni finanziatori.",
+        "categorie": "Categoria di averi",
+        "categories": {
+          "BANQUE": "Averi in banca",
+          "ASSURANCE": "Averi presso un'assicurazione",
+          "CAISSE_PENSION": "Avere presso una cassa pensioni",
+          "AUTRE": "Altri averi"
+        },
+        "typeBancaire": "Tipo",
+        "typesBancaires": {
+          "COMPTE": "Saldo del conto",
+          "TITRES": "Titoli",
+          "COMPTE_3A": "Conto pilastro 3a (senza titoli)",
+          "TITRES_3A": "Conto titoli pilastro 3a",
+          "LIBRE_PASSAGE": "Averi di libero passaggio (conto o titoli)"
+        },
+        "montant": "Importo",
+        "utilisePourAchat": "Utilizzato per l'acquisto",
+        "totalLabel": "Totale degli averi"
+      },
+      "emprunteurCharges": {
+        "title": "Spese regolari?",
+        "short": "Oneri del mutuatario",
+        "subtitle": "Leasing, alimenti, interessi di prestiti o piccoli crediti.",
+        "info": "Le altre spese correnti (assicurazioni, telefono…) NON devono essere inserite.",
+        "type": "Tipo di onere",
+        "types": {
+          "PENSION_ALIMENTAIRE": "Alimenti",
+          "LEASING": "Rate di leasing",
+          "CREDIT_CONSO": "Credito al consumo (rate)",
+          "INTERETS_PRET": "Interessi e rimborso di prestito"
+        },
+        "montant": "Importo annuo",
+        "leasingFin": "Fino a quando dura il leasing?",
+        "leasingPlusTard": "scadenza successiva",
+        "totalLabel": "Totale oneri annui"
+      },
+      "emprunteurPoursuites": {
+        "title": "La persona ha esecuzioni in corso o concluse?",
+        "short": "Esecuzioni del mutuatario",
+        "subtitle": "Molti finanziatori verificano con un estratto esecuzioni aggiornato — meglio indicarlo.",
+        "origine": "Chi ha avviato l'esecuzione?",
+        "origines": {
+          "FISC": "Amministrazione fiscale",
+          "JEU": "Debiti di gioco",
+          "LEASING": "Rate di leasing",
+          "INTERETS": "Interessi di prestiti",
+          "AUTRE": "Altro"
+        },
+        "montant": "Importo dell'esecuzione",
+        "montantInfo": "Secondo l'estratto esecuzioni.",
+        "soldee": "L'esecuzione è già saldata?",
+        "soldeeInfo": "Fa stato l'estratto esecuzioni."
+      },
+      "addEmprunteur": "Ci sono altri mutuatari?",
+      "removeEmprunteur": "Rimuovere questo mutuatario",
+      "emprunteurTitle": "Mutuatario {ordre}",
+      "ajustement": {
+        "title": "Aumentare o ridurre l'ipoteca esistente?",
+        "short": "Adeguamento dell'importo",
+        "options": {
+          "AUCUN": "Nessun adeguamento",
+          "REDUIRE": "Ridurre (ammortamento unico)",
+          "AUGMENTER": "Aumentare"
+        },
+        "montantReduction": "Importo del rimborso",
+        "montantAugmentation": "Importo dell'aumento",
+        "raison": "Motivo dell'aumento",
+        "raisons": {
+          "renovation": "Ristrutturazione",
+          "agrandissement": "Ampliamento",
+          "les-deux": "Ristrutturazione e ampliamento",
+          "autre": "Altro motivo"
+        }
+      },
+      "tranchesSouhaitees": {
+        "title": "Come strutturare la vostra ipoteca?",
+        "short": "Configurazione delle tranche",
+        "subtitle": "Modello e durata per tranche — dividete per attenuare il rischio di tasso.",
+        "info": "Suddividere in tranche con scadenze diverse attenua il rischio di tasso, ma può legarvi allo stesso finanziatore. I nostri consulenti vi aiutano a decidere.",
+        "produit": "Modello",
+        "produits": {
+          "SARON": "SARON",
+          "VARIABLE": "Variabile",
+          "FIXE": "Tasso fisso"
+        },
+        "duree": "Durata",
+        "dureeAnnees": "{years, plural, one {# anno} other {# anni}}",
+        "montant": "Importo della tranche",
+        "dateDebut": "Data di inizio",
+        "dateDebutInfo": "Rinnovo: la data di inizio corrisponde alla scadenza della vecchia tranche.",
+        "split": "Dividere questa tranche",
+        "totalLabel": "Totale delle tranche",
+        "reparti": "Ripartito",
+        "reste": "Da ripartire",
+        "depassement": "Superamento",
+        "sumOk": "Ripartizione completa",
+        "fromExisting": "Riprendere le mie tranche esistenti"
+      }
+    }
+  },
+  "magicLink": {
+    "loading": "Accesso in corso…",
+    "errorTitle": "Questo link non funziona più",
+    "errorBody": "Il link di accesso è scaduto o è già stato utilizzato. Richiedetene uno nuovo dal vostro dossier.",
+    "errorCta": "Tornare al mio dossier"
   }
 }

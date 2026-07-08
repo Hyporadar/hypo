@@ -419,6 +419,16 @@
       "subject": "Die Hypothekarzinsen von heute",
       "body": "Der 10-Jahres-Referenzzinssatz liegt bei {refRate}.\n\nIhr HypoPilot-Zinsupdate — vergleichen Sie mit Ihrem aktuellen Zinssatz in 2 Minuten, ohne Anmeldung.",
       "cta": "Mit meinem Zinssatz vergleichen"
+    },
+    "magicLink": {
+      "subject": "Ihr HypoPilot-Anmeldelink",
+      "body": "Klicken Sie auf die Schaltfläche unten, um Ihr Hypothekardossier wiederzufinden. Der Link ist eine Stunde gültig und kann nur einmal verwendet werden.\nWenn Sie diese Anfrage nicht gestellt haben, ignorieren Sie diese E-Mail einfach.",
+      "cta": "Mein Dossier öffnen"
+    },
+    "rateAlertConfirm": {
+      "subject": "Bestätigen Sie Ihr HypoPilot-Zinsabo",
+      "body": "Noch ein Klick: Bestätigen Sie Ihre Adresse, um die Entwicklung der Hypothekarzinsen in der gewählten Häufigkeit zu erhalten. Abmeldung mit einem Klick in jeder E-Mail.",
+      "cta": "Mein Abo bestätigen"
     }
   },
   "clientApp": {
@@ -630,5 +640,497 @@
     },
     "placeholder": "Das detaillierte Formular erscheint hier. Bis dahin liefert Ihnen die 2-Minuten-Simulation bereits Ihr Ergebnis.",
     "fallbackCta": "Simulation in 2 Minuten starten"
+  },
+  "wizard": {
+    "meta": {
+      "title": "Ihr Hypothekardossier",
+      "description": "Erfassen Sie Ihr Dossier online — Offerten in Echtzeit kalibriert, ohne E-Mail und ohne Termin."
+    },
+    "steps": {
+      "bien": "1. Die Liegenschaft",
+      "emprunteurs": "2. Die Kreditnehmer",
+      "hypotheque": "3. Die Hypothek"
+    },
+    "sections": {
+      "bien": "Die Liegenschaft",
+      "emprunteurs": "Die Kreditnehmer",
+      "hypotheque": "Die Hypothek"
+    },
+    "nav": {
+      "back": "Zurück",
+      "next": "Weiter",
+      "save": "Wird gespeichert…",
+      "saved": "Dossier automatisch gespeichert",
+      "switchFunnel": "Transaktionsart wechseln",
+      "switchWarning": "Beim Wechsel der Transaktionsart müssen einzelne Angaben ergänzt oder neu erfasst werden. Fortfahren?",
+      "toBuy": "Zum Kauf wechseln",
+      "toRenewal": "Zur Ablösung wechseln"
+    },
+    "missing": {
+      "title": "Fehlende Angaben"
+    },
+    "assistant": {
+      "open": "Assistent öffnen",
+      "close": "Schliessen",
+      "title": "Ihr Assistent",
+      "minutesLeft": "Noch etwa {minutes} Min.",
+      "yourRates": "Ihre Zinssätze",
+      "tipsTitle": "Tipps",
+      "noTips": "Alles in Ordnung — machen Sie einfach weiter.",
+      "tips": {
+        "lpp": "Erfassen Sie Ihr Pensionskassenkapital: Es stärkt Ihre finanzielle Situation und kann zu besseren Zinssätzen führen.",
+        "coldMonitoring": "Ihre Fälligkeit liegt noch in weiter Ferne — aktivieren Sie die kostenlose Überwachung, wir melden uns zum richtigen Zeitpunkt.",
+        "ecoLabel": "Gut zu wissen: Einige Kreditgeber gewähren einen Rabatt für zertifizierte Liegenschaften (grüne Hypothek)."
+      }
+    },
+    "offers": {
+      "title": "Ihre Offerten",
+      "calibrated": "Kalibrierte Bandbreite",
+      "estimate": "Schätzung",
+      "duration": "Laufzeit",
+      "years": "{years} Jahre",
+      "from": "ab",
+      "empty": "Beantworten Sie die ersten Fragen, um Ihre Bandbreiten zu sehen.",
+      "savings": "Sparpotenzial",
+      "perYear": "pro Jahr",
+      "noteEstimate": "Schätzung — wird mit jeder Antwort genauer.",
+      "noteCalibrated": "Auf Basis Ihres vollständigen Dossiers kalibrierte Bandbreite. Die Identität der Kreditgeber wird nach Erstellung Ihres Kontos offengelegt.",
+      "lenderTypes": {
+        "BANQUE": "Banken",
+        "ASSURANCE": "Versicherungen",
+        "CAISSE_PENSION": "Pensionskassen"
+      }
+    },
+    "common": {
+      "yes": "Ja",
+      "no": "Nein",
+      "done": "Fertig",
+      "add": "+ Weitere hinzufügen",
+      "edit": "Bearbeiten",
+      "remove": "Entfernen",
+      "total": "Total",
+      "sensitive": "Geschützte Angabe — wird ohne Ihre ausdrückliche Zustimmung nie an einen Kreditgeber weitergegeben.",
+      "invalidDate": "Erwartetes Format: TT.MM.JJJJ",
+      "invalidYear": "Ungültiges Jahr",
+      "decrement": "Verringern",
+      "increment": "Erhöhen",
+      "comingSoon": "Dieser Abschnitt folgt gleich. Ihre Antworten sind bereits gespeichert — fahren Sie mit dem Abschnitt «Die Liegenschaft» fort oder kommen Sie später zurück."
+    },
+    "complexCard": {
+      "title": "Ihre Situation verdient einen Berater",
+      "body": "Kein Grund zur Sorge: Ihr Fall braucht einfach einen persönlichen Blick. Ein Experte meldet sich bei Ihnen — Sie können Ihr Dossier trotzdem fertig erfassen.",
+      "cta": "Gespräch planen"
+    },
+    "rateAlert": {
+      "title": "Bleiben Sie über die Zinsen informiert",
+      "body": "Erhalten Sie die Zinsentwicklung in Ihrem Rhythmus. Doppelte Bestätigung per E-Mail, Abmeldung mit einem Klick.",
+      "emailPlaceholder": "ihre@email.ch",
+      "frequency": "Häufigkeit",
+      "frequencies": {
+        "QUOTIDIEN": "Täglich",
+        "HEBDOMADAIRE": "Wöchentlich",
+        "MENSUEL": "Monatlich"
+      },
+      "cta": "Abonnieren",
+      "sent": "Fast geschafft! Klicken Sie auf den Link, den wir an {email} gesendet haben, um Ihr Abo zu bestätigen.",
+      "confirmed": "Abo bestätigt — Sie erhalten die nächsten Zins-Updates.",
+      "alreadyConfirmed": "Ihr Abo ist bereits aktiv — Häufigkeit aktualisiert.",
+      "error": "Das Abonnieren ist fehlgeschlagen. Prüfen Sie die E-Mail-Adresse und versuchen Sie es erneut."
+    },
+    "account": {
+      "title": "Ihr Dossier überall wiederfinden",
+      "body": "Erhalten Sie einen Anmeldelink per E-Mail: Ihr Dossier begleitet Sie, ganz ohne Passwort. Ohne Ihre Zustimmung werden keine Daten an Kreditgeber übermittelt.",
+      "emailPlaceholder": "ihre@email.ch",
+      "cta": "Anmeldelink erhalten",
+      "sent": "Link an {email} gesendet — er ist eine Stunde gültig.",
+      "throttled": "Ein Link wurde soeben verschickt. Prüfen Sie Ihren Posteingang (und den Spam-Ordner).",
+      "error": "Der Versand ist fehlgeschlagen. Prüfen Sie die E-Mail-Adresse und versuchen Sie es erneut."
+    },
+    "questions": {
+      "usage": {
+        "title": "Wie nutzen Sie diese Liegenschaft?",
+        "short": "Nutzung",
+        "subtitle": "Die Nutzung bestimmt die anwendbaren Finanzierungsregeln.",
+        "info": "Hauptwohnsitz, Ferienobjekt oder Renditeliegenschaft: Die Kreditgeber wenden unterschiedliche Belehnungssätze und Eigenmittelanforderungen an.",
+        "options": {
+          "RESIDENCE_PRINCIPALE": "Hauptwohnsitz",
+          "RESIDENCE_PRINCIPALE_sub": "Vom Eigentümer bewohnt",
+          "VACANCES": "Ferienobjekt",
+          "RENDEMENT": "Vermietete Liegenschaft (Rendite)",
+          "LOUE_PARTIEL": "Vermietet und teilweise selbst bewohnt"
+        },
+        "vacancesOccupation": "Eigennutzung oder Vermietung?",
+        "vacancesOptions": {
+          "OCCUPE": "Vollständig vom Eigentümer genutzt",
+          "LOUE_ET_OCCUPE": "Vermietet und vom Eigentümer genutzt",
+          "LOUE": "Vollständig vermietet"
+        },
+        "locatifUsage": "Wie wird die vermietete Liegenschaft genutzt?",
+        "locatifUsageOptions": {
+          "RESIDENTIEL": "Rein wohnwirtschaftlich",
+          "MIXTE": "Wohnen und Gewerbe (gemischt)",
+          "COMMERCIAL": "Rein gewerblich (Büros, Lager…)"
+        },
+        "locatifTypeLocation": "Art der Vermietung?",
+        "locatifTypeLocationOptions": {
+          "PERMANENT": "Gleicher Mieter das ganze Jahr (Dauermiete)",
+          "TEMPORAIRE": "Wechselnde Mieter (temporäre Vermietung)"
+        },
+        "revenuLocatif": "Netto-Mietertrag pro Jahr (ohne Nebenkosten)"
+      },
+      "typeBien": {
+        "title": "Welche Art von Liegenschaft?",
+        "short": "Objektart",
+        "subtitle": "Das Bild hilft: Wählen Sie, was Ihrer Liegenschaft am ähnlichsten ist.",
+        "info": "Die Objektart beeinflusst die Bewertung und den Kreis der interessierten Kreditgeber.",
+        "options": {
+          "MAISON": "Einfamilienhaus",
+          "APPARTEMENT_PPE": "Wohnung",
+          "APPARTEMENT_PPE_sub": "Stockwerkeigentum (StWE)",
+          "MAISON_MITOYENNE": "Reihenhaus",
+          "PLUSIEURS_APPARTEMENTS": "Mehrere Wohnungen in einem Gebäude",
+          "GRAND_ENSEMBLE": "Grosse Überbauung",
+          "GRAND_ENSEMBLE_sub": "Renditeobjekt"
+        },
+        "annexe": "Hat die Liegenschaft eine Einliegerwohnung?",
+        "annexeInfo": "Eine Einliegerwohnung ist eine unabhängige Wohneinheit im Haus — ihre Miete kann als Einkommen zählen.",
+        "annexeLouee": "Ist die Einliegerwohnung vermietet?",
+        "revenuAnnexe": "Mietertrag der Einliegerwohnung (netto/Jahr)"
+      },
+      "adresse": {
+        "title": "Wo befindet sich die Liegenschaft?",
+        "short": "Standort",
+        "subtitle": "PLZ oder Ort — die Zinssätze variieren je nach Region.",
+        "info": "Der Standort dient der Bewertung der Liegenschaft und der Auswahl der in Ihrem Kanton aktiven Kreditgeber.",
+        "npaPlaceholder": "z.B. 8001 oder Zürich"
+      },
+      "labelEco": {
+        "title": "Hat die Liegenschaft einen Öko-Standard?",
+        "short": "Öko-Standard",
+        "info": "Ein anerkanntes Label (Minergie, GEAK…) kann Anspruch auf eine «grüne Hypothek» geben: Einige Kreditgeber gewähren einen Zinsrabatt.",
+        "options": {
+          "non": "Nein",
+          "minergie": "Minergie",
+          "geak-cecb": "GEAK",
+          "snbs": "SNBS",
+          "autre": "Anderer Standard"
+        }
+      },
+      "chauffage": {
+        "title": "Wie wird die Liegenschaft beheizt?",
+        "short": "Heizung",
+        "options": {
+          "mazout": "Öl",
+          "gaz": "Gas",
+          "pac": "Wärmepumpe (Luft-Wasser oder Erdsonde)",
+          "distance": "Fernwärme",
+          "bois": "Holz (Schnitzel, Pellets, Stückholz)",
+          "electrique": "Elektrisch / Speicherheizung",
+          "autre": "Andere / unbekannt"
+        }
+      },
+      "casSpeciaux": {
+        "title": "Besondere Situationen",
+        "short": "Spezialfälle",
+        "subtitle": "Ein «Ja» blockiert nichts — es hilft uns, die richtigen Kreditgeber zu wählen.",
+        "droitHabitation": "Ist ein Wohnrecht eingetragen?",
+        "usufruit": "Ist eine Nutzniessung eingetragen?",
+        "droitSuperficie": "Ist die Liegenschaft im Baurecht?",
+        "zoneAgricole": "Liegt die Liegenschaft in der Landwirtschaftszone (ausserhalb der Bauzone)?",
+        "noteRF": "Liegenschaften mit Grundbucheinträgen (Vorkaufsrecht…) sind nicht immer vermittelbar; für einen Baukredit kontaktiert Sie ein Berater direkt."
+      },
+      "achatInfos": {
+        "title": "Angaben zum Kauf",
+        "short": "Kaufangaben",
+        "existant": "Ist die Liegenschaft bestehend oder ein Neubau?",
+        "existantOptions": {
+          "existant": "Bestehende Liegenschaft",
+          "neuf": "Neubau"
+        },
+        "prixAchat": "Kaufpreis",
+        "dateFixee": "Steht das Kaufdatum bereits fest?",
+        "dateFixeeInfo": "Gemeint ist das Datum des Grundbucheintrags.",
+        "dateAchat": "Kaufdatum",
+        "renovation": "Wird die Liegenschaft unmittelbar nach dem Kauf renoviert oder erweitert?"
+      },
+      "valeur": {
+        "title": "Was ist der Wert der Liegenschaft?",
+        "short": "Liegenschaftswert",
+        "subtitle": "Ihre beste Schätzung genügt für den Start.",
+        "info": "Der Wert bestimmt die Belehnung (LTV). Eine detaillierte Online-Bewertung folgt bald — geben Sie einstweilen Ihre Schätzung und deren Quelle an.",
+        "source": "Quelle der Schätzung",
+        "sources": {
+          "banque": "Bank",
+          "en-ligne": "Online-Schätzung",
+          "agent": "Immobilienmakler",
+          "expert": "Akkreditierter Schätzer",
+          "propre": "Andere / eigene Schätzung"
+        }
+      },
+      "fondsPropres": {
+        "title": "Bestimmen Sie Ihre Eigenmittel",
+        "short": "Eigenmittel",
+        "subtitle": "Verschieben Sie den Griff zwischen Hypothek und Eigenmitteln — beide Felder sind editierbar.",
+        "mortgageLabel": "Neue Hypothek",
+        "ownFundsLabel": "Eigenmittel",
+        "totalLabel": "Kaufpreis",
+        "note": "Die Zusammensetzung der Eigenmittel (Bargeld, 2. Säule, 3a) wird bei der Bearbeitung Ihres Dossiers präzisiert."
+      },
+      "tranchesExistantes": {
+        "title": "Ihre aktuellen Hypotheken",
+        "short": "Bestehende Hypotheken",
+        "subtitle": "Tranchen mit unterschiedlichen Fälligkeiten? Erfassen Sie sie separat.",
+        "info": "Die nächste Fälligkeit bestimmt den idealen Zeitpunkt für die Ablösung — und wie viel Verhandlungsspielraum Sie haben.",
+        "lender": "Aktueller Kreditgeber",
+        "lenderPlaceholder": "z.B. UBS, ZKB, Raiffeisen…",
+        "montant": "Betrag",
+        "taux": "Zinssatz (%)",
+        "produit": "Modell der Tranche",
+        "produits": {
+          "FIXE": "Festhypothek",
+          "SARON": "SARON",
+          "VARIABLE": "Variabel"
+        },
+        "echeance": "Fälligkeitsdatum",
+        "totalLabel": "Total der Tranchen"
+      },
+      "autresPrets": {
+        "title": "Gibt es weitere Darlehen im Zusammenhang mit der Liegenschaft?",
+        "short": "Weitere Darlehen",
+        "subtitle": "Nur Darlehen zur Finanzierung der Liegenschaft — z.B. Privat- oder Verkäuferdarlehen.",
+        "montant": "Darlehensbetrag",
+        "libelle": "Beschreibung (optional)"
+      },
+      "autresBiens": {
+        "title": "Besitzt einer der Kreditnehmer weitere Liegenschaften?",
+        "short": "Weitere Liegenschaften",
+        "usage": "Welche Art von Liegenschaft?",
+        "usageOptions": {
+          "OCCUPE": "Vom Eigentümer bewohnt",
+          "VACANCES": "Ferienobjekt (Eigennutzung)",
+          "LOUE": "Vermietet (Investition)",
+          "PARTIEL": "Teilweise vermietet"
+        },
+        "locatifUsage": "Art der Vermietung",
+        "locatifUsageOptions": {
+          "RESIDENTIEL": "Rein wohnwirtschaftlich",
+          "MIXTE": "Wohnen und Gewerbe (gemischt)",
+          "COMMERCIAL": "Rein gewerblich (Büros, Lager)"
+        },
+        "enSuisse": "Befindet sich die Liegenschaft in der Schweiz?",
+        "genre": "Objektart",
+        "genreOptions": {
+          "MAISON": "Haus",
+          "APPARTEMENT": "Wohnung",
+          "MITOYENNE": "Reihenhaus",
+          "IMMEUBLE": "Gebäude",
+          "PLUSIEURS_APPARTEMENTS": "Mehrere Wohnungen"
+        },
+        "annexe": "Einliegerwohnung?",
+        "valeur": "Aktueller geschätzter Wert",
+        "aHypotheque": "Hypotheken oder Darlehen auf dieser Liegenschaft?",
+        "totalHypotheques": "Total der Hypotheken und Darlehen",
+        "amortissementRequis": "Müssen sie amortisiert werden? (vertragliche Rückzahlungen)",
+        "amortissementAnnuel": "Jährlicher Amortisationsbetrag",
+        "revenuLocatif": "Netto-Mietertrag pro Jahr"
+      },
+      "nombreEmprunteurs": {
+        "title": "Wer wird Kreditnehmer sein?",
+        "short": "Anzahl Kreditnehmer",
+        "subtitle": "Alle Kreditnehmer müssen erfasst werden — auch ohne Einkommen.",
+        "options": {
+          "UNE": "Eine Person",
+          "PLUSIEURS": "Zwei oder mehr Personen"
+        }
+      },
+      "emprunteurIdentite": {
+        "title": "Persönliche Angaben",
+        "short": "Identität des Kreditnehmers",
+        "nationalite": "Nationalität",
+        "nationaliteOptions": {
+          "SUISSE": "Schweiz",
+          "AUTRE": "Andere Nationalität",
+          "PLUSIEURS": "Mehrere Nationalitäten"
+        },
+        "permis": "Aufenthaltsbewilligung",
+        "permisOptions": {
+          "C": "Bewilligung C",
+          "B": "Bewilligung B",
+          "AUTRE": "Andere"
+        },
+        "fatca": "Ist die Person US-Bürger:in oder hat sie eine steuerliche Verbindung zu den USA?",
+        "fatcaInfo": "Von der FATCA-Regulierung verlangte Frage: Einige Kreditgeber akzeptieren keine US-steuerpflichtigen Personen.",
+        "residenceFuture": "Künftiger Wohnsitz",
+        "residenceOptions": {
+          "HABITE_LE_BIEN": "Wird die Liegenschaft bewohnen",
+          "AUTRE_ADRESSE": "Künftig an einer anderen Adresse"
+        },
+        "anneeNaissance": "Geburtsjahr"
+      },
+      "emprunteurRevenus": {
+        "title": "Hat der Kreditnehmer ein Einkommen?",
+        "short": "Einkommen des Kreditnehmers",
+        "subtitle": "Erfassen Sie jede Einkommensquelle separat — das Total wird laufend aktualisiert.",
+        "info": "Das Einkommen bestimmt die Tragbarkeit: Kalkulatorische Zinsen zu 5% + Amortisation + Unterhalt dürfen einen Drittel des Einkommens nicht übersteigen.",
+        "categorie": "Einkommensart",
+        "categories": {
+          "ACTIVITE": "Erwerbseinkommen",
+          "RENTE": "Renteneinkommen",
+          "AUTRE": "Anderes Einkommen"
+        },
+        "typeActivite": "Art des Erwerbs",
+        "typesActivite": {
+          "SALARIE": "Angestellt",
+          "INDEPENDANT": "Selbständig",
+          "ACCESSOIRE": "Nebenerwerb",
+          "CHOMAGE": "Arbeitslosenentschädigung",
+          "ETRANGER": "Ausländisches Einkommen"
+        },
+        "typeRente": "Art der Rente",
+        "typesRente": {
+          "AVS_AI": "IV / AHV (1. oder 2. Säule)",
+          "AI_3E_PILIER": "IV 3. Säule (3a oder 3b)",
+          "SURVIVANT": "Hinterlassenenrente (Witwe, Witwer, Waise)",
+          "ENFANT": "Kinderrente (IV oder Alter)",
+          "VIAGERE": "Leibrente / Zeitrente",
+          "ETRANGERE": "Ausländische Rente"
+        },
+        "typeAutre": "Art",
+        "typesAutre": {
+          "PENSION_ALIMENTAIRE": "Alimente",
+          "DIVIDENDES": "Dividendenerträge (Beteiligung)",
+          "LOCATIF": "Mietertrag"
+        },
+        "montantSalarie": "Brutto-Jahreseinkommen",
+        "montantSalarieInfo": "Inkl. 13. Monatslohn, ohne unregelmässige Boni.",
+        "montantIndependant": "Jahreseinkommen",
+        "montantIndependantInfo": "Schätzen Sie bei Bedarf.",
+        "montant": "Jahresbetrag",
+        "bonus3Ans": "Bonus in den letzten 3 Jahren?",
+        "bonusMontant": "Bonus Jahr {n}",
+        "independantDepuis": "Seit wann sind Sie selbständig?",
+        "independantOptions": {
+          "plus3": "Mehr als 3 Jahre",
+          "moins3": "Weniger als 3 Jahre"
+        },
+        "independantCurseur": "Die Tätigkeit besteht seit weniger als…",
+        "durees": {
+          "3m": "3 Monaten",
+          "6m": "6 Monaten",
+          "1a": "1 Jahr",
+          "2a": "2 Jahren",
+          "3a": "3 Jahren"
+        },
+        "totalLabel": "Total Einkommen pro Jahr"
+      },
+      "emprunteurAvoirs": {
+        "title": "Besitzt der Kreditnehmer Vermögenswerte?",
+        "short": "Vermögen des Kreditnehmers",
+        "subtitle": "Konten, Säule 3a, Wertschriften… Vermögenswerte beeinflussen die Zinssätze einiger Kreditgeber.",
+        "categorie": "Vermögenskategorie",
+        "categories": {
+          "BANQUE": "Bankguthaben",
+          "ASSURANCE": "Guthaben bei einer Versicherung",
+          "CAISSE_PENSION": "Guthaben bei einer Pensionskasse",
+          "AUTRE": "Andere Vermögenswerte"
+        },
+        "typeBancaire": "Art",
+        "typesBancaires": {
+          "COMPTE": "Kontosaldo",
+          "TITRES": "Wertschriften",
+          "COMPTE_3A": "Säule-3a-Konto (ohne Titel)",
+          "TITRES_3A": "Säule-3a-Wertschriftenkonto",
+          "LIBRE_PASSAGE": "Freizügigkeitsguthaben (Konto oder Titel)"
+        },
+        "montant": "Betrag",
+        "utilisePourAchat": "Für den Kauf verwendet",
+        "totalLabel": "Total Vermögen"
+      },
+      "emprunteurCharges": {
+        "title": "Regelmässige Ausgaben?",
+        "short": "Verpflichtungen des Kreditnehmers",
+        "subtitle": "Leasing, Alimente, Darlehens- oder Kleinkreditzinsen.",
+        "info": "Andere laufende Ausgaben (Versicherungen, Telefon…) dürfen NICHT erfasst werden.",
+        "type": "Art der Verpflichtung",
+        "types": {
+          "PENSION_ALIMENTAIRE": "Alimente",
+          "LEASING": "Leasingraten",
+          "CREDIT_CONSO": "Konsumkredit (Raten)",
+          "INTERETS_PRET": "Darlehenszinsen und -rückzahlung"
+        },
+        "montant": "Betrag pro Jahr",
+        "leasingFin": "Bis wann läuft das Leasing?",
+        "leasingPlusTard": "spätere Fälligkeit",
+        "totalLabel": "Total jährliche Verpflichtungen"
+      },
+      "emprunteurPoursuites": {
+        "title": "Hat die Person offene oder abgeschlossene Betreibungen?",
+        "short": "Betreibungen des Kreditnehmers",
+        "subtitle": "Viele Kreditgeber prüfen mit einem aktuellen Betreibungsauszug — besser, Sie geben es an.",
+        "origine": "Wer hat die Betreibung eingeleitet?",
+        "origines": {
+          "FISC": "Steuerverwaltung",
+          "JEU": "Spielschulden",
+          "LEASING": "Leasingraten",
+          "INTERETS": "Darlehenszinsen",
+          "AUTRE": "Andere"
+        },
+        "montant": "Betreibungsbetrag",
+        "montantInfo": "Gemäss Betreibungsauszug.",
+        "soldee": "Ist die Betreibung bereits beglichen?",
+        "soldeeInfo": "Der Betreibungsauszug ist massgebend."
+      },
+      "addEmprunteur": "Gibt es weitere Kreditnehmer?",
+      "removeEmprunteur": "Diesen Kreditnehmer entfernen",
+      "emprunteurTitle": "Kreditnehmer {ordre}",
+      "ajustement": {
+        "title": "Bestehende Hypothek erhöhen oder reduzieren?",
+        "short": "Anpassung des Betrags",
+        "options": {
+          "AUCUN": "Keine Anpassung",
+          "REDUIRE": "Reduzieren (einmalige Amortisation)",
+          "AUGMENTER": "Erhöhen"
+        },
+        "montantReduction": "Rückzahlungsbetrag",
+        "montantAugmentation": "Erhöhungsbetrag",
+        "raison": "Grund der Erhöhung",
+        "raisons": {
+          "renovation": "Renovation",
+          "agrandissement": "Erweiterung",
+          "les-deux": "Renovation und Erweiterung",
+          "autre": "Anderer Grund"
+        }
+      },
+      "tranchesSouhaitees": {
+        "title": "Wie soll Ihre Hypothek strukturiert werden?",
+        "short": "Tranchen-Konfiguration",
+        "subtitle": "Modell und Laufzeit pro Tranche — splitten Sie, um das Zinsrisiko zu glätten.",
+        "info": "Die Aufteilung in Tranchen mit unterschiedlichen Fälligkeiten glättet das Zinsrisiko, kann Sie aber an denselben Kreditgeber binden. Unsere Berater helfen beim Abwägen.",
+        "produit": "Modell",
+        "produits": {
+          "SARON": "SARON",
+          "VARIABLE": "Variabel",
+          "FIXE": "Festhypothek"
+        },
+        "duree": "Laufzeit",
+        "dureeAnnees": "{years, plural, one {# Jahr} other {# Jahre}}",
+        "montant": "Betrag der Tranche",
+        "dateDebut": "Startdatum",
+        "dateDebutInfo": "Ablösung: Das Startdatum entspricht der Fälligkeit der alten Tranche.",
+        "split": "Diese Tranche splitten",
+        "totalLabel": "Total der Tranchen",
+        "reparti": "Verteilt",
+        "reste": "Noch zu verteilen",
+        "depassement": "Überschreitung",
+        "sumOk": "Vollständig verteilt",
+        "fromExisting": "Meine bestehenden Tranchen übernehmen"
+      }
+    }
+  },
+  "magicLink": {
+    "loading": "Anmeldung läuft…",
+    "errorTitle": "Dieser Link funktioniert nicht mehr",
+    "errorBody": "Der Anmeldelink ist abgelaufen oder wurde bereits verwendet. Fordern Sie einen neuen aus Ihrem Dossier an.",
+    "errorCta": "Zurück zu meinem Dossier"
   }
 }

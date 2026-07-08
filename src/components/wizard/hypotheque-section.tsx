@@ -47,12 +47,15 @@ export function HypothequeSection({
   dossierId,
   patch,
   highlightKey,
+  showConversionCards = true,
 }: {
   funnel: Funnel
   data: DossierData
   dossierId: string
   patch: (updater: (prev: DossierData) => DossierData) => void
   highlightKey: string | null
+  /** Cartes alerte taux + compte — masquées en mode édition admin. */
+  showConversionCards?: boolean
 }) {
   const t = useTranslations('wizard.questions')
   const tc = useTranslations('wizard.common')
@@ -378,8 +381,12 @@ export function HypothequeSection({
       ) : null}
 
       {/* Alerte taux (double opt-in) + compte (magic link) */}
-      <RateAlertCard dossierId={dossierId} />
-      <AccountCard dossierId={dossierId} />
+      {showConversionCards ? (
+        <>
+          <RateAlertCard dossierId={dossierId} />
+          <AccountCard dossierId={dossierId} />
+        </>
+      ) : null}
     </div>
   )
 }

@@ -828,10 +828,6 @@
           "propre": "Autre / propre estimation"
         }
       },
-      "prixAchat": {
-        "title": "Quel est le prix d'achat ?",
-        "short": "Prix d'achat"
-      },
       "fondsPropres": {
         "title": "Déterminez vos fonds propres",
         "short": "Fonds propres",
