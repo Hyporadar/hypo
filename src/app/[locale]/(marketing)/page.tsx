@@ -1,28 +1,29 @@
 import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { ArrowRight } from 'lucide-react'
 import { Link } from '@/i18n/navigation'
-import { formatRate } from '@/lib/format'
 import { prisma } from '@/lib/prisma'
-import { getReferenceRate10y } from '@/lib/rates'
 import { CallbackDialog } from '@/components/marketing/callback-dialog'
 import { HomeLeadWidget, type WidgetRates } from '@/components/marketing/home-lead-widget'
+import { LendersRow, RateCards } from '@/components/marketing/rate-cards'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 
-// Taux du jour pour le widget de lead (repli si la table est vide).
-async function getWidgetRates(): Promise<WidgetRates> {
+// Taux du jour pour le bandeau et le widget (repli si la table est vide).
+async function getWidgetRates(): Promise<{ rates: WidgetRates; updatedAt: Date | null }> {
   try {
-    const rates = await prisma.referenceRate.findMany()
+    const rows = await prisma.referenceRate.findMany()
     const fixed: Record<number, number> = {}
     let saron: number | null = null
-    for (const rate of rates) {
+    let updatedAt: Date | null = null
+    for (const rate of rows) {
       if (rate.type === 'SARON') saron = Number(rate.rate)
       else fixed[rate.termYears] = Number(rate.rate)
+      if (!updatedAt || rate.updatedAt > updatedAt) updatedAt = rate.updatedAt
     }
     fixed[15] ??= fixed[10] !== undefined ? Math.round((fixed[10] + 0.25) * 100) / 100 : 2.0
-    return { saron, fixed }
+    return { rates: { saron, fixed }, updatedAt }
   } catch {
-    return { saron: 0.9, fixed: { 5: 1.3, 10: 1.75, 15: 2.0 } }
+    return { rates: { saron: 0.9, fixed: { 5: 1.3, 10: 1.75, 15: 2.0 } }, updatedAt: null }
   }
 }
 
@@ -30,12 +31,12 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
   const { locale } = await params
   setRequestLocale(locale)
   const t = await getTranslations('home')
-  const [refRate10y, widgetRates] = await Promise.all([getReferenceRate10y(), getWidgetRates()])
+  const { rates, updatedAt } = await getWidgetRates()
 
   return (
     <>
-      {/* Hero */}
-      <section className="mx-auto max-w-[1120px] px-6 py-16 md:py-24">
+      {/* Hero : titre, sous-titre, UN call-to-action (modèle hypotheke.ch) */}
+      <section className="mx-auto max-w-[1120px] px-6 pt-16 pb-10 md:pt-24">
         <div className="max-w-2xl space-y-6">
           <p className="text-pilot-600 text-xs font-semibold tracking-[0.08em] uppercase">
             {t('hero.overline')}
@@ -44,34 +45,26 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
             {t('hero.title')}
           </h1>
           <p className="text-ink-700 text-lg leading-relaxed">{t('hero.subtitle')}</p>
-          <div className="flex flex-wrap gap-3 pt-2">
+          <div className="pt-2">
             <Button asChild size="lg">
-              <Link href="/acheter">{t('hero.ctaBuy')}</Link>
-            </Button>
-            <Button asChild size="lg" variant="outline">
-              <Link href="/renouveler">{t('hero.ctaRenew')}</Link>
+              <a href="#simulateur">{t('hero.cta')}</a>
             </Button>
           </div>
         </div>
-        {/* Le formulaire de lead : saisie immédiate, propositions dessous */}
-        <div className="mt-14">
-          <HomeLeadWidget rates={widgetRates} />
-        </div>
-      </section>
 
-      {/* Le chiffre du jour */}
-      <section className="border-line border-y">
-        <div className="mx-auto flex max-w-[1120px] flex-col items-start gap-2 px-6 py-8 sm:flex-row sm:items-center sm:justify-between">
-          <div>
-            <p className="text-pilot-600 text-xs font-semibold tracking-[0.08em] uppercase">
-              {t('dailyRate.overline')}
-            </p>
-            <p className="text-ink-700 mt-1 text-sm">{t('dailyRate.label')}</p>
-          </div>
-          <p className="text-data text-pilot-700 text-4xl sm:text-5xl">{formatRate(refRate10y)}</p>
-          <p className="text-ink-500 max-w-[220px] text-xs leading-relaxed">
-            {t('dailyRate.note')}
-          </p>
+        {/* Bandeau des 3 taux : SARON / 10 ans / 5 ans */}
+        <div className="mt-14">
+          <RateCards rates={rates} updatedAt={updatedAt} />
+        </div>
+
+        {/* Prêteurs (placeholders — logos réels à venir) */}
+        <div className="mt-10">
+          <LendersRow />
+        </div>
+
+        {/* L'outil : bien, hypothèque, revenu, NPA → 3 propositions */}
+        <div className="mt-14">
+          <HomeLeadWidget rates={rates} />
         </div>
       </section>
 

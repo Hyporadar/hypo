@@ -54,7 +54,8 @@
       "title": "La Sua ipoteca al miglior tasso. All'acquisto come al rinnovo.",
       "subtitle": "Banche, assicurazioni e casse pensioni messe in concorrenza, gratuitamente. Risultato immediato — nessun appuntamento imposto.",
       "ctaBuy": "Calcolare la sostenibilità",
-      "ctaRenew": "Registrare l'ipoteca"
+      "ctaRenew": "Registrare l'ipoteca",
+      "cta": "Trovare la mia ipoteca"
     },
     "dailyRate": {
       "overline": "La cifra del giorno",
@@ -114,7 +115,27 @@
       "savingsNote": "Risparmio stimato sulla durata scelta rispetto a un'offerta media del mercato (scarto medio osservato: 0,72%). Tasso definitivo dopo la gara d'offerte reale.",
       "emptyHint": "Inserisca la Sua ipoteca per vedere le Sue offerte.",
       "buyHint": "Sta comprando un immobile?",
-      "buyCta": "Calcolare la sostenibilità"
+      "buyCta": "Calcolare la sostenibilità",
+      "plz": "NPA / Località",
+      "plzPlaceholder": "NPA o località dell'immobile",
+      "categoriesTitle": "Le Sue offerte, per tipo di finanziatore",
+      "bankDesc": "I tassi più aggressivi del mercato sulle durate corte e medie.",
+      "pensionDesc": "Spesso imbattibili sulle lunghe durate — l'alternativa sottovalutata.",
+      "insuranceDesc": "Condizioni stabili e solide sul lungo periodo.",
+      "from": "da",
+      "perYear": "all'anno",
+      "categoryCta": "Continuare"
+    },
+    "rateCards": {
+      "saronLabel": "SARON",
+      "saronSub": "margine da",
+      "fixedSub": "ipoteca fissa da",
+      "tenYears": "10 anni",
+      "fiveYears": "5 anni",
+      "updated": "aggiornato il {date}"
+    },
+    "lenders": {
+      "more": "e altri 26 finanziatori"
     }
   },
   "buy": {
@@ -583,5 +604,17 @@
       "privacyBody": "I Suoi dati sono trattati conformemente alla legge federale svizzera sulla protezione dei dati (LPD).|Finalità: calcolo delle simulazioni, sorveglianza dell'ipoteca, gara d'offerte presso i finanziatori con il Suo consenso esplicito, miglioramento del servizio.|I Suoi dati non sono mai venduti. Un dossier è trasmesso a un finanziatore solo completo e da Lei validato.|Hosting dei dati: da completare (Svizzera/UE).|I Suoi diritti: accesso, rettifica, cancellazione — contact@hypopilot.ch.|Durata di conservazione: da completare.",
       "termsBody": "Il servizio HypoPilot è gratuito per l'utente e fornito «così com'è».|Simulazioni, certificati e fasce di tassi sono indicativi e non costituiscono né una consulenza finanziaria personalizzata né una promessa di credito.|La decisione di concessione spetta esclusivamente ai finanziatori.|L'utente garantisce l'esattezza delle informazioni inserite.|Foro competente e diritto applicabile: Svizzera, da completare."
     }
+  },
+  "request": {
+    "metaTitle": "La Sua richiesta d'ipoteca",
+    "title": "La Sua richiesta — {category}",
+    "subtitle": "Ancora qualche dettaglio e il Suo dossier parte in gara d'offerte. Un consulente La accompagna dalla ricezione.",
+    "categories": {
+      "banque": "Banche",
+      "assurance": "Assicurazioni",
+      "caisse-pension": "Casse pensioni"
+    },
+    "placeholder": "Il modulo dettagliato arriverà qui. Nel frattempo, la simulazione di 2 minuti Le dà già il Suo risultato.",
+    "fallbackCta": "Fare la simulazione in 2 minuti"
   }
 }

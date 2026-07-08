@@ -1,17 +1,18 @@
 'use client'
 
-import { useMemo, useState } from 'react'
+import { useState } from 'react'
 import { useTranslations } from 'next-intl'
-import { Check, Landmark, PiggyBank, Umbrella } from 'lucide-react'
+import { ArrowRight, Landmark, PiggyBank, Umbrella } from 'lucide-react'
 import { useRouter } from '@/i18n/navigation'
 import { formatCHF, formatRate } from '@/lib/format'
-import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
+import { Input } from '@/components/ui/input'
 
-// Le formulaire de lead de la home : curseurs + taux du jour par durée +
-// propositions immédiates. Le CTA embarque les montants saisis dans le
-// brouillon du funnel renouvellement (localStorage) pour préremplir.
+// Le formulaire de lead de la home (modèle hypotheke.ch) : curseurs +
+// NPA/localité, puis trois propositions par TYPE de prêteur (banques,
+// assurances, caisses de pension). Chaque proposition redirige vers la
+// page de demande détaillée en préremplissant le brouillon.
 
 export interface WidgetRates {
   saron: number | null
@@ -62,10 +63,15 @@ function SliderRow({ id, label, value, max, step, onChange }: SliderRowProps) {
   )
 }
 
-const TERMS = ['saron', 5, 10, 15] as const
 // Écart moyen constaté entre meilleure et pire offre : 0,72% → une offre
 // moyenne se situe ~0,36 point au-dessus de la référence.
 const AVERAGE_MARKET_PREMIUM = 0.36
+
+const CATEGORIES = [
+  { key: 'bank', type: 'banque', icon: Landmark, premium: 0 },
+  { key: 'insurance', type: 'assurance', icon: Umbrella, premium: 0.15 },
+  { key: 'pension', type: 'caisse-pension', icon: PiggyBank, premium: 0.09 },
+] as const
 
 export function HomeLeadWidget({ rates }: { rates: WidgetRates }) {
   const t = useTranslations('home.leadWidget')
@@ -73,31 +79,14 @@ export function HomeLeadWidget({ rates }: { rates: WidgetRates }) {
   const [propertyValue, setPropertyValue] = useState(0)
   const [mortgage, setMortgage] = useState(0)
   const [income, setIncome] = useState(0)
-  const [term, setTerm] = useState<(typeof TERMS)[number]>(10)
+  const [plz, setPlz] = useState('')
 
-  const selectedRate =
-    term === 'saron' ? (rates.saron ?? 0.9) : (rates.fixed[term] ?? rates.fixed[10] ?? 1.75)
-  const horizonYears = term === 'saron' ? 10 : term
+  const baseRate = rates.fixed[10] ?? 1.75
   const showOffers = mortgage >= 100_000
 
-  const offers = useMemo(() => {
-    const defs = [
-      { key: 'bank', icon: Landmark, premium: 0 },
-      { key: 'pension', icon: PiggyBank, premium: 0.09 },
-      { key: 'insurance', icon: Umbrella, premium: 0.15 },
-    ] as const
-    return defs.map((def) => {
-      const rate = Math.round((selectedRate + def.premium) * 100) / 100
-      const savings = Math.max(
-        0,
-        Math.round(((AVERAGE_MARKET_PREMIUM - def.premium) / 100) * mortgage * horizonYears)
-      )
-      return { ...def, rate, savings }
-    })
-  }, [selectedRate, mortgage, horizonYears])
-
-  function startRenewal() {
-    // Préremplit le brouillon du funnel — l'utilisateur ne ressaisit rien.
+  function continueWith(category: (typeof CATEGORIES)[number]['type']) {
+    // Préremplit le brouillon partagé — la demande détaillée et le funnel
+    // renouvellement repartent de ces montants sans ressaisie.
     try {
       window.localStorage.setItem(
         'hp-draft-renouvellement',
@@ -115,19 +104,22 @@ export function HomeLeadWidget({ rates }: { rates: WidgetRates }) {
             email: '',
             phone: '',
             wantsCallback: false,
+            plz: plz || null,
+            income: income || null,
+            lenderCategory: category,
           },
           attribution: {},
           updatedAt: new Date().toISOString(),
         })
       )
     } catch {
-      // stockage indisponible : le funnel partira vide
+      // stockage indisponible : la demande partira vide
     }
-    router.push('/renouveler')
+    router.push({ pathname: '/demande', query: { type: category } })
   }
 
   return (
-    <Card className="border-line shadow-card">
+    <Card id="simulateur" className="border-line scroll-mt-24 shadow-sm">
       <CardContent className="p-6 sm:p-10">
         <div className="text-center">
           <h2 className="font-display text-2xl font-semibold sm:text-3xl">{t('title')}</h2>
@@ -162,93 +154,69 @@ export function HomeLeadWidget({ rates }: { rates: WidgetRates }) {
             step={5_000}
             onChange={setIncome}
           />
+          <div className="grid items-center gap-2 sm:grid-cols-[140px_1fr] sm:gap-4">
+            <label htmlFor="hw-plz" className="text-ink-700 text-sm">
+              {t('plz')}
+            </label>
+            <Input
+              id="hw-plz"
+              className="h-11 rounded-full bg-white px-4"
+              placeholder={t('plzPlaceholder')}
+              autoComplete="postal-code"
+              value={plz}
+              onChange={(e) => setPlz(e.target.value.slice(0, 60))}
+            />
+          </div>
         </div>
 
         {showOffers ? (
           <div className="mt-10">
-            <p className="text-center text-lg">
-              <span className="font-display font-semibold">{t('offersTitle', { count: 20 })}</span>
-            </p>
-            <div className="mt-6 grid gap-4 lg:grid-cols-[260px_1fr]">
-              {/* Sélecteur de durée + taux du jour */}
-              <ul className="border-line divide-line h-fit divide-y overflow-hidden rounded-xl border bg-white">
-                {TERMS.map((option) => {
-                  const rate =
-                    option === 'saron' ? (rates.saron ?? 0.9) : (rates.fixed[option] ?? 0)
-                  const active = term === option
-                  return (
-                    <li key={String(option)}>
-                      <button
-                        type="button"
-                        onClick={() => setTerm(option)}
-                        aria-pressed={active}
-                        className={cn(
-                          'flex w-full items-center justify-between px-4 py-3 text-left transition-colors',
-                          active ? 'bg-pilot-50' : 'hover:bg-surface-alt'
-                        )}
-                      >
-                        <span>
-                          <span className="block text-sm font-semibold">
-                            {option === 'saron' ? 'SARON' : t('years', { years: option })}
-                          </span>
-                          <span className="text-ink-500 text-xs">
-                            {option === 'saron' ? t('saronNote') : t('fixedNote')}
-                          </span>
-                        </span>
-                        <span className="flex items-center gap-2.5">
-                          <span className="text-data text-lg">{formatRate(rate)}</span>
-                          <span
-                            className={cn(
-                              'size-3.5 rounded-full border-2',
-                              active ? 'border-pilot-600 bg-white' : 'border-pilot-200 bg-pilot-100'
-                            )}
-                          />
-                        </span>
-                      </button>
-                    </li>
-                  )
-                })}
-              </ul>
-
-              {/* Propositions */}
-              <div className="space-y-3">
-                {offers.map((offer) => {
-                  const Icon = offer.icon
-                  return (
-                    <div
-                      key={offer.key}
-                      className="border-line flex flex-wrap items-center gap-x-6 gap-y-3 rounded-xl border bg-white p-4"
-                    >
-                      <span className="bg-pilot-50 text-pilot-700 flex size-10 shrink-0 items-center justify-center rounded-full">
-                        <Icon className="size-5" strokeWidth={1.8} />
+            <p className="font-display text-center text-lg font-semibold">{t('categoriesTitle')}</p>
+            <div className="mt-6 grid gap-4 md:grid-cols-3">
+              {CATEGORIES.map((category) => {
+                const Icon = category.icon
+                const rate = Math.round((baseRate + category.premium) * 100) / 100
+                const savings = Math.max(
+                  0,
+                  Math.round(((AVERAGE_MARKET_PREMIUM - category.premium) / 100) * mortgage)
+                )
+                return (
+                  <button
+                    key={category.key}
+                    type="button"
+                    onClick={() => continueWith(category.type)}
+                    className="border-line hover:border-pilot-600 group flex flex-col rounded-2xl border bg-white p-6 text-left transition-colors"
+                  >
+                    <span className="bg-pilot-50 text-pilot-700 flex size-11 items-center justify-center rounded-full">
+                      <Icon className="size-5" strokeWidth={1.8} />
+                    </span>
+                    <span className="font-display mt-4 text-lg font-semibold">
+                      {t(category.key)}
+                    </span>
+                    <span className="text-ink-700 mt-1 flex-1 text-sm leading-relaxed">
+                      {t(`${category.key}Desc`)}
+                    </span>
+                    <span className="text-data text-pilot-700 mt-4 text-3xl">
+                      <span className="text-ink-500 mr-1.5 font-sans text-sm">{t('from')}</span>
+                      {formatRate(rate)}
+                    </span>
+                    {savings > 0 ? (
+                      <span className="text-ink-500 mt-1 text-xs">
+                        {t('savings')} : <span className="text-data">{formatCHF(savings)}</span>{' '}
+                        {t('perYear')}
                       </span>
-                      <div className="min-w-36">
-                        <p className="font-display font-semibold">{t(offer.key)}</p>
-                        <ul className="text-ink-500 mt-1 space-y-0.5 text-xs">
-                          <li className="flex items-center gap-1.5">
-                            <Check className="text-pilot-600 size-3" /> {t('bullet1')}
-                          </li>
-                          <li className="flex items-center gap-1.5">
-                            <Check className="text-pilot-600 size-3" /> {t('bullet2')}
-                          </li>
-                        </ul>
-                      </div>
-                      <p className="text-data text-xl">{formatRate(offer.rate)}</p>
-                      <div className="ml-auto text-right">
-                        <p className="text-data text-pilot-700 text-lg">
-                          {formatCHF(offer.savings)}
-                        </p>
-                        <p className="text-ink-500 text-xs">{t('savings')}</p>
-                        <Button size="sm" className="mt-2" onClick={startRenewal}>
-                          {t('cta')}
-                        </Button>
-                      </div>
-                    </div>
-                  )
-                })}
-                <p className="text-ink-400 text-xs leading-relaxed">{t('savingsNote')}</p>
-              </div>
+                    ) : null}
+                    <span className="text-pilot-700 mt-4 inline-flex items-center gap-1 text-sm font-medium group-hover:underline">
+                      {t('categoryCta')}
+                      <ArrowRight className="size-4" />
+                    </span>
+                  </button>
+                )
+              })}
             </div>
+            <p className="text-ink-400 mt-4 text-center text-xs leading-relaxed">
+              {t('savingsNote')}
+            </p>
           </div>
         ) : (
           <p className="text-ink-500 mt-8 text-center text-sm">{t('emptyHint')}</p>

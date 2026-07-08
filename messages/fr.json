@@ -54,7 +54,8 @@
       "title": "Votre hypothèque au meilleur taux. À l'achat comme au renouvellement.",
       "subtitle": "Banques, assurances et caisses de pension mises en concurrence, gratuitement. Résultat immédiat — aucun rendez-vous imposé.",
       "ctaBuy": "Calculer ma capacité d'achat",
-      "ctaRenew": "Enregistrer mon hypothèque"
+      "ctaRenew": "Enregistrer mon hypothèque",
+      "cta": "Trouver mon hypothèque"
     },
     "dailyRate": {
       "overline": "Le chiffre du jour",
@@ -114,7 +115,27 @@
       "savingsNote": "Économie estimée sur la durée choisie, par rapport à une offre moyenne du marché (écart moyen constaté : 0,72%). Taux définitif après mise en concurrence réelle.",
       "emptyHint": "Renseignez votre hypothèque pour voir vos offres.",
       "buyHint": "Vous achetez un bien ?",
-      "buyCta": "Calculer ma capacité d'achat"
+      "buyCta": "Calculer ma capacité d'achat",
+      "plz": "NPA / Localité",
+      "plzPlaceholder": "NPA ou localité du bien",
+      "categoriesTitle": "Vos offres, par type de prêteur",
+      "bankDesc": "Les taux les plus agressifs du marché sur les durées courtes et moyennes.",
+      "pensionDesc": "Souvent imbattables sur les longues durées — l'alternative sous-estimée.",
+      "insuranceDesc": "Conditions stables et solides sur le long terme.",
+      "from": "dès",
+      "perYear": "par an",
+      "categoryCta": "Continuer"
+    },
+    "rateCards": {
+      "saronLabel": "SARON",
+      "saronSub": "marge dès",
+      "fixedSub": "hypothèque fixe dès",
+      "tenYears": "10 ans",
+      "fiveYears": "5 ans",
+      "updated": "mis à jour le {date}"
+    },
+    "lenders": {
+      "more": "et 26 autres prêteurs"
     }
   },
   "buy": {
@@ -583,5 +604,17 @@
       "privacyBody": "Vos données sont traitées conformément à la loi fédérale suisse sur la protection des données (LPD).|Finalités : calcul de vos simulations, surveillance de votre hypothèque, mise en concurrence des prêteurs avec votre consentement explicite, amélioration du service.|Vos données ne sont jamais vendues. Un dossier n'est transmis à un prêteur que complet et validé par vous.|Hébergement des données : à compléter (Suisse/UE).|Vos droits : accès, rectification, effacement — contact@hypopilot.ch.|Durée de conservation : à compléter.",
       "termsBody": "Le service HypoPilot est gratuit pour l'utilisateur et fourni « en l'état ».|Les simulations, certificats et fourchettes de taux sont indicatifs et ne constituent ni un conseil financier personnalisé ni une promesse de crédit.|La décision d'octroi appartient exclusivement aux prêteurs.|L'utilisateur garantit l'exactitude des informations saisies.|For juridique et droit applicable : Suisse, à compléter."
     }
+  },
+  "request": {
+    "metaTitle": "Votre demande d'hypothèque",
+    "title": "Votre demande — {category}",
+    "subtitle": "Encore quelques détails et votre dossier part en mise en concurrence. Un conseiller vous accompagne dès réception.",
+    "categories": {
+      "banque": "Banques",
+      "assurance": "Assurances",
+      "caisse-pension": "Caisses de pension"
+    },
+    "placeholder": "Le formulaire détaillé arrive ici. En attendant, la simulation en 2 minutes vous donne déjà votre résultat.",
+    "fallbackCta": "Faire la simulation en 2 minutes"
   }
 }

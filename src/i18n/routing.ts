@@ -22,6 +22,11 @@ export const routing = defineRouting({
       de: '/so-funktionierts',
       it: '/come-funziona',
     },
+    '/demande': {
+      fr: '/demande',
+      de: '/anfrage',
+      it: '/richiesta',
+    },
     '/taux': {
       fr: '/taux',
       de: '/zinsen',

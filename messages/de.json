@@ -54,7 +54,8 @@
       "title": "Ihre Hypothek zum besten Zinssatz. Beim Kauf wie bei der Verlängerung.",
       "subtitle": "Banken, Versicherungen und Pensionskassen im Wettbewerb — kostenlos. Sofortiges Ergebnis, kein Termin nötig.",
       "ctaBuy": "Tragbarkeit berechnen",
-      "ctaRenew": "Hypothek erfassen"
+      "ctaRenew": "Hypothek erfassen",
+      "cta": "Hypothek finden"
     },
     "dailyRate": {
       "overline": "Die Zahl des Tages",
@@ -114,7 +115,27 @@
       "savingsNote": "Geschätzte Ersparnis über die gewählte Laufzeit gegenüber einer durchschnittlichen Marktofferte (beobachtete Differenz: 0,72%). Definitiver Zinssatz nach der eigentlichen Ausschreibung.",
       "emptyHint": "Erfassen Sie Ihre Hypothek, um Ihre Offerten zu sehen.",
       "buyHint": "Sie kaufen eine Immobilie?",
-      "buyCta": "Tragbarkeit berechnen"
+      "buyCta": "Tragbarkeit berechnen",
+      "plz": "PLZ / Ort",
+      "plzPlaceholder": "PLZ oder Ort der Immobilie",
+      "categoriesTitle": "Ihre Offerten, nach Kreditgeber-Typ",
+      "bankDesc": "Die aggressivsten Zinssätze des Marktes bei kurzen und mittleren Laufzeiten.",
+      "pensionDesc": "Bei langen Laufzeiten oft unschlagbar — die unterschätzte Alternative.",
+      "insuranceDesc": "Stabile und solide Konditionen auf lange Sicht.",
+      "from": "ab",
+      "perYear": "pro Jahr",
+      "categoryCta": "Weiter"
+    },
+    "rateCards": {
+      "saronLabel": "SARON",
+      "saronSub": "Marge ab",
+      "fixedSub": "Festhypothek ab",
+      "tenYears": "10 Jahre",
+      "fiveYears": "5 Jahre",
+      "updated": "aktualisiert am {date}"
+    },
+    "lenders": {
+      "more": "und 26 weitere Kreditgeber"
     }
   },
   "buy": {
@@ -583,5 +604,17 @@
       "privacyBody": "Ihre Daten werden gemäss dem schweizerischen Datenschutzgesetz (DSG) bearbeitet.|Zwecke: Berechnung Ihrer Simulationen, Überwachung Ihrer Hypothek, Ausschreibung bei Kreditgebern mit Ihrer ausdrücklichen Einwilligung, Verbesserung des Dienstes.|Ihre Daten werden nie verkauft. Ein Dossier geht nur vollständig und von Ihnen freigegeben an einen Kreditgeber.|Datenhosting: zu ergänzen (Schweiz/EU).|Ihre Rechte: Auskunft, Berichtigung, Löschung — contact@hypopilot.ch.|Aufbewahrungsdauer: zu ergänzen.",
       "termsBody": "Der HypoPilot-Service ist für Nutzende kostenlos und wird «wie besehen» bereitgestellt.|Simulationen, Zertifikate und Zinsspannen sind indikativ und stellen weder eine persönliche Finanzberatung noch eine Kreditzusage dar.|Der Kreditentscheid liegt ausschliesslich bei den Kreditgebern.|Die Nutzenden garantieren die Richtigkeit der erfassten Angaben.|Gerichtsstand und anwendbares Recht: Schweiz, zu ergänzen."
     }
+  },
+  "request": {
+    "metaTitle": "Ihre Hypothekaranfrage",
+    "title": "Ihre Anfrage — {category}",
+    "subtitle": "Noch einige Details, dann geht Ihr Dossier in die Ausschreibung. Ein Berater begleitet Sie ab Eingang.",
+    "categories": {
+      "banque": "Banken",
+      "assurance": "Versicherungen",
+      "caisse-pension": "Pensionskassen"
+    },
+    "placeholder": "Das detaillierte Formular erscheint hier. Bis dahin liefert Ihnen die 2-Minuten-Simulation bereits Ihr Ergebnis.",
+    "fallbackCta": "Simulation in 2 Minuten starten"
   }
 }
