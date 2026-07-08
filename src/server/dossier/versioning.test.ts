@@ -1,7 +1,6 @@
 import { afterAll, beforeAll, describe, expect, it } from 'vitest'
 import { prisma } from '@/lib/prisma'
 import {
-  DossierError,
   assertCanEditDossier,
   canViewDossier,
   restoreVersion,

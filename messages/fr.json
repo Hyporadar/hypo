@@ -630,5 +630,275 @@
     },
     "placeholder": "Le formulaire détaillé arrive ici. En attendant, la simulation en 2 minutes vous donne déjà votre résultat.",
     "fallbackCta": "Faire la simulation en 2 minutes"
+  },
+  "wizard": {
+    "meta": {
+      "title": "Votre dossier hypothécaire",
+      "description": "Constituez votre dossier en ligne — offres calibrées en temps réel, sans email ni rendez-vous."
+    },
+    "steps": {
+      "bien": "1. Le bien",
+      "emprunteurs": "2. Les emprunteurs",
+      "hypotheque": "3. L'hypothèque"
+    },
+    "sections": {
+      "bien": "Le bien",
+      "emprunteurs": "Les emprunteurs",
+      "hypotheque": "L'hypothèque"
+    },
+    "nav": {
+      "back": "Précédent",
+      "next": "Suivant",
+      "save": "Sauvegarder mon dossier",
+      "saved": "Dossier sauvegardé automatiquement",
+      "switchFunnel": "Changer de parcours",
+      "switchWarning": "En changeant de parcours, certaines informations devront être complétées. Vos réponses sont conservées.",
+      "toBuy": "Passer en achat",
+      "toRenewal": "Passer en renouvellement"
+    },
+    "missing": {
+      "title": "Informations manquantes"
+    },
+    "assistant": {
+      "open": "Assistant",
+      "close": "Fermer",
+      "title": "Votre assistant",
+      "minutesLeft": "Encore environ {minutes} min",
+      "yourRates": "Vos taux",
+      "tipsTitle": "Conseils",
+      "noTips": "Rien à signaler — continuez, tout est bon.",
+      "tips": {
+        "lpp": "Saisissez votre capital de caisse de pension : il peut améliorer votre taux.",
+        "coldMonitoring": "Trop tôt pour signer, parfait pour surveiller : activez le suivi gratuit et nous vous réveillerons au bon moment.",
+        "ecoLabel": "Bien noté : certains prêteurs offrent un rabais hypothèque verte, on le prendra en compte."
+      }
+    },
+    "offers": {
+      "title": "Vos offres",
+      "calibrated": "Fourchette calibrée",
+      "estimate": "Estimation",
+      "duration": "Durée",
+      "years": "{years} ans",
+      "from": "dès",
+      "empty": "Répondez aux premières questions pour voir vos fourchettes.",
+      "savings": "Économie estimée :",
+      "perYear": "par an",
+      "noteEstimate": "Estimation — s'affine avec vos réponses.",
+      "noteCalibrated": "Fourchette calibrée sur votre dossier complet. Taux définitif après mise en concurrence réelle.",
+      "lenderTypes": {
+        "BANQUE": "Banques",
+        "ASSURANCE": "Assurances",
+        "CAISSE_PENSION": "Caisses de pension"
+      }
+    },
+    "common": {
+      "yes": "Oui",
+      "no": "Non",
+      "done": "Terminé",
+      "add": "+ Ajouter un autre",
+      "edit": "Éditer",
+      "remove": "Supprimer",
+      "total": "Total",
+      "sensitive": "Utilisé uniquement pour le calcul, jamais transmis sans votre accord.",
+      "invalidDate": "Format attendu : JJ.MM.AAAA",
+      "invalidYear": "Année invalide",
+      "decrement": "Diminuer",
+      "increment": "Augmenter",
+      "comingSoon": "Cette section arrive juste après. Vos réponses sont déjà enregistrées — continuez avec la section « Le bien » ou revenez plus tard, votre dossier vous attend."
+    },
+    "complexCard": {
+      "title": "Votre situation mérite un conseiller",
+      "body": "Rien de bloquant : votre cas sort simplement du parcours standard. Un conseiller vous accompagne gratuitement pour le traiter correctement.",
+      "cta": "Planifier un échange"
+    },
+    "questions": {
+      "usage": {
+        "title": "Comment utilisez-vous ce bien ?",
+        "short": "Usage du bien",
+        "subtitle": "L'usage détermine les règles de financement applicables.",
+        "info": "Une résidence principale bénéficie des meilleures conditions. Un bien de rendement est financé différemment (rendement locatif pris en compte).",
+        "options": {
+          "RESIDENCE_PRINCIPALE": "Résidence principale",
+          "RESIDENCE_SECONDAIRE": "Résidence secondaire",
+          "RESIDENCE_SECONDAIRE_sub": "Vacances ou pied-à-terre",
+          "RENDEMENT": "Bien de rendement",
+          "RENDEMENT_sub": "Mis en location"
+        }
+      },
+      "typeBien": {
+        "title": "Quel type de bien ?",
+        "short": "Type de bien",
+        "subtitle": "Le visuel vous aide : choisissez ce qui ressemble le plus à votre bien.",
+        "info": "Le type de bien influence l'évaluation : une PPE se compare à l'immeuble, une maison à sa parcelle.",
+        "options": {
+          "MAISON": "Maison individuelle",
+          "APPARTEMENT_PPE": "Appartement",
+          "APPARTEMENT_PPE_sub": "Propriété par étages (PPE)",
+          "MAISON_MITOYENNE": "Maison mitoyenne",
+          "IMMEUBLE": "Immeuble",
+          "IMMEUBLE_sub": "Plusieurs appartements"
+        }
+      },
+      "position": {
+        "title": "Comment votre maison est-elle implantée ?",
+        "short": "Implantation",
+        "subtitle": "La position dans la rangée compte pour l'évaluation.",
+        "options": {
+          "INDIVIDUELLE": "Individuelle",
+          "JUMELEE": "Jumelée",
+          "MITOYENNE_CENTRALE": "Mitoyenne centrale",
+          "MITOYENNE_ANGLE": "Mitoyenne d'angle"
+        }
+      },
+      "adresse": {
+        "title": "Où se trouve le bien ?",
+        "short": "Adresse",
+        "subtitle": "NPA ou localité, puis la rue.",
+        "info": "L'adresse sert à l'évaluation du bien. Les taux, eux, sont nationaux.",
+        "npaPlaceholder": "NPA ou localité (p.ex. 1003 ou Lausanne)",
+        "ruePlaceholder": "Rue et numéro",
+        "mapConfirm": "C'est bien là",
+        "mapWrong": "Corriger l'adresse",
+        "mapLoading": "Chargement de la carte…",
+        "mapUnavailable": "Carte indisponible pour le moment — vérifiez simplement l'adresse saisie."
+      },
+      "anneeConstruction": {
+        "title": "Année de construction ?",
+        "short": "Année de construction",
+        "renovationAsk": "Rénovation majeure depuis ?",
+        "renovationTitle": "En quelle année ?"
+      },
+      "pieces": {
+        "title": "Combien de pièces ?",
+        "short": "Pièces",
+        "subtitle": "Selon le standard suisse (cuisine non comptée)."
+      },
+      "sallesEau": {
+        "title": "Vos salles d'eau ?",
+        "short": "Salles d'eau",
+        "baignoire": "Baignoires",
+        "douche": "Douches",
+        "wc": "WC séparés"
+      },
+      "etatBien": {
+        "title": "Dans quel état est le bien ?",
+        "short": "État du bien",
+        "subtitle": "Votre estimation honnête suffit — cela affine l'évaluation.",
+        "cuisine": "Cuisine",
+        "sallesBains": "Salles de bains",
+        "interieur": "Intérieur général",
+        "exterieur": "Extérieur / façade",
+        "scale": {
+          "tresBon": "Très bon",
+          "bon": "Bon",
+          "moyen": "Moyen",
+          "mauvais": "Mauvais"
+        }
+      },
+      "chauffage": {
+        "title": "Quel chauffage ?",
+        "short": "Chauffage",
+        "options": {
+          "pompe-a-chaleur": "Pompe à chaleur",
+          "gaz": "Gaz",
+          "mazout": "Mazout",
+          "pellets": "Bois / pellets",
+          "electrique": "Électrique",
+          "reseau": "Chauffage à distance",
+          "autre": "Autre"
+        }
+      },
+      "labelEco": {
+        "title": "Le bien a-t-il un label énergétique ?",
+        "short": "Label énergétique",
+        "info": "Minergie ou CECB A/B : certains prêteurs accordent un rabais « hypothèque verte ». Nous le prenons en compte dans vos offres.",
+        "which": "Lequel ?",
+        "options": {
+          "Minergie": "Minergie",
+          "Minergie-P": "Minergie-P / A",
+          "CECB-A": "CECB A",
+          "CECB-B": "CECB B",
+          "autre": "Autre"
+        }
+      },
+      "casSpeciaux": {
+        "title": "Quelques cas particuliers",
+        "short": "Cas particuliers",
+        "subtitle": "Trois questions rapides — répondre Oui ne bloque rien.",
+        "servitudes": "Des servitudes particulières ?",
+        "servitudesInfo": "Droit de passage, droit d'habitation… Un conseiller vérifie leur impact, c'est tout.",
+        "zoneAgricole": "Le bien est-il en zone agricole ?",
+        "nouvelleConstruction": "S'agit-il d'une nouvelle construction ?"
+      },
+      "valeur": {
+        "title": "Quelle est la valeur du bien ?",
+        "short": "Valeur du bien",
+        "subtitle": "Une estimation actuelle du marché suffit.",
+        "info": "La valeur détermine le taux d'avance (LTV) : plus il est bas, meilleures sont vos conditions."
+      },
+      "prixAchat": {
+        "title": "Quel est le prix d'achat ?",
+        "short": "Prix d'achat"
+      },
+      "fondsPropres": {
+        "title": "Comment répartissez-vous le financement ?",
+        "short": "Fonds propres",
+        "subtitle": "Faites glisser la poignée ou saisissez les montants.",
+        "mortgageLabel": "Hypothèque",
+        "ownFundsLabel": "Fonds propres",
+        "totalLabel": "Prix d'achat"
+      },
+      "tranchesExistantes": {
+        "title": "Vos hypothèques actuelles",
+        "short": "Hypothèques existantes",
+        "subtitle": "Une entrée par tranche — la plupart des dossiers en ont une ou deux.",
+        "info": "L'échéance la plus proche détermine votre fenêtre d'action (12–18 mois avant).",
+        "lender": "Prêteur actuel",
+        "lenderPlaceholder": "p.ex. BCV, UBS, Raiffeisen…",
+        "montant": "Montant restant",
+        "taux": "Taux actuel (%)",
+        "produit": "Produit",
+        "produits": {
+          "FIXE": "Taux fixe",
+          "SARON": "SARON",
+          "VARIABLE": "Variable"
+        },
+        "echeance": "Échéance",
+        "totalLabel": "Total des tranches"
+      },
+      "autresBiens": {
+        "title": "Possédez-vous d'autres biens immobiliers ?",
+        "short": "Autres biens",
+        "type": "Type de bien",
+        "typePlaceholder": "p.ex. appartement de rendement",
+        "valeur": "Valeur estimée",
+        "hypotheque": "Hypothèque restante",
+        "revenuLocatif": "Revenu locatif annuel"
+      },
+      "emprunteurIdentite": {
+        "short": "Identité de l'emprunteur"
+      },
+      "emprunteurActivite": {
+        "short": "Activité de l'emprunteur"
+      },
+      "emprunteurRevenus": {
+        "short": "Revenus de l'emprunteur"
+      },
+      "emprunteurAvoirs": {
+        "short": "Avoirs de l'emprunteur"
+      },
+      "emprunteurPoursuites": {
+        "short": "Poursuites de l'emprunteur"
+      },
+      "montantTotal": {
+        "short": "Montant de l'hypothèque"
+      },
+      "tranchesSouhaitees": {
+        "short": "Tranches souhaitées"
+      },
+      "dateDebut": {
+        "short": "Date de début"
+      }
+    }
   }
 }
