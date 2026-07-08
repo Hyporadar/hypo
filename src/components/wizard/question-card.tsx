@@ -4,7 +4,12 @@ import { useEffect, useRef, useState } from 'react'
 import { Info, ShieldCheck } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
-import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '@/components/ui/tooltip'
 
 export type QuestionStatus = 'untouched' | 'required' | 'complete'
 
@@ -78,14 +83,16 @@ export function QuestionCard({
             <h3 className="font-display flex items-center gap-2 text-base font-semibold sm:text-lg">
               {title}
               {sensitive ? (
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <span tabIndex={0} aria-label={sensitiveLabel}>
-                      <ShieldCheck className="text-pilot-600 size-4" strokeWidth={2} />
-                    </span>
-                  </TooltipTrigger>
-                  <TooltipContent className="max-w-64">{sensitiveLabel}</TooltipContent>
-                </Tooltip>
+                <TooltipProvider>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <span tabIndex={0} aria-label={sensitiveLabel}>
+                        <ShieldCheck className="text-pilot-600 size-4" strokeWidth={2} />
+                      </span>
+                    </TooltipTrigger>
+                    <TooltipContent className="max-w-64">{sensitiveLabel}</TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
               ) : null}
             </h3>
             {subtitle ? <p className="text-ink-500 mt-0.5 text-sm">{subtitle}</p> : null}

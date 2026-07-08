@@ -39,8 +39,12 @@ const ABANDON_MIN_STEP: Record<string, number> = {
   RENOUVELLEMENT_FROID: 3,
 }
 
+// « > 50% complété » du wizard /dossier (completude dénormalisée en %).
+const DOSSIER_ABANDON_MIN_COMPLETUDE = 50
+
 export interface EngineSummary {
   abandons: number
+  abandonsDossier: number
   offresNonLues: number
   offresExpirent: number
   entreesFenetre: number
@@ -124,6 +128,47 @@ async function evaluateAbandons(now: Date): Promise<number> {
     const amount = Number(data.amount ?? data.price ?? 0) || 0
     if (await createSignalIfAbsent(leadId, 'ABANDON_DOSSIER', amount, { draftId: draft.id })) {
       created++
+    }
+  }
+  return created
+}
+
+/**
+ * Règle 1bis — ABANDON_DOSSIER (wizard /dossier) : dossier >50% complété,
+ * inactif 24h, déjà rattaché à un lead avec email. Trace aussi l'abandon
+ * côté dossier (DossierEvent WIZARD_ABANDONED, une seule fois).
+ */
+async function evaluateDossierAbandons(now: Date): Promise<number> {
+  const stale = await prisma.dossier.findMany({
+    where: {
+      completude: { gt: DOSSIER_ABANDON_MIN_COMPLETUDE },
+      lastActivityAt: { lt: new Date(now.getTime() - ABANDON_INACTIVITY_MS) },
+      leadId: { not: null },
+      lead: { email: { not: null } },
+    },
+    include: { tranchesExistantes: { select: { montant: true } } },
+  })
+
+  let created = 0
+  for (const dossier of stale) {
+    const amount = dossier.tranchesExistantes.reduce((sum, t) => sum + Number(t.montant), 0)
+    if (
+      await createSignalIfAbsent(dossier.leadId!, 'ABANDON_DOSSIER', amount, {
+        dossierId: dossier.id,
+        completude: dossier.completude,
+      })
+    ) {
+      created++
+    }
+
+    const alreadyTracked = await prisma.dossierEvent.findFirst({
+      where: { dossierId: dossier.id, type: 'WIZARD_ABANDONED' },
+      select: { id: true },
+    })
+    if (!alreadyTracked) {
+      await prisma.dossierEvent.create({
+        data: { dossierId: dossier.id, type: 'WIZARD_ABANDONED' },
+      })
     }
   }
   return created
@@ -312,6 +357,7 @@ async function evaluateBigSavings(now: Date): Promise<number> {
 /** Passe complète — idempotente, appelée par le cron. */
 export async function evaluateSignals(now: Date = new Date()): Promise<EngineSummary> {
   const abandons = await evaluateAbandons(now)
+  const abandonsDossier = await evaluateDossierAbandons(now)
   const offresNonLues = await evaluateUnreadOffers(now)
   const offresExpirent = await evaluateExpiringOffers(now)
   const fenetre = await evaluateWindowEntries(now)
@@ -319,6 +365,7 @@ export async function evaluateSignals(now: Date = new Date()): Promise<EngineSum
 
   return {
     abandons,
+    abandonsDossier,
     offresNonLues,
     offresExpirent,
     entreesFenetre: fenetre.signals,

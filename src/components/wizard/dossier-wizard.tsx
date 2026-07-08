@@ -9,6 +9,8 @@ import { detectComplexReasons } from '@/lib/dossier/schema'
 import type { DossierSection } from '@/lib/dossier/completeness'
 import { useDossierWizard } from '@/components/wizard/use-dossier-wizard'
 import { BienSection } from '@/components/wizard/bien-section'
+import { EmprunteursSection } from '@/components/wizard/emprunteurs-section'
+import { HypothequeSection } from '@/components/wizard/hypotheque-section'
 import { OffersPanel } from '@/components/wizard/offers-panel'
 import { AssistantWidget } from '@/components/wizard/assistant-widget'
 import { MissingInfoBadge } from '@/components/wizard/missing-info-badge'
@@ -35,29 +37,32 @@ export function DossierWizard({ initialFunnel }: { initialFunnel?: Funnel }) {
   const wizard = useDossierWizard(initialFunnel)
   const [section, setSection] = useState<DossierSection>('bien')
   const [highlightKey, setHighlightKey] = useState<string | null>(null)
-  const bienTracked = useRef(false)
+  const trackedSections = useRef(new Set<string>())
 
   const complex = detectComplexReasons(wizard.data).length > 0
   const sectionIndex = SECTIONS.indexOf(section)
 
-  // Section Bien terminée une fois → événement WIZARD_STEP_COMPLETED.
-  const bienDone =
-    wizard.hydrated && wizard.completeness.missingBySection.bien.length === 0
+  // Chaque section terminée une fois → événement WIZARD_STEP_COMPLETED.
   useEffect(() => {
-    if (bienDone && !bienTracked.current) {
-      bienTracked.current = true
-      wizard.trackStep('bien')
+    if (!wizard.hydrated) return
+    for (const s of SECTIONS) {
+      if (
+        wizard.completeness.missingBySection[s].length === 0 &&
+        !trackedSections.current.has(s)
+      ) {
+        trackedSections.current.add(s)
+        wizard.trackStep(s)
+      }
     }
-  }, [bienDone, wizard])
+  }, [wizard])
+
 
   function navigateTo(questionKey: string) {
     const target = sectionOfKey(questionKey)
     setSection(target)
-    if (target === 'bien') {
-      setHighlightKey(null)
-      // Reposer la clé au tick suivant pour re-déclencher la surbrillance.
-      requestAnimationFrame(() => setHighlightKey(questionKey.replace(/#\d+$/, '')))
-    }
+    setHighlightKey(null)
+    // Reposer la clé au tick suivant pour re-déclencher la surbrillance.
+    requestAnimationFrame(() => setHighlightKey(questionKey.replace(/#\d+$/, '')))
   }
 
   function showOffers() {
@@ -136,10 +141,21 @@ export function DossierWizard({ initialFunnel }: { initialFunnel?: Funnel }) {
               onAnswered={() => setHighlightKey(null)}
               complex={complex}
             />
+          ) : section === 'emprunteurs' ? (
+            <EmprunteursSection
+              funnel={wizard.funnel}
+              data={wizard.data}
+              patch={wizard.patch}
+              highlightKey={highlightKey}
+            />
           ) : (
-            <div className="border-line text-ink-500 rounded-xl border border-dashed bg-white p-10 text-center text-sm leading-relaxed">
-              {t('common.comingSoon')}
-            </div>
+            <HypothequeSection
+              funnel={wizard.funnel}
+              data={wizard.data}
+              dossierId={wizard.dossierId}
+              patch={wizard.patch}
+              highlightKey={highlightKey}
+            />
           )}
 
           {/* Navigation bas de section + bascule de funnel */}

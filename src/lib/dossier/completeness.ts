@@ -1,9 +1,10 @@
 import type { Funnel } from '@prisma/client'
-import type { DossierData } from '@/lib/dossier/schema'
+import { deriveMontantTotal, validateTranches, type DossierData } from '@/lib/dossier/schema'
 
 // ─── Complétude du dossier — source unique ─────────────────────────────
 // Utilisée par le wizard (MissingInfoBadge, jauge assistant) ET par
-// l'admin (jauge + « quoi demander au téléphone »). Un item = une question.
+// l'admin (jauge + « quoi demander au téléphone »). Un item = une question
+// de docs/formulaire-complet.md (qui fait foi).
 
 export type DossierSection = 'bien' | 'emprunteurs' | 'hypotheque'
 
@@ -31,42 +32,68 @@ function has(value: unknown): boolean {
 /** Liste des exigences selon le funnel — l'ordre suit l'arbre du wizard. */
 export function requirements(funnel: Funnel, data: DossierData): RequirementItem[] {
   const b = data.bien
+
+  // §1.1 usage + branches locatives
+  const usageDone =
+    has(b.usage) &&
+    (b.usage !== 'VACANCES' || has(b.vacancesOccupation)) &&
+    (b.usage !== 'RENDEMENT' ||
+      (has(b.locatifUsage) && has(b.locatifTypeLocation) && has(b.revenuLocatifAnnuel)))
+
+  // Type + appartement annexe (maison individuelle)
+  const annexeDone =
+    b.type !== 'MAISON' ||
+    (b.annexe != null &&
+      (!b.annexe || (b.annexeLouee != null && (!b.annexeLouee || has(b.revenuAnnexeAnnuel)))))
+  const typeDone = has(b.type) && annexeDone
+
+  // §1.1 cas spéciaux : 4 × Non/Oui
+  const casSpeciauxDone =
+    b.droitHabitation != null &&
+    b.usufruit != null &&
+    b.droitSuperficie != null &&
+    b.zoneAgricole != null
+
   const items: RequirementItem[] = [
-    { key: 'usage', section: 'bien', done: has(b.usage) },
-    { key: 'typeBien', section: 'bien', done: has(b.type) },
+    { key: 'usage', section: 'bien', done: usageDone },
+    { key: 'typeBien', section: 'bien', done: typeDone },
     { key: 'adresse', section: 'bien', done: has(b.npa) && has(b.localite) },
-    { key: 'anneeConstruction', section: 'bien', done: has(b.anneeConstruction) },
-    { key: 'pieces', section: 'bien', done: has(b.pieces) },
-    { key: 'sallesEau', section: 'bien', done: has(b.sallesEau) },
-    {
-      key: 'etatBien',
-      section: 'bien',
-      done:
-        has(b.etatCuisine) &&
-        has(b.etatSallesBains) &&
-        has(b.etatInterieur) &&
-        has(b.etatExterieur),
-    },
+    { key: 'labelEco', section: 'bien', done: has(b.labelEco) },
     { key: 'chauffage', section: 'bien', done: has(b.chauffage) },
-    {
-      key: 'casSpeciaux',
-      section: 'bien',
-      done: b.servitudes != null && b.zoneAgricole != null && b.nouvelleConstruction != null,
-    },
-    { key: 'valeur', section: 'bien', done: has(b.valeur) },
+    { key: 'casSpeciaux', section: 'bien', done: casSpeciauxDone },
   ]
 
-  // Position uniquement pour les maisons.
-  if (b.type === 'MAISON' || b.type === 'MAISON_MITOYENNE') {
-    items.splice(2, 0, { key: 'position', section: 'bien', done: has(b.position) })
+  if (funnel === 'ACHAT') {
+    // §1.2 informations sur l'achat
+    items.push({
+      key: 'achatInfos',
+      section: 'bien',
+      done:
+        b.bienExistant != null &&
+        has(b.prixAchat) &&
+        b.dateAchatFixee != null &&
+        (!b.dateAchatFixee || has(b.dateAchat)) &&
+        b.renovationImmediate != null,
+    })
   }
 
+  // §1.3 valeur + source de l'estimation
+  items.push({
+    key: 'valeur',
+    section: 'bien',
+    done: has(b.valeur) && has(b.valeurSource),
+  })
+
   if (funnel === 'ACHAT') {
-    items.push(
-      { key: 'prixAchat', section: 'bien', done: has(b.prixAchat) },
-      { key: 'fondsPropres', section: 'bien', done: has(b.fondsPropres) }
-    )
+    // §1.5 autres prêts liés au bien
+    items.push({
+      key: 'autresPrets',
+      section: 'bien',
+      done:
+        data.asks.autresPrets != null && (!data.asks.autresPrets || data.autresPrets.length > 0),
+    })
   } else {
+    // §1.4 hypothèques existantes (multi-tranches)
     items.push({
       key: 'tranchesExistantes',
       section: 'bien',
@@ -76,45 +103,105 @@ export function requirements(funnel: Funnel, data: DossierData): RequirementItem
     })
   }
 
-  // Emprunteurs : au moins un, et pour chacun les blocs clés.
+  // §1.6 autres biens en propriété
+  items.push({
+    key: 'autresBiens',
+    section: 'bien',
+    done:
+      data.asks.autresBiens != null &&
+      (!data.asks.autresBiens ||
+        (data.autresBiens.length > 0 &&
+          data.autresBiens.every((ab) => has(ab.usage) && has(ab.genre) && has(ab.valeur)))),
+  })
+
+  // §2.0 « Qui sera emprunteur ? »
+  items.push({
+    key: 'nombreEmprunteurs',
+    section: 'emprunteurs',
+    done: data.asks.plusieursEmprunteurs != null,
+  })
+
+  // §2.1–2.5 par personne
   if (data.emprunteurs.length === 0) {
     items.push(
       { key: 'emprunteurIdentite', section: 'emprunteurs', done: false },
-      { key: 'emprunteurActivite', section: 'emprunteurs', done: false },
       { key: 'emprunteurRevenus', section: 'emprunteurs', done: false },
       { key: 'emprunteurAvoirs', section: 'emprunteurs', done: false },
+      { key: 'emprunteurCharges', section: 'emprunteurs', done: false },
       { key: 'emprunteurPoursuites', section: 'emprunteurs', done: false }
     )
   } else {
     for (const e of data.emprunteurs) {
       const suffix = data.emprunteurs.length > 1 ? `#${e.ordre}` : ''
+      const suisse = e.nationalite === 'SUISSE' || e.nationalite === 'Suisse'
+      const identiteDone =
+        has(e.nationalite) &&
+        (suisse || (has(e.permis) && e.fatca != null)) &&
+        has(e.residenceFuture) &&
+        has(e.anneeNaissance)
+      const revenuOk = (r: (typeof e.revenus)[number]) =>
+        r.montantAnnuel > 0 &&
+        (has(r.categorie) || has(r.type)) &&
+        (r.categorie !== 'ACTIVITE' || has(r.typeActivite)) &&
+        (r.categorie !== 'RENTE' || has(r.typeRente)) &&
+        (r.categorie !== 'AUTRE' || has(r.typeAutre))
       items.push(
+        { key: `emprunteurIdentite${suffix}`, section: 'emprunteurs', done: identiteDone },
         {
-          key: `emprunteurIdentite${suffix}`,
+          key: `emprunteurRevenus${suffix}`,
           section: 'emprunteurs',
-          done: has(e.anneeNaissance) && has(e.etatCivil),
+          done:
+            e.aRevenu != null && (!e.aRevenu || (e.revenus.length > 0 && e.revenus.every(revenuOk))),
         },
-        { key: `emprunteurActivite${suffix}`, section: 'emprunteurs', done: has(e.statutActivite) },
-        { key: `emprunteurRevenus${suffix}`, section: 'emprunteurs', done: e.revenus.length > 0 },
-        { key: `emprunteurAvoirs${suffix}`, section: 'emprunteurs', done: e.avoirs.length > 0 },
+        {
+          key: `emprunteurAvoirs${suffix}`,
+          section: 'emprunteurs',
+          done: e.aAvoirs != null && (!e.aAvoirs || e.avoirs.length > 0),
+        },
+        {
+          key: `emprunteurCharges${suffix}`,
+          section: 'emprunteurs',
+          done: e.aCharges != null && (!e.aCharges || e.charges.length > 0),
+        },
         {
           key: `emprunteurPoursuites${suffix}`,
           section: 'emprunteurs',
-          done: e.poursuites.length > 0 || e.statutActivite != null, // « non » = tableau vide déclaré après activité
+          done:
+            e.aPoursuites != null &&
+            (!e.aPoursuites ||
+              (e.poursuites.length > 0 && e.poursuites.every((p) => has(p.origine)))),
         }
       )
     }
   }
 
-  items.push(
-    { key: 'montantTotal', section: 'hypotheque', done: has(data.montantTotal) },
-    {
-      key: 'tranchesSouhaitees',
+  // §3 configurateur
+  const total = deriveMontantTotal(funnel, data)
+  if (funnel !== 'ACHAT') {
+    items.push({
+      key: 'ajustement',
       section: 'hypotheque',
-      done: data.tranchesSouhaitees.length > 0,
-    },
-    { key: 'dateDebut', section: 'hypotheque', done: has(data.dateDebut) }
-  )
+      done:
+        data.ajustement.sens != null &&
+        (data.ajustement.sens === 'AUCUN' || has(data.ajustement.montant)) &&
+        (data.ajustement.sens !== 'AUGMENTER' || has(data.ajustement.raison)),
+    })
+  } else {
+    items.push({
+      key: 'fondsPropres',
+      section: 'hypotheque',
+      done: has(data.bien.fondsPropres),
+    })
+  }
+  items.push({
+    key: 'tranchesSouhaitees',
+    section: 'hypotheque',
+    done:
+      total != null &&
+      data.tranchesSouhaitees.length > 0 &&
+      validateTranches(data, funnel).ok &&
+      data.tranchesSouhaitees.every((t) => t.produit !== 'FIXE' || has(t.dureeAnnees)),
+  })
 
   return items
 }

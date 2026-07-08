@@ -174,7 +174,13 @@ export async function runNurturing(now: Date = new Date()): Promise<NurturingSum
       locale,
       template: `zins-update-${sub.frequency.toLowerCase()}`,
       subject: t('rateUpdate.subject'),
-      body: t('rateUpdate.body', { refRate: formatRate(refRate) }),
+      // Chaque email de taux embarque le lien de désinscription 1 clic.
+      body: [
+        t('rateUpdate.body', { refRate: formatRate(refRate) }),
+        t('rateUpdate.unsubscribe', {
+          url: `${BASE_URL}/api/alerts/unsubscribe/${sub.unsubscribeToken}`,
+        }),
+      ].join('\n\n'),
       ctaLabel: t('rateUpdate.cta'),
       ctaUrl: funnelUrl(locale, '/renouveler'),
     })

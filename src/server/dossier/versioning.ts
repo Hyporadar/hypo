@@ -29,6 +29,54 @@ export class DossierError extends Error {
   }
 }
 
+// ── Mapping v2 (formulaire-complet.md) → enums Prisma des tables
+// structurées. Les tables servent aux requêtes admin (tri, filtres) ;
+// la vérité exhaustive reste le JSON de DossierVersion.data.
+type BienData = DossierData['bien']
+type RevenuData = DossierData['emprunteurs'][number]['revenus'][number]
+type ChargeData = DossierData['emprunteurs'][number]['charges'][number]
+type AvoirData = DossierData['emprunteurs'][number]['avoirs'][number]
+
+function mapUsage(usage: BienData['usage']) {
+  if (usage === 'VACANCES') return 'RESIDENCE_SECONDAIRE' as const
+  if (usage === 'LOUE_PARTIEL') return 'RENDEMENT' as const
+  return usage ?? null
+}
+function mapTypeBien(type: BienData['type']) {
+  if (type === 'PLUSIEURS_APPARTEMENTS' || type === 'GRAND_ENSEMBLE') return 'IMMEUBLE' as const
+  return type ?? null
+}
+function mapRevenuType(r: RevenuData) {
+  if (r.type) return r.type
+  if (r.categorie === 'ACTIVITE') {
+    return r.typeActivite === 'INDEPENDANT' ? ('INDEPENDANT' as const) : ('SALAIRE' as const)
+  }
+  if (r.categorie === 'RENTE') return 'RENTE' as const
+  if (r.typeAutre === 'LOCATIF') return 'REVENU_LOCATIF' as const
+  return 'AUTRE' as const
+}
+function mapChargeType(c: ChargeData) {
+  if (c.type === 'CREDIT_CONSO') return 'CREDIT' as const
+  if (c.type === 'INTERETS_PRET') return 'AUTRE' as const
+  return c.type
+}
+function mapAvoirType(a: AvoirData) {
+  if (a.type) return a.type
+  if (a.categorie === 'CAISSE_PENSION') return 'CAPITAL_LPP' as const
+  if (a.categorie === 'ASSURANCE' || a.categorie === 'AUTRE') return 'AUTRE' as const
+  switch (a.typeBancaire) {
+    case 'TITRES':
+      return 'TITRES' as const
+    case 'COMPTE_3A':
+    case 'TITRES_3A':
+      return 'PILIER_3A' as const
+    case 'LIBRE_PASSAGE':
+      return 'LIBRE_PASSAGE' as const
+    default:
+      return 'COMPTE_EPARGNE' as const
+  }
+}
+
 export interface SaveDossierInput {
   dossierId: string // uuid client (dossier anonyme) ou existant
   funnel: Funnel
@@ -45,8 +93,8 @@ export async function saveDossierVersion(input: SaveDossierInput) {
   if (!parsed.success) throw new DossierError('invalid')
   const data = parsed.data
 
-  // Invariant multi-tranches : somme = montant total.
-  if (!validateTranches(data).ok) throw new DossierError('tranches')
+  // Invariant multi-tranches : somme = montant total dérivé.
+  if (!validateTranches(data, input.funnel).ok) throw new DossierError('tranches')
 
   // Un closer justifie TOUJOURS sa modification.
   if (input.author.type === 'CLOSER' && !input.commentaire?.trim()) {
@@ -121,8 +169,8 @@ export async function saveDossierVersion(input: SaveDossierInput) {
     await tx.bien.create({
       data: {
         dossierId: dossier.id,
-        usage: data.bien.usage ?? null,
-        type: data.bien.type ?? null,
+        usage: mapUsage(data.bien.usage),
+        type: mapTypeBien(data.bien.type),
         position: data.bien.position ?? null,
         rue: data.bien.rue ?? null,
         npa: data.bien.npa ?? null,
@@ -142,9 +190,15 @@ export async function saveDossierVersion(input: SaveDossierInput) {
         etatSallesBains: data.bien.etatSallesBains ?? null,
         etatInterieur: data.bien.etatInterieur ?? null,
         etatExterieur: data.bien.etatExterieur ?? null,
-        servitudes: data.bien.servitudes ?? null,
+        servitudes:
+          (data.bien.servitudes ||
+            data.bien.droitHabitation ||
+            data.bien.usufruit ||
+            data.bien.droitSuperficie) ??
+          null,
         zoneAgricole: data.bien.zoneAgricole ?? null,
-        nouvelleConstruction: data.bien.nouvelleConstruction ?? null,
+        nouvelleConstruction:
+          (data.bien.nouvelleConstruction || data.bien.bienExistant === false) ?? null,
         valeur: data.bien.valeur ?? null,
         prixAchat: data.bien.prixAchat ?? null,
         fondsPropres: data.bien.fondsPropres ?? null,
@@ -191,21 +245,25 @@ export async function saveDossierVersion(input: SaveDossierInput) {
           employeur: e.employeur ?? null,
           revenus: {
             create: e.revenus.map((r) => ({
-              type: r.type,
+              type: mapRevenuType(r),
               montantAnnuel: r.montantAnnuel,
               libelle: r.libelle ?? null,
             })),
           },
           charges: {
             create: e.charges.map((c) => ({
-              type: c.type,
+              type: mapChargeType(c),
               montantAnnuel: c.montantAnnuel,
-              echeanceLeasing: c.echeanceLeasing ? new Date(c.echeanceLeasing) : null,
+              echeanceLeasing: c.echeanceLeasing
+                ? new Date(c.echeanceLeasing)
+                : c.leasingFinAnnee
+                  ? new Date(Date.UTC(c.leasingFinAnnee, 11, 31))
+                  : null,
             })),
           },
           avoirs: {
             create: e.avoirs.map((a) => ({
-              type: a.type,
+              type: mapAvoirType(a),
               montant: a.montant,
               utilisePourAchat: a.utilisePourAchat,
             })),
@@ -214,7 +272,7 @@ export async function saveDossierVersion(input: SaveDossierInput) {
             create: e.poursuites.map((p) => ({
               soldee: p.soldee,
               montant: p.montant ?? null,
-              motif: p.motif ?? null,
+              motif: p.motif ?? p.origine ?? null,
             })),
           },
         },
@@ -224,7 +282,7 @@ export async function saveDossierVersion(input: SaveDossierInput) {
       await tx.autreBien.create({
         data: {
           dossierId: dossier.id,
-          type: b.type ?? null,
+          type: b.type ?? b.genre ?? null,
           valeur: b.valeur ?? null,
           hypothequeRestante: b.hypothequeRestante ?? null,
           revenuLocatifAnnuel: b.revenuLocatifAnnuel ?? null,
@@ -349,6 +407,8 @@ export function stripFinancials(data: DossierData): DossierData {
       poursuites: [],
     })),
     tranchesExistantes: [],
+    autresPrets: [],
+    ajustement: {},
     montantTotal: null,
     tranchesSouhaitees: [],
   }

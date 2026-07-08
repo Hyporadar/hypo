@@ -1,6 +1,6 @@
 import type { Funnel } from '@prisma/client'
 import { CHARGE_MAX, annualCosts } from '@/lib/finance'
-import type { DossierData } from '@/lib/dossier/schema'
+import { deriveMontantTotal, totalRevenus, type DossierData } from '@/lib/dossier/schema'
 import { computeCompleteness } from '@/lib/dossier/completeness'
 
 // ─── Calibration des fourchettes d'offres ──────────────────────────────
@@ -53,11 +53,7 @@ export function calibrateOffers(
 
   // LTV : hypothèque demandée / valeur du bien.
   const valeur = data.bien.valeur ?? data.bien.prixAchat ?? null
-  const montant =
-    data.montantTotal ??
-    (data.tranchesExistantes.length
-      ? data.tranchesExistantes.reduce((s, t) => s + t.montant, 0)
-      : null)
+  const montant = deriveMontantTotal(funnel, data)
   const ltv = valeur && montant ? montant / valeur : null
 
   let delta = 0
@@ -70,9 +66,7 @@ export function calibrateOffers(
   }
 
   // Tenue des charges (règles CLAUDE.md via finance.ts).
-  const revenus = data.emprunteurs
-    .flatMap((e) => e.revenus)
-    .reduce((s, r) => s + r.montantAnnuel, 0)
+  const revenus = totalRevenus(data)
   const chargesTiers = data.emprunteurs
     .flatMap((e) => e.charges)
     .reduce((s, c) => s + c.montantAnnuel, 0)
@@ -85,8 +79,8 @@ export function calibrateOffers(
     }
   }
 
-  // Rabais hypothèque verte.
-  if (data.bien.labelEco) {
+  // Rabais hypothèque verte (« non » explicite = pas de label).
+  if (data.bien.labelEco && data.bien.labelEco !== 'non') {
     delta -= 0.05
     adjustments.push('ecoDiscount')
   }

@@ -23,6 +23,8 @@ export const routing = defineRouting({
       it: '/come-funziona',
     },
     '/dossier': '/dossier',
+    // Connexion par magic link (lien reçu par email) — slug technique stable.
+    '/lien-magique/[token]': '/lien-magique/[token]',
     '/demande': {
       fr: '/demande',
       de: '/anfrage',
@@ -79,4 +81,4 @@ export const routing = defineRouting({
 export type Locale = (typeof routing.locales)[number]
 export type AppPathname = keyof typeof routing.pathnames
 // Chemins sans paramètre dynamique — utilisables tels quels dans Link/sitemap.
-export type StaticPathname = Exclude<AppPathname, '/guides/[slug]'>
+export type StaticPathname = Exclude<AppPathname, '/guides/[slug]' | '/lien-magique/[token]'>

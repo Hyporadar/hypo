@@ -28,11 +28,14 @@ interface StoredWizard {
 export const EMPTY_DATA: DossierData = {
   bien: {},
   tranchesExistantes: [],
+  autresPrets: [],
+  ajustement: {},
   montantTotal: null,
   tranchesSouhaitees: [],
   dateDebut: null,
   emprunteurs: [],
   autresBiens: [],
+  asks: {},
 }
 
 /** Préremplissage depuis le teaser de la home (valeur, montant, revenu, NPA). */
@@ -68,7 +71,10 @@ function prefillFromTeaser(): { data: DossierData; funnel: Funnel } | null {
       data.emprunteurs = [
         {
           ordre: 1,
-          revenus: [{ type: 'SALAIRE', montantAnnuel: v.income, libelle: null }],
+          aRevenu: true,
+          revenus: [
+            { categorie: 'ACTIVITE', typeActivite: 'SALARIE', montantAnnuel: v.income },
+          ],
           charges: [],
           avoirs: [],
           poursuites: [],
@@ -229,11 +235,17 @@ export function useDossierWizard(initialFunnel?: Funnel) {
   // ── Tips contextuels (jamais bloquants)
   const tips: WizardTip[] = useMemo(() => {
     const list: WizardTip[] = []
-    const hasSalaire = data.emprunteurs.some((e) => e.revenus.some((r) => r.type === 'SALAIRE'))
-    const hasLpp = data.emprunteurs.some((e) => e.avoirs.some((a) => a.type === 'CAPITAL_LPP'))
+    // Nudge LPP (formulaire-complet §2.3) : revenu salarié saisi sans
+    // avoir de caisse de pension → le capital LPP peut améliorer le taux.
+    const hasSalaire = data.emprunteurs.some((e) =>
+      e.revenus.some((r) => r.typeActivite === 'SALARIE' || r.type === 'SALAIRE')
+    )
+    const hasLpp = data.emprunteurs.some((e) =>
+      e.avoirs.some((a) => a.categorie === 'CAISSE_PENSION' || a.type === 'CAPITAL_LPP')
+    )
     if (hasSalaire && !hasLpp) list.push({ id: 'lpp' })
     if (funnel === 'RENOUVELLEMENT_FROID') list.push({ id: 'coldMonitoring' })
-    if (data.bien.labelEco) list.push({ id: 'ecoLabel' })
+    if (data.bien.labelEco && data.bien.labelEco !== 'non') list.push({ id: 'ecoLabel' })
     return list
   }, [data, funnel])
 

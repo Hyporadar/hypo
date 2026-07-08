@@ -23,6 +23,7 @@ async function cleanup() {
   await prisma.formDraft.deleteMany({
     where: { OR: [{ leadId: { in: ids } }, { email: { endsWith: `@${DOMAIN}` } }] },
   })
+  await prisma.dossier.deleteMany({ where: { leadId: { in: ids } } })
   await prisma.lead.deleteMany({ where: { id: { in: ids } } })
 }
 
@@ -130,6 +131,103 @@ describe('moteur de signaux', () => {
     await evaluateSignals()
     const lead = await prisma.lead.findFirst({ where: { email: `trop-tot@${DOMAIN}` } })
     expect(lead).toBeNull()
+  })
+
+  it('ABANDON_DOSSIER (wizard) : dossier >50% inactif 24h → signal + événement, sans doublon', async () => {
+    const lead = await prisma.lead.create({
+      data: {
+        funnel: 'RENOUVELLEMENT_CHAUD',
+        status: 'NOUVEAU',
+        locale: 'fr',
+        name: 'Test Dossier Abandonné',
+        email: `dossier-abandon@${DOMAIN}`,
+      },
+    })
+    const dossier = await prisma.dossier.create({
+      data: {
+        id: crypto.randomUUID(),
+        funnel: 'RENOUVELLEMENT_CHAUD',
+        locale: 'fr',
+        leadId: lead.id,
+        completude: 60,
+        lastActivityAt: new Date(Date.now() - 25 * HOURS),
+        tranchesExistantes: {
+          create: { ordre: 1, montant: 400_000, produit: 'FIXE' },
+        },
+      },
+    })
+
+    await evaluateSignals()
+
+    const signals = await prisma.signal.findMany({
+      where: { leadId: lead.id, type: 'ABANDON_DOSSIER' },
+    })
+    expect(signals).toHaveLength(1)
+    expect(signals[0]!.priority).toBe(signalPriority('ABANDON_DOSSIER', 400_000))
+
+    const events = await prisma.dossierEvent.findMany({
+      where: { dossierId: dossier.id, type: 'WIZARD_ABANDONED' },
+    })
+    expect(events).toHaveLength(1)
+
+    // Seconde passe : idempotente, ni doublon de signal ni d'événement.
+    await evaluateSignals()
+    expect(
+      await prisma.signal.count({ where: { leadId: lead.id, type: 'ABANDON_DOSSIER' } })
+    ).toBe(1)
+    expect(
+      await prisma.dossierEvent.count({
+        where: { dossierId: dossier.id, type: 'WIZARD_ABANDONED' },
+      })
+    ).toBe(1)
+  })
+
+  it('ABANDON_DOSSIER (wizard) : ignore les dossiers ≤50% ou actifs récemment', async () => {
+    const leadPeuComplet = await prisma.lead.create({
+      data: {
+        funnel: 'ACHAT',
+        status: 'NOUVEAU',
+        locale: 'fr',
+        email: `dossier-peu-complet@${DOMAIN}`,
+      },
+    })
+    await prisma.dossier.create({
+      data: {
+        id: crypto.randomUUID(),
+        funnel: 'ACHAT',
+        locale: 'fr',
+        leadId: leadPeuComplet.id,
+        completude: 40, // pas assez avancé
+        lastActivityAt: new Date(Date.now() - 48 * HOURS),
+      },
+    })
+
+    const leadActif = await prisma.lead.create({
+      data: {
+        funnel: 'ACHAT',
+        status: 'NOUVEAU',
+        locale: 'fr',
+        email: `dossier-actif@${DOMAIN}`,
+      },
+    })
+    await prisma.dossier.create({
+      data: {
+        id: crypto.randomUUID(),
+        funnel: 'ACHAT',
+        locale: 'fr',
+        leadId: leadActif.id,
+        completude: 80,
+        lastActivityAt: new Date(), // encore actif
+      },
+    })
+
+    await evaluateSignals()
+
+    expect(
+      await prisma.signal.count({
+        where: { leadId: { in: [leadPeuComplet.id, leadActif.id] }, type: 'ABANDON_DOSSIER' },
+      })
+    ).toBe(0)
   })
 
   it('OFFRES_NON_LUES : offres actives depuis 48h sans ouverture', async () => {

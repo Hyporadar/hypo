@@ -21,42 +21,49 @@ const baseData: DossierData = {
   bien: {
     usage: 'RESIDENCE_PRINCIPALE',
     type: 'MAISON',
-    position: 'INDIVIDUELLE',
+    annexe: false,
     npa: '1003',
     localite: 'Lausanne',
     canton: 'VD',
-    anneeConstruction: 2005,
-    pieces: 4.5,
-    sallesEau: { baignoires: 1, douches: 1, wc: 2 },
+    labelEco: 'non',
     chauffage: 'gaz',
-    etatCuisine: 3,
-    etatSallesBains: 3,
-    etatInterieur: 2,
-    etatExterieur: 2,
-    servitudes: false,
+    droitHabitation: false,
+    usufruit: false,
+    droitSuperficie: false,
     zoneAgricole: false,
-    nouvelleConstruction: false,
     valeur: 1_000_000,
+    valeurSource: 'propre',
   },
   tranchesExistantes: [
     { lenderNom: 'UBS', montant: 650_000, taux: 1.9, produit: 'FIXE', echeance: '2027-06-01' },
   ],
+  autresPrets: [],
+  ajustement: { sens: 'AUCUN' },
   montantTotal: 650_000,
-  tranchesSouhaitees: [{ produit: 'FIXE', dureeAnnees: 10, montant: 650_000 }],
+  tranchesSouhaitees: [
+    { produit: 'FIXE', dureeAnnees: 10, montant: 650_000, dateDebut: '2027-06-01' },
+  ],
   dateDebut: '2027-06-01',
   emprunteurs: [
     {
       ordre: 1,
+      nationalite: 'SUISSE',
+      residenceFuture: 'HABITE_LE_BIEN',
       anneeNaissance: 1980,
-      etatCivil: 'marie',
-      statutActivite: 'SALARIE',
-      revenus: [{ type: 'SALAIRE', montantAnnuel: 180_000 }],
+      aRevenu: true,
+      aAvoirs: true,
+      aCharges: false,
+      aPoursuites: false,
+      revenus: [{ categorie: 'ACTIVITE', typeActivite: 'SALARIE', montantAnnuel: 180_000 }],
       charges: [],
-      avoirs: [{ type: 'PILIER_3A', montant: 50_000, utilisePourAchat: false }],
+      avoirs: [
+        { categorie: 'BANQUE', typeBancaire: 'COMPTE_3A', montant: 50_000, utilisePourAchat: false },
+      ],
       poursuites: [],
     },
   ],
   autresBiens: [],
+  asks: { autresBiens: false, plusieursEmprunteurs: false },
 }
 
 async function cleanup() {
@@ -232,11 +239,14 @@ describe('règles pures', () => {
     const empty = computeCompleteness('RENOUVELLEMENT_CHAUD', {
       bien: {},
       tranchesExistantes: [],
+      autresPrets: [],
+      ajustement: {},
       montantTotal: null,
       tranchesSouhaitees: [],
       dateDebut: null,
       emprunteurs: [],
       autresBiens: [],
+      asks: {},
     })
     expect(empty.percent).toBe(0)
     expect(empty.missingBySection.bien.length).toBeGreaterThan(5)
@@ -260,11 +270,12 @@ describe('règles pures', () => {
     expect(eco.adjustments).toContain('ecoDiscount')
     expect(eco.calibrated).toBe(true) // dossier complet → fourchette calibrée
 
+    // LTV élevée via une augmentation d'hypothèque (le montant total est dérivé).
     const highLtv = calibrateOffers(
       'RENOUVELLEMENT_CHAUD',
       {
         ...baseData,
-        montantTotal: 850_000,
+        ajustement: { sens: 'AUGMENTER', montant: 200_000, raison: 'renovation' },
         tranchesSouhaitees: [{ produit: 'FIXE', dureeAnnees: 10, montant: 850_000 }],
       },
       RATES,

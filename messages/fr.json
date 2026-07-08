@@ -419,6 +419,16 @@
       "subject": "Les taux hypothécaires du jour",
       "body": "Le taux de référence fixe 10 ans est à {refRate}.\n\nVotre point taux HypoPilot — comparez avec votre taux actuel en 2 minutes, sans inscription.",
       "cta": "Comparer avec mon taux"
+    },
+    "magicLink": {
+      "subject": "Votre lien de connexion HypoPilot",
+      "body": "Cliquez sur le bouton ci-dessous pour retrouver votre dossier hypothécaire. Le lien est valable une heure et ne peut être utilisé qu'une fois.\nSi vous n'êtes pas à l'origine de cette demande, ignorez simplement cet email.",
+      "cta": "Ouvrir mon dossier"
+    },
+    "rateAlertConfirm": {
+      "subject": "Confirmez votre abonnement aux taux HypoPilot",
+      "body": "Encore un clic : confirmez votre adresse pour recevoir l'évolution des taux hypothécaires à la fréquence choisie. Désinscription en un clic dans chaque email.",
+      "cta": "Confirmer mon abonnement"
     }
   },
   "clientApp": {
@@ -716,142 +726,125 @@
         "title": "Comment utilisez-vous ce bien ?",
         "short": "Usage du bien",
         "subtitle": "L'usage détermine les règles de financement applicables.",
-        "info": "Une résidence principale bénéficie des meilleures conditions. Un bien de rendement est financé différemment (rendement locatif pris en compte).",
+        "info": "Résidence principale, bien de vacances ou bien de rendement : les prêteurs n'appliquent pas les mêmes taux d'avance ni les mêmes exigences de fonds propres.",
         "options": {
           "RESIDENCE_PRINCIPALE": "Résidence principale",
-          "RESIDENCE_SECONDAIRE": "Résidence secondaire",
-          "RESIDENCE_SECONDAIRE_sub": "Vacances ou pied-à-terre",
-          "RENDEMENT": "Bien de rendement",
-          "RENDEMENT_sub": "Mis en location"
-        }
+          "RESIDENCE_PRINCIPALE_sub": "Occupée par le propriétaire",
+          "VACANCES": "Bien de vacances",
+          "RENDEMENT": "Bien loué (rendement)",
+          "LOUE_PARTIEL": "Loué et partiellement habité"
+        },
+        "vacancesOccupation": "Occupation ou location ?",
+        "vacancesOptions": {
+          "OCCUPE": "Entièrement occupé par le propriétaire",
+          "LOUE_ET_OCCUPE": "Loué et occupé par le propriétaire",
+          "LOUE": "Entièrement loué"
+        },
+        "locatifUsage": "Comment le bien loué est-il utilisé ?",
+        "locatifUsageOptions": {
+          "RESIDENTIEL": "Purement résidentiel",
+          "MIXTE": "Résidentiel et commercial (usage mixte)",
+          "COMMERCIAL": "Purement commercial (bureaux, dépôts…)"
+        },
+        "locatifTypeLocation": "Type de location ?",
+        "locatifTypeLocationOptions": {
+          "PERMANENT": "Même locataire toute l'année (bail permanent)",
+          "TEMPORAIRE": "Locataires différents (location temporaire)"
+        },
+        "revenuLocatif": "Revenu locatif net par an (hors charges)"
       },
       "typeBien": {
         "title": "Quel type de bien ?",
         "short": "Type de bien",
         "subtitle": "Le visuel vous aide : choisissez ce qui ressemble le plus à votre bien.",
-        "info": "Le type de bien influence l'évaluation : une PPE se compare à l'immeuble, une maison à sa parcelle.",
+        "info": "Le type de bien influence l'évaluation et le cercle des prêteurs intéressés.",
         "options": {
           "MAISON": "Maison individuelle",
           "APPARTEMENT_PPE": "Appartement",
           "APPARTEMENT_PPE_sub": "Propriété par étages (PPE)",
           "MAISON_MITOYENNE": "Maison mitoyenne",
-          "IMMEUBLE": "Immeuble",
-          "IMMEUBLE_sub": "Plusieurs appartements"
-        }
-      },
-      "position": {
-        "title": "Comment votre maison est-elle implantée ?",
-        "short": "Implantation",
-        "subtitle": "La position dans la rangée compte pour l'évaluation.",
-        "options": {
-          "INDIVIDUELLE": "Individuelle",
-          "JUMELEE": "Jumelée",
-          "MITOYENNE_CENTRALE": "Mitoyenne centrale",
-          "MITOYENNE_ANGLE": "Mitoyenne d'angle"
-        }
+          "PLUSIEURS_APPARTEMENTS": "Plusieurs appartements dans un immeuble",
+          "GRAND_ENSEMBLE": "Grand ensemble",
+          "GRAND_ENSEMBLE_sub": "Immeuble de rapport"
+        },
+        "annexe": "Le bien a-t-il un appartement annexe ?",
+        "annexeInfo": "Un appartement annexe (Einliegerwohnung) est un logement indépendant dans la maison — son loyer peut compter comme revenu.",
+        "annexeLouee": "L'appartement annexe est-il loué ?",
+        "revenuAnnexe": "Revenu locatif de l'appartement annexe (net/an)"
       },
       "adresse": {
-        "title": "Où se trouve le bien ?",
-        "short": "Adresse",
-        "subtitle": "NPA ou localité, puis la rue.",
-        "info": "L'adresse sert à l'évaluation du bien. Les taux, eux, sont nationaux.",
-        "npaPlaceholder": "NPA ou localité (p.ex. 1003 ou Lausanne)",
-        "ruePlaceholder": "Rue et numéro",
-        "mapConfirm": "C'est bien là",
-        "mapWrong": "Corriger l'adresse",
-        "mapLoading": "Chargement de la carte…",
-        "mapUnavailable": "Carte indisponible pour le moment — vérifiez simplement l'adresse saisie."
-      },
-      "anneeConstruction": {
-        "title": "Année de construction ?",
-        "short": "Année de construction",
-        "renovationAsk": "Rénovation majeure depuis ?",
-        "renovationTitle": "En quelle année ?"
-      },
-      "pieces": {
-        "title": "Combien de pièces ?",
-        "short": "Pièces",
-        "subtitle": "Selon le standard suisse (cuisine non comptée)."
-      },
-      "sallesEau": {
-        "title": "Vos salles d'eau ?",
-        "short": "Salles d'eau",
-        "baignoire": "Baignoires",
-        "douche": "Douches",
-        "wc": "WC séparés"
-      },
-      "etatBien": {
-        "title": "Dans quel état est le bien ?",
-        "short": "État du bien",
-        "subtitle": "Votre estimation honnête suffit — cela affine l'évaluation.",
-        "cuisine": "Cuisine",
-        "sallesBains": "Salles de bains",
-        "interieur": "Intérieur général",
-        "exterieur": "Extérieur / façade",
-        "scale": {
-          "tresBon": "Très bon",
-          "bon": "Bon",
-          "moyen": "Moyen",
-          "mauvais": "Mauvais"
-        }
+        "title": "Où se situe le bien ?",
+        "short": "Localisation",
+        "subtitle": "NPA ou localité — les taux varient selon la région.",
+        "info": "La localisation sert à l'évaluation du bien et au choix des prêteurs actifs dans votre canton.",
+        "npaPlaceholder": "p.ex. 1003 ou Lausanne"
       },
       "chauffage": {
-        "title": "Quel chauffage ?",
+        "title": "Comment le bien est-il chauffé ?",
         "short": "Chauffage",
         "options": {
-          "pompe-a-chaleur": "Pompe à chaleur",
-          "gaz": "Gaz",
           "mazout": "Mazout",
-          "pellets": "Bois / pellets",
-          "electrique": "Électrique",
-          "reseau": "Chauffage à distance",
-          "autre": "Autre"
+          "gaz": "Gaz",
+          "pac": "Pompe à chaleur (air-eau ou géothermie)",
+          "distance": "Chauffage à distance",
+          "bois": "Bois (copeaux, pellets, bûches)",
+          "electrique": "Électrique / à accumulation",
+          "autre": "Autre / inconnu"
         }
       },
       "labelEco": {
-        "title": "Le bien a-t-il un label énergétique ?",
-        "short": "Label énergétique",
-        "info": "Minergie ou CECB A/B : certains prêteurs accordent un rabais « hypothèque verte ». Nous le prenons en compte dans vos offres.",
-        "which": "Lequel ?",
+        "title": "Le bien a-t-il un standard écologique ?",
+        "short": "Standard écologique",
+        "info": "Un label reconnu (Minergie, CECB…) peut donner droit à une « hypothèque verte » : certains prêteurs offrent un rabais de taux.",
         "options": {
-          "Minergie": "Minergie",
-          "Minergie-P": "Minergie-P / A",
-          "CECB-A": "CECB A",
-          "CECB-B": "CECB B",
-          "autre": "Autre"
+          "non": "Non",
+          "minergie": "Minergie",
+          "geak-cecb": "GEAK / CECB",
+          "snbs": "SNBS",
+          "autre": "Autre standard"
         }
       },
       "casSpeciaux": {
-        "title": "Quelques cas particuliers",
-        "short": "Cas particuliers",
-        "subtitle": "Trois questions rapides — répondre Oui ne bloque rien.",
-        "servitudes": "Des servitudes particulières ?",
-        "servitudesInfo": "Droit de passage, droit d'habitation… Un conseiller vérifie leur impact, c'est tout.",
-        "zoneAgricole": "Le bien est-il en zone agricole ?",
-        "nouvelleConstruction": "S'agit-il d'une nouvelle construction ?"
+        "title": "Situations particulières",
+        "short": "Cas spéciaux",
+        "subtitle": "Un « oui » ne bloque rien — il nous aide à choisir les bons prêteurs.",
+        "droitHabitation": "Un droit d'habitation est-il inscrit ?",
+        "usufruit": "Un usufruit est-il inscrit ?",
+        "droitSuperficie": "Le bien est-il en droit de superficie ?",
+        "zoneAgricole": "Le bien est-il en zone agricole (hors zone à bâtir) ?",
+        "noteRF": "Les biens avec inscriptions au registre foncier (droit de préemption…) ne sont pas toujours intermédiables ; pour un crédit de construction, un conseiller vous contacte directement."
       },
       "valeur": {
         "title": "Quelle est la valeur du bien ?",
         "short": "Valeur du bien",
-        "subtitle": "Une estimation actuelle du marché suffit.",
-        "info": "La valeur détermine le taux d'avance (LTV) : plus il est bas, meilleures sont vos conditions."
+        "subtitle": "Votre meilleure estimation suffit pour démarrer.",
+        "info": "La valeur détermine le taux d'avance (LTV). Une évaluation en ligne détaillée arrive bientôt — en attendant, indiquez votre estimation et sa source.",
+        "source": "Source de l'estimation",
+        "sources": {
+          "banque": "Banque",
+          "en-ligne": "Estimation en ligne",
+          "agent": "Agent immobilier",
+          "expert": "Expert accrédité",
+          "propre": "Autre / propre estimation"
+        }
       },
       "prixAchat": {
         "title": "Quel est le prix d'achat ?",
         "short": "Prix d'achat"
       },
       "fondsPropres": {
-        "title": "Comment répartissez-vous le financement ?",
+        "title": "Déterminez vos fonds propres",
         "short": "Fonds propres",
-        "subtitle": "Faites glisser la poignée ou saisissez les montants.",
-        "mortgageLabel": "Hypothèque",
+        "subtitle": "Déplacez la poignée entre hypothèque et fonds propres — les deux champs sont éditables.",
+        "mortgageLabel": "Nouvelle hypothèque",
         "ownFundsLabel": "Fonds propres",
-        "totalLabel": "Prix d'achat"
+        "totalLabel": "Prix d'achat",
+        "note": "La composition des fonds propres (cash, 2e pilier, 3a) sera précisée lors du traitement de votre dossier."
       },
       "tranchesExistantes": {
         "title": "Vos hypothèques actuelles",
         "short": "Hypothèques existantes",
-        "subtitle": "Une entrée par tranche — la plupart des dossiers en ont une ou deux.",
+        "subtitle": "Des tranches à échéances différentes ? Saisissez-les séparément.",
         "info": "L'échéance la plus proche détermine votre fenêtre d'action (12–18 mois avant).",
         "lender": "Prêteur actuel",
         "lenderPlaceholder": "p.ex. BCV, UBS, Raiffeisen…",
@@ -867,38 +860,281 @@
         "totalLabel": "Total des tranches"
       },
       "autresBiens": {
-        "title": "Possédez-vous d'autres biens immobiliers ?",
+        "title": "Un des emprunteurs possède-t-il d'autres biens ?",
         "short": "Autres biens",
-        "type": "Type de bien",
-        "typePlaceholder": "p.ex. appartement de rendement",
-        "valeur": "Valeur estimée",
-        "hypotheque": "Hypothèque restante",
-        "revenuLocatif": "Revenu locatif annuel"
+        "usage": "Quel type de bien ?",
+        "usageOptions": {
+          "OCCUPE": "Bien occupé par le propriétaire",
+          "VACANCES": "Bien de vacances (usage propre)",
+          "LOUE": "Bien loué (investissement)",
+          "PARTIEL": "Partiellement loué"
+        },
+        "locatifUsage": "Type de location",
+        "locatifUsageOptions": {
+          "RESIDENTIEL": "Purement résidentiel",
+          "MIXTE": "Résidentiel et commercial (mixte)",
+          "COMMERCIAL": "Purement commercial (bureaux, dépôts)"
+        },
+        "enSuisse": "Le bien est-il situé en Suisse ?",
+        "genre": "Genre d'objet",
+        "genreOptions": {
+          "MAISON": "Maison",
+          "APPARTEMENT": "Appartement",
+          "MITOYENNE": "Maison mitoyenne",
+          "IMMEUBLE": "Immeuble",
+          "PLUSIEURS_APPARTEMENTS": "Plusieurs appartements"
+        },
+        "annexe": "Appartement annexe ?",
+        "valeur": "Valeur actuelle estimée",
+        "aHypotheque": "Des hypothèques ou prêts sur ce bien ?",
+        "totalHypotheques": "Total des hypothèques et prêts",
+        "amortissementRequis": "Doivent-ils être amortis ? (remboursements contractuels)",
+        "amortissementAnnuel": "Montant d'amortissement annuel",
+        "revenuLocatif": "Revenu locatif net par an"
       },
       "emprunteurIdentite": {
-        "short": "Identité de l'emprunteur"
-      },
-      "emprunteurActivite": {
-        "short": "Activité de l'emprunteur"
+        "title": "Données personnelles",
+        "short": "Identité de l'emprunteur",
+        "nationalite": "Nationalité",
+        "nationaliteOptions": {
+          "SUISSE": "Suisse",
+          "AUTRE": "Autre nationalité",
+          "PLUSIEURS": "Plusieurs nationalités"
+        },
+        "permis": "Permis d'établissement",
+        "permisOptions": {
+          "C": "Permis C",
+          "B": "Permis B",
+          "AUTRE": "Autre"
+        },
+        "fatca": "La personne est-elle citoyenne US ou a-t-elle un lien fiscal avec les USA ?",
+        "fatcaInfo": "Question requise par la réglementation FATCA : certains prêteurs n'acceptent pas les personnes assujetties au fisc américain.",
+        "residenceFuture": "Résidence future",
+        "residenceOptions": {
+          "HABITE_LE_BIEN": "Habitera le bien",
+          "AUTRE_ADRESSE": "À l'avenir à une autre adresse"
+        },
+        "anneeNaissance": "Année de naissance"
       },
       "emprunteurRevenus": {
-        "short": "Revenus de l'emprunteur"
+        "title": "L'emprunteur a-t-il un revenu ?",
+        "short": "Revenus de l'emprunteur",
+        "subtitle": "Ajoutez chaque source de revenu séparément — le total se met à jour en continu.",
+        "info": "Les revenus déterminent la tenue des charges : intérêts théoriques à 5% + amortissement + entretien ne doivent pas dépasser un tiers des revenus.",
+        "categorie": "Type de revenu",
+        "categories": {
+          "ACTIVITE": "Revenu d'activité",
+          "RENTE": "Revenu de rente",
+          "AUTRE": "Autre revenu"
+        },
+        "typeActivite": "Type d'acquisition",
+        "typesActivite": {
+          "SALARIE": "Salarié",
+          "INDEPENDANT": "Indépendant",
+          "ACCESSOIRE": "Activité accessoire",
+          "CHOMAGE": "Indemnités chômage",
+          "ETRANGER": "Revenu étranger"
+        },
+        "typeRente": "Type de rente",
+        "typesRente": {
+          "AVS_AI": "AI / AVS (1er ou 2e pilier)",
+          "AI_3E_PILIER": "AI 3e pilier (3a ou 3b)",
+          "SURVIVANT": "Rente de survivant (veuve, veuf, orphelin)",
+          "ENFANT": "Rente d'enfant (AI ou retraite)",
+          "VIAGERE": "Rente viagère / temporaire",
+          "ETRANGERE": "Rente étrangère"
+        },
+        "typeAutre": "Type",
+        "typesAutre": {
+          "PENSION_ALIMENTAIRE": "Pension alimentaire",
+          "DIVIDENDES": "Revenus de dividendes (participation)",
+          "LOCATIF": "Revenu locatif"
+        },
+        "montantSalarie": "Revenu annuel brut",
+        "montantSalarieInfo": "13e salaire inclus, bonus irréguliers exclus.",
+        "montantIndependant": "Revenu annuel",
+        "montantIndependantInfo": "Estimez si nécessaire.",
+        "montant": "Montant annuel",
+        "bonus3Ans": "Bonus au cours des 3 dernières années ?",
+        "bonusMontant": "Bonus année {n}",
+        "independantDepuis": "Depuis quand êtes-vous indépendant ?",
+        "independantOptions": {
+          "plus3": "Plus de 3 ans",
+          "moins3": "Moins de 3 ans"
+        },
+        "independantCurseur": "L'activité dure depuis moins de…",
+        "durees": {
+          "3m": "3 mois",
+          "6m": "6 mois",
+          "1a": "1 an",
+          "2a": "2 ans",
+          "3a": "3 ans"
+        },
+        "totalLabel": "Total des revenus par an"
       },
       "emprunteurAvoirs": {
-        "short": "Avoirs de l'emprunteur"
+        "title": "L'emprunteur possède-t-il des avoirs ?",
+        "short": "Avoirs de l'emprunteur",
+        "subtitle": "Comptes, pilier 3a, titres… Les avoirs influencent les taux offerts par certains prêteurs.",
+        "categorie": "Catégorie d'avoirs",
+        "categories": {
+          "BANQUE": "Avoirs en banque",
+          "ASSURANCE": "Avoirs auprès d'une assurance",
+          "CAISSE_PENSION": "Avoir auprès d'une caisse de pension",
+          "AUTRE": "Autres avoirs"
+        },
+        "typeBancaire": "Type",
+        "typesBancaires": {
+          "COMPTE": "Solde de compte",
+          "TITRES": "Titres",
+          "COMPTE_3A": "Compte pilier 3a (sans titres)",
+          "TITRES_3A": "Compte-titres pilier 3a",
+          "LIBRE_PASSAGE": "Avoirs de libre passage (compte ou titres)"
+        },
+        "montant": "Montant",
+        "utilisePourAchat": "Utilisé pour l'achat",
+        "totalLabel": "Avoirs totaux"
       },
       "emprunteurPoursuites": {
-        "short": "Poursuites de l'emprunteur"
-      },
-      "montantTotal": {
-        "short": "Montant de l'hypothèque"
+        "title": "La personne a-t-elle des poursuites ouvertes ou terminées ?",
+        "short": "Poursuites de l'emprunteur",
+        "subtitle": "Beaucoup de prêteurs vérifient avec un extrait des poursuites actuel — mieux vaut l'indiquer.",
+        "origine": "Qui a initié la poursuite ?",
+        "origines": {
+          "FISC": "Administration fiscale",
+          "JEU": "Dettes de jeu",
+          "LEASING": "Mensualités de leasing",
+          "INTERETS": "Intérêts de prêts",
+          "AUTRE": "Autre"
+        },
+        "montant": "Montant de la poursuite",
+        "montantInfo": "Selon l'extrait des poursuites.",
+        "soldee": "La poursuite est-elle déjà soldée ?",
+        "soldeeInfo": "L'extrait des poursuites fait foi."
       },
       "tranchesSouhaitees": {
-        "short": "Tranches souhaitées"
+        "title": "Comment structurer votre hypothèque ?",
+        "short": "Configuration des tranches",
+        "subtitle": "Modèle et durée par tranche — splittez pour lisser le risque de taux.",
+        "info": "Fractionner en tranches à échéances différentes lisse le risque de taux, mais peut vous lier au même prêteur. Nos conseillers vous aident à arbitrer.",
+        "produit": "Modèle",
+        "produits": {
+          "SARON": "SARON",
+          "VARIABLE": "Variable",
+          "FIXE": "Taux fixe"
+        },
+        "duree": "Durée",
+        "dureeAnnees": "{years, plural, one {# an} other {# ans}}",
+        "montant": "Montant de la tranche",
+        "dateDebut": "Date de départ",
+        "dateDebutInfo": "Renouvellement : la date de départ = l'échéance de l'ancienne tranche.",
+        "split": "Splitter cette tranche",
+        "totalLabel": "Total des tranches",
+        "reparti": "Réparti",
+        "reste": "Reste à répartir",
+        "depassement": "Dépassement",
+        "sumOk": "Répartition complète",
+        "fromExisting": "Reprendre mes tranches existantes"
       },
-      "dateDebut": {
-        "short": "Date de début"
+      "emprunteurCharges": {
+        "title": "Des dépenses régulières ?",
+        "short": "Charges de l'emprunteur",
+        "subtitle": "Leasing, pensions alimentaires, intérêts de prêts ou petits crédits.",
+        "info": "Les autres dépenses courantes (assurances, téléphone…) ne doivent PAS être saisies.",
+        "type": "Type de charge",
+        "types": {
+          "PENSION_ALIMENTAIRE": "Pensions alimentaires",
+          "LEASING": "Mensualités de leasing",
+          "CREDIT_CONSO": "Crédit à la consommation (mensualités)",
+          "INTERETS_PRET": "Intérêts et remboursement de prêt"
+        },
+        "montant": "Montant par an",
+        "leasingFin": "Jusqu'à quand court le leasing ?",
+        "leasingPlusTard": "échéance ultérieure",
+        "totalLabel": "Charges annuelles totales"
+      },
+      "addEmprunteur": "Y a-t-il d'autres emprunteurs ?",
+      "removeEmprunteur": "Retirer cet emprunteur",
+      "emprunteurTitle": "Emprunteur {ordre}",
+      "achatInfos": {
+        "title": "Informations sur l'achat",
+        "short": "Informations d'achat",
+        "existant": "Le bien est-il existant ou une nouvelle construction ?",
+        "existantOptions": {
+          "existant": "Bien existant",
+          "neuf": "Nouvelle construction"
+        },
+        "prixAchat": "Prix d'achat",
+        "dateFixee": "La date d'achat est-elle déjà fixée ?",
+        "dateFixeeInfo": "Il s'agit de la date d'inscription au registre foncier.",
+        "dateAchat": "Date d'achat",
+        "renovation": "Le bien sera-t-il rénové ou agrandi immédiatement après l'achat ?"
+      },
+      "autresPrets": {
+        "title": "Y a-t-il d'autres prêts liés au bien ?",
+        "short": "Autres prêts",
+        "subtitle": "Uniquement des prêts servant à financer le bien — p.ex. prêt privé ou prêt du vendeur.",
+        "montant": "Montant du prêt",
+        "libelle": "Description (facultatif)"
+      },
+      "nombreEmprunteurs": {
+        "title": "Qui sera emprunteur ?",
+        "short": "Nombre d'emprunteurs",
+        "subtitle": "Tous les emprunteurs doivent être saisis — même sans revenu.",
+        "options": {
+          "UNE": "Une personne",
+          "PLUSIEURS": "Deux personnes ou plus"
+        }
+      },
+      "ajustement": {
+        "title": "Augmenter ou réduire l'hypothèque existante ?",
+        "short": "Ajustement du montant",
+        "options": {
+          "AUCUN": "Pas d'ajustement",
+          "REDUIRE": "Réduire (amortissement unique)",
+          "AUGMENTER": "Augmenter"
+        },
+        "montantReduction": "Montant du remboursement",
+        "montantAugmentation": "Montant de l'augmentation",
+        "raison": "Raison de l'augmentation",
+        "raisons": {
+          "renovation": "Rénovation",
+          "agrandissement": "Agrandissement",
+          "les-deux": "Rénovation et agrandissement",
+          "autre": "Autre raison"
+        }
       }
+    },
+    "rateAlert": {
+      "title": "Restez informé·e des taux",
+      "body": "Recevez l'évolution des taux à votre rythme. Double confirmation par email, désinscription en un clic.",
+      "emailPlaceholder": "votre@email.ch",
+      "frequency": "Fréquence",
+      "frequencies": {
+        "QUOTIDIEN": "Chaque jour",
+        "HEBDOMADAIRE": "Chaque semaine",
+        "MENSUEL": "Chaque mois"
+      },
+      "cta": "M'abonner",
+      "sent": "Presque fini ! Cliquez sur le lien envoyé à {email} pour confirmer votre abonnement.",
+      "confirmed": "Abonnement confirmé — vous recevrez les prochaines mises à jour de taux.",
+      "alreadyConfirmed": "Votre abonnement est déjà actif — fréquence mise à jour.",
+      "error": "L'abonnement a échoué. Vérifiez l'adresse email et réessayez."
+    },
+    "account": {
+      "title": "Retrouvez votre dossier partout",
+      "body": "Recevez un lien de connexion par email : votre dossier vous suit, sans mot de passe. Aucune donnée n'est transmise à un prêteur sans votre accord.",
+      "emailPlaceholder": "votre@email.ch",
+      "cta": "Recevoir mon lien de connexion",
+      "sent": "Lien envoyé à {email} — il est valable une heure.",
+      "throttled": "Un lien vient déjà de partir. Vérifiez votre boîte de réception (et le dossier spam).",
+      "error": "L'envoi a échoué. Vérifiez l'adresse email et réessayez."
     }
+  },
+  "magicLink": {
+    "loading": "Connexion en cours…",
+    "errorTitle": "Ce lien ne fonctionne plus",
+    "errorBody": "Le lien de connexion a expiré ou a déjà été utilisé. Demandez-en un nouveau depuis votre dossier.",
+    "errorCta": "Retour à mon dossier"
   }
 }
