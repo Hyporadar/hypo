@@ -183,3 +183,43 @@
   font-weight: 500;
   font-variant-numeric: tabular-nums;
 }
+
+/* Slider minimaliste (widget de simulation) : piste fine, poignée discrète.
+   Le remplissage vert est fourni en dégradé inline selon la valeur. */
+.hp-range {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 6px;
+  border-radius: 9999px;
+  outline: none;
+}
+.hp-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 16px;
+  width: 16px;
+  border-radius: 9999px;
+  background: var(--color-pilot-600);
+  border: 3px solid white;
+  box-shadow: 0 1px 3px rgba(33, 30, 26, 0.25);
+  cursor: pointer;
+  transition: transform 0.1s ease;
+}
+.hp-range::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+}
+.hp-range::-moz-range-thumb {
+  height: 16px;
+  width: 16px;
+  border-radius: 9999px;
+  background: var(--color-pilot-600);
+  border: 3px solid white;
+  box-shadow: 0 1px 3px rgba(33, 30, 26, 0.25);
+  cursor: pointer;
+}
+.hp-range:focus-visible::-webkit-slider-thumb {
+  box-shadow: 0 0 0 3px var(--color-pilot-200);
+}
+.hp-range:focus-visible::-moz-range-thumb {
+  box-shadow: 0 0 0 3px var(--color-pilot-200);
+}

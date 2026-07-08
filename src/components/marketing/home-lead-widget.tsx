@@ -24,17 +24,20 @@ interface AmountRowProps {
   label: string
   value: number
   max: number
+  step: number
   onChange: (v: number) => void
 }
 
-// Ligne minimaliste : libellé à gauche, champ CHF à droite (sans curseur).
-function AmountRow({ id, label, value, max, onChange }: AmountRowProps) {
+// Ligne : libellé + champ CHF + curseur minimaliste (piste fine, poignée
+// discrète, remplissage vert selon la valeur) pour glisser/ajuster.
+function AmountRow({ id, label, value, max, step, onChange }: AmountRowProps) {
+  const pct = max > 0 ? Math.min(100, (value / max) * 100) : 0
   return (
-    <div className="flex items-center justify-between gap-4">
+    <div className="grid items-center gap-2 sm:grid-cols-[140px_170px_1fr] sm:gap-4">
       <label htmlFor={id} className="text-ink-700 text-sm">
         {label}
       </label>
-      <div className="relative w-48 shrink-0">
+      <div className="relative">
         <input
           id={id}
           inputMode="numeric"
@@ -50,6 +53,19 @@ function AmountRow({ id, label, value, max, onChange }: AmountRowProps) {
           CHF
         </span>
       </div>
+      <input
+        type="range"
+        aria-label={label}
+        min={0}
+        max={max}
+        step={step}
+        value={value}
+        onChange={(e) => onChange(Number(e.target.value))}
+        className="hp-range w-full"
+        style={{
+          background: `linear-gradient(to right, var(--color-pilot-600) ${pct}%, var(--color-line) ${pct}%)`,
+        }}
+      />
     </div>
   )
 }
@@ -154,12 +170,13 @@ export function HomeLeadWidget({ rates }: { rates: WidgetRates }) {
           <p className="text-ink-700 mt-1">{t('subtitle')}</p>
         </div>
 
-        <div className="mx-auto mt-6 max-w-md space-y-3">
+        <div className="mx-auto mt-6 max-w-2xl space-y-4">
           <AmountRow
             id="hw-property"
             label={t('propertyValue')}
             value={propertyValue}
             max={3_000_000}
+            step={50_000}
             onChange={(v) => {
               setPropertyValue(v)
               if (mortgage === 0 && v > 0) setMortgage(Math.round((v * 0.65) / 25_000) * 25_000)
@@ -170,6 +187,7 @@ export function HomeLeadWidget({ rates }: { rates: WidgetRates }) {
             label={t('mortgage')}
             value={mortgage}
             max={2_400_000}
+            step={25_000}
             onChange={setMortgage}
           />
           <AmountRow
@@ -177,15 +195,16 @@ export function HomeLeadWidget({ rates }: { rates: WidgetRates }) {
             label={t('income')}
             value={income}
             max={500_000}
+            step={5_000}
             onChange={setIncome}
           />
-          <div className="flex items-center justify-between gap-4">
+          <div className="grid items-center gap-2 sm:grid-cols-[140px_1fr] sm:gap-4">
             <label htmlFor="hw-plz" className="text-ink-700 text-sm">
               {t('plz')}
             </label>
             <Input
               id="hw-plz"
-              className="h-11 w-48 shrink-0 rounded-full bg-white px-4"
+              className="h-11 rounded-full bg-white px-4"
               placeholder={t('plzPlaceholder')}
               autoComplete="postal-code"
               value={plz}
