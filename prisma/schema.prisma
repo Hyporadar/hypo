@@ -176,6 +176,7 @@ model Lead {
   certificate       Certificate?
   formDrafts        FormDraft[]
   events            ClientEvent[]
+  dossier           Dossier?
 
   @@index([status, funnel])
   @@index([closerId, status])
@@ -394,13 +395,17 @@ enum RateAlertFrequency {
 }
 
 model RateSubscription {
-  id             String             @id @default(cuid())
-  email          String             @unique
-  locale         Locale             @default(fr)
-  frequency      RateAlertFrequency @default(HEBDOMADAIRE)
-  lastSentAt     DateTime?
-  unsubscribedAt DateTime?
-  createdAt      DateTime           @default(now())
+  id               String             @id @default(cuid())
+  email            String             @unique
+  locale           Locale             @default(fr)
+  frequency        RateAlertFrequency @default(HEBDOMADAIRE)
+  dossierId        String? // souscrit depuis le wizard
+  confirmToken     String?            @unique // double opt-in
+  confirmedAt      DateTime?
+  unsubscribeToken String             @unique @default(cuid()) // désinscription 1 clic
+  lastSentAt       DateTime?
+  unsubscribedAt   DateTime?
+  createdAt        DateTime           @default(now())
 
   @@index([frequency, lastSentAt])
 }
@@ -433,4 +438,326 @@ model Appointment {
   createdAt DateTime        @default(now())
 
   @@index([closerId, date])
+}
+
+// ═══════════════════════════════════════════════════════════════════════
+// MODULE DOSSIER — wizard structuré + versionnage immuable (LSFin/LBA)
+// DossierVersion.data (JSON) = vérité immuable, jamais purgée.
+// Les tables structurées = état COURANT dénormalisé (requêtes admin).
+// ═══════════════════════════════════════════════════════════════════════
+
+enum VersionAuthor {
+  LEAD
+  CLOSER
+  ADMIN
+  SYSTEM
+}
+
+enum UsageBien {
+  RESIDENCE_PRINCIPALE
+  RESIDENCE_SECONDAIRE
+  RENDEMENT
+}
+
+enum TypeBien {
+  MAISON
+  APPARTEMENT_PPE
+  MAISON_MITOYENNE
+  IMMEUBLE
+}
+
+enum PositionMaison {
+  INDIVIDUELLE
+  JUMELEE
+  MITOYENNE_CENTRALE
+  MITOYENNE_ANGLE
+}
+
+enum ProduitTranche {
+  FIXE
+  SARON
+  VARIABLE
+}
+
+enum StatutActivite {
+  SALARIE
+  INDEPENDANT
+  RETRAITE
+  SANS_ACTIVITE
+}
+
+enum TypeRevenu {
+  SALAIRE
+  BONUS
+  INDEPENDANT
+  RENTE
+  REVENU_LOCATIF
+  AUTRE
+}
+
+enum TypeCharge {
+  LEASING
+  CREDIT
+  PENSION_ALIMENTAIRE
+  AUTRE
+}
+
+enum TypeAvoir {
+  COMPTE_EPARGNE
+  TITRES
+  PILIER_3A
+  LIBRE_PASSAGE
+  CAPITAL_LPP
+  DONATION
+  AUTRE
+}
+
+enum TypeLender {
+  BANQUE
+  ASSURANCE
+  CAISSE_PENSION
+}
+
+enum DossierEventType {
+  WIZARD_STEP_COMPLETED
+  WIZARD_ABANDONED
+  COMPLEX_CASE_DETECTED
+  RATE_ALERT_SUBSCRIBED
+  OFFERS_VIEWED
+  ACCOUNT_CREATED
+  VERSION_CREATED
+  CONSULTATION
+}
+
+model Dossier {
+  id             String   @id // uuid généré côté client (dossier anonyme)
+  funnel         Funnel
+  locale         Locale   @default(fr)
+  leadId         String?  @unique // rattaché au Lead pipeline au 1er save
+  lead           Lead?    @relation(fields: [leadId], references: [id])
+  userId         String? // rattaché au compte après magic link
+  complex        Boolean  @default(false)
+  complexReasons String[] @default([])
+
+  currentVersionId String? @unique
+  completude       Int      @default(0) // % dénormalisé (liste admin)
+  echeanceProche   DateTime? // min(échéances tranches existantes) — tri admin
+  lastActivityAt   DateTime  @default(now()) // détection d'abandon
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+
+  versions           DossierVersion[]
+  bien               Bien?
+  emprunteurs        Emprunteur[]
+  tranchesExistantes TrancheExistante[]
+  tranchesSouhaitees TrancheSouhaitee[]
+  autresBiens        AutreBien[]
+  dossierEvents      DossierEvent[]
+
+  @@index([echeanceProche])
+  @@index([completude])
+}
+
+// Version immuable : AUCUNE update/delete n'est exposée (traçabilité LSFin/LBA).
+model DossierVersion {
+  id              String        @id @default(cuid())
+  dossierId       String
+  dossier         Dossier       @relation(fields: [dossierId], references: [id], onDelete: Cascade)
+  numero          Int // v1, v2…
+  data            Json // snapshot complet (format DossierData zod)
+  authorType      VersionAuthor
+  authorId        String?
+  authorName      String
+  commentaire     String? // obligatoire si authorType=CLOSER (validé serveur)
+  parentVersionId String?
+  createdAt       DateTime      @default(now())
+
+  @@unique([dossierId, numero])
+  @@index([dossierId, createdAt])
+}
+
+model Bien {
+  id        String  @id @default(cuid())
+  dossierId String  @unique
+  dossier   Dossier @relation(fields: [dossierId], references: [id], onDelete: Cascade)
+
+  usage    UsageBien?
+  type     TypeBien?
+  position PositionMaison?
+
+  rue         String?
+  npa         String?
+  localite    String?
+  canton      String?
+  lat         Decimal? @db.Decimal(9, 6)
+  lng         Decimal? @db.Decimal(9, 6)
+  geoConfirme Boolean  @default(false)
+
+  anneeConstruction Int?
+  anneeRenovation   Int?
+  pieces            Decimal? @db.Decimal(4, 1)
+  sallesEau         Json? // { baignoires, douches, wc }
+  surfaceHabitable  Int?
+  chauffage         String?
+  labelEco          String?
+
+  etatCuisine     Int? // 1..7
+  etatSallesBains Int?
+  etatInterieur   Int?
+  etatExterieur   Int?
+
+  servitudes           Boolean?
+  zoneAgricole         Boolean?
+  nouvelleConstruction Boolean?
+
+  valeur       Decimal? @db.Decimal(12, 2)
+  prixAchat    Decimal? @db.Decimal(12, 2)
+  fondsPropres Decimal? @db.Decimal(12, 2)
+}
+
+model TrancheExistante {
+  id        String         @id @default(cuid())
+  dossierId String
+  dossier   Dossier        @relation(fields: [dossierId], references: [id], onDelete: Cascade)
+  ordre     Int
+  lenderId  String?
+  lender    Lender?        @relation(fields: [lenderId], references: [id])
+  lenderNom String?
+  montant   Decimal        @db.Decimal(12, 2)
+  taux      Decimal?       @db.Decimal(6, 3)
+  produit   ProduitTranche @default(FIXE)
+  echeance  DateTime?
+
+  @@index([dossierId, ordre])
+}
+
+model TrancheSouhaitee {
+  id          String         @id @default(cuid())
+  dossierId   String
+  dossier     Dossier        @relation(fields: [dossierId], references: [id], onDelete: Cascade)
+  ordre       Int
+  produit     ProduitTranche @default(FIXE)
+  dureeAnnees Int?
+  montant     Decimal        @db.Decimal(12, 2)
+
+  @@index([dossierId, ordre])
+}
+
+model Emprunteur {
+  id        String  @id @default(cuid())
+  dossierId String
+  dossier   Dossier @relation(fields: [dossierId], references: [id], onDelete: Cascade)
+  ordre     Int // 1..4
+
+  prenom                      String?
+  nom                         String?
+  anneeNaissance              Int?
+  etatCivil                   String?
+  nationalite                 String?
+  permis                      String?
+  statutActivite              StatutActivite?
+  dureeActiviteRestanteMois   Int?
+  employeur                   String?
+
+  revenus    Revenu[]
+  charges    Charge[]
+  avoirs     Avoir[]
+  poursuites Poursuite[]
+
+  @@unique([dossierId, ordre])
+}
+
+model Revenu {
+  id            String     @id @default(cuid())
+  emprunteurId  String
+  emprunteur    Emprunteur @relation(fields: [emprunteurId], references: [id], onDelete: Cascade)
+  type          TypeRevenu
+  montantAnnuel Decimal    @db.Decimal(12, 2)
+  libelle       String?
+}
+
+model Charge {
+  id              String     @id @default(cuid())
+  emprunteurId    String
+  emprunteur      Emprunteur @relation(fields: [emprunteurId], references: [id], onDelete: Cascade)
+  type            TypeCharge
+  montantAnnuel   Decimal    @db.Decimal(12, 2)
+  echeanceLeasing DateTime?
+}
+
+model Avoir {
+  id              String     @id @default(cuid())
+  emprunteurId    String
+  emprunteur      Emprunteur @relation(fields: [emprunteurId], references: [id], onDelete: Cascade)
+  type            TypeAvoir
+  montant         Decimal    @db.Decimal(12, 2)
+  utilisePourAchat Boolean   @default(false)
+}
+
+model Poursuite {
+  id           String     @id @default(cuid())
+  emprunteurId String
+  emprunteur   Emprunteur @relation(fields: [emprunteurId], references: [id], onDelete: Cascade)
+  soldee       Boolean
+  montant      Decimal?   @db.Decimal(12, 2)
+  motif        String?
+}
+
+model AutreBien {
+  id                  String   @id @default(cuid())
+  dossierId           String
+  dossier             Dossier  @relation(fields: [dossierId], references: [id], onDelete: Cascade)
+  type                String?
+  valeur              Decimal? @db.Decimal(12, 2)
+  hypothequeRestante  Decimal? @db.Decimal(12, 2)
+  revenuLocatifAnnuel Decimal? @db.Decimal(12, 2)
+}
+
+// Prêteurs suisses (~40 seedés) — autocomplete insensible aux accents/abréviations.
+model Lender {
+  id       String     @id @default(cuid())
+  nom      String     @unique
+  nomCourt String
+  alias    String[]   @default([])
+  type     TypeLender
+  actif    Boolean    @default(true)
+
+  tranchesExistantes TrancheExistante[]
+}
+
+// Base NPA suisse (GeoNames, CC-BY) — autocomplete « VD-1003 Lausanne ».
+model SwissLocality {
+  id       String @id @default(cuid())
+  npa      String
+  localite String
+  canton   String
+
+  @@unique([npa, localite])
+  @@index([npa])
+  @@index([localite])
+}
+
+// Événements du wizard + audit log léger (CONSULTATION par rôle).
+model DossierEvent {
+  id        String           @id @default(cuid())
+  dossierId String
+  dossier   Dossier          @relation(fields: [dossierId], references: [id], onDelete: Cascade)
+  type      DossierEventType
+  data      Json?
+  actorType VersionAuthor?
+  actorId   String?
+  createdAt DateTime         @default(now())
+
+  @@index([dossierId, createdAt])
+}
+
+// Magic link « Sauvegarder mon dossier » / « Recevoir mes offres fermes ».
+model MagicLinkToken {
+  id        String    @id @default(cuid())
+  token     String    @unique
+  email     String
+  dossierId String?
+  expiresAt DateTime
+  usedAt    DateTime?
+  createdAt DateTime  @default(now())
 }

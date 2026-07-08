@@ -2,9 +2,13 @@
 // Mot de passe de tous les comptes : « Password123! »
 //   admin@hypopilot.ch, closer1/2@hypopilot.ch, partner1/2@hypopilot.ch,
 //   client1..10@exemple.ch
+import { readFileSync } from 'node:fs'
+import path from 'node:path'
 import { PrismaClient, type Funnel, type LeadStatus, type Locale } from '@prisma/client'
 import bcrypt from 'bcryptjs'
 import { renewalFunnel } from '../src/lib/finance'
+import { saveDossierVersion } from '../src/server/dossier/versioning'
+import type { DossierData } from '../src/lib/dossier/schema'
 
 const prisma = new PrismaClient()
 
@@ -40,6 +44,12 @@ async function main() {
   console.log('Seed HypoPilot…')
 
   // ─── Nettoyage (ordre : enfants → parents) ──────────────────────────
+  await prisma.dossierEvent.deleteMany()
+  await prisma.dossierVersion.deleteMany()
+  await prisma.dossier.deleteMany()
+  await prisma.lender.deleteMany()
+  await prisma.swissLocality.deleteMany()
+  await prisma.magicLinkToken.deleteMany()
   await prisma.appointment.deleteMany()
   await prisma.commissionEntry.deleteMany()
   await prisma.document.deleteMany()
@@ -703,6 +713,299 @@ async function main() {
     })
   }
 
+  // ─── Base NPA suisse (GeoNames, CC-BY) ───────────────────────────────
+  const npa = JSON.parse(
+    readFileSync(path.join(__dirname, 'data', 'npa-ch.json'), 'utf8')
+  ) as Array<{ npa: string; localite: string; canton: string }>
+  await prisma.swissLocality.createMany({ data: npa, skipDuplicates: true })
+
+  // ─── ~40 prêteurs suisses (autocomplete avec alias) ──────────────────
+  const LENDERS_SEED: Array<{
+    nom: string
+    nomCourt: string
+    alias: string[]
+    type: 'BANQUE' | 'ASSURANCE' | 'CAISSE_PENSION'
+  }> = [
+    {
+      nom: 'UBS',
+      nomCourt: 'UBS',
+      alias: ['ubs', 'union de banques suisses', 'credit suisse', 'cs'],
+      type: 'BANQUE',
+    },
+    { nom: 'Raiffeisen', nomCourt: 'Raiffeisen', alias: ['raiffeisen'], type: 'BANQUE' },
+    {
+      nom: 'PostFinance',
+      nomCourt: 'PostFinance',
+      alias: ['postfinance', 'poste'],
+      type: 'BANQUE',
+    },
+    { nom: 'Migros Bank', nomCourt: 'Migros Bank', alias: ['migros'], type: 'BANQUE' },
+    {
+      nom: 'Banque Cantonale Vaudoise',
+      nomCourt: 'BCV',
+      alias: ['bcv', 'vaudoise'],
+      type: 'BANQUE',
+    },
+    {
+      nom: 'Banque Cantonale du Valais',
+      nomCourt: 'BCVs',
+      alias: ['bcv', 'bcvs', 'valais'],
+      type: 'BANQUE',
+    },
+    {
+      nom: 'Banque Cantonale de Genève',
+      nomCourt: 'BCGE',
+      alias: ['bcge', 'geneve'],
+      type: 'BANQUE',
+    },
+    {
+      nom: 'Banque Cantonale de Fribourg',
+      nomCourt: 'BCF',
+      alias: ['bcf', 'fribourg'],
+      type: 'BANQUE',
+    },
+    {
+      nom: 'Banque Cantonale Neuchâteloise',
+      nomCourt: 'BCN',
+      alias: ['bcn', 'neuchatel'],
+      type: 'BANQUE',
+    },
+    { nom: 'Banque Cantonale du Jura', nomCourt: 'BCJ', alias: ['bcj', 'jura'], type: 'BANQUE' },
+    {
+      nom: 'Zürcher Kantonalbank',
+      nomCourt: 'ZKB',
+      alias: ['zkb', 'zurcher', 'zurich kantonalbank'],
+      type: 'BANQUE',
+    },
+    {
+      nom: 'Berner Kantonalbank',
+      nomCourt: 'BEKB',
+      alias: ['bekb', 'bcbe', 'berne'],
+      type: 'BANQUE',
+    },
+    {
+      nom: 'Basler Kantonalbank',
+      nomCourt: 'BKB',
+      alias: ['bkb', 'basel', 'bale'],
+      type: 'BANQUE',
+    },
+    {
+      nom: 'Luzerner Kantonalbank',
+      nomCourt: 'LUKB',
+      alias: ['lukb', 'luzern', 'lucerne'],
+      type: 'BANQUE',
+    },
+    {
+      nom: 'St. Galler Kantonalbank',
+      nomCourt: 'SGKB',
+      alias: ['sgkb', 'st gallen', 'saint gall'],
+      type: 'BANQUE',
+    },
+    {
+      nom: 'Aargauische Kantonalbank',
+      nomCourt: 'AKB',
+      alias: ['akb', 'aargau', 'argovie'],
+      type: 'BANQUE',
+    },
+    {
+      nom: 'Thurgauer Kantonalbank',
+      nomCourt: 'TKB',
+      alias: ['tkb', 'thurgau', 'thurgovie'],
+      type: 'BANQUE',
+    },
+    {
+      nom: 'Graubündner Kantonalbank',
+      nomCourt: 'GKB',
+      alias: ['gkb', 'grisons', 'graubunden'],
+      type: 'BANQUE',
+    },
+    {
+      nom: 'Banca dello Stato del Cantone Ticino',
+      nomCourt: 'BancaStato',
+      alias: ['bancastato', 'ticino', 'tessin'],
+      type: 'BANQUE',
+    },
+    { nom: 'Schwyzer Kantonalbank', nomCourt: 'SZKB', alias: ['szkb', 'schwyz'], type: 'BANQUE' },
+    { nom: 'Zuger Kantonalbank', nomCourt: 'ZugerKB', alias: ['zug', 'zoug'], type: 'BANQUE' },
+    { nom: 'Valiant', nomCourt: 'Valiant', alias: ['valiant'], type: 'BANQUE' },
+    { nom: 'Hypothekarbank Lenzburg', nomCourt: 'HBL', alias: ['hbl', 'lenzburg'], type: 'BANQUE' },
+    { nom: 'Cler', nomCourt: 'Banque Cler', alias: ['cler', 'coop'], type: 'BANQUE' },
+    { nom: 'Banque WIR', nomCourt: 'WIR', alias: ['wir'], type: 'BANQUE' },
+    {
+      nom: "Caisse d'Épargne Riviera",
+      nomCourt: 'CER',
+      alias: ['riviera', 'caisse epargne'],
+      type: 'BANQUE',
+    },
+    {
+      nom: 'Crédit Agricole next bank',
+      nomCourt: 'CA next bank',
+      alias: ['credit agricole', 'ca next'],
+      type: 'BANQUE',
+    },
+    {
+      nom: 'Swiss Life',
+      nomCourt: 'Swiss Life',
+      alias: ['swisslife', 'swiss life'],
+      type: 'ASSURANCE',
+    },
+    { nom: 'AXA', nomCourt: 'AXA', alias: ['axa', 'winterthur'], type: 'ASSURANCE' },
+    { nom: 'Zurich Assurances', nomCourt: 'Zurich', alias: ['zurich'], type: 'ASSURANCE' },
+    { nom: 'Helvetia', nomCourt: 'Helvetia', alias: ['helvetia'], type: 'ASSURANCE' },
+    { nom: 'Bâloise', nomCourt: 'Bâloise', alias: ['baloise', 'basler'], type: 'ASSURANCE' },
+    { nom: 'Generali', nomCourt: 'Generali', alias: ['generali'], type: 'ASSURANCE' },
+    { nom: 'Allianz Suisse', nomCourt: 'Allianz', alias: ['allianz'], type: 'ASSURANCE' },
+    {
+      nom: 'La Mobilière',
+      nomCourt: 'Mobilière',
+      alias: ['mobiliere', 'mobiliar'],
+      type: 'ASSURANCE',
+    },
+    { nom: 'Vaudoise Assurances', nomCourt: 'Vaudoise', alias: ['vaudoise'], type: 'ASSURANCE' },
+    {
+      nom: 'Retraites Populaires',
+      nomCourt: 'Retraites Populaires',
+      alias: ['retraites populaires', 'rp'],
+      type: 'CAISSE_PENSION',
+    },
+    {
+      nom: 'Caisse de pension Migros',
+      nomCourt: 'CPM',
+      alias: ['cpm', 'migros pension'],
+      type: 'CAISSE_PENSION',
+    },
+    { nom: 'Publica', nomCourt: 'Publica', alias: ['publica'], type: 'CAISSE_PENSION' },
+    { nom: 'CAP Prévoyance', nomCourt: 'CAP', alias: ['cap prevoyance'], type: 'CAISSE_PENSION' },
+    { nom: 'Profond', nomCourt: 'Profond', alias: ['profond'], type: 'CAISSE_PENSION' },
+  ]
+  for (const lender of LENDERS_SEED) {
+    await prisma.lender.create({ data: lender })
+  }
+
+  // ─── Dossier de démo avec 3 versions (Client → Closer → Admin) ───────
+  const demoEcheance = monthsFromNow(11).toISOString().slice(0, 10)
+  const demoBase: DossierData = {
+    bien: {
+      usage: 'RESIDENCE_PRINCIPALE',
+      type: 'MAISON',
+      position: 'INDIVIDUELLE',
+      rue: 'Chemin des Vignes 12',
+      npa: '1095',
+      localite: 'Lutry',
+      canton: 'VD',
+      geoConfirme: true,
+      anneeConstruction: 1998,
+      anneeRenovation: 2019,
+      pieces: 5.5,
+      sallesEau: { baignoires: 1, douches: 1, wc: 2 },
+      chauffage: 'pompe-a-chaleur',
+      labelEco: 'Minergie',
+      etatCuisine: 2,
+      etatSallesBains: 3,
+      etatInterieur: 2,
+      etatExterieur: 2,
+      servitudes: false,
+      zoneAgricole: false,
+      nouvelleConstruction: false,
+      valeur: 1_250_000,
+    },
+    tranchesExistantes: [
+      {
+        lenderNom: 'Banque Cantonale Vaudoise',
+        montant: 600_000,
+        taux: 1.9,
+        produit: 'FIXE',
+        echeance: demoEcheance,
+      },
+      {
+        lenderNom: 'Banque Cantonale Vaudoise',
+        montant: 150_000,
+        taux: 1.1,
+        produit: 'SARON',
+        echeance: demoEcheance,
+      },
+    ],
+    montantTotal: 750_000,
+    tranchesSouhaitees: [
+      { produit: 'FIXE', dureeAnnees: 10, montant: 600_000 },
+      { produit: 'SARON', montant: 150_000 },
+    ],
+    dateDebut: demoEcheance,
+    emprunteurs: [
+      {
+        ordre: 1,
+        prenom: 'Jean',
+        nom: 'Rochat',
+        anneeNaissance: 1978,
+        etatCivil: 'marie',
+        nationalite: 'CH',
+        statutActivite: 'SALARIE',
+        employeur: 'Nestlé SA',
+        revenus: [{ type: 'SALAIRE', montantAnnuel: 165_000 }],
+        charges: [{ type: 'LEASING', montantAnnuel: 7_200, echeanceLeasing: '2027-06-01' }],
+        avoirs: [
+          { type: 'PILIER_3A', montant: 85_000, utilisePourAchat: false },
+          { type: 'COMPTE_EPARGNE', montant: 120_000, utilisePourAchat: false },
+        ],
+        poursuites: [],
+      },
+    ],
+    autresBiens: [],
+  }
+  const demoDossierId = 'demo-dossier-0001'
+  await saveDossierVersion({
+    dossierId: demoDossierId,
+    funnel: 'RENOUVELLEMENT_CHAUD',
+    locale: 'fr',
+    data: demoBase,
+    author: { type: 'LEAD', name: 'Client' },
+  })
+  // v2 : le closer corrige le taux et la valeur après appel
+  await saveDossierVersion({
+    dossierId: demoDossierId,
+    funnel: 'RENOUVELLEMENT_CHAUD',
+    data: {
+      ...demoBase,
+      bien: { ...demoBase.bien, valeur: 1_300_000 },
+      tranchesExistantes: [
+        { ...demoBase.tranchesExistantes[0]!, taux: 1.95 },
+        demoBase.tranchesExistantes[1]!,
+      ],
+    },
+    author: { type: 'CLOSER', id: closer1.id, name: 'Marc' },
+    commentaire:
+      'Valeur ajustée après appel client (estimation agence 2025) + taux confirmé sur le relevé.',
+  })
+  // v3 : l'admin complète le revenu bonus
+  await saveDossierVersion({
+    dossierId: demoDossierId,
+    funnel: 'RENOUVELLEMENT_CHAUD',
+    data: {
+      ...demoBase,
+      bien: { ...demoBase.bien, valeur: 1_300_000 },
+      tranchesExistantes: [
+        { ...demoBase.tranchesExistantes[0]!, taux: 1.95 },
+        demoBase.tranchesExistantes[1]!,
+      ],
+      emprunteurs: [
+        {
+          ...demoBase.emprunteurs[0]!,
+          revenus: [
+            { type: 'SALAIRE', montantAnnuel: 165_000 },
+            { type: 'BONUS', montantAnnuel: 15_000 },
+          ],
+        },
+      ],
+    },
+    author: { type: 'ADMIN', id: admin.id, name: 'Alice' },
+    commentaire: 'Ajout du bonus contractuel (certificat de salaire).',
+  })
+  // rattacher le dossier démo au lead chaud du closer 1 (fiche complète)
+  await prisma.dossier.update({
+    where: { id: demoDossierId },
+    data: { leadId: leads[13]!.id },
+  })
+
   const counts = {
     users: await prisma.user.count(),
     leads: await prisma.lead.count(),
@@ -710,6 +1013,9 @@ async function main() {
     signals: await prisma.signal.count(),
     offers: await prisma.offer.count(),
     rates: await prisma.referenceRate.count(),
+    localites: await prisma.swissLocality.count(),
+    lenders: await prisma.lender.count(),
+    dossierVersions: await prisma.dossierVersion.count(),
   }
   console.log('Seed terminé :', counts)
   console.log(`(admin : ${admin.email} / Password123!)`)
