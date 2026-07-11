@@ -13,9 +13,16 @@ import {
 
 export type QuestionStatus = 'untouched' | 'required' | 'complete'
 
-// Une carte blanche par question. Barre de statut fine à gauche :
+// Lueur de statut émanant de SOUS la carte (pas de barre latérale) :
 // neutre (non touchée) / ambre (« Information requise ») / verte (complète).
-// Apparition en fondu (progressive disclosure) quand la précédente est répondue.
+const STATUS_GLOW: Record<QuestionStatus, string> = {
+  complete: '0 16px 34px -14px color-mix(in srgb, var(--color-pilot-600) 55%, transparent)',
+  required: '0 16px 34px -14px color-mix(in srgb, var(--color-ambre-500) 55%, transparent)',
+  untouched: '0 10px 24px -16px color-mix(in srgb, var(--color-ink-900) 22%, transparent)',
+}
+
+// Une carte blanche par question, avec une lueur douce en dessous qui
+// indique le statut. Apparition en fondu (progressive disclosure).
 export function QuestionCard({
   id,
   title,
@@ -62,22 +69,13 @@ export function QuestionCard({
       ref={ref}
       id={`question-${id}`}
       data-status={status}
+      style={{ boxShadow: STATUS_GLOW[status] }}
       className={cn(
-        'animate-in fade-in slide-in-from-bottom-2 relative scroll-mt-28 rounded-xl border bg-white shadow-sm duration-300',
+        'animate-in fade-in slide-in-from-bottom-2 relative scroll-mt-28 rounded-xl border bg-white transition-shadow duration-300',
         flash ? 'border-pilot-600 ring-pilot-200 ring-3' : 'border-line'
       )}
     >
-      {/* Barre de statut sur le bord gauche */}
-      <span
-        aria-hidden
-        className={cn(
-          'absolute inset-y-3 left-0 w-1 rounded-r-full transition-colors',
-          status === 'complete' && 'bg-pilot-600',
-          status === 'required' && 'bg-ambre-500',
-          status === 'untouched' && 'bg-line'
-        )}
-      />
-      <div className="p-5 pl-6 sm:p-6 sm:pl-7">
+      <div className="p-5 sm:p-6">
         <div className="flex items-start justify-between gap-3">
           <div>
             <h3 className="font-display flex items-center gap-2 text-base font-semibold sm:text-lg">
