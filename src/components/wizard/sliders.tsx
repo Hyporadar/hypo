@@ -1,16 +1,20 @@
 'use client'
 
-import { useId, useRef, useState } from 'react'
+import { useId, useRef } from 'react'
 
 import { Input } from '@/components/ui/input'
 import { formatThousands, parseMoney } from '@/components/wizard/inputs'
 import { cn } from '@/lib/utils'
 
-/* Pas d'arrondi de la poignée du SplitSlider. */
-const STEP = 5000
-
 function clamp(v: number, min: number, max: number): number {
   return Math.min(Math.max(v, min), max)
+}
+
+/* Pas d'arrondi adaptatif : fin pour les petits montants, 5'000 pour les gros. */
+function stepFor(total: number): number {
+  if (total >= 100_000) return 5_000
+  if (total >= 10_000) return 1_000
+  return 100
 }
 
 /** Curseur à crans : la valeur rendue est celle du cran, pas son index.
@@ -107,7 +111,7 @@ function CompactAmount({
 }
 
 /** Hypothèque et fonds propres se partagent visuellement la largeur de la barre.
-    Poignée draggable (arrondie au 5'000) + deux champs éditables au clavier. */
+    Piste fine + poignée discrète, draggable au pointeur et au clavier. */
 export function SplitSlider({
   total,
   mortgage,
@@ -124,68 +128,79 @@ export function SplitSlider({
   totalLabel: string
 }) {
   const barRef = useRef<HTMLDivElement>(null)
-  const [dragging, setDragging] = useState(false)
+  const dragging = useRef(false)
   const baseId = useId()
-  const ownFunds = clamp(total - mortgage, 0, total)
-  const ratio = total > 0 ? clamp(mortgage / total, 0, 1) : 0
+  const safeTotal = Math.max(0, total)
+  const step = stepFor(safeTotal)
+  const clampedMortgage = clamp(mortgage, 0, safeTotal)
+  const ownFunds = safeTotal - clampedMortgage
+  const ratio = safeTotal > 0 ? clampedMortgage / safeTotal : 0
 
   function moveTo(clientX: number) {
     const bar = barRef.current
-    if (!bar || total <= 0) return
+    if (!bar || safeTotal <= 0) return
     const rect = bar.getBoundingClientRect()
     const r = clamp((clientX - rect.left) / rect.width, 0, 1)
-    onChange(clamp(Math.round((r * total) / STEP) * STEP, 0, total))
+    onChange(clamp(Math.round((r * safeTotal) / step) * step, 0, safeTotal))
   }
 
   return (
     <div>
+      {/* Piste fine ; toute la zone est la cible du pointeur, la poignée est décorative. */}
       <div
         ref={barRef}
-        className="relative h-12 w-full cursor-pointer touch-none select-none"
+        role="slider"
+        tabIndex={0}
+        aria-label={mortgageLabel}
+        aria-valuemin={0}
+        aria-valuemax={safeTotal}
+        aria-valuenow={clampedMortgage}
+        className="focus-visible:ring-pilot-200 relative flex h-6 w-full cursor-pointer touch-none items-center rounded-full select-none focus-visible:ring-2 focus-visible:outline-none"
         onPointerDown={(e) => {
-          e.currentTarget.setPointerCapture(e.pointerId)
-          setDragging(true)
+          try {
+            e.currentTarget.setPointerCapture(e.pointerId)
+          } catch {
+            // capture indisponible (certains environnements) : le drag marche quand même
+          }
+          dragging.current = true
           moveTo(e.clientX)
         }}
         onPointerMove={(e) => {
-          if (dragging) moveTo(e.clientX)
+          if (dragging.current) moveTo(e.clientX)
         }}
         onPointerUp={(e) => {
+          dragging.current = false
           if (e.currentTarget.hasPointerCapture(e.pointerId)) {
             e.currentTarget.releasePointerCapture(e.pointerId)
           }
-          setDragging(false)
         }}
-        onPointerCancel={() => setDragging(false)}
+        onPointerCancel={() => {
+          dragging.current = false
+        }}
+        onKeyDown={(e) => {
+          if (e.key === 'ArrowLeft' || e.key === 'ArrowDown') {
+            e.preventDefault()
+            onChange(clamp(clampedMortgage - step, 0, safeTotal))
+          }
+          if (e.key === 'ArrowRight' || e.key === 'ArrowUp') {
+            e.preventDefault()
+            onChange(clamp(clampedMortgage + step, 0, safeTotal))
+          }
+        }}
       >
-        <div className="border-line absolute inset-0 flex overflow-hidden rounded-full border">
-          <div className="bg-pilot-600 h-full" style={{ width: `${ratio * 100}%` }} />
-          <div className="bg-ambre-100 h-full flex-1" />
+        <div className="border-line relative h-2 w-full overflow-hidden rounded-full border">
+          <div className="bg-ambre-100 absolute inset-0" />
+          <div className="bg-pilot-600 absolute inset-y-0 left-0" style={{ width: `${ratio * 100}%` }} />
         </div>
-        {/* Poignée : drag au pointeur, flèches au clavier. */}
+        {/* Poignée décorative (pointer-events désactivés → tout va à la piste). */}
         <div
-          role="slider"
-          tabIndex={0}
-          aria-valuemin={0}
-          aria-valuemax={total}
-          aria-valuenow={clamp(mortgage, 0, total)}
-          aria-label={mortgageLabel}
-          onKeyDown={(e) => {
-            if (e.key === 'ArrowLeft' || e.key === 'ArrowDown') {
-              e.preventDefault()
-              onChange(clamp(mortgage - STEP, 0, total))
-            }
-            if (e.key === 'ArrowRight' || e.key === 'ArrowUp') {
-              e.preventDefault()
-              onChange(clamp(mortgage + STEP, 0, total))
-            }
-          }}
-          className="border-pilot-600 focus-visible:ring-pilot-200 absolute top-1/2 h-14 w-4 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 bg-white shadow-sm focus-visible:ring-2 focus-visible:outline-none"
+          aria-hidden
+          className="border-pilot-600 pointer-events-none absolute top-1/2 size-5 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 bg-white shadow-sm"
           style={{ left: `${ratio * 100}%` }}
         />
       </div>
       {/* Champs éditables : modifier l'un recalcule l'autre. */}
-      <div className="mt-3 grid grid-cols-2 gap-3">
+      <div className="mt-4 grid grid-cols-2 gap-3">
         <div>
           <label
             htmlFor={`${baseId}-hypotheque`}
@@ -195,8 +210,8 @@ export function SplitSlider({
           </label>
           <CompactAmount
             id={`${baseId}-hypotheque`}
-            value={clamp(mortgage, 0, total)}
-            onChange={(v) => onChange(clamp(v, 0, total))}
+            value={clampedMortgage}
+            onChange={(v) => onChange(clamp(v, 0, safeTotal))}
           />
         </div>
         <div>
@@ -209,7 +224,7 @@ export function SplitSlider({
           <CompactAmount
             id={`${baseId}-fonds-propres`}
             value={ownFunds}
-            onChange={(v) => onChange(clamp(total - v, 0, total))}
+            onChange={(v) => onChange(clamp(safeTotal - v, 0, safeTotal))}
           />
         </div>
       </div>
