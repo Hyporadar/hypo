@@ -1131,7 +1131,43 @@
     "done": {
       "badge": "Formulaire terminé",
       "title": "Votre dossier est prêt",
-      "body": "Il est enregistré automatiquement. Créez votre accès pour le retrouver et être rappelé gratuitement par un conseiller — ou abonnez-vous simplement à l'évolution des taux."
+      "body": "Il est enregistré automatiquement. Finalisez pour être rappelé gratuitement par un conseiller."
+    },
+    "finalize": {
+      "cta": "Finaliser mon dossier",
+      "ready": {
+        "title": "Votre dossier est prêt 🎉",
+        "body": "Un conseiller peut le passer en revue avec vous et vous obtenir la meilleure offre — gratuitement, sans engagement.",
+        "cta": "Continuer"
+      },
+      "email": {
+        "title": "Votre adresse email",
+        "body": "Pour enregistrer votre dossier et vous permettre d'y revenir quand vous voulez.",
+        "label": "Email",
+        "placeholder": "votre@email.ch",
+        "cta": "Continuer"
+      },
+      "callback": {
+        "title": "Quand vous rappeler ?",
+        "body": "Laissez-nous votre numéro et choisissez le moment qui vous arrange.",
+        "phoneLabel": "Numéro de téléphone",
+        "phonePlaceholder": "079 123 45 67",
+        "dateLabel": "Date souhaitée",
+        "slotLabel": "Plage horaire",
+        "slots": {
+          "matin": "Matin",
+          "apres-midi": "Après-midi",
+          "soir": "Soir"
+        },
+        "cta": "Confirmer le rappel"
+      },
+      "done": {
+        "title": "C'est noté !",
+        "body": "Un conseiller vous rappellera le {date} ({slot}).",
+        "access": "Vous pourrez revoir et compléter votre dossier à tout moment en vous connectant avec votre adresse email.",
+        "close": "Fermer"
+      },
+      "error": "Une erreur est survenue. Réessayez dans un instant."
     }
   },
   "magicLink": {

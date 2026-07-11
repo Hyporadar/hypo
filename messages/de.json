@@ -1131,7 +1131,43 @@
     "done": {
       "badge": "Formular abgeschlossen",
       "title": "Ihr Dossier ist bereit",
-      "body": "Es wird automatisch gespeichert. Erstellen Sie Ihren Zugang, um es wiederzufinden und kostenlos von einem Berater zurückgerufen zu werden — oder abonnieren Sie einfach die Zinsentwicklung."
+      "body": "Es wird automatisch gespeichert. Schliessen Sie ab, um kostenlos von einem Berater zurückgerufen zu werden."
+    },
+    "finalize": {
+      "cta": "Dossier abschliessen",
+      "ready": {
+        "title": "Ihr Dossier ist bereit 🎉",
+        "body": "Ein Berater kann es mit Ihnen durchgehen und Ihnen das beste Angebot besorgen — kostenlos und unverbindlich.",
+        "cta": "Weiter"
+      },
+      "email": {
+        "title": "Ihre E-Mail-Adresse",
+        "body": "Um Ihr Dossier zu speichern und Ihnen jederzeit den Zugriff zu ermöglichen.",
+        "label": "E-Mail",
+        "placeholder": "ihre@email.ch",
+        "cta": "Weiter"
+      },
+      "callback": {
+        "title": "Wann sollen wir Sie zurückrufen?",
+        "body": "Hinterlassen Sie uns Ihre Nummer und wählen Sie den passenden Moment.",
+        "phoneLabel": "Telefonnummer",
+        "phonePlaceholder": "079 123 45 67",
+        "dateLabel": "Gewünschtes Datum",
+        "slotLabel": "Zeitfenster",
+        "slots": {
+          "matin": "Vormittag",
+          "apres-midi": "Nachmittag",
+          "soir": "Abend"
+        },
+        "cta": "Rückruf bestätigen"
+      },
+      "done": {
+        "title": "Notiert!",
+        "body": "Ein Berater ruft Sie am {date} ({slot}) zurück.",
+        "access": "Sie können Ihr Dossier jederzeit einsehen und ergänzen, indem Sie sich mit Ihrer E-Mail-Adresse anmelden.",
+        "close": "Schliessen"
+      },
+      "error": "Ein Fehler ist aufgetreten. Bitte versuchen Sie es gleich erneut."
     }
   },
   "magicLink": {

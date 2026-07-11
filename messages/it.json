@@ -1131,7 +1131,43 @@
     "done": {
       "badge": "Modulo completato",
       "title": "Il vostro dossier è pronto",
-      "body": "È salvato automaticamente. Create il vostro accesso per ritrovarlo ed essere richiamati gratuitamente da un consulente — oppure abbonatevi semplicemente all'evoluzione dei tassi."
+      "body": "È salvato automaticamente. Finalizzate per essere richiamati gratuitamente da un consulente."
+    },
+    "finalize": {
+      "cta": "Finalizzare il dossier",
+      "ready": {
+        "title": "Il vostro dossier è pronto 🎉",
+        "body": "Un consulente può esaminarlo con voi e ottenervi la migliore offerta — gratuitamente, senza impegno.",
+        "cta": "Continuare"
+      },
+      "email": {
+        "title": "Il vostro indirizzo email",
+        "body": "Per salvare il vostro dossier e permettervi di riprenderlo quando volete.",
+        "label": "Email",
+        "placeholder": "vostra@email.ch",
+        "cta": "Continuare"
+      },
+      "callback": {
+        "title": "Quando richiamarvi?",
+        "body": "Lasciateci il vostro numero e scegliete il momento che preferite.",
+        "phoneLabel": "Numero di telefono",
+        "phonePlaceholder": "079 123 45 67",
+        "dateLabel": "Data desiderata",
+        "slotLabel": "Fascia oraria",
+        "slots": {
+          "matin": "Mattina",
+          "apres-midi": "Pomeriggio",
+          "soir": "Sera"
+        },
+        "cta": "Confermare il richiamo"
+      },
+      "done": {
+        "title": "Annotato!",
+        "body": "Un consulente vi richiamerà il {date} ({slot}).",
+        "access": "Potrete rivedere e completare il vostro dossier in qualsiasi momento accedendo con il vostro indirizzo email.",
+        "close": "Chiudere"
+      },
+      "error": "Si è verificato un errore. Riprovate tra un istante."
     }
   },
   "magicLink": {

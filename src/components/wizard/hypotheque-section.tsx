@@ -1,9 +1,8 @@
 'use client'
 
-import { useState, useTransition } from 'react'
-import { useSearchParams } from 'next/navigation'
+import { useState } from 'react'
 import { useTranslations } from 'next-intl'
-import { BellRing, CheckCircle2, MailCheck, Send, Split } from 'lucide-react'
+import { CheckCircle2, Split } from 'lucide-react'
 import type { Funnel } from '@prisma/client'
 import { formatCHF } from '@/lib/format'
 import {
@@ -16,10 +15,8 @@ import { AmountInput } from '@/components/wizard/inputs'
 import { OptionList } from '@/components/wizard/option-list'
 import { SplitSlider } from '@/components/wizard/sliders'
 import { RepeatableGroup } from '@/components/wizard/repeatable-group'
-import { subscribeRateAlertFromDossier } from '@/server/actions/rate-alerts'
-import { requestMagicLink } from '@/server/actions/magic-link'
+import { FinalizeDialog } from '@/components/wizard/finalize-dialog'
 import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import {
   Select,
@@ -60,6 +57,7 @@ export function HypothequeSection({
   const t = useTranslations('wizard.questions')
   const tc = useTranslations('wizard.common')
   const tw = useTranslations('wizard')
+  const [finalizeOpen, setFinalizeOpen] = useState(false)
 
   const total = deriveMontantTotal(funnel, data)
   const tranches = data.tranchesSouhaitees
@@ -404,157 +402,30 @@ export function HypothequeSection({
         </QuestionCard>
       ) : null}
 
-      {/* Clôture du formulaire : c'est la dernière étape. */}
+      {/* Clôture : bouton qui ouvre la popup de finalisation. */}
       {showConversionCards ? (
-        <>
-          <div className="border-line mt-4 border-t pt-6 text-center">
-            <p className="bg-pilot-50 text-pilot-700 mx-auto inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-medium">
-              <CheckCircle2 className="size-3.5" />
-              {tw('done.badge')}
-            </p>
-            <h2 className="font-display mt-3 text-xl font-semibold">{tw('done.title')}</h2>
-            <p className="text-ink-500 mx-auto mt-1 max-w-md text-sm leading-relaxed">
-              {tw('done.body')}
-            </p>
-          </div>
-          <RateAlertCard dossierId={dossierId} />
-          <AccountCard dossierId={dossierId} />
-        </>
+        <div className="border-line mt-4 rounded-xl border bg-white p-6 text-center">
+          <p className="bg-pilot-50 text-pilot-700 mx-auto inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-medium">
+            <CheckCircle2 className="size-3.5" />
+            {tw('done.badge')}
+          </p>
+          <h2 className="font-display mt-3 text-xl font-semibold">{tw('done.title')}</h2>
+          <p className="text-ink-500 mx-auto mt-1 mb-4 max-w-md text-sm leading-relaxed">
+            {tw('done.body')}
+          </p>
+          <Button size="lg" onClick={() => setFinalizeOpen(true)}>
+            {tw('finalize.cta')}
+          </Button>
+          <FinalizeDialog
+            open={finalizeOpen}
+            onOpenChange={setFinalizeOpen}
+            dossierId={dossierId}
+            funnel={funnel}
+            data={data}
+          />
+        </div>
       ) : null}
     </div>
   )
 }
 
-// ─── Abonnement aux taux — double opt-in ───────────────────────────────
-function RateAlertCard({ dossierId }: { dossierId: string }) {
-  const t = useTranslations('wizard.rateAlert')
-  const searchParams = useSearchParams()
-  const confirmedViaLink = searchParams.get('rateAlert') === 'confirmed'
-  const [email, setEmail] = useState('')
-  const [frequency, setFrequency] = useState<'QUOTIDIEN' | 'HEBDOMADAIRE' | 'MENSUEL'>(
-    'HEBDOMADAIRE'
-  )
-  const [state, setState] = useState<'idle' | 'sent' | 'already' | 'error'>('idle')
-  const [pending, startTransition] = useTransition()
-
-  function submit() {
-    startTransition(async () => {
-      const result = await subscribeRateAlertFromDossier({ email, frequency, dossierId }).catch(
-        () => ({ ok: false as const })
-      )
-      if (!result.ok) setState('error')
-      else setState('alreadyConfirmed' in result && result.alreadyConfirmed ? 'already' : 'sent')
-    })
-  }
-
-  return (
-    <div className="border-line rounded-xl border bg-white p-5">
-      <h3 className="font-display flex items-center gap-2 font-semibold">
-        <BellRing className="text-pilot-600 size-4" />
-        {t('title')}
-      </h3>
-      {confirmedViaLink ? (
-        <p className="text-pilot-700 mt-2 flex items-center gap-2 text-sm">
-          <CheckCircle2 className="size-4 shrink-0" />
-          {t('confirmed')}
-        </p>
-      ) : state === 'sent' ? (
-        <p className="text-pilot-700 mt-2 flex items-center gap-2 text-sm">
-          <MailCheck className="size-4 shrink-0" />
-          {t('sent', { email })}
-        </p>
-      ) : state === 'already' ? (
-        <p className="text-pilot-700 mt-2 text-sm">{t('alreadyConfirmed')}</p>
-      ) : (
-        <>
-          <p className="text-ink-500 mt-1 text-sm leading-relaxed">{t('body')}</p>
-          <div className="mt-3 flex flex-col gap-2 sm:flex-row">
-            <Input
-              type="email"
-              inputMode="email"
-              autoComplete="email"
-              aria-label={t('emailPlaceholder')}
-              placeholder={t('emailPlaceholder')}
-              className="h-11 flex-1"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-            <Select value={frequency} onValueChange={(v) => setFrequency(v as typeof frequency)}>
-              <SelectTrigger aria-label={t('frequency')} className="h-11 sm:w-44">
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                {(['QUOTIDIEN', 'HEBDOMADAIRE', 'MENSUEL'] as const).map((f) => (
-                  <SelectItem key={f} value={f}>
-                    {t(`frequencies.${f}`)}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-            <Button type="button" disabled={pending || !email.includes('@')} onClick={submit}>
-              {t('cta')}
-            </Button>
-          </div>
-          {state === 'error' ? <p className="text-erreur mt-2 text-sm">{t('error')}</p> : null}
-        </>
-      )}
-    </div>
-  )
-}
-
-// ─── Compte sans mot de passe (magic link) ─────────────────────────────
-function AccountCard({ dossierId }: { dossierId: string }) {
-  const t = useTranslations('wizard.account')
-  const [email, setEmail] = useState('')
-  const [state, setState] = useState<'idle' | 'sent' | 'throttled' | 'error'>('idle')
-  const [pending, startTransition] = useTransition()
-
-  function submit() {
-    startTransition(async () => {
-      const result = await requestMagicLink({ email, dossierId }).catch(() => ({
-        ok: false as const,
-        error: 'server' as const,
-      }))
-      if (result.ok) setState('sent')
-      else setState(result.error === 'throttled' ? 'throttled' : 'error')
-    })
-  }
-
-  return (
-    <div className="border-pilot-200 bg-pilot-50/50 rounded-xl border p-5">
-      <h3 className="font-display flex items-center gap-2 font-semibold">
-        <Send className="text-pilot-600 size-4" />
-        {t('title')}
-      </h3>
-      {state === 'sent' ? (
-        <p className="text-pilot-700 mt-2 flex items-center gap-2 text-sm">
-          <MailCheck className="size-4 shrink-0" />
-          {t('sent', { email })}
-        </p>
-      ) : (
-        <>
-          <p className="text-ink-700 mt-1 text-sm leading-relaxed">{t('body')}</p>
-          <div className="mt-3 flex flex-col gap-2 sm:flex-row">
-            <Input
-              type="email"
-              inputMode="email"
-              autoComplete="email"
-              aria-label={t('emailPlaceholder')}
-              placeholder={t('emailPlaceholder')}
-              className="h-11 flex-1 bg-white"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-            <Button type="button" disabled={pending || !email.includes('@')} onClick={submit}>
-              {t('cta')}
-            </Button>
-          </div>
-          {state === 'throttled' ? (
-            <p className="text-ambre-700 mt-2 text-sm">{t('throttled')}</p>
-          ) : null}
-          {state === 'error' ? <p className="text-erreur mt-2 text-sm">{t('error')}</p> : null}
-        </>
-      )}
-    </div>
-  )
-}
