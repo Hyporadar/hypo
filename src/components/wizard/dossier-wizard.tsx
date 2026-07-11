@@ -153,14 +153,21 @@ export function DossierWizard({ initialFunnel }: { initialFunnel?: Funnel }) {
             >
               {wizard.funnel === 'ACHAT' ? t('nav.toRenewal') : t('nav.toBuy')}
             </button>
-            <Button
-              type="button"
-              disabled={sectionIndex === SECTIONS.length - 1}
-              onClick={() => setSection(SECTIONS[sectionIndex + 1] ?? 'hypotheque')}
-            >
-              {t('nav.next')}
-              <ArrowRight data-icon="inline-end" />
-            </Button>
+            {sectionIndex < SECTIONS.length - 1 ? (
+              <Button
+                type="button"
+                onClick={() => setSection(SECTIONS[sectionIndex + 1] ?? 'hypotheque')}
+              >
+                {t('nav.next')}
+                <ArrowRight data-icon="inline-end" />
+              </Button>
+            ) : (
+              // Dernière section : plus de « Suivant » mort, on marque la fin.
+              <span className="text-pilot-700 flex items-center gap-1.5 text-sm font-medium">
+                <Check className="size-4" />
+                {t('nav.finished')}
+              </span>
+            )}
           </div>
         </div>
       </div>

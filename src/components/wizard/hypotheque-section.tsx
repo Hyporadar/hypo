@@ -59,6 +59,7 @@ export function HypothequeSection({
 }) {
   const t = useTranslations('wizard.questions')
   const tc = useTranslations('wizard.common')
+  const tw = useTranslations('wizard')
 
   const total = deriveMontantTotal(funnel, data)
   const tranches = data.tranchesSouhaitees
@@ -403,9 +404,19 @@ export function HypothequeSection({
         </QuestionCard>
       ) : null}
 
-      {/* Alerte taux (double opt-in) + compte (magic link) */}
+      {/* Clôture du formulaire : c'est la dernière étape. */}
       {showConversionCards ? (
         <>
+          <div className="border-line mt-4 border-t pt-6 text-center">
+            <p className="bg-pilot-50 text-pilot-700 mx-auto inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-medium">
+              <CheckCircle2 className="size-3.5" />
+              {tw('done.badge')}
+            </p>
+            <h2 className="font-display mt-3 text-xl font-semibold">{tw('done.title')}</h2>
+            <p className="text-ink-500 mx-auto mt-1 max-w-md text-sm leading-relaxed">
+              {tw('done.body')}
+            </p>
+          </div>
           <RateAlertCard dossierId={dossierId} />
           <AccountCard dossierId={dossierId} />
         </>

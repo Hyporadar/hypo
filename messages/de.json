@@ -664,7 +664,8 @@
       "switchFunnel": "Transaktionsart wechseln",
       "switchWarning": "Beim Wechsel der Transaktionsart müssen einzelne Angaben ergänzt oder neu erfasst werden. Fortfahren?",
       "toBuy": "Zum Kauf wechseln",
-      "toRenewal": "Zur Ablösung wechseln"
+      "toRenewal": "Zur Ablösung wechseln",
+      "finished": "Dossier vollständig"
     },
     "missing": {
       "title": "Fehlende Angaben"
@@ -1126,6 +1127,11 @@
         "sumOk": "Vollständig verteilt",
         "fromExisting": "Meine bestehenden Tranchen übernehmen"
       }
+    },
+    "done": {
+      "badge": "Formular abgeschlossen",
+      "title": "Ihr Dossier ist bereit",
+      "body": "Es wird automatisch gespeichert. Erstellen Sie Ihren Zugang, um es wiederzufinden und kostenlos von einem Berater zurückgerufen zu werden — oder abonnieren Sie einfach die Zinsentwicklung."
     }
   },
   "magicLink": {

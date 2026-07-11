@@ -664,7 +664,8 @@
       "switchFunnel": "Cambiare tipo di operazione",
       "switchWarning": "Cambiando tipo di operazione, alcune informazioni dovranno essere completate o reinserite. Continuare?",
       "toBuy": "Passare all'acquisto",
-      "toRenewal": "Passare al rinnovo"
+      "toRenewal": "Passare al rinnovo",
+      "finished": "Dossier completo"
     },
     "missing": {
       "title": "Informazioni mancanti"
@@ -1126,6 +1127,11 @@
         "sumOk": "Ripartizione completa",
         "fromExisting": "Riprendere le mie tranche esistenti"
       }
+    },
+    "done": {
+      "badge": "Modulo completato",
+      "title": "Il vostro dossier è pronto",
+      "body": "È salvato automaticamente. Create il vostro accesso per ritrovarlo ed essere richiamati gratuitamente da un consulente — oppure abbonatevi semplicemente all'evoluzione dei tassi."
     }
   },
   "magicLink": {
