@@ -727,14 +727,16 @@ model Lender {
 
 // Base NPA suisse (GeoNames, CC-BY) — autocomplete « VD-1003 Lausanne ».
 model SwissLocality {
-  id       String @id @default(cuid())
-  npa      String
-  localite String
-  canton   String
+  id        String @id @default(cuid())
+  npa       String
+  localite  String
+  canton    String
+  recherche String @default("") // « npa localite canton » normalisé (sans accents) pour l'autocomplete
 
   @@unique([npa, localite])
   @@index([npa])
   @@index([localite])
+  @@index([recherche])
 }
 
 // Événements du wizard + audit log léger (CONSULTATION par rôle).

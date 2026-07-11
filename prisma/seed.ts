@@ -717,7 +717,19 @@ async function main() {
   const npa = JSON.parse(
     readFileSync(path.join(__dirname, 'data', 'npa-ch.json'), 'utf8')
   ) as Array<{ npa: string; localite: string; canton: string }>
-  await prisma.swissLocality.createMany({ data: npa, skipDuplicates: true })
+  const normalize = (s: string) =>
+    s
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[̀-ͯ]/g, '')
+      .trim()
+  await prisma.swissLocality.createMany({
+    data: npa.map((l) => ({
+      ...l,
+      recherche: normalize(`${l.npa} ${l.localite} ${l.canton}`),
+    })),
+    skipDuplicates: true,
+  })
 
   // ─── ~40 prêteurs suisses (autocomplete avec alias) ──────────────────
   const LENDERS_SEED: Array<{

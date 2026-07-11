@@ -1,15 +1,9 @@
 import { NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
+import { normalize } from '@/lib/normalize'
 
 // Autocomplete des prêteurs — insensible aux accents et aux abréviations
 // (« BCV » → Banque Cantonale Vaudoise ET du Valais, via Lender.alias).
-function normalize(s: string): string {
-  return s
-    .toLowerCase()
-    .normalize('NFD')
-    .replace(/[̀-ͯ]/g, '')
-}
-
 export async function GET(req: Request) {
   const q = normalize(new URL(req.url).searchParams.get('q')?.trim() ?? '')
   if (q.length < 2) return NextResponse.json({ results: [] })

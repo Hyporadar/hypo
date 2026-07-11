@@ -1,16 +1,17 @@
 import { NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
+import { normalize } from '@/lib/normalize'
 
 // Autocomplete NPA/localité — résultat au format « VD-1003 Lausanne ».
+// Recherche sur une colonne normalisée : insensible à la casse ET aux
+// accents (« geneve » → Genève), et par NPA ou par nom indifféremment.
 export async function GET(req: Request) {
-  const q = new URL(req.url).searchParams.get('q')?.trim() ?? ''
-  if (q.length < 2) return NextResponse.json({ results: [] })
+  const raw = new URL(req.url).searchParams.get('q')?.trim() ?? ''
+  if (raw.length < 2) return NextResponse.json({ results: [] })
+  const q = normalize(raw)
 
-  const isNumeric = /^\d+$/.test(q)
   const results = await prisma.swissLocality.findMany({
-    where: isNumeric
-      ? { npa: { startsWith: q } }
-      : { localite: { contains: q, mode: 'insensitive' } },
+    where: { recherche: { contains: q } },
     orderBy: [{ npa: 'asc' }, { localite: 'asc' }],
     take: 8,
   })
