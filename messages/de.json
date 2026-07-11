@@ -874,7 +874,8 @@
         "mortgageLabel": "Neue Hypothek",
         "ownFundsLabel": "Eigenmittel",
         "totalLabel": "Kaufpreis",
-        "note": "Die Zusammensetzung der Eigenmittel (Bargeld, 2. Säule, 3a) wird bei der Bearbeitung Ihres Dossiers präzisiert."
+        "note": "Die Zusammensetzung der Eigenmittel (Bargeld, 2. Säule, 3a) wird bei der Bearbeitung Ihres Dossiers präzisiert.",
+        "prixAchatPrompt": "Geben Sie den Kaufpreis an, um Hypothek und Eigenmittel aufzuteilen."
       },
       "tranchesExistantes": {
         "title": "Ihre aktuellen Hypotheken",

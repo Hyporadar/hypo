@@ -128,7 +128,30 @@ export function HypothequeSection({
               <p className="text-ink-500 text-xs leading-relaxed">{t('fondsPropres.note')}</p>
             </div>
           ) : (
-            <p className="text-ink-500 text-sm">{t('achatInfos.prixAchat')} — {tc('sensitive')}</p>
+            /* Pas encore de prix d'achat (ex. bascule depuis le renouvellement) :
+               on le demande ici, puis le curseur apparaît avec un défaut à 20%. */
+            <div className="space-y-2">
+              <Label htmlFor="w-fp-prix">{t('achatInfos.prixAchat')}</Label>
+              <AmountInput
+                id="w-fp-prix"
+                value={data.bien.prixAchat ?? null}
+                onChange={(v) => {
+                  if (!v) {
+                    patch((prev) => ({ ...prev, bien: { ...prev.bien, prixAchat: null } }))
+                    return
+                  }
+                  const fp = Math.round((v * 0.2) / 5000) * 5000
+                  patch((prev) => ({
+                    ...prev,
+                    montantTotal: v - fp,
+                    bien: { ...prev.bien, prixAchat: v, fondsPropres: fp },
+                  }))
+                }}
+              />
+              <p className="text-ink-500 text-xs leading-relaxed">
+                {t('fondsPropres.prixAchatPrompt')}
+              </p>
+            </div>
           )}
         </QuestionCard>
       ) : (

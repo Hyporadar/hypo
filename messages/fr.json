@@ -835,7 +835,8 @@
         "mortgageLabel": "Nouvelle hypothèque",
         "ownFundsLabel": "Fonds propres",
         "totalLabel": "Prix d'achat",
-        "note": "La composition des fonds propres (cash, 2e pilier, 3a) sera précisée lors du traitement de votre dossier."
+        "note": "La composition des fonds propres (cash, 2e pilier, 3a) sera précisée lors du traitement de votre dossier.",
+        "prixAchatPrompt": "Indiquez le prix d'achat pour répartir hypothèque et fonds propres."
       },
       "tranchesExistantes": {
         "title": "Vos hypothèques actuelles",

@@ -874,7 +874,8 @@
         "mortgageLabel": "Nuova ipoteca",
         "ownFundsLabel": "Fondi propri",
         "totalLabel": "Prezzo d'acquisto",
-        "note": "La composizione dei fondi propri (contanti, 2° pilastro, 3a) sarà precisata durante l'elaborazione del dossier."
+        "note": "La composizione dei fondi propri (contanti, 2° pilastro, 3a) sarà precisata durante l'elaborazione del dossier.",
+        "prixAchatPrompt": "Indicate il prezzo d'acquisto per ripartire ipoteca e fondi propri."
       },
       "tranchesExistantes": {
         "title": "Le vostre ipoteche attuali",
