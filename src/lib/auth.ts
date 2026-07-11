@@ -1,6 +1,7 @@
 import bcrypt from 'bcryptjs'
 import NextAuth from 'next-auth'
 import Credentials from 'next-auth/providers/credentials'
+import Google from 'next-auth/providers/google'
 import { z } from 'zod'
 import { authConfig } from '@/lib/auth.config'
 import { prisma } from '@/lib/prisma'
@@ -14,8 +15,56 @@ const magicLinkSchema = z.object({
   token: z.string().min(1),
 })
 
+// Google OAuth : activé uniquement si les identifiants sont configurés
+// (AUTH_GOOGLE_ID / AUTH_GOOGLE_SECRET). Sinon le bouton n'apparaît pas.
+export const googleEnabled = Boolean(
+  process.env.AUTH_GOOGLE_ID && process.env.AUTH_GOOGLE_SECRET
+)
+
 export const { handlers, auth, signIn, signOut } = NextAuth({
   ...authConfig,
+  callbacks: {
+    ...authConfig.callbacks,
+    // Connexion Google : on crée le compte CLIENT s'il n'existe pas encore.
+    async signIn({ user, account }) {
+      if (account?.provider !== 'google') return true
+      const email = user.email?.toLowerCase()
+      if (!email) return false
+      const existing = await prisma.user.findUnique({ where: { email } })
+      if (!existing) {
+        await prisma.user.create({
+          data: {
+            email,
+            name: user.name ?? email.split('@')[0] ?? email,
+            passwordHash: await bcrypt.hash(crypto.randomUUID(), 12),
+            role: 'CLIENT',
+            locale: 'fr',
+          },
+        })
+      }
+      return true
+    },
+    // role/locale viennent du provider (credentials/magic-link) ou, pour
+    // Google, sont chargés depuis notre table User par email.
+    async jwt({ token, user, account }) {
+      if (user && 'role' in user && user.role) {
+        token.id = user.id
+        token.role = user.role
+        token.locale = user.locale
+      } else if (account?.provider === 'google' && token.email) {
+        const dbUser = await prisma.user.findUnique({
+          where: { email: token.email.toLowerCase() },
+          select: { id: true, role: true, locale: true },
+        })
+        if (dbUser) {
+          token.id = dbUser.id
+          token.role = dbUser.role
+          token.locale = dbUser.locale
+        }
+      }
+      return token
+    },
+  },
   providers: [
     Credentials({
       credentials: {
@@ -130,5 +179,6 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         }
       },
     }),
+    ...(googleEnabled ? [Google] : []),
   ],
 })

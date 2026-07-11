@@ -353,7 +353,9 @@
       "hasAccount": "Bereits ein Konto?",
       "toLogin": "Anmelden",
       "emailTaken": "Mit dieser E-Mail-Adresse besteht bereits ein Konto.",
-      "invalidData": "Bitte überprüfen Sie die Formularfelder."
+      "invalidData": "Bitte überprüfen Sie die Formularfelder.",
+      "googleCta": "Mit Google fortfahren",
+      "or": "oder"
     }
   },
   "app": {

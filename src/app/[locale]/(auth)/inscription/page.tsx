@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
+import { googleEnabled } from '@/lib/auth'
 import { RegisterForm } from '@/components/auth/register-form'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 
@@ -25,7 +26,7 @@ export default async function RegisterPage({ params }: { params: Promise<{ local
         <CardDescription>{t('subtitle')}</CardDescription>
       </CardHeader>
       <CardContent>
-        <RegisterForm />
+        <RegisterForm googleEnabled={googleEnabled} />
       </CardContent>
     </Card>
   )

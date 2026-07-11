@@ -353,7 +353,9 @@
       "hasAccount": "Ha già un conto?",
       "toLogin": "Accedere",
       "emailTaken": "Esiste già un conto con questo indirizzo e-mail.",
-      "invalidData": "Verifichi i campi del modulo."
+      "invalidData": "Verifichi i campi del modulo.",
+      "googleCta": "Continuare con Google",
+      "or": "oppure"
     }
   },
   "app": {

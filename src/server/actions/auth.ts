@@ -16,13 +16,7 @@ export type AuthFormState = {
 }
 
 const registerSchema = z.object({
-  name: z.string().min(2).max(120),
   email: z.string().email(),
-  phone: z
-    .string()
-    .max(30)
-    .optional()
-    .transform((v) => (v === '' ? undefined : v)),
   password: z.string().min(8).max(200),
 })
 
@@ -39,9 +33,7 @@ export async function registerAction(
   const t = await getTranslations('auth.register')
 
   const parsed = registerSchema.safeParse({
-    name: formData.get('name'),
     email: formData.get('email'),
-    phone: formData.get('phone') ?? undefined,
     password: formData.get('password'),
   })
   if (!parsed.success) {
@@ -57,8 +49,8 @@ export async function registerAction(
   await prisma.user.create({
     data: {
       email,
-      name: parsed.data.name,
-      phone: parsed.data.phone ?? null,
+      // Nom dérivé de l'email : complété plus tard (profil / rappel closer).
+      name: email.split('@')[0] ?? email,
       passwordHash: await bcrypt.hash(parsed.data.password, 12),
       role: 'CLIENT',
       locale, // la langue au moment de l'inscription devient la langue du compte
@@ -119,4 +111,11 @@ export async function loginAction(
 export async function signOutAction() {
   const locale = (await getLocale()) as Locale
   await signOut({ redirectTo: `/${locale}` })
+}
+
+/** Connexion / inscription via Google (OAuth). Crée le compte CLIENT au
+    premier passage (voir le callback signIn dans lib/auth.ts). */
+export async function googleSignInAction() {
+  const locale = (await getLocale()) as Locale
+  await signIn('google', { redirectTo: `/${locale}/app` })
 }
