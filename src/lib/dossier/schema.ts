@@ -203,6 +203,7 @@ export const emprunteurSchema = z.object({
   fatca: z.boolean().nullish(), // lien fiscal USA (non-Suisses uniquement)
   residenceFuture: z.enum(['HABITE_LE_BIEN', 'AUTRE_ADRESSE']).nullish(),
   anneeNaissance: annee.nullish(), // 🛡 donnée protégée
+  email: z.string().max(200).nullish(), // contact — envoi de l'offre par email
   // Questions-portes (« Non » persisté)
   aRevenu: z.boolean().nullish(),
   aAvoirs: z.boolean().nullish(),

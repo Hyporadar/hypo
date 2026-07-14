@@ -970,7 +970,10 @@
           "HABITE_LE_BIEN": "Abiterà l'immobile",
           "AUTRE_ADRESSE": "In futuro a un altro indirizzo"
         },
-        "anneeNaissance": "Anno di nascita"
+        "anneeNaissance": "Anno di nascita",
+        "email": "Indirizzo email",
+        "emailPlaceholder": "nome.cognome@email.ch",
+        "emailInfo": "Vi inviamo la vostra offerta personalizzata al termine del questionario."
       },
       "emprunteurRevenus": {
         "title": "Il mutuatario ha un reddito?",

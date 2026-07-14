@@ -915,7 +915,10 @@
           "HABITE_LE_BIEN": "Habitera le bien",
           "AUTRE_ADRESSE": "À l'avenir à une autre adresse"
         },
-        "anneeNaissance": "Année de naissance"
+        "anneeNaissance": "Année de naissance",
+        "email": "Adresse email",
+        "emailPlaceholder": "prenom.nom@email.ch",
+        "emailInfo": "Nous y envoyons votre offre personnalisée dès la fin du questionnaire."
       },
       "emprunteurRevenus": {
         "title": "L'emprunteur a-t-il un revenu ?",

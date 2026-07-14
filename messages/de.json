@@ -970,7 +970,10 @@
           "HABITE_LE_BIEN": "Wird die Liegenschaft bewohnen",
           "AUTRE_ADRESSE": "Künftig an einer anderen Adresse"
         },
-        "anneeNaissance": "Geburtsjahr"
+        "anneeNaissance": "Geburtsjahr",
+        "email": "E-Mail-Adresse",
+        "emailPlaceholder": "vorname.name@email.ch",
+        "emailInfo": "Dorthin senden wir Ihr persönliches Angebot direkt nach dem Fragebogen."
       },
       "emprunteurRevenus": {
         "title": "Hat der Kreditnehmer ein Einkommen?",

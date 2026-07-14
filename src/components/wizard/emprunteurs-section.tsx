@@ -11,6 +11,7 @@ import { AmountInput, YearInput, YesNoToggle } from '@/components/wizard/inputs'
 import { NotchedSlider } from '@/components/wizard/sliders'
 import { RepeatableGroup } from '@/components/wizard/repeatable-group'
 import { Label } from '@/components/ui/label'
+import { Input } from '@/components/ui/input'
 import { Checkbox } from '@/components/ui/checkbox'
 import {
   Select,
@@ -171,7 +172,8 @@ function EmprunteurBlock({
     emp.nationalite != null &&
     (suisse || (emp.permis != null && emp.fatca != null)) &&
     emp.residenceFuture != null &&
-    emp.anneeNaissance != null
+    emp.anneeNaissance != null &&
+    (emp.ordre !== 1 || (emp.email != null && emp.email.includes('@')))
   const revenuComplet = (r: Revenu) =>
     r.montantAnnuel > 0 &&
     (r.categorie != null || r.type != null) &&
@@ -303,6 +305,24 @@ function EmprunteurBlock({
               onChange={(v) => set('anneeNaissance', v)}
             />
           </div>
+          {emp.ordre === 1 ? (
+            <div className="space-y-1.5">
+              <Label htmlFor={`e${emp.ordre}-email`}>{t('emprunteurIdentite.email')}</Label>
+              <Input
+                id={`e${emp.ordre}-email`}
+                type="email"
+                inputMode="email"
+                autoComplete="email"
+                placeholder={t('emprunteurIdentite.emailPlaceholder')}
+                className="h-12"
+                value={emp.email ?? ''}
+                onChange={(e) => set('email', e.target.value || null)}
+              />
+              <p className="text-ink-500 text-xs leading-relaxed">
+                {t('emprunteurIdentite.emailInfo')}
+              </p>
+            </div>
+          ) : null}
         </div>
       </QuestionCard>
 

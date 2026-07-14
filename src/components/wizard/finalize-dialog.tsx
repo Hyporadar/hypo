@@ -49,6 +49,10 @@ export function FinalizeDialog({
     setError(false)
   }
 
+  // Email de contact saisi à l'étape « L'emprunteur » (emprunteur principal).
+  const rawEmail = data.emprunteurs[0]?.email?.trim()
+  const email = rawEmail && /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(rawEmail) ? rawEmail : undefined
+
   function confirm() {
     if (phone.trim().length < 6) return
     setError(false)
@@ -60,16 +64,16 @@ export function FinalizeDialog({
         } catch {
           utm = undefined
         }
-        const result = await submitTestLead({ dossierId, funnel, data, phone, utm }).catch(() => ({
-          ok: false as const,
-        }))
+        const result = await submitTestLead({ dossierId, funnel, data, email, phone, utm }).catch(
+          () => ({ ok: false as const })
+        )
         if (result.ok) setStep('done')
         else setError(true)
         return
       }
       // Vrai produit : on sauvegarde le dossier puis on rattache le lead.
       await saveDossierAction({ dossierId, funnel, data }).catch(() => null)
-      const result = await requestCallback({ dossierId, phone }).catch(() => ({
+      const result = await requestCallback({ dossierId, email, phone }).catch(() => ({
         ok: false as const,
       }))
       if (result.ok) setStep('done')

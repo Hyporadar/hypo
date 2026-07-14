@@ -138,7 +138,8 @@ export function requirements(funnel: Funnel, data: DossierData): RequirementItem
         has(e.nationalite) &&
         (suisse || (has(e.permis) && e.fatca != null)) &&
         has(e.residenceFuture) &&
-        has(e.anneeNaissance)
+        has(e.anneeNaissance) &&
+        (e.ordre !== 1 || (has(e.email) && e.email!.includes('@')))
       const revenuOk = (r: (typeof e.revenus)[number]) =>
         r.montantAnnuel > 0 &&
         (has(r.categorie) || has(r.type)) &&

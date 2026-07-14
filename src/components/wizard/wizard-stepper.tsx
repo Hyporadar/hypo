@@ -36,7 +36,7 @@ export function WizardStepper({
                 aria-current={step.status === 'current' ? 'step' : undefined}
                 aria-label={step.label}
                 onClick={() => onSelect(step.key)}
-                className="flex items-center justify-center"
+                className="flex size-5 shrink-0 items-center justify-center"
               >
                 <span
                   className={cn(
