@@ -19,9 +19,16 @@ const SECTIONS: DossierSection[] = ['bien', 'emprunteurs', 'hypotheque']
 // ─── Assemblage du wizard /dossier ─────────────────────────────────────
 // Barre d'étapes en haut, questions en colonne unique, assistant flottant.
 // Sauvegarde locale instantanée (indicateur façon Google Docs).
-export function DossierWizard({ initialFunnel }: { initialFunnel?: Funnel }) {
+export function DossierWizard({
+  initialFunnel,
+  testMode = false,
+}: {
+  initialFunnel?: Funnel
+  /** Site de test (/lp) : aucune écriture serveur, soumission → TestLead. */
+  testMode?: boolean
+}) {
   const t = useTranslations('wizard')
-  const wizard = useDossierWizard(initialFunnel)
+  const wizard = useDossierWizard(initialFunnel, testMode)
   const [section, setSection] = useState<DossierSection>('bien')
   const trackedSections = useRef(new Set<string>())
 
@@ -132,6 +139,7 @@ export function DossierWizard({ initialFunnel }: { initialFunnel?: Funnel }) {
               dossierId={wizard.dossierId}
               patch={wizard.patch}
               highlightKey={null}
+              testMode={testMode}
             />
           )}
 

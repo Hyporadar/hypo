@@ -1177,5 +1177,14 @@
     "errorTitle": "Ce lien ne fonctionne plus",
     "errorBody": "Le lien de connexion a expiré ou a déjà été utilisé. Demandez-en un nouveau depuis votre dossier.",
     "errorCta": "Retour à mon dossier"
+  },
+  "testLp": {
+    "badge": "Hypothèque en Suisse",
+    "title": "Payez-vous trop cher pour votre hypothèque ?",
+    "subtitle": "En 3 minutes, obtenez une estimation de votre taux et faites-vous rappeler gratuitement par un conseiller.",
+    "cta": "Vérifier mon taux",
+    "p1": "100% gratuit, sans engagement",
+    "p2": "Banques, assurances et caisses de pension comparées",
+    "p3": "Réponse rapide par un conseiller"
   }
 }

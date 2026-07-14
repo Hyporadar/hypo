@@ -1177,5 +1177,14 @@
     "errorTitle": "Questo link non funziona più",
     "errorBody": "Il link di accesso è scaduto o è già stato utilizzato. Richiedetene uno nuovo dal vostro dossier.",
     "errorCta": "Tornare al mio dossier"
+  },
+  "testLp": {
+    "badge": "Ipoteca in Svizzera",
+    "title": "Pagate troppo per la vostra ipoteca?",
+    "subtitle": "In 3 minuti ottenete una stima del vostro tasso e un richiamo gratuito da un consulente.",
+    "cta": "Verificare il mio tasso",
+    "p1": "100% gratuito, senza impegno",
+    "p2": "Banche, assicurazioni e casse pensioni a confronto",
+    "p3": "Risposta rapida da un consulente"
   }
 }

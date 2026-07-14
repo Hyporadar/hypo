@@ -24,6 +24,11 @@ export default auth((req) => {
     return
   }
 
+  // /campagne — panel de test (hors routing localisé), auth propre (cookie).
+  if (nextUrl.pathname === '/campagne' || nextUrl.pathname.startsWith('/campagne/')) {
+    return
+  }
+
   // /admin — hors routing localisé (français uniquement), réservé CLOSER/PARTNER/ADMIN.
   if (nextUrl.pathname === '/admin' || nextUrl.pathname.startsWith('/admin/')) {
     if (!user) {

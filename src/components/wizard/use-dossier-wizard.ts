@@ -112,7 +112,7 @@ export interface WizardTip {
   id: 'lpp' | 'coldMonitoring' | 'ecoLabel'
 }
 
-export function useDossierWizard(initialFunnel?: Funnel) {
+export function useDossierWizard(initialFunnel?: Funnel, testMode = false) {
   const [hydrated, setHydrated] = useState(false)
   const [dossierId, setDossierId] = useState('')
   const [funnel, setFunnel] = useState<Funnel>(initialFunnel ?? 'RENOUVELLEMENT_CHAUD')
@@ -179,6 +179,9 @@ export function useDossierWizard(initialFunnel?: Funnel) {
       flashTimer.current = setTimeout(() => setSaveStatus('saved'), 350)
     }
 
+    // Site de test : on ne persiste PAS côté serveur (pas de vrai Dossier) —
+    // la soumission finale écrit dans TestLead. localStorage suffit à la reprise.
+    if (testMode) return
     const payload = JSON.stringify({ funnel, data })
     if (payload === lastSaved.current) return
     if (saveTimer.current) clearTimeout(saveTimer.current)
@@ -191,7 +194,7 @@ export function useDossierWizard(initialFunnel?: Funnel) {
     return () => {
       if (saveTimer.current) clearTimeout(saveTimer.current)
     }
-  }, [hydrated, dossierId, funnel, data])
+  }, [hydrated, dossierId, funnel, data, testMode])
 
   const completeness: Completeness = useMemo(
     () => computeCompleteness(funnel, data),

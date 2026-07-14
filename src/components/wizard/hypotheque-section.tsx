@@ -45,6 +45,7 @@ export function HypothequeSection({
   patch,
   highlightKey,
   showConversionCards = true,
+  testMode = false,
 }: {
   funnel: Funnel
   data: DossierData
@@ -53,6 +54,8 @@ export function HypothequeSection({
   highlightKey: string | null
   /** Cartes alerte taux + compte — masquées en mode édition admin. */
   showConversionCards?: boolean
+  /** Site de test : la popup de finalisation écrit dans TestLead. */
+  testMode?: boolean
 }) {
   const t = useTranslations('wizard.questions')
   const tc = useTranslations('wizard.common')
@@ -422,6 +425,7 @@ export function HypothequeSection({
             dossierId={dossierId}
             funnel={funnel}
             data={data}
+            testMode={testMode}
           />
         </div>
       ) : null}

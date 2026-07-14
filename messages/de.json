@@ -1177,5 +1177,14 @@
     "errorTitle": "Dieser Link funktioniert nicht mehr",
     "errorBody": "Der Anmeldelink ist abgelaufen oder wurde bereits verwendet. Fordern Sie einen neuen aus Ihrem Dossier an.",
     "errorCta": "Zurück zu meinem Dossier"
+  },
+  "testLp": {
+    "badge": "Hypothek in der Schweiz",
+    "title": "Zahlen Sie zu viel für Ihre Hypothek?",
+    "subtitle": "In 3 Minuten erhalten Sie eine Zinseinschätzung und einen kostenlosen Rückruf durch einen Berater.",
+    "cta": "Meinen Zins prüfen",
+    "p1": "100% kostenlos, unverbindlich",
+    "p2": "Banken, Versicherungen und Pensionskassen im Vergleich",
+    "p3": "Schnelle Antwort durch einen Berater"
   }
 }

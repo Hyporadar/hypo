@@ -763,3 +763,28 @@ model MagicLinkToken {
   usedAt    DateTime?
   createdAt DateTime  @default(now())
 }
+
+// ─── Site de TEST (campagne Google Ads) ────────────────────────────────
+// Landing /lp + wizard en mode test : les soumissions atterrissent ICI,
+// pas dans les tables Dossier/Lead du vrai produit. Un admin ultra-simple
+// (/campagne) les liste pour mesurer le coût par lead.
+model TestLead {
+  id           String   @id @default(cuid())
+  dossierId    String   @unique // uuid client (dédup des soumissions)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  funnel       String
+  completude   Int      @default(0)
+  data         Json // snapshot complet du formulaire (DossierData)
+  name         String?
+  email        String?
+  phone        String?
+  callbackDate String?
+  callbackSlot String?
+  utmSource    String?
+  utmMedium    String?
+  utmCampaign  String?
+  referrer     String?
+
+  @@index([createdAt])
+}

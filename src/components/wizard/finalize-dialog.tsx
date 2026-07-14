@@ -7,6 +7,7 @@ import type { Funnel } from '@prisma/client'
 import type { DossierData } from '@/lib/dossier/schema'
 import { saveDossierAction } from '@/server/actions/dossier'
 import { requestCallback } from '@/server/actions/callback'
+import { submitTestLead } from '@/server/actions/test-lead'
 import {
   Dialog,
   DialogContent,
@@ -30,12 +31,15 @@ export function FinalizeDialog({
   dossierId,
   funnel,
   data,
+  testMode = false,
 }: {
   open: boolean
   onOpenChange: (open: boolean) => void
   dossierId: string
   funnel: Funnel
   data: DossierData
+  /** Site de test : soumission → TestLead (pas de vrai Lead ni email). */
+  testMode?: boolean
 }) {
   const t = useTranslations('wizard.finalize')
   const [step, setStep] = useState<Step>('ready')
@@ -61,6 +65,29 @@ export function FinalizeDialog({
     if (!phone || !date || !slot) return
     setError(false)
     startTransition(async () => {
+      if (testMode) {
+        // Site de test : on écrit uniquement dans TestLead (pas de vrai
+        // dossier, pas d'email). UTM récupérés au premier atterrissage.
+        let utm: Record<string, string> | undefined
+        try {
+          utm = JSON.parse(window.localStorage.getItem('hp-test-utm') ?? 'null') ?? undefined
+        } catch {
+          utm = undefined
+        }
+        const result = await submitTestLead({
+          dossierId,
+          funnel,
+          data,
+          email,
+          phone,
+          callbackDate: date,
+          callbackSlot: slot,
+          utm,
+        }).catch(() => ({ ok: false as const }))
+        if (result.ok) setStep('done')
+        else setError(true)
+        return
+      }
       // On force une sauvegarde du dossier (crée la ligne si besoin) avant
       // de rattacher le lead + créneau de rappel.
       await saveDossierAction({ dossierId, funnel, data }).catch(() => null)
