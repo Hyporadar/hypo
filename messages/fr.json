@@ -918,7 +918,7 @@
         "anneeNaissance": "Année de naissance",
         "email": "Adresse email",
         "emailPlaceholder": "prenom.nom@email.ch",
-        "emailInfo": "Nous y envoyons votre offre personnalisée dès la fin du questionnaire."
+        "emailInfo": "Uniquement pour vous envoyer votre offre, jamais à d'autres fins."
       },
       "emprunteurRevenus": {
         "title": "L'emprunteur a-t-il un revenu ?",

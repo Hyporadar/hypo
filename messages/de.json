@@ -973,7 +973,7 @@
         "anneeNaissance": "Geburtsjahr",
         "email": "E-Mail-Adresse",
         "emailPlaceholder": "vorname.name@email.ch",
-        "emailInfo": "Dorthin senden wir Ihr persönliches Angebot direkt nach dem Fragebogen."
+        "emailInfo": "Nur um Ihnen Ihr Angebot zu senden, nie für andere Zwecke."
       },
       "emprunteurRevenus": {
         "title": "Hat der Kreditnehmer ein Einkommen?",

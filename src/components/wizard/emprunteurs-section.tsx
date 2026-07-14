@@ -171,7 +171,6 @@ function EmprunteurBlock({
   const identiteDone =
     emp.nationalite != null &&
     (suisse || (emp.permis != null && emp.fatca != null)) &&
-    emp.residenceFuture != null &&
     emp.anneeNaissance != null &&
     (emp.ordre !== 1 || (emp.email != null && emp.email.includes('@')))
   const revenuComplet = (r: Revenu) =>
@@ -281,17 +280,6 @@ function EmprunteurBlock({
               </div>
             </>
           ) : null}
-          <div className="space-y-2">
-            <Label>{t('emprunteurIdentite.residenceFuture')}</Label>
-            <OptionList
-              value={emp.residenceFuture ?? null}
-              options={(['HABITE_LE_BIEN', 'AUTRE_ADRESSE'] as const).map((v) => ({
-                value: v,
-                label: t(`emprunteurIdentite.residenceOptions.${v}`),
-              }))}
-              onSelect={(v) => set('residenceFuture', v)}
-            />
-          </div>
           <div className="space-y-1.5">
             <Label htmlFor={`e${emp.ordre}-naissance`}>
               {t('emprunteurIdentite.anneeNaissance')}

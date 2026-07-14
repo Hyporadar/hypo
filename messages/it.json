@@ -973,7 +973,7 @@
         "anneeNaissance": "Anno di nascita",
         "email": "Indirizzo email",
         "emailPlaceholder": "nome.cognome@email.ch",
-        "emailInfo": "Vi inviamo la vostra offerta personalizzata al termine del questionario."
+        "emailInfo": "Solo per inviarvi la vostra offerta, mai per altri scopi."
       },
       "emprunteurRevenus": {
         "title": "Il mutuatario ha un reddito?",
