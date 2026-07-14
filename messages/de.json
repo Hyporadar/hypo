@@ -1138,11 +1138,11 @@
     },
     "finalize": {
       "form": {
-        "title": "Erhalten Sie Ihr definitives Angebot",
-        "body": "Unser Fachberater sendet Ihnen Ihr Angebot in den nächsten Minuten per E-Mail und ruft Sie an, um es mit Ihnen zu bestätigen und die Details zu besprechen.",
+        "title": "Angebot gesendet",
+        "body": "Sie erhalten es in den nächsten Minuten per E-Mail. Um weiterzugehen und es mit unserem Fachberater zu bestätigen, hinterlassen Sie uns Ihre Nummer.",
         "phoneLabel": "Telefonnummer",
         "phonePlaceholder": "079 123 45 67",
-        "cta": "Mein Angebot bestätigen"
+        "cta": "Zurückgerufen werden"
       },
       "done": {
         "title": "Bestätigt!",

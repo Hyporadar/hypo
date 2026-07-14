@@ -1138,11 +1138,11 @@
     },
     "finalize": {
       "form": {
-        "title": "Ricevete la vostra offerta definitiva",
-        "body": "Il nostro consulente specializzato vi invia la vostra offerta via email nei prossimi minuti e vi chiama per convalidarla con voi e vedere i dettagli.",
+        "title": "Offerta inviata",
+        "body": "La ricevete via email nei prossimi minuti. Per andare oltre e convalidarla con il nostro consulente specializzato, lasciateci il vostro numero.",
         "phoneLabel": "Numero di telefono",
         "phonePlaceholder": "079 123 45 67",
-        "cta": "Convalidare la mia offerta"
+        "cta": "Essere richiamato"
       },
       "done": {
         "title": "Convalidato!",

@@ -2,7 +2,7 @@
 
 import { useState, useTransition } from 'react'
 import { useTranslations } from 'next-intl'
-import { CheckCircle2, Phone } from 'lucide-react'
+import { CheckCircle2, MailCheck } from 'lucide-react'
 import type { Funnel } from '@prisma/client'
 import type { DossierData } from '@/lib/dossier/schema'
 import { saveDossierAction } from '@/server/actions/dossier'
@@ -90,7 +90,7 @@ export function FinalizeDialog({
           <>
             <DialogHeader>
               <span className="bg-pilot-50 text-pilot-700 mx-auto flex size-12 items-center justify-center rounded-full">
-                <Phone className="size-6" strokeWidth={1.8} />
+                <MailCheck className="size-6" strokeWidth={1.8} />
               </span>
               <DialogTitle className="text-center text-xl">{t('form.title')}</DialogTitle>
               <DialogDescription className="text-center leading-relaxed">

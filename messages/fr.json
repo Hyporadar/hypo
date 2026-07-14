@@ -1138,11 +1138,11 @@
     },
     "finalize": {
       "form": {
-        "title": "Recevez votre offre définitive",
-        "body": "Notre conseiller spécialisé vous envoie votre offre par email dans les prochaines minutes et vous appelle pour la valider avec vous et voir les détails.",
+        "title": "Offre envoyée",
+        "body": "Vous la recevez par email dans les prochaines minutes. Pour aller plus loin et la valider avec notre conseiller spécialisé, laissez-nous votre numéro.",
         "phoneLabel": "Numéro de téléphone",
         "phonePlaceholder": "079 123 45 67",
-        "cta": "Valider mon offre"
+        "cta": "Être rappelé"
       },
       "done": {
         "title": "C'est validé !",
