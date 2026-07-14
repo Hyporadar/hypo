@@ -20,10 +20,10 @@ const SLOT_LABELS: Record<string, string> = {
 
 const schema = z.object({
   dossierId: z.string().min(8).max(64),
-  email: z.string().email().max(200),
   phone: z.string().min(6).max(40),
-  date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
-  slot: z.enum(['matin', 'apres-midi', 'soir']),
+  email: z.string().email().max(200).optional(),
+  date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/).optional(),
+  slot: z.enum(['matin', 'apres-midi', 'soir']).optional(),
 })
 
 export type CallbackResult = { ok: boolean; error?: 'invalid' | 'server' }
@@ -37,7 +37,7 @@ export async function requestCallback(input: z.infer<typeof schema>): Promise<Ca
   const parsed = schema.safeParse(input)
   if (!parsed.success) return { ok: false, error: 'invalid' }
   const locale = (await getLocale()) as Locale
-  const email = parsed.data.email.toLowerCase()
+  const email = parsed.data.email?.toLowerCase() ?? null
   const { dossierId, phone, date, slot } = parsed.data
 
   try {
@@ -47,7 +47,11 @@ export async function requestCallback(input: z.infer<typeof schema>): Promise<Ca
     })
     if (!dossier) return { ok: false, error: 'server' }
 
-    const note = `Rappel souhaité : ${frDate(date)} — ${SLOT_LABELS[slot] ?? slot}`
+    // Note pour le closer : rappel à passer pour valider l'offre.
+    const note =
+      date && slot
+        ? `Rappel souhaité : ${frDate(date)} — ${SLOT_LABELS[slot] ?? slot}`
+        : 'Offre à valider — rappel demandé'
 
     // Lead interne : créé/complété, jamais poussé vers un partenaire.
     if (dossier.leadId) {
@@ -71,25 +75,27 @@ export async function requestCallback(input: z.infer<typeof schema>): Promise<Ca
         dossierId,
         type: 'ACCOUNT_CREATED',
         actorType: 'LEAD',
-        data: { email, phone, date, slot },
+        data: { email, phone, date: date ?? null, slot: slot ?? null },
       },
     })
 
-    // Lien d'accès par email (connexion sans mot de passe).
-    const token = crypto.randomUUID()
-    await prisma.magicLinkToken.create({
-      data: { token, email, dossierId, expiresAt: new Date(Date.now() + 60 * 60 * 1000) },
-    })
-    const t = await getTranslations({ locale, namespace: 'emails' })
-    await sendAndLog({
-      to: email,
-      locale,
-      template: 'magic-link',
-      subject: t('magicLink.subject'),
-      body: t('magicLink.body'),
-      ctaLabel: t('magicLink.cta'),
-      ctaUrl: `${BASE_URL}/${locale}/lien-magique/${token}`,
-    })
+    // Lien d'accès par email — seulement si une adresse a été fournie.
+    if (email) {
+      const token = crypto.randomUUID()
+      await prisma.magicLinkToken.create({
+        data: { token, email, dossierId, expiresAt: new Date(Date.now() + 60 * 60 * 1000) },
+      })
+      const t = await getTranslations({ locale, namespace: 'emails' })
+      await sendAndLog({
+        to: email,
+        locale,
+        template: 'magic-link',
+        subject: t('magicLink.subject'),
+        body: t('magicLink.body'),
+        ctaLabel: t('magicLink.cta'),
+        ctaUrl: `${BASE_URL}/${locale}/lien-magique/${token}`,
+      })
+    }
 
     return { ok: true }
   } catch (error) {

@@ -1137,37 +1137,16 @@
       "body": "Es wird automatisch gespeichert. Schliessen Sie ab, um kostenlos von einem Berater zurückgerufen zu werden."
     },
     "finalize": {
-      "cta": "Dossier abschliessen",
-      "ready": {
-        "title": "Erhalten Sie Ihr Angebot",
-        "body": "Hinterlassen Sie Ihre Kontaktdaten: Ein Berater bestätigt Ihren Zins und ruft Sie kostenlos zurück, unverbindlich.",
-        "cta": "Weiter"
-      },
-      "email": {
-        "title": "Ihre E-Mail-Adresse",
-        "body": "Um Ihr Dossier zu speichern und Ihnen jederzeit den Zugriff zu ermöglichen.",
-        "label": "E-Mail",
-        "placeholder": "ihre@email.ch",
-        "cta": "Weiter"
-      },
-      "callback": {
-        "title": "Wann sollen wir Sie zurückrufen?",
-        "body": "Hinterlassen Sie uns Ihre Nummer und wählen Sie den passenden Moment.",
+      "form": {
+        "title": "Erhalten Sie Ihr definitives Angebot",
+        "body": "Unser Fachberater sendet Ihnen Ihr Angebot in den nächsten Minuten per E-Mail und ruft Sie an, um es mit Ihnen zu bestätigen und die Details zu besprechen.",
         "phoneLabel": "Telefonnummer",
         "phonePlaceholder": "079 123 45 67",
-        "dateLabel": "Gewünschtes Datum",
-        "slotLabel": "Zeitfenster",
-        "slots": {
-          "matin": "Vormittag",
-          "apres-midi": "Nachmittag",
-          "soir": "Abend"
-        },
-        "cta": "Rückruf bestätigen"
+        "cta": "Mein Angebot bestätigen"
       },
       "done": {
-        "title": "Notiert!",
-        "body": "Ein Berater ruft Sie am {date} ({slot}) zurück.",
-        "access": "Sie können Ihr Dossier jederzeit einsehen und ergänzen, indem Sie sich mit Ihrer E-Mail-Adresse anmelden.",
+        "title": "Bestätigt!",
+        "body": "Sie erhalten Ihr Angebot in den nächsten Minuten per E-Mail, und unser Fachberater ruft Sie an, um es mit Ihnen zu bestätigen.",
         "close": "Schliessen"
       },
       "error": "Ein Fehler ist aufgetreten. Bitte versuchen Sie es gleich erneut."
@@ -1175,8 +1154,8 @@
     "estimation": {
       "title": "Ihre Zinsschätzung",
       "subtitle": "Auf Basis Ihrer Angaben — Richtwert, mit einem Berater zu bestätigen.",
-      "cta": "Mein bestätigtes Angebot erhalten",
-      "ctaHint": "Ein Berater bestätigt Ihren Zins und ruft Sie kostenlos zurück."
+      "cta": "Mein definitives Angebot bestätigen",
+      "ctaHint": "Sie erhalten Ihr Angebot und ein Berater ruft Sie zur Bestätigung zurück."
     }
   },
   "magicLink": {

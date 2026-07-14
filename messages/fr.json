@@ -1137,37 +1137,16 @@
       "body": "Il est enregistré automatiquement. Finalisez pour être rappelé gratuitement par un conseiller."
     },
     "finalize": {
-      "cta": "Finaliser mon dossier",
-      "ready": {
-        "title": "Recevez votre offre",
-        "body": "Laissez vos coordonnées : un conseiller valide votre taux et vous rappelle gratuitement, sans engagement.",
-        "cta": "Continuer"
-      },
-      "email": {
-        "title": "Votre adresse email",
-        "body": "Pour enregistrer votre dossier et vous permettre d'y revenir quand vous voulez.",
-        "label": "Email",
-        "placeholder": "votre@email.ch",
-        "cta": "Continuer"
-      },
-      "callback": {
-        "title": "Quand vous rappeler ?",
-        "body": "Laissez-nous votre numéro et choisissez le moment qui vous arrange.",
+      "form": {
+        "title": "Recevez votre offre définitive",
+        "body": "Notre conseiller spécialisé vous envoie votre offre par email dans les prochaines minutes et vous appelle pour la valider avec vous et voir les détails.",
         "phoneLabel": "Numéro de téléphone",
         "phonePlaceholder": "079 123 45 67",
-        "dateLabel": "Date souhaitée",
-        "slotLabel": "Plage horaire",
-        "slots": {
-          "matin": "Matin",
-          "apres-midi": "Après-midi",
-          "soir": "Soir"
-        },
-        "cta": "Confirmer le rappel"
+        "cta": "Valider mon offre"
       },
       "done": {
-        "title": "C'est noté !",
-        "body": "Un conseiller vous rappellera le {date} ({slot}).",
-        "access": "Vous pourrez revoir et compléter votre dossier à tout moment en vous connectant avec votre adresse email.",
+        "title": "C'est validé !",
+        "body": "Vous recevez votre offre par email dans les prochaines minutes, et notre conseiller spécialisé vous appelle pour la valider avec vous.",
         "close": "Fermer"
       },
       "error": "Une erreur est survenue. Réessayez dans un instant."
@@ -1175,8 +1154,8 @@
     "estimation": {
       "title": "Votre estimation de taux",
       "subtitle": "Sur la base de vos réponses — fourchette indicative, à confirmer avec un conseiller.",
-      "cta": "Recevoir mon offre validée",
-      "ctaHint": "Un conseiller valide votre taux et vous rappelle gratuitement."
+      "cta": "Valider mon offre définitive",
+      "ctaHint": "Recevez votre offre et un conseiller vous rappelle pour la valider."
     }
   },
   "magicLink": {

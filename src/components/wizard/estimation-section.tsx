@@ -63,15 +63,7 @@ export function EstimationSection({
     <div className="space-y-4">
       <div className="border-line rounded-xl border bg-white p-6 sm:p-8">
         <div className="text-center">
-          <span
-            className={cn(
-              'inline-flex rounded-full px-2.5 py-0.5 text-[11px] font-semibold',
-              calibration?.calibrated ? 'bg-pilot-100 text-pilot-700' : 'bg-surface-alt text-ink-500'
-            )}
-          >
-            {calibration?.calibrated ? to('calibrated') : to('estimate')}
-          </span>
-          <h2 className="font-display mt-3 text-xl font-semibold sm:text-2xl">{t('title')}</h2>
+          <h2 className="font-display text-xl font-semibold sm:text-2xl">{t('title')}</h2>
           <p className="text-ink-500 mx-auto mt-1 max-w-md text-sm leading-relaxed">
             {t('subtitle')}
           </p>
@@ -138,10 +130,6 @@ export function EstimationSection({
                 )
               })}
             </ul>
-
-            <p className="text-ink-400 mx-auto mt-4 max-w-md text-center text-xs leading-relaxed">
-              {calibration?.calibrated ? to('noteCalibrated') : to('noteEstimate')}
-            </p>
           </>
         ) : (
           <p className="text-ink-500 mt-6 text-center text-sm">{to('empty')}</p>

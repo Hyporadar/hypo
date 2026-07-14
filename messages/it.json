@@ -1137,37 +1137,16 @@
       "body": "È salvato automaticamente. Finalizzate per essere richiamati gratuitamente da un consulente."
     },
     "finalize": {
-      "cta": "Finalizzare il dossier",
-      "ready": {
-        "title": "Ricevete la vostra offerta",
-        "body": "Lasciate i vostri contatti: un consulente convalida il vostro tasso e vi richiama gratuitamente, senza impegno.",
-        "cta": "Continuare"
-      },
-      "email": {
-        "title": "Il vostro indirizzo email",
-        "body": "Per salvare il vostro dossier e permettervi di riprenderlo quando volete.",
-        "label": "Email",
-        "placeholder": "vostra@email.ch",
-        "cta": "Continuare"
-      },
-      "callback": {
-        "title": "Quando richiamarvi?",
-        "body": "Lasciateci il vostro numero e scegliete il momento che preferite.",
+      "form": {
+        "title": "Ricevete la vostra offerta definitiva",
+        "body": "Il nostro consulente specializzato vi invia la vostra offerta via email nei prossimi minuti e vi chiama per convalidarla con voi e vedere i dettagli.",
         "phoneLabel": "Numero di telefono",
         "phonePlaceholder": "079 123 45 67",
-        "dateLabel": "Data desiderata",
-        "slotLabel": "Fascia oraria",
-        "slots": {
-          "matin": "Mattina",
-          "apres-midi": "Pomeriggio",
-          "soir": "Sera"
-        },
-        "cta": "Confermare il richiamo"
+        "cta": "Convalidare la mia offerta"
       },
       "done": {
-        "title": "Annotato!",
-        "body": "Un consulente vi richiamerà il {date} ({slot}).",
-        "access": "Potrete rivedere e completare il vostro dossier in qualsiasi momento accedendo con il vostro indirizzo email.",
+        "title": "Convalidato!",
+        "body": "Ricevete la vostra offerta via email nei prossimi minuti, e il nostro consulente specializzato vi chiama per convalidarla con voi.",
         "close": "Chiudere"
       },
       "error": "Si è verificato un errore. Riprovate tra un istante."
@@ -1175,8 +1154,8 @@
     "estimation": {
       "title": "La vostra stima del tasso",
       "subtitle": "In base alle vostre risposte — valore indicativo, da confermare con un consulente.",
-      "cta": "Ricevere la mia offerta convalidata",
-      "ctaHint": "Un consulente convalida il vostro tasso e vi richiama gratuitamente."
+      "cta": "Convalidare la mia offerta definitiva",
+      "ctaHint": "Ricevete la vostra offerta e un consulente vi richiama per convalidarla."
     }
   },
   "magicLink": {
