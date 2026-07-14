@@ -649,9 +649,10 @@
       "description": "Compilate il vostro dossier online, al vostro ritmo — senza email né appuntamento. Salvataggio automatico, ripresa in qualsiasi momento."
     },
     "steps": {
-      "bien": "1. L'immobile",
-      "emprunteurs": "2. I mutuatari",
-      "hypotheque": "3. L'ipoteca"
+      "bien": "L'immobile",
+      "emprunteurs": "Il mutuatario",
+      "hypotheque": "L'ipoteca",
+      "estimation": "Stima del tasso"
     },
     "sections": {
       "bien": "L'immobile",
@@ -1138,8 +1139,8 @@
     "finalize": {
       "cta": "Finalizzare il dossier",
       "ready": {
-        "title": "Il vostro dossier è pronto 🎉",
-        "body": "Un consulente può esaminarlo con voi e ottenervi la migliore offerta — gratuitamente, senza impegno.",
+        "title": "Ricevete la vostra offerta",
+        "body": "Lasciate i vostri contatti: un consulente convalida il vostro tasso e vi richiama gratuitamente, senza impegno.",
         "cta": "Continuare"
       },
       "email": {
@@ -1170,6 +1171,12 @@
         "close": "Chiudere"
       },
       "error": "Si è verificato un errore. Riprovate tra un istante."
+    },
+    "estimation": {
+      "title": "La vostra stima del tasso",
+      "subtitle": "In base alle vostre risposte — valore indicativo, da confermare con un consulente.",
+      "cta": "Ricevere la mia offerta convalidata",
+      "ctaHint": "Un consulente convalida il vostro tasso e vi richiama gratuitamente."
     }
   },
   "magicLink": {

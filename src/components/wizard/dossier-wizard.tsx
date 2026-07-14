@@ -4,21 +4,23 @@ import { useEffect, useRef, useState } from 'react'
 import { useTranslations } from 'next-intl'
 import { ArrowLeft, ArrowRight, Check, Loader2 } from 'lucide-react'
 import type { Funnel } from '@prisma/client'
-import { cn } from '@/lib/utils'
 import { detectComplexReasons } from '@/lib/dossier/schema'
 import type { DossierSection } from '@/lib/dossier/completeness'
 import { useDossierWizard } from '@/components/wizard/use-dossier-wizard'
+import { WizardStepper, type StepStatus } from '@/components/wizard/wizard-stepper'
 import { BienSection } from '@/components/wizard/bien-section'
 import { EmprunteursSection } from '@/components/wizard/emprunteurs-section'
 import { HypothequeSection } from '@/components/wizard/hypotheque-section'
+import { EstimationSection } from '@/components/wizard/estimation-section'
 import { AssistantWidget } from '@/components/wizard/assistant-widget'
 import { Button } from '@/components/ui/button'
 
-const SECTIONS: DossierSection[] = ['bien', 'emprunteurs', 'hypotheque']
+// 3 sections de données + 1 étape finale « estimation du taux » (climax
+// avant la capture du lead).
+const STEPS = ['bien', 'emprunteurs', 'hypotheque', 'estimation'] as const
+type Step = (typeof STEPS)[number]
+const DATA_SECTIONS: DossierSection[] = ['bien', 'emprunteurs', 'hypotheque']
 
-// ─── Assemblage du wizard /dossier ─────────────────────────────────────
-// Barre d'étapes en haut, questions en colonne unique, assistant flottant.
-// Sauvegarde locale instantanée (indicateur façon Google Docs).
 export function DossierWizard({
   initialFunnel,
   testMode = false,
@@ -29,20 +31,17 @@ export function DossierWizard({
 }) {
   const t = useTranslations('wizard')
   const wizard = useDossierWizard(initialFunnel, testMode)
-  const [section, setSection] = useState<DossierSection>('bien')
+  const [section, setSection] = useState<Step>('bien')
   const trackedSections = useRef(new Set<string>())
 
   const complex = detectComplexReasons(wizard.data).length > 0
-  const sectionIndex = SECTIONS.indexOf(section)
+  const stepIndex = STEPS.indexOf(section)
 
   // Chaque section terminée une fois → événement WIZARD_STEP_COMPLETED.
   useEffect(() => {
     if (!wizard.hydrated) return
-    for (const s of SECTIONS) {
-      if (
-        wizard.completeness.missingBySection[s].length === 0 &&
-        !trackedSections.current.has(s)
-      ) {
+    for (const s of DATA_SECTIONS) {
+      if (wizard.completeness.missingBySection[s].length === 0 && !trackedSections.current.has(s)) {
         trackedSections.current.add(s)
         wizard.trackStep(s)
       }
@@ -64,52 +63,38 @@ export function DossierWizard({
     )
   }
 
+  const steps = STEPS.map((s, i) => ({
+    key: s,
+    label: t(`steps.${s}`),
+    status: (i === stepIndex ? 'current' : i < stepIndex ? 'done' : 'todo') as StepStatus,
+  }))
+
   return (
     <div>
-      {/* Barre d'étapes + état de sauvegarde */}
-      <div className="border-line sticky top-0 z-20 -mx-6 border-b bg-[--color-paper]/95 px-6 py-3 backdrop-blur">
-        <div className="mx-auto flex max-w-[1120px] items-center justify-between gap-4">
-          <nav aria-label={t('meta.title')} className="flex flex-wrap items-center gap-2">
-            {SECTIONS.map((s, i) => {
-              const done =
-                wizard.completeness.missingBySection[s].length === 0 && s !== section
-              return (
-                <button
-                  key={s}
-                  type="button"
-                  aria-current={s === section ? 'step' : undefined}
-                  onClick={() => setSection(s)}
-                  className={cn(
-                    'flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-sm font-medium transition-colors',
-                    s === section
-                      ? 'border-pilot-600 bg-pilot-600 text-white'
-                      : 'border-line text-ink-700 hover:bg-surface-alt bg-white'
-                  )}
-                >
-                  {done ? <Check className="size-3.5" /> : null}
-                  {t(`steps.${s}`)}
-                  {i < SECTIONS.length - 1 ? null : null}
-                </button>
-              )
-            })}
-          </nav>
-          {/* État de sauvegarde façon Google Docs : instantané, discret */}
-          <span
-            aria-live="polite"
-            className="text-ink-400 flex shrink-0 items-center gap-1.5 text-xs"
-          >
-            {wizard.saveStatus === 'saving' ? (
-              <>
-                <Loader2 className="size-3.5 animate-spin" />
-                {t('nav.save')}
-              </>
-            ) : (
-              <>
-                <Check className="text-pilot-600 size-3.5" />
-                {t('nav.saved')}
-              </>
-            )}
-          </span>
+      {/* Stepper « ligne + points » + état de sauvegarde */}
+      <div className="border-line sticky top-0 z-20 -mx-6 border-b bg-[--color-paper]/95 px-6 py-4 backdrop-blur">
+        <div className="mx-auto max-w-2xl">
+          <div className="flex items-center justify-end">
+            <span
+              aria-live="polite"
+              className="text-ink-400 flex shrink-0 items-center gap-1.5 text-xs"
+            >
+              {wizard.saveStatus === 'saving' ? (
+                <>
+                  <Loader2 className="size-3.5 animate-spin" />
+                  {t('nav.save')}
+                </>
+              ) : (
+                <>
+                  <Check className="text-pilot-600 size-3.5" />
+                  {t('nav.saved')}
+                </>
+              )}
+            </span>
+          </div>
+          <div className="mt-2">
+            <WizardStepper steps={steps} onSelect={(key) => setSection(key as Step)} />
+          </div>
         </div>
       </div>
 
@@ -132,13 +117,18 @@ export function DossierWizard({
               patch={wizard.patch}
               highlightKey={null}
             />
-          ) : (
+          ) : section === 'hypotheque' ? (
             <HypothequeSection
               funnel={wizard.funnel}
               data={wizard.data}
-              dossierId={wizard.dossierId}
               patch={wizard.patch}
               highlightKey={null}
+            />
+          ) : (
+            <EstimationSection
+              funnel={wizard.funnel}
+              data={wizard.data}
+              dossierId={wizard.dossierId}
               testMode={testMode}
             />
           )}
@@ -148,8 +138,8 @@ export function DossierWizard({
             <Button
               type="button"
               variant="outline"
-              disabled={sectionIndex === 0}
-              onClick={() => setSection(SECTIONS[sectionIndex - 1] ?? 'bien')}
+              disabled={stepIndex === 0}
+              onClick={() => setSection(STEPS[stepIndex - 1] ?? 'bien')}
             >
               <ArrowLeft data-icon="inline-start" />
               {t('nav.back')}
@@ -161,20 +151,13 @@ export function DossierWizard({
             >
               {wizard.funnel === 'ACHAT' ? t('nav.toRenewal') : t('nav.toBuy')}
             </button>
-            {sectionIndex < SECTIONS.length - 1 ? (
-              <Button
-                type="button"
-                onClick={() => setSection(SECTIONS[sectionIndex + 1] ?? 'hypotheque')}
-              >
+            {stepIndex < STEPS.length - 1 ? (
+              <Button type="button" onClick={() => setSection(STEPS[stepIndex + 1] ?? 'estimation')}>
                 {t('nav.next')}
                 <ArrowRight data-icon="inline-end" />
               </Button>
             ) : (
-              // Dernière section : plus de « Suivant » mort, on marque la fin.
-              <span className="text-pilot-700 flex items-center gap-1.5 text-sm font-medium">
-                <Check className="size-4" />
-                {t('nav.finished')}
-              </span>
+              <span className="w-[92px]" aria-hidden />
             )}
           </div>
         </div>

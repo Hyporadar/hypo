@@ -649,9 +649,10 @@
       "description": "Constituez votre dossier en ligne, à votre rythme — sans email ni rendez-vous. Enregistrement automatique, reprise à tout moment."
     },
     "steps": {
-      "bien": "1. Le bien",
-      "emprunteurs": "2. Les emprunteurs",
-      "hypotheque": "3. L'hypothèque"
+      "bien": "Le bien",
+      "emprunteurs": "L'emprunteur",
+      "hypotheque": "L'hypothèque",
+      "estimation": "Estimation du taux"
     },
     "sections": {
       "bien": "Le bien",
@@ -1138,8 +1139,8 @@
     "finalize": {
       "cta": "Finaliser mon dossier",
       "ready": {
-        "title": "Votre dossier est prêt 🎉",
-        "body": "Un conseiller peut le passer en revue avec vous et vous obtenir la meilleure offre — gratuitement, sans engagement.",
+        "title": "Recevez votre offre",
+        "body": "Laissez vos coordonnées : un conseiller valide votre taux et vous rappelle gratuitement, sans engagement.",
         "cta": "Continuer"
       },
       "email": {
@@ -1170,6 +1171,12 @@
         "close": "Fermer"
       },
       "error": "Une erreur est survenue. Réessayez dans un instant."
+    },
+    "estimation": {
+      "title": "Votre estimation de taux",
+      "subtitle": "Sur la base de vos réponses — fourchette indicative, à confirmer avec un conseiller.",
+      "cta": "Recevoir mon offre validée",
+      "ctaHint": "Un conseiller valide votre taux et vous rappelle gratuitement."
     }
   },
   "magicLink": {

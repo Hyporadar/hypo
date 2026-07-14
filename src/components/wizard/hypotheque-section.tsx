@@ -1,8 +1,7 @@
 'use client'
 
-import { useState } from 'react'
 import { useTranslations } from 'next-intl'
-import { CheckCircle2, Split } from 'lucide-react'
+import { Split } from 'lucide-react'
 import type { Funnel } from '@prisma/client'
 import { formatCHF } from '@/lib/format'
 import {
@@ -15,7 +14,6 @@ import { AmountInput } from '@/components/wizard/inputs'
 import { OptionList } from '@/components/wizard/option-list'
 import { SplitSlider } from '@/components/wizard/sliders'
 import { RepeatableGroup } from '@/components/wizard/repeatable-group'
-import { FinalizeDialog } from '@/components/wizard/finalize-dialog'
 import { Button } from '@/components/ui/button'
 import { Label } from '@/components/ui/label'
 import {
@@ -41,26 +39,16 @@ function isoToFr(iso: string | null | undefined): string {
 export function HypothequeSection({
   funnel,
   data,
-  dossierId,
   patch,
   highlightKey,
-  showConversionCards = true,
-  testMode = false,
 }: {
   funnel: Funnel
   data: DossierData
-  dossierId: string
   patch: (updater: (prev: DossierData) => DossierData) => void
   highlightKey: string | null
-  /** Cartes alerte taux + compte — masquées en mode édition admin. */
-  showConversionCards?: boolean
-  /** Site de test : la popup de finalisation écrit dans TestLead. */
-  testMode?: boolean
 }) {
   const t = useTranslations('wizard.questions')
   const tc = useTranslations('wizard.common')
-  const tw = useTranslations('wizard')
-  const [finalizeOpen, setFinalizeOpen] = useState(false)
 
   const total = deriveMontantTotal(funnel, data)
   const tranches = data.tranchesSouhaitees
@@ -403,31 +391,6 @@ export function HypothequeSection({
             />
           </div>
         </QuestionCard>
-      ) : null}
-
-      {/* Clôture : bouton qui ouvre la popup de finalisation. */}
-      {showConversionCards ? (
-        <div className="border-line mt-4 rounded-xl border bg-white p-6 text-center">
-          <p className="bg-pilot-50 text-pilot-700 mx-auto inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-medium">
-            <CheckCircle2 className="size-3.5" />
-            {tw('done.badge')}
-          </p>
-          <h2 className="font-display mt-3 text-xl font-semibold">{tw('done.title')}</h2>
-          <p className="text-ink-500 mx-auto mt-1 mb-4 max-w-md text-sm leading-relaxed">
-            {tw('done.body')}
-          </p>
-          <Button size="lg" onClick={() => setFinalizeOpen(true)}>
-            {tw('finalize.cta')}
-          </Button>
-          <FinalizeDialog
-            open={finalizeOpen}
-            onOpenChange={setFinalizeOpen}
-            dossierId={dossierId}
-            funnel={funnel}
-            data={data}
-            testMode={testMode}
-          />
-        </div>
       ) : null}
     </div>
   )

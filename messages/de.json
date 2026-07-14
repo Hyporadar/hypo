@@ -649,9 +649,10 @@
       "description": "Erstellen Sie Ihr Dossier online, in Ihrem Tempo — ohne E-Mail und ohne Termin. Automatisch gespeichert, jederzeit fortsetzbar."
     },
     "steps": {
-      "bien": "1. Die Liegenschaft",
-      "emprunteurs": "2. Die Kreditnehmer",
-      "hypotheque": "3. Die Hypothek"
+      "bien": "Die Liegenschaft",
+      "emprunteurs": "Der Kreditnehmer",
+      "hypotheque": "Die Hypothek",
+      "estimation": "Zinsschätzung"
     },
     "sections": {
       "bien": "Die Liegenschaft",
@@ -1138,8 +1139,8 @@
     "finalize": {
       "cta": "Dossier abschliessen",
       "ready": {
-        "title": "Ihr Dossier ist bereit 🎉",
-        "body": "Ein Berater kann es mit Ihnen durchgehen und Ihnen das beste Angebot besorgen — kostenlos und unverbindlich.",
+        "title": "Erhalten Sie Ihr Angebot",
+        "body": "Hinterlassen Sie Ihre Kontaktdaten: Ein Berater bestätigt Ihren Zins und ruft Sie kostenlos zurück, unverbindlich.",
         "cta": "Weiter"
       },
       "email": {
@@ -1170,6 +1171,12 @@
         "close": "Schliessen"
       },
       "error": "Ein Fehler ist aufgetreten. Bitte versuchen Sie es gleich erneut."
+    },
+    "estimation": {
+      "title": "Ihre Zinsschätzung",
+      "subtitle": "Auf Basis Ihrer Angaben — Richtwert, mit einem Berater zu bestätigen.",
+      "cta": "Mein bestätigtes Angebot erhalten",
+      "ctaHint": "Ein Berater bestätigt Ihren Zins und ruft Sie kostenlos zurück."
     }
   },
   "magicLink": {

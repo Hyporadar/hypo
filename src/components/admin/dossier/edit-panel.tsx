@@ -128,14 +128,7 @@ export function EditPanel({
         ) : section === 'emprunteurs' ? (
           <EmprunteursSection funnel={funnel} data={data} patch={patch} highlightKey={null} />
         ) : (
-          <HypothequeSection
-            funnel={funnel}
-            data={data}
-            dossierId={dossierId}
-            patch={patch}
-            highlightKey={null}
-            showConversionCards={false}
-          />
+          <HypothequeSection funnel={funnel} data={data} patch={patch} highlightKey={null} />
         )}
       </NextIntlClientProvider>
 
