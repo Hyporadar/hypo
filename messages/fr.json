@@ -93,7 +93,15 @@
       "name": "Nom complet",
       "phone": "Téléphone",
       "submit": "Me faire rappeler",
-      "success": "C'est noté. Un conseiller vous rappelle très vite."
+      "success": "C'est noté. Un conseiller vous rappelle très vite.",
+      "firstName": "Prénom",
+      "lastName": "Nom",
+      "whenLabel": "Quand vous rappeler ?",
+      "slots": {
+        "matin": "Matin (9h–12h)",
+        "apres-midi": "Après-midi (12h–17h)",
+        "soir": "Soir (17h–20h)"
+      }
     },
     "leadWidget": {
       "title": "Quel taux pouvez-vous obtenir ?",

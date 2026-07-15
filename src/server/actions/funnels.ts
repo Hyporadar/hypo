@@ -397,8 +397,16 @@ export async function submitContractUpload(formData: FormData): Promise<UploadRe
 const callbackSchema = z.object({
   name: z.string().min(2).max(120),
   phone: z.string().min(6).max(30),
+  date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/).optional(),
+  slot: z.enum(['matin', 'apres-midi', 'soir']).optional(),
   attribution: attributionSchema.optional(),
 })
+
+const CALLBACK_SLOTS: Record<string, string> = {
+  matin: 'Matin (9h–12h)',
+  'apres-midi': 'Après-midi (12h–17h)',
+  soir: 'Soir (17h–20h)',
+}
 
 export type CallbackResult = { ok: boolean }
 
@@ -409,6 +417,14 @@ export async function requestCallback(
   if (!parsed.success) return { ok: false }
   const locale = (await getLocale()) as Locale
   const attribution = parsed.data.attribution
+  const { date, slot } = parsed.data
+  const frDate = (iso: string) => {
+    const m = iso.match(/^(\d{4})-(\d{2})-(\d{2})$/)
+    return m ? `${m[3]}.${m[2]}.${m[1]}` : iso
+  }
+  const note = slot
+    ? `Rappel souhaité : ${date ? `${frDate(date)} — ` : ''}${CALLBACK_SLOTS[slot] ?? slot}`
+    : null
 
   try {
     await prisma.$transaction(async (tx) => {
@@ -420,6 +436,7 @@ export async function requestCallback(
           locale,
           name: parsed.data.name,
           phone: parsed.data.phone,
+          notes: note,
           partnerId: (await resolveReferrer(attribution?.ref)).partnerId,
           ...(attribution ? utmData(attribution) : {}),
           utmContent: 'callback-home',

@@ -93,7 +93,15 @@
       "name": "Nome completo",
       "phone": "Telefono",
       "submit": "Richiedere la chiamata",
-      "success": "Registrato. Un consulente La richiamerà a breve."
+      "success": "Registrato. Un consulente La richiamerà a breve.",
+      "firstName": "Nome",
+      "lastName": "Cognome",
+      "whenLabel": "Quando richiamarvi?",
+      "slots": {
+        "matin": "Mattina (9–12)",
+        "apres-midi": "Pomeriggio (12–17)",
+        "soir": "Sera (17–20)"
+      }
     },
     "leadWidget": {
       "title": "Che tasso può ottenere?",

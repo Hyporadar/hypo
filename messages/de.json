@@ -93,7 +93,15 @@
       "name": "Vollständiger Name",
       "phone": "Telefon",
       "submit": "Rückruf anfordern",
-      "success": "Notiert. Ein Berater meldet sich sehr bald bei Ihnen."
+      "success": "Notiert. Ein Berater meldet sich sehr bald bei Ihnen.",
+      "firstName": "Vorname",
+      "lastName": "Name",
+      "whenLabel": "Wann sollen wir zurückrufen?",
+      "slots": {
+        "matin": "Morgen (9–12 Uhr)",
+        "apres-midi": "Nachmittag (12–17 Uhr)",
+        "soir": "Abend (17–20 Uhr)"
+      }
     },
     "leadWidget": {
       "title": "Welche Zinsen erhalten Sie?",
