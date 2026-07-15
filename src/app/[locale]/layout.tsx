@@ -4,7 +4,7 @@ import { hasLocale, NextIntlClientProvider } from 'next-intl'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { fontClasses } from '@/app/fonts'
 import { routing, type Locale } from '@/i18n/routing'
-import { localizedAlternates } from '@/lib/seo'
+import { BASE_URL, localizedAlternates } from '@/lib/seo'
 import '@/app/globals.css'
 
 export function generateStaticParams() {
@@ -20,6 +20,7 @@ export async function generateMetadata({
   const t = await getTranslations({ locale, namespace: 'metadata' })
 
   return {
+    metadataBase: new URL(BASE_URL),
     title: {
       default: t('title'),
       template: '%s · HypoRadar',
