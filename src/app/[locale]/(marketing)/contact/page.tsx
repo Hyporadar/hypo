@@ -35,7 +35,7 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
             <p className="text-ink-500 text-xs font-semibold tracking-[0.08em] uppercase">
               {t('emailLabel')}
             </p>
-            <p className="text-data mt-0.5">contact@hypopilot.ch</p>
+            <p className="text-data mt-0.5">contact@hyporadar.ch</p>
           </div>
           <div>
             <p className="text-ink-500 text-xs font-semibold tracking-[0.08em] uppercase">
@@ -47,7 +47,7 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
             <p className="text-ink-500 text-xs font-semibold tracking-[0.08em] uppercase">
               {t('addressLabel')}
             </p>
-            <p className="mt-0.5">HypoPilot — Suisse</p>
+            <p className="mt-0.5">HypoRadar — Suisse</p>
           </div>
           <div className="border-line border-t pt-4">
             <p className="text-ink-700 mb-3">{t('callback')}</p>

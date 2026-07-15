@@ -15,7 +15,7 @@ export async function GET(_req: Request, { params }: { params: Promise<{ id: str
   return new NextResponse(Buffer.from(pdf), {
     headers: {
       'Content-Type': 'application/pdf',
-      'Content-Disposition': `inline; filename="hypopilot-${certificate.number}.pdf"`,
+      'Content-Disposition': `inline; filename="hyporadar-${certificate.number}.pdf"`,
       'Cache-Control': 'private, max-age=3600',
     },
   })

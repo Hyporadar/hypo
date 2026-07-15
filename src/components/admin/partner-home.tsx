@@ -67,7 +67,7 @@ export async function PartnerHome({ partnerId }: { partnerId: string }) {
             </p>
             <CopyRefLink url={refLink} />
             <Button asChild variant="outline" size="sm">
-              <a href="/api/partner/qr" download="hypopilot-qr.png">
+              <a href="/api/partner/qr" download="hyporadar-qr.png">
                 Télécharger le QR code
               </a>
             </Button>

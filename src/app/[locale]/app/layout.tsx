@@ -15,7 +15,7 @@ export default async function ClientAppLayout({ children }: { children: React.Re
     <div className="flex min-h-screen flex-col">
       <header className="border-line bg-paper sticky top-0 z-40 border-b">
         <div className="mx-auto flex h-16 max-w-[1120px] items-center justify-between px-6">
-          <Link href="/app" aria-label="HypoPilot">
+          <Link href="/app" aria-label="HypoRadar">
             <Wordmark />
           </Link>
           <div className="flex items-center gap-2">

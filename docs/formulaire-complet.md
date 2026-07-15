@@ -1,6 +1,6 @@
 # Formulaire app.hypotheke.ch — Inventaire EXHAUSTIF (toutes options et sous-options)
 
-*Relevé en direct les 08-09.07.2026, toutes les branches cliquées une par une (parcours renouvellement, parcours achat, évaluation immobilière, tous les « Oui »). Ce document est la référence unique pour le build HypoPilot — le prompt Claude Code du doc « Formulaire-Hypotheke-Inventaire » reste valable, ce fichier fait foi pour la liste des champs.*
+*Relevé en direct les 08-09.07.2026, toutes les branches cliquées une par une (parcours renouvellement, parcours achat, évaluation immobilière, tous les « Oui »). Ce document est la référence unique pour le build HypoRadar — le prompt Claude Code du doc « Formulaire-Hypotheke-Inventaire » reste valable, ce fichier fait foi pour la liste des champs.*
 
 ---
 

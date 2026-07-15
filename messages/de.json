@@ -1,7 +1,7 @@
 {
   "metadata": {
-    "title": "HypoPilot — Ihre Hypothek, unter Beobachtung",
-    "description": "HypoPilot überwacht Ihre Hypothek kostenlos und meldet sich 12 bis 18 Monate vor Ablauf. Kostenloses Tragbarkeitszertifikat in 2 Minuten."
+    "title": "HypoRadar — Ihre Hypothek, unter Beobachtung",
+    "description": "HypoRadar überwacht Ihre Hypothek kostenlos und meldet sich 12 bis 18 Monate vor Ablauf. Kostenloses Tragbarkeitszertifikat in 2 Minuten."
   },
   "common": {
     "nav": {
@@ -29,12 +29,12 @@
       "invalidDate": "Bitte geben Sie ein gültiges Datum ein.",
       "invalidEmail": "Bitte geben Sie eine gültige E-Mail-Adresse ein.",
       "genericError": "Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut.",
-      "privacy": "Ihre Daten bleiben bei HypoPilot. Keine Weitergabe an Dritte ohne Ihre ausdrückliche Zustimmung."
+      "privacy": "Ihre Daten bleiben bei HypoRadar. Keine Weitergabe an Dritte ohne Ihre ausdrückliche Zustimmung."
     },
     "footer": {
       "transparency": "Kostenlos für Sie. Bezahlt von den Kreditgebern. Schwarz auf weiss ausgewiesen.",
-      "legal": "HypoPilot wird durch eine Kommission des gewählten Kreditgebers vergütet. Sie sehen sie, bevor Sie unterschreiben.",
-      "copyright": "HypoPilot — Schweizer Fintech",
+      "legal": "HypoRadar wird durch eine Kommission des gewählten Kreditgebers vergütet. Sie sehen sie, bevor Sie unterschreiben.",
+      "copyright": "HypoRadar — Schweizer Fintech",
       "nav": {
         "rates": "Zinsen heute",
         "guides": "Leitfäden",
@@ -284,20 +284,20 @@
   },
   "howItWorks": {
     "metaTitle": "So funktioniert es",
-    "metaDescription": "Erfassen Sie Ihre Hypothek in 3 Minuten. HypoPilot überwacht Ihren Zinssatz kostenlos und bringt die Kreditgeber zum richtigen Zeitpunkt in Konkurrenz.",
+    "metaDescription": "Sichern Sie sich den besten Hypothekarzins – beim Kauf wie bei der Verlängerung: sofortige Schätzung und Ausschreibung bei den Kreditgebern, kostenlos und ohne aufgezwungenen Termin.",
     "hero": {
       "overline": "Das Prinzip",
-      "title": "Niemand überwacht Ihre Hypothek. Wir schon.",
-      "subtitle": "Sie ist oft die grösste Ausgabe eines Haushalts — und die am wenigsten verglichene. HypoPilot übernimmt das, kostenlos, über Jahre."
+      "title": "Ihre Hypothek zum besten Zins, ohne dass Sie Tage investieren.",
+      "subtitle": "Beim Kauf wie bei der Verlängerung bringt HypoRadar Banken, Versicherungen und Pensionskassen in Konkurrenz — kostenlos, mit sofortiger Schätzung und ohne aufgezwungenen Termin."
     },
     "steps": {
       "title": "Drei Schritte, mehr braucht es nicht",
-      "step1Title": "Erfassen Sie Ihre Hypothek",
-      "step1Body": "Betrag, Zinssatz, Kreditgeber, Ablauf. 3 Minuten, ein einziges Mal. Kein Papierkram: ungefähre Zahlen genügen für den Start.",
-      "step2Title": "Wir überwachen Zinssatz und Ablauf, kostenlos",
-      "step2Body": "Über Jahre, ohne dass Sie etwas tun müssen. Wenn sich das Zeitfenster öffnet — 12 bis 18 Monate vor Ablauf — erhalten Sie eine Meldung. Es ist die einzige Phase, in der ein Bankwechsel wirklich möglich ist: vorher fressen die Entschädigungen den Gewinn, nachher ist die Frist verstrichen.",
-      "step3Title": "Zum richtigen Zeitpunkt bringen wir die Kreditgeber in Konkurrenz",
-      "step3Body": "Banken, Versicherungen, Pensionskassen: alle legen ihre Offerte für Ihr Dossier vor. Sie vergleichen, Sie wählen, Sie unterschreiben — oder nicht. Keinerlei Verpflichtung."
+      "step1Title": "Erfassen Sie Ihre Situation",
+      "step1Body": "Die Liegenschaft, Ihr Profil, Ihre Hypothek: rund 3 Minuten. Kein Papierkram — Ihre ungefähren Zahlen genügen für den Start.",
+      "step2Title": "Erhalten Sie sofort Ihre Zinsschätzung",
+      "step2Body": "Direkt nach dem Fragebogen sehen Sie eine auf Ihr Dossier abgestimmte Zinsspanne — Banken, Versicherungen und Pensionskassen. Kein Termin, kein aufgezwungener Anruf.",
+      "step3Title": "Wir bringen die Kreditgeber in Konkurrenz",
+      "step3Body": "Ein Fachberater startet die Ausschreibung und verfeinert Ihr Angebot bei den Kreditgebern. Sie vergleichen, wählen, unterschreiben — oder nicht. Keine Verpflichtung."
     },
     "whyFree": {
       "title": "Warum es kostenlos ist",
@@ -316,13 +316,13 @@
     "faq": {
       "title": "Häufige Fragen",
       "q1": "Verpflichte ich mich zu etwas?",
-      "a1": "Nein. Die Überwachung ist kostenlos und unverbindlich. Die Ausschreibung ebenfalls: Sie erhalten Offerten und können alle ablehnen — auch um bei Ihrer aktuellen Bank zu bleiben.",
+      "a1": "Nein. Die Schätzung und die Ausschreibung sind kostenlos und unverbindlich: Sie erhalten Angebote und können alle ablehnen — auch um bei Ihrer aktuellen Bank zu bleiben.",
       "q2": "Wer sieht meine Daten?",
-      "a2": "HypoPilot, sonst niemand. Ihre Daten werden nie verkauft. Ein Kreditgeber sieht Ihr Dossier nur, wenn Sie es ihm senden — vollständig und von Ihnen freigegeben.",
+      "a2": "HypoRadar, sonst niemand. Ihre Daten werden nie verkauft. Ein Kreditgeber sieht Ihr Dossier nur, wenn Sie es ihm senden — vollständig und von Ihnen freigegeben.",
       "q3": "Muss ich die Bank wechseln?",
       "a3": "Nein. Oft dient die beste externe Offerte schlicht als Argument, um mit der eigenen Bank nachzuverhandeln — die dann nachzieht. Sie gewinnen in beiden Fällen.",
-      "q4": "Was passiert, wenn mein Ablauf noch weit entfernt ist?",
-      "a4": "Das ist das ideale Szenario. Wir aktivieren die Überwachung und wecken Sie 12 bis 18 Monate vor Ablauf — genau dann, wenn wieder alles verhandelbar ist."
+      "q4": "Und wenn meine Fälligkeit noch weit weg ist?",
+      "a4": "Dann ist es ideal, früh dran zu sein: Sie erhalten bereits Ihre Schätzung. Und auf Wunsch überwachen wir Ihren Zins und melden uns 12 bis 18 Monate vor Fälligkeit — genau dann, wenn alles wieder verhandelbar wird."
     },
     "cta": {
       "title": "Zwei Minuten, um zu wissen, wo Sie stehen",
@@ -365,7 +365,7 @@
   },
   "certificate": {
     "title": "Tragbarkeitszertifikat",
-    "issuer": "Ausgestellt von HypoPilot — Schweizer Plattform für Hypothekarfinanzierung",
+    "issuer": "Ausgestellt von HypoRadar — Schweizer Plattform für Hypothekarfinanzierung",
     "number": "Zertifikat Nr.",
     "issuedOn": "Ausgestellt am",
     "holder": "Ausgestellt für",
@@ -387,14 +387,14 @@
   "verify": {
     "title": "Zertifikatsprüfung",
     "validBadge": "Echtes Zertifikat",
-    "validBody": "Dieses Zertifikat wurde von HypoPilot ausgestellt. Die untenstehenden Angaben sind massgebend.",
+    "validBody": "Dieses Zertifikat wurde von HypoRadar ausgestellt. Die untenstehenden Angaben sind massgebend.",
     "invalidTitle": "Zertifikat nicht gefunden",
-    "invalidBody": "Kein Zertifikat entspricht dieser Kennung. Das Ihnen vorgelegte Dokument wurde nicht von HypoPilot ausgestellt — oder seine Nummer wurde verändert.",
+    "invalidBody": "Kein Zertifikat entspricht dieser Kennung. Das Ihnen vorgelegte Dokument wurde nicht von HypoRadar ausgestellt — oder seine Nummer wurde verändert.",
     "number": "Nummer",
     "holder": "Inhaber",
     "issuedOn": "Ausstellungsdatum",
     "maxCapacity": "Zertifizierte Kaufkraft",
-    "footer": "HypoPilot stellt kostenlose Tragbarkeitszertifikate aus, berechnet nach Schweizer Bankenregeln."
+    "footer": "HypoRadar stellt kostenlose Tragbarkeitszertifikate aus, berechnet nach Schweizer Bankenregeln."
   },
   "emails": {
     "abandonJ1": {
@@ -419,16 +419,16 @@
     },
     "rateUpdate": {
       "subject": "Die Hypothekarzinsen von heute",
-      "body": "Der 10-Jahres-Referenzzinssatz liegt bei {refRate}.\n\nIhr HypoPilot-Zinsupdate — vergleichen Sie mit Ihrem aktuellen Zinssatz in 2 Minuten, ohne Anmeldung.",
+      "body": "Der 10-Jahres-Referenzzinssatz liegt bei {refRate}.\n\nIhr HypoRadar-Zinsupdate — vergleichen Sie mit Ihrem aktuellen Zinssatz in 2 Minuten, ohne Anmeldung.",
       "cta": "Mit meinem Zinssatz vergleichen"
     },
     "magicLink": {
-      "subject": "Ihr HypoPilot-Anmeldelink",
+      "subject": "Ihr HypoRadar-Anmeldelink",
       "body": "Klicken Sie auf die Schaltfläche unten, um Ihr Hypothekardossier wiederzufinden. Der Link ist eine Stunde gültig und kann nur einmal verwendet werden.\nWenn Sie diese Anfrage nicht gestellt haben, ignorieren Sie diese E-Mail einfach.",
       "cta": "Mein Dossier öffnen"
     },
     "rateAlertConfirm": {
-      "subject": "Bestätigen Sie Ihr HypoPilot-Zinsabo",
+      "subject": "Bestätigen Sie Ihr HypoRadar-Zinsabo",
       "body": "Noch ein Klick: Bestätigen Sie Ihre Adresse, um die Entwicklung der Hypothekarzinsen in der gewählten Häufigkeit zu erhalten. Abmeldung mit einem Klick in jeder E-Mail.",
       "cta": "Mein Abo bestätigen"
     }
@@ -515,7 +515,7 @@
     },
     "referral": {
       "title": "Empfehlen",
-      "subtitle": "Empfehlen Sie HypoPilot: CHF 100 pro geworbene Person mit validierter Hypothek.",
+      "subtitle": "Empfehlen Sie HypoRadar: CHF 100 pro geworbene Person mit validierter Hypothek.",
       "yourLink": "Ihr persönlicher Link",
       "copy": "Kopieren",
       "copied": "Kopiert",
@@ -565,13 +565,13 @@
     },
     "guides": {
       "metaTitle": "Hypotheken-Leitfäden",
-      "metaDescription": "Verlängerung, Tragbarkeitszertifikat, SARON oder Festzins: die HypoPilot-Leitfäden, ohne Fachjargon.",
+      "metaDescription": "Verlängerung, Tragbarkeitszertifikat, SARON oder Festzins: die HypoRadar-Leitfäden, ohne Fachjargon.",
       "title": "Leitfäden",
       "subtitle": "Die Schweizer Hypothek ohne Fachjargon erklärt. Das Nötige zum Entscheiden, nicht mehr.",
       "readMore": "Leitfaden lesen"
     },
     "transparency": {
-      "metaTitle": "Wie HypoPilot bezahlt wird",
+      "metaTitle": "Wie HypoRadar bezahlt wird",
       "metaDescription": "Unser Modell schwarz auf weiss: kostenlos für Sie, bezahlt von den Kreditgebern, gleiche Kommission bei jedem Anbieter.",
       "title": "Wie wir bezahlt werden",
       "subtitle": "Transparenz ist keine weitere Seite auf dieser Website. Sie ist das Produkt.",
@@ -586,12 +586,12 @@
       "cta": "Meinen Zinssatz jetzt prüfen"
     },
     "partnersPublic": {
-      "metaTitle": "HypoPilot-Vermittler werden",
-      "metaDescription": "Makler, Treuhänder: Senden Sie Ihre Kunden an HypoPilot und verfolgen Sie Ihre Kommissionen in voller Transparenz.",
+      "metaTitle": "HypoRadar-Vermittler werden",
+      "metaDescription": "Makler, Treuhänder: Senden Sie Ihre Kunden an HypoRadar und verfolgen Sie Ihre Kommissionen in voller Transparenz.",
       "title": "Vermittler: Ihre Kunden verdienen einen besseren Zinssatz",
       "subtitle": "Makler, Treuhänder, Verwalter: Senden Sie uns Ihre Eigentümer-Kunden. Wir rufen sie in Minuten zurück, Sie verfolgen alles — Status und Kommissionen — in Ihrem Bereich.",
       "how1": "Sie senden einen Kunden (persönlicher Link, QR oder Direkterfassung)",
-      "how2": "Ein HypoPilot-Berater ruft ihn innert Minuten zurück",
+      "how2": "Ein HypoRadar-Berater ruft ihn innert Minuten zurück",
       "how3": "Dossier unterschrieben: Ihre Kommission erscheint in Ihrem Bereich, fällig und dann bezahlt",
       "simTitle": "Was das bedeutet",
       "simLabel": "Gesendete Kunden pro Jahr",
@@ -616,7 +616,7 @@
     "faqPage": {
       "metaTitle": "Häufige Fragen",
       "title": "Häufige Fragen",
-      "q5": "Was kostet HypoPilot?",
+      "q5": "Was kostet HypoRadar?",
       "a5": "Nichts, nie. Der Service wird durch eine Kommission des gewählten Kreditgebers finanziert, die vor der Unterschrift ausgewiesen wird. Siehe unsere Transparenz-Seite.",
       "q6": "In welchen Sprachen arbeiten Sie?",
       "a6": "Deutsch, Französisch und Italienisch — Formulare, Dokumente, PDF-Zertifikate und Berater."
@@ -626,9 +626,9 @@
       "privacyTitle": "Datenschutz (DSG)",
       "termsTitle": "Allgemeine Geschäftsbedingungen",
       "lawyerNote": "PROVISORISCHER INHALT — VOM ANWALT ZU PRÜFEN",
-      "impressumBody": "HypoPilot AG (in Gründung)|Betreiberin der Plattform hypopilot.ch|Adresse: zu ergänzen, Schweiz|E-Mail: contact@hypopilot.ch|Verantwortlich für die Publikation: zu ergänzen|Handelsregistereintrag: zu ergänzen",
-      "privacyBody": "Ihre Daten werden gemäss dem schweizerischen Datenschutzgesetz (DSG) bearbeitet.|Zwecke: Berechnung Ihrer Simulationen, Überwachung Ihrer Hypothek, Ausschreibung bei Kreditgebern mit Ihrer ausdrücklichen Einwilligung, Verbesserung des Dienstes.|Ihre Daten werden nie verkauft. Ein Dossier geht nur vollständig und von Ihnen freigegeben an einen Kreditgeber.|Datenhosting: zu ergänzen (Schweiz/EU).|Ihre Rechte: Auskunft, Berichtigung, Löschung — contact@hypopilot.ch.|Aufbewahrungsdauer: zu ergänzen.",
-      "termsBody": "Der HypoPilot-Service ist für Nutzende kostenlos und wird «wie besehen» bereitgestellt.|Simulationen, Zertifikate und Zinsspannen sind indikativ und stellen weder eine persönliche Finanzberatung noch eine Kreditzusage dar.|Der Kreditentscheid liegt ausschliesslich bei den Kreditgebern.|Die Nutzenden garantieren die Richtigkeit der erfassten Angaben.|Gerichtsstand und anwendbares Recht: Schweiz, zu ergänzen."
+      "impressumBody": "HypoRadar AG (in Gründung)|Betreiberin der Plattform hyporadar.ch|Adresse: zu ergänzen, Schweiz|E-Mail: contact@hyporadar.ch|Verantwortlich für die Publikation: zu ergänzen|Handelsregistereintrag: zu ergänzen",
+      "privacyBody": "Ihre Daten werden gemäss dem schweizerischen Datenschutzgesetz (DSG) bearbeitet.|Zwecke: Berechnung Ihrer Simulationen, Überwachung Ihrer Hypothek, Ausschreibung bei Kreditgebern mit Ihrer ausdrücklichen Einwilligung, Verbesserung des Dienstes.|Ihre Daten werden nie verkauft. Ein Dossier geht nur vollständig und von Ihnen freigegeben an einen Kreditgeber.|Datenhosting: zu ergänzen (Schweiz/EU).|Ihre Rechte: Auskunft, Berichtigung, Löschung — contact@hyporadar.ch.|Aufbewahrungsdauer: zu ergänzen.",
+      "termsBody": "Der HypoRadar-Service ist für Nutzende kostenlos und wird «wie besehen» bereitgestellt.|Simulationen, Zertifikate und Zinsspannen sind indikativ und stellen weder eine persönliche Finanzberatung noch eine Kreditzusage dar.|Der Kreditentscheid liegt ausschliesslich bei den Kreditgebern.|Die Nutzenden garantieren die Richtigkeit der erfassten Angaben.|Gerichtsstand und anwendbares Recht: Schweiz, zu ergänzen."
     }
   },
   "request": {

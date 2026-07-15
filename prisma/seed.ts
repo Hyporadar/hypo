@@ -1,6 +1,6 @@
 // Seed de développement — données réalistes, déterministes.
 // Mot de passe de tous les comptes : « Password123! »
-//   admin@hypopilot.ch, closer1/2@hypopilot.ch, partner1/2@hypopilot.ch,
+//   admin@hyporadar.ch, closer1/2@hyporadar.ch, partner1/2@hyporadar.ch,
 //   client1..10@exemple.ch
 import { readFileSync } from 'node:fs'
 import path from 'node:path'
@@ -41,7 +41,7 @@ const PIPELINE: LeadStatus[] = [
 ]
 
 async function main() {
-  console.log('Seed HypoPilot…')
+  console.log('Seed HypoRadar…')
 
   // ─── Nettoyage (ordre : enfants → parents) ──────────────────────────
   await prisma.dossierEvent.deleteMany()
@@ -67,7 +67,7 @@ async function main() {
   // ─── Utilisateurs ────────────────────────────────────────────────────
   const admin = await prisma.user.create({
     data: {
-      email: 'admin@hypopilot.ch',
+      email: 'admin@hyporadar.ch',
       passwordHash,
       name: 'Alice Berthoud',
       phone: '+41 21 555 00 01',
@@ -79,7 +79,7 @@ async function main() {
   const [closer1, closer2] = await Promise.all([
     prisma.user.create({
       data: {
-        email: 'closer1@hypopilot.ch',
+        email: 'closer1@hyporadar.ch',
         passwordHash,
         name: 'Marc Dubois',
         phone: '+41 21 555 00 02',
@@ -89,7 +89,7 @@ async function main() {
     }),
     prisma.user.create({
       data: {
-        email: 'closer2@hypopilot.ch',
+        email: 'closer2@hyporadar.ch',
         passwordHash,
         name: 'Sandra Keller',
         phone: '+41 44 555 00 03',
@@ -102,7 +102,7 @@ async function main() {
   const [partner1, partner2] = await Promise.all([
     prisma.user.create({
       data: {
-        email: 'partner1@hypopilot.ch',
+        email: 'partner1@hyporadar.ch',
         passwordHash,
         name: 'Régie Lambert SA',
         phone: '+41 22 555 00 04',
@@ -113,7 +113,7 @@ async function main() {
     }),
     prisma.user.create({
       data: {
-        email: 'partner2@hypopilot.ch',
+        email: 'partner2@hyporadar.ch',
         passwordHash,
         name: 'Fiduciaria Bernasconi',
         phone: '+41 91 555 00 05',
@@ -651,7 +651,7 @@ async function main() {
       data: {
         leadId: leads[d.lead]!.id,
         type: d.type,
-        url: `https://storage.hypopilot.ch/dev/${leads[d.lead]!.id}/${d.type}.pdf`,
+        url: `https://storage.hyporadar.ch/dev/${leads[d.lead]!.id}/${d.type}.pdf`,
         verificationStatus: d.status,
       },
     })

@@ -20,7 +20,7 @@ export async function generateMetadata({
   }
 }
 
-// Page statique de confiance : comment HypoPilot est payé, montants types.
+// Page statique de confiance : comment HypoRadar est payé, montants types.
 export default async function TransparencyPage({
   params,
 }: {

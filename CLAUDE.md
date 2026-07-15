@@ -1,6 +1,6 @@
-# HypoPilot — plateforme web
+# HypoRadar — plateforme web
 
-HypoPilot est une fintech suisse qui surveille **gratuitement** l'hypothèque des propriétaires. Monétisation : commissions des prêteurs, **affichées en toute transparence** (pilier du produit). Derrière la plateforme, des **closers humains rappellent les leads chauds en moins de 5 minutes** — tout le logiciel est construit autour de cette exigence de vitesse.
+HypoRadar est une fintech suisse qui surveille **gratuitement** l'hypothèque des propriétaires. Monétisation : commissions des prêteurs, **affichées en toute transparence** (pilier du produit). Derrière la plateforme, des **closers humains rappellent les leads chauds en moins de 5 minutes** — tout le logiciel est construit autour de cette exigence de vitesse.
 
 ## Produit & funnels
 
@@ -16,7 +16,7 @@ Le service est 100 % gratuit pour l'utilisateur. La transparence sur les rémun�
 
 ## Règle d'or produit
 
-Un lead n'est **JAMAIS** transmis brut à un partenaire hypothécaire externe. Le lead appartient à HypoPilot ; seul un **dossier complété et consenti** est marqué « envoyé au partenaire » (champ de statut — aucune intégration externe pour l'instant).
+Un lead n'est **JAMAIS** transmis brut à un partenaire hypothécaire externe. Le lead appartient à HypoRadar ; seul un **dossier complété et consenti** est marqué « envoyé au partenaire » (champ de statut — aucune intégration externe pour l'instant).
 
 ## Stack imposée
 
@@ -72,7 +72,7 @@ Le brand kit complet est un skill du projet : **`.claude/skills/hypopilot-design
 - **Ton** : vouvoiement, phrases courtes, chiffres précis, transparence dite noir sur blanc. Pas d'emoji, pas de point d'exclamation. Sentence case partout (titres et boutons inclus). Boutons = verbe d'action + bénéfice (« Obtenir mon certificat »).
 - **Icônes** : Lucide, trait 2px, jamais rempli.
 - **Motif signature** : la ligne de temps de l'hypothèque, point ambre sur la fenêtre 12–18 mois.
-- Logo : wordmark typographique « HypoPilot » (« Hypo » encre / « Pilot » vert-600), composant `Wordmark` — pas de symbole séparé.
+- Logo : wordmark typographique « HypoRadar » (« Hypo » encre / « Pilot » vert-600), composant `Wordmark` — pas de symbole séparé.
 
 ## Conventions de code
 

@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
-import { Bell, FileText, Scale } from 'lucide-react'
+import { FileText, Scale, Zap } from 'lucide-react'
 import { Link } from '@/i18n/navigation'
 import type { Locale } from '@/i18n/routing'
 import { localizedAlternates } from '@/lib/seo'
@@ -21,7 +21,7 @@ export async function generateMetadata({
   }
 }
 
-const STEP_ICONS = [FileText, Bell, Scale] as const
+const STEP_ICONS = [FileText, Zap, Scale] as const
 
 // LA page de vente du concept — pour celui qui hésite avant le formulaire.
 export default async function HowItWorksPage({ params }: { params: Promise<{ locale: string }> }) {

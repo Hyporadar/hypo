@@ -1,4 +1,4 @@
-# HypoPilot
+# HypoRadar
 
 Plateforme suisse de surveillance d'hypothèques — trilingue fr/de/it.
 Next.js (App Router) · TypeScript strict · Tailwind 4 · shadcn/ui · next-intl · PostgreSQL + Prisma · Auth.js · Playwright.
@@ -16,7 +16,7 @@ cp .env.example .env
 # → DATABASE_URL (PostgreSQL local) et AUTH_SECRET (openssl rand -base64 32)
 
 # 3. Base de données (PostgreSQL ≥ 15)
-createdb hypopilot
+createdb hyporadar
 pnpm db:migrate        # applique les migrations
 pnpm db:seed           # données de démo
 
@@ -31,11 +31,11 @@ curl http://localhost:3000/api/cron/signals
 
 | Rôle    | Email                 | Ce qu'il voit                                      |
 | ------- | --------------------- | -------------------------------------------------- |
-| ADMIN   | admin@hypopilot.ch    | /admin : tout (leads, pipeline, stats, taux…)      |
-| CLOSER  | closer1@hypopilot.ch  | /admin : SA file de signaux, agenda, mes stats     |
-| CLOSER  | closer2@hypopilot.ch  | idem, ses leads à lui                              |
-| PARTNER | partner1@hypopilot.ch | /admin : ses apports, envoyer un client, ses gains |
-| PARTNER | partner2@hypopilot.ch | idem (code BERNASCONI)                             |
+| ADMIN   | admin@hyporadar.ch    | /admin : tout (leads, pipeline, stats, taux…)      |
+| CLOSER  | closer1@hyporadar.ch  | /admin : SA file de signaux, agenda, mes stats     |
+| CLOSER  | closer2@hyporadar.ch  | idem, ses leads à lui                              |
+| PARTNER | partner1@hyporadar.ch | /admin : ses apports, envoyer un client, ses gains |
+| PARTNER | partner2@hyporadar.ch | idem (code BERNASCONI)                             |
 | CLIENT  | client1@exemple.ch    | /fr/app : hypothèque surveillée (fenêtre ouverte)  |
 | CLIENT  | client6@exemple.ch    | /de/app : client germanophone, hypothèque froide   |
 | CLIENT  | client9@exemple.ch    | /it/app : client italophone                        |

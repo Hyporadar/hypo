@@ -29,7 +29,7 @@ export async function GET() {
   return new NextResponse(new Uint8Array(png), {
     headers: {
       'Content-Type': 'image/png',
-      'Content-Disposition': 'attachment; filename="hypopilot-qr.png"',
+      'Content-Disposition': 'attachment; filename="hyporadar-qr.png"',
     },
   })
 }

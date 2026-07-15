@@ -1,7 +1,7 @@
 {
   "metadata": {
-    "title": "HypoPilot — votre hypothèque, sous surveillance",
-    "description": "HypoPilot surveille gratuitement votre hypothèque et vous prévient 12 à 18 mois avant l'échéance. Certificat de capacité d'achat gratuit en 2 minutes."
+    "title": "HypoRadar — votre hypothèque, sous surveillance",
+    "description": "HypoRadar surveille gratuitement votre hypothèque et vous prévient 12 à 18 mois avant l'échéance. Certificat de capacité d'achat gratuit en 2 minutes."
   },
   "common": {
     "nav": {
@@ -29,12 +29,12 @@
       "invalidDate": "Veuillez saisir une date valide.",
       "invalidEmail": "Veuillez saisir une adresse e-mail valide.",
       "genericError": "Une erreur est survenue. Veuillez réessayer.",
-      "privacy": "Vos données restent chez HypoPilot. Aucune transmission à des tiers sans votre accord explicite."
+      "privacy": "Vos données restent chez HypoRadar. Aucune transmission à des tiers sans votre accord explicite."
     },
     "footer": {
       "transparency": "Gratuit pour vous. Payé par les prêteurs. Affiché noir sur blanc.",
-      "legal": "HypoPilot est rémunéré par une commission du prêteur retenu. Vous la voyez avant de signer.",
-      "copyright": "HypoPilot — fintech suisse",
+      "legal": "HypoRadar est rémunéré par une commission du prêteur retenu. Vous la voyez avant de signer.",
+      "copyright": "HypoRadar — fintech suisse",
       "nav": {
         "rates": "Taux du jour",
         "guides": "Guides",
@@ -284,20 +284,20 @@
   },
   "howItWorks": {
     "metaTitle": "Comment ça marche",
-    "metaDescription": "Enregistrez votre hypothèque en 3 minutes, HypoPilot surveille votre taux gratuitement et met les prêteurs en concurrence au bon moment.",
+    "metaDescription": "Obtenez le meilleur taux hypothécaire, à l'achat comme au renouvellement : estimation immédiate et mise en concurrence des prêteurs, gratuitement et sans rendez-vous imposé.",
     "hero": {
       "overline": "Le principe",
-      "title": "Personne ne surveille votre hypothèque. Nous, si.",
-      "subtitle": "C'est souvent la plus grosse dépense d'un ménage — et la moins comparée. HypoPilot s'en charge, gratuitement, pendant des années."
+      "title": "Votre hypothèque au meilleur taux, sans y passer vos journées.",
+      "subtitle": "À l'achat comme au renouvellement, HypoRadar met banques, assurances et caisses de pension en concurrence — gratuitement, avec une estimation immédiate et aucun rendez-vous imposé."
     },
     "steps": {
       "title": "Trois étapes, et c'est réglé",
-      "step1Title": "Enregistrez votre hypothèque",
-      "step1Body": "Montant, taux, prêteur, échéance. 3 minutes, une seule fois. Pas de paperasse : vos chiffres approximatifs suffisent pour démarrer.",
-      "step2Title": "On surveille votre taux et votre échéance, gratuitement",
-      "step2Body": "Pendant des années, sans rien vous demander. Quand la fenêtre s'ouvre — 12 à 18 mois avant l'échéance — vous recevez une alerte. C'est la seule période où changer de banque est vraiment possible : avant, les pénalités mangent le gain ; après, le préavis est dépassé.",
-      "step3Title": "Au bon moment, on met les prêteurs en concurrence",
-      "step3Body": "Banques, assurances, caisses de pension : chacun remet son offre sur votre dossier. Vous comparez, vous choisissez, vous signez — ou pas. Aucune obligation."
+      "step1Title": "Renseignez votre situation",
+      "step1Body": "Le bien, votre profil, votre hypothèque : environ 3 minutes. Pas de paperasse — vos chiffres approximatifs suffisent pour démarrer.",
+      "step2Title": "Recevez votre estimation de taux, tout de suite",
+      "step2Body": "Dès la fin du questionnaire, vous voyez une fourchette de taux calibrée sur votre dossier — banques, assurances et caisses de pension. Aucun rendez-vous, aucun appel à subir.",
+      "step3Title": "On met les prêteurs en concurrence",
+      "step3Body": "Un conseiller spécialisé lance l'appel d'offres et affine votre offre auprès des prêteurs. Vous comparez, vous choisissez, vous signez — ou pas. Aucune obligation."
     },
     "whyFree": {
       "title": "Pourquoi c'est gratuit",
@@ -316,13 +316,13 @@
     "faq": {
       "title": "Les questions qu'on nous pose",
       "q1": "Est-ce que je m'engage à quelque chose ?",
-      "a1": "Non. La surveillance est gratuite et sans engagement. L'appel d'offres aussi : vous recevez des offres, vous restez libre de toutes les refuser — y compris pour rester chez votre banque actuelle.",
+      "a1": "Non. L'estimation et la mise en concurrence sont gratuites et sans engagement : vous recevez des offres et restez libre de toutes les refuser — y compris pour rester chez votre banque actuelle.",
       "q2": "Qui voit mes données ?",
-      "a2": "HypoPilot, et personne d'autre. Vos données ne sont jamais vendues. Un prêteur ne voit votre dossier que si vous décidez de le lui envoyer, une fois complet et validé par vous.",
+      "a2": "HypoRadar, et personne d'autre. Vos données ne sont jamais vendues. Un prêteur ne voit votre dossier que si vous décidez de le lui envoyer, une fois complet et validé par vous.",
       "q3": "Dois-je changer de banque ?",
       "a3": "Non. Souvent, la meilleure offre externe sert simplement d'argument pour renégocier avec votre banque actuelle — qui s'aligne. Vous gagnez dans les deux cas.",
-      "q4": "Que se passe-t-il si mon échéance est encore loin ?",
-      "a4": "C'est le scénario idéal. Nous activons la surveillance et nous vous réveillons 12 à 18 mois avant l'échéance, au moment exact où tout redevient négociable."
+      "q4": "Et si mon échéance est encore loin ?",
+      "a4": "C'est le bon moment pour anticiper : vous recevez déjà votre estimation. Et si vous le souhaitez, nous surveillons votre taux pour vous prévenir 12 à 18 mois avant l'échéance, au moment où tout redevient négociable."
     },
     "cta": {
       "title": "Deux minutes pour savoir où vous en êtes",
@@ -365,7 +365,7 @@
   },
   "certificate": {
     "title": "Certificat de capacité d'achat",
-    "issuer": "Émis par HypoPilot — plateforme suisse de financement hypothécaire",
+    "issuer": "Émis par HypoRadar — plateforme suisse de financement hypothécaire",
     "number": "Certificat n°",
     "issuedOn": "Émis le",
     "holder": "Établi pour",
@@ -387,14 +387,14 @@
   "verify": {
     "title": "Vérification de certificat",
     "validBadge": "Certificat authentique",
-    "validBody": "Ce certificat a été émis par HypoPilot. Les informations ci-dessous font foi.",
+    "validBody": "Ce certificat a été émis par HypoRadar. Les informations ci-dessous font foi.",
     "invalidTitle": "Certificat introuvable",
-    "invalidBody": "Aucun certificat ne correspond à cet identifiant. Le document qu'on vous a présenté n'a pas été émis par HypoPilot — ou son numéro a été altéré.",
+    "invalidBody": "Aucun certificat ne correspond à cet identifiant. Le document qu'on vous a présenté n'a pas été émis par HypoRadar — ou son numéro a été altéré.",
     "number": "Numéro",
     "holder": "Porteur",
     "issuedOn": "Date d'émission",
     "maxCapacity": "Capacité d'achat certifiée",
-    "footer": "HypoPilot émet des certificats de capacité d'achat gratuits, calculés selon les règles bancaires suisses."
+    "footer": "HypoRadar émet des certificats de capacité d'achat gratuits, calculés selon les règles bancaires suisses."
   },
   "emails": {
     "abandonJ1": {
@@ -419,16 +419,16 @@
     },
     "rateUpdate": {
       "subject": "Les taux hypothécaires du jour",
-      "body": "Le taux de référence fixe 10 ans est à {refRate}.\n\nVotre point taux HypoPilot — comparez avec votre taux actuel en 2 minutes, sans inscription.",
+      "body": "Le taux de référence fixe 10 ans est à {refRate}.\n\nVotre point taux HypoRadar — comparez avec votre taux actuel en 2 minutes, sans inscription.",
       "cta": "Comparer avec mon taux"
     },
     "magicLink": {
-      "subject": "Votre lien de connexion HypoPilot",
+      "subject": "Votre lien de connexion HypoRadar",
       "body": "Cliquez sur le bouton ci-dessous pour retrouver votre dossier hypothécaire. Le lien est valable une heure et ne peut être utilisé qu'une fois.\nSi vous n'êtes pas à l'origine de cette demande, ignorez simplement cet email.",
       "cta": "Ouvrir mon dossier"
     },
     "rateAlertConfirm": {
-      "subject": "Confirmez votre abonnement aux taux HypoPilot",
+      "subject": "Confirmez votre abonnement aux taux HypoRadar",
       "body": "Encore un clic : confirmez votre adresse pour recevoir l'évolution des taux hypothécaires à la fréquence choisie. Désinscription en un clic dans chaque email.",
       "cta": "Confirmer mon abonnement"
     }
@@ -515,7 +515,7 @@
     },
     "referral": {
       "title": "Parrainage",
-      "subtitle": "Recommandez HypoPilot : CHF 100 par filleul dont l'hypothèque est validée.",
+      "subtitle": "Recommandez HypoRadar : CHF 100 par filleul dont l'hypothèque est validée.",
       "yourLink": "Votre lien personnel",
       "copy": "Copier",
       "copied": "Copié",
@@ -565,13 +565,13 @@
     },
     "guides": {
       "metaTitle": "Guides hypothécaires",
-      "metaDescription": "Renouvellement, certificat de capacité d'achat, SARON ou taux fixe : les guides HypoPilot, sans jargon.",
+      "metaDescription": "Renouvellement, certificat de capacité d'achat, SARON ou taux fixe : les guides HypoRadar, sans jargon.",
       "title": "Guides",
       "subtitle": "L'hypothèque suisse expliquée sans jargon. Le nécessaire pour décider, rien de plus.",
       "readMore": "Lire le guide"
     },
     "transparency": {
-      "metaTitle": "Comment HypoPilot est payé",
+      "metaTitle": "Comment HypoRadar est payé",
       "metaDescription": "Notre modèle noir sur blanc : gratuit pour vous, payé par les prêteurs, commission identique quel que soit le prêteur retenu.",
       "title": "Comment nous sommes payés",
       "subtitle": "La transparence n'est pas une page de plus sur ce site. C'est le produit.",
@@ -586,12 +586,12 @@
       "cta": "Vérifier mon taux maintenant"
     },
     "partnersPublic": {
-      "metaTitle": "Devenir apporteur HypoPilot",
-      "metaDescription": "Agents immobiliers, fiduciaires : envoyez vos clients à HypoPilot et suivez vos commissions en toute transparence.",
+      "metaTitle": "Devenir apporteur HypoRadar",
+      "metaDescription": "Agents immobiliers, fiduciaires : envoyez vos clients à HypoRadar et suivez vos commissions en toute transparence.",
       "title": "Apporteurs : vos clients méritent un meilleur taux",
       "subtitle": "Agents immobiliers, fiduciaires, gérants : envoyez-nous vos clients propriétaires. Nous les rappelons en minutes, vous suivez tout — statuts et commissions — dans votre espace.",
       "how1": "Vous envoyez un client (lien personnel, QR ou saisie directe)",
-      "how2": "Un conseiller HypoPilot le rappelle en quelques minutes",
+      "how2": "Un conseiller HypoRadar le rappelle en quelques minutes",
       "how3": "Dossier signé : votre commission apparaît dans votre espace, due puis payée",
       "simTitle": "Ce que ça représente",
       "simLabel": "Clients envoyés par an",
@@ -616,7 +616,7 @@
     "faqPage": {
       "metaTitle": "Questions fréquentes",
       "title": "Questions fréquentes",
-      "q5": "Combien coûte HypoPilot ?",
+      "q5": "Combien coûte HypoRadar ?",
       "a5": "Rien, jamais. Le service est financé par une commission du prêteur retenu, affichée avant signature. Voir notre page transparence.",
       "q6": "Dans quelles langues travaillez-vous ?",
       "a6": "Français, allemand et italien — formulaires, documents, certificats PDF et conseillers."
@@ -626,9 +626,9 @@
       "privacyTitle": "Protection des données (LPD)",
       "termsTitle": "Conditions générales d'utilisation",
       "lawyerNote": "CONTENU PROVISOIRE — À VALIDER PAR AVOCAT",
-      "impressumBody": "HypoPilot SA (en constitution)|Exploitant de la plateforme hypopilot.ch|Adresse : à compléter, Suisse|E-mail : contact@hypopilot.ch|Responsable de la publication : à compléter|Inscription au registre du commerce : à compléter",
-      "privacyBody": "Vos données sont traitées conformément à la loi fédérale suisse sur la protection des données (LPD).|Finalités : calcul de vos simulations, surveillance de votre hypothèque, mise en concurrence des prêteurs avec votre consentement explicite, amélioration du service.|Vos données ne sont jamais vendues. Un dossier n'est transmis à un prêteur que complet et validé par vous.|Hébergement des données : à compléter (Suisse/UE).|Vos droits : accès, rectification, effacement — contact@hypopilot.ch.|Durée de conservation : à compléter.",
-      "termsBody": "Le service HypoPilot est gratuit pour l'utilisateur et fourni « en l'état ».|Les simulations, certificats et fourchettes de taux sont indicatifs et ne constituent ni un conseil financier personnalisé ni une promesse de crédit.|La décision d'octroi appartient exclusivement aux prêteurs.|L'utilisateur garantit l'exactitude des informations saisies.|For juridique et droit applicable : Suisse, à compléter."
+      "impressumBody": "HypoRadar SA (en constitution)|Exploitant de la plateforme hyporadar.ch|Adresse : à compléter, Suisse|E-mail : contact@hyporadar.ch|Responsable de la publication : à compléter|Inscription au registre du commerce : à compléter",
+      "privacyBody": "Vos données sont traitées conformément à la loi fédérale suisse sur la protection des données (LPD).|Finalités : calcul de vos simulations, surveillance de votre hypothèque, mise en concurrence des prêteurs avec votre consentement explicite, amélioration du service.|Vos données ne sont jamais vendues. Un dossier n'est transmis à un prêteur que complet et validé par vous.|Hébergement des données : à compléter (Suisse/UE).|Vos droits : accès, rectification, effacement — contact@hyporadar.ch.|Durée de conservation : à compléter.",
+      "termsBody": "Le service HypoRadar est gratuit pour l'utilisateur et fourni « en l'état ».|Les simulations, certificats et fourchettes de taux sont indicatifs et ne constituent ni un conseil financier personnalisé ni une promesse de crédit.|La décision d'octroi appartient exclusivement aux prêteurs.|L'utilisateur garantit l'exactitude des informations saisies.|For juridique et droit applicable : Suisse, à compléter."
     }
   },
   "request": {

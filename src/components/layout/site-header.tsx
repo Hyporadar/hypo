@@ -19,7 +19,7 @@ export async function SiteHeader() {
     <header className="border-line bg-paper/95 sticky top-0 z-40 border-b backdrop-blur-sm">
       <div className="mx-auto flex h-16 max-w-[1120px] items-center gap-6 px-6">
         <div className="flex flex-1 items-center">
-          <Link href="/" aria-label="HypoPilot — accueil" className="shrink-0">
+          <Link href="/" aria-label="HypoRadar — accueil" className="shrink-0">
             <Wordmark />
           </Link>
         </div>

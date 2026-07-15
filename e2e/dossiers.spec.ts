@@ -71,7 +71,7 @@ test.describe('admin /admin/dossiers (versionnage immuable)', () => {
   test('closer : édition = nouvelle version avec commentaire obligatoire, diff, restauration', async ({
     page,
   }) => {
-    await login(page, 'closer1@hypopilot.ch')
+    await login(page, 'closer1@hyporadar.ch')
     await page.goto('/admin/dossiers')
     await expect(page.getByRole('heading', { name: 'Dossiers' })).toBeVisible()
 
@@ -126,7 +126,7 @@ test.describe('admin /admin/dossiers (versionnage immuable)', () => {
     page,
     request,
   }) => {
-    await login(page, 'closer2@hypopilot.ch')
+    await login(page, 'closer2@hyporadar.ch')
     const res = await page.goto('/admin/dossiers/demo-dossier-0001')
     expect(res?.status()).toBe(404)
 
@@ -136,7 +136,7 @@ test.describe('admin /admin/dossiers (versionnage immuable)', () => {
     await logout(page)
 
     // ADMIN : export JSON complet avec toutes les versions
-    await login(page, 'admin@hypopilot.ch')
+    await login(page, 'admin@hyporadar.ch')
     const exportRes = await page.request.get('/api/admin/dossiers/demo-dossier-0001/export')
     expect(exportRes.status()).toBe(200)
     const json = (await exportRes.json()) as { versions: unknown[] }

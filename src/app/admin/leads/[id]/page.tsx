@@ -21,7 +21,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 // les vrais scripts seront fournis par le métier.
 const SCRIPTS: Record<string, { hook: string; points: string[]; close: string }> = {
   CALLBACK_DEMANDE: {
-    hook: '« Bonjour, vous avez demandé à être rappelé par HypoPilot — je vous appelle à ce sujet. »',
+    hook: '« Bonjour, vous avez demandé à être rappelé par HypoRadar — je vous appelle à ce sujet. »',
     points: [
       'Confirmer le contexte : renouvellement ou achat ?',
       'Poser la question de l’échéance en premier.',

@@ -1,4 +1,4 @@
-/** Wordmark officiel HypoPilot — seule représentation autorisée du logo. */
+/** Wordmark officiel HypoRadar — seule représentation autorisée du logo. */
 export interface WordmarkProps {
   /** Taille de police en px (défaut 28) */
   size?: number;

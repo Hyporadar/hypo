@@ -20,7 +20,7 @@ test('CLIENT : aucun accès au panel', async ({ page }) => {
 })
 
 test('PARTNER : ne voit ni les leads, ni les stats, ni les vues closer', async ({ page }) => {
-  await login(page, 'partner1@hypopilot.ch')
+  await login(page, 'partner1@hyporadar.ch')
 
   for (const path of [
     '/admin/leads',
@@ -49,7 +49,7 @@ test('PARTNER : ne voit ni les leads, ni les stats, ni les vues closer', async (
 })
 
 test('CLOSER : pas de pages admin, pas de fiche d’un lead non assigné', async ({ page }) => {
-  await login(page, 'closer1@hypopilot.ch')
+  await login(page, 'closer1@hyporadar.ch')
 
   for (const path of ['/admin/utilisateurs', '/admin/taux', '/admin/partenaires', '/admin/stats']) {
     await page.goto(path)

@@ -22,7 +22,7 @@ export async function generateMetadata({
   return {
     title: {
       default: t('title'),
-      template: '%s — HypoPilot',
+      template: '%s — HypoRadar',
     },
     description: t('description'),
     alternates: localizedAlternates('/', locale as Locale),

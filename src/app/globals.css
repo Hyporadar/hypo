@@ -4,7 +4,7 @@
 
 @custom-variant dark (&:is(.dark *));
 
-/* ─── HypoPilot — tokens de marque (voir .claude/skills/hypopilot-design) ─── */
+/* ─── HypoRadar — tokens de marque (voir .claude/skills/hypopilot-design) ─── */
 @theme {
   /* Encre (noirs chauds) */
   --color-ink-900: #211e1a;
@@ -86,7 +86,7 @@
   --radius-4xl: calc(var(--radius) * 2.6);
 }
 
-/* Variables sémantiques shadcn mappées sur la palette HypoPilot.
+/* Variables sémantiques shadcn mappées sur la palette HypoRadar.
    Aucun dégradé, ombres très douces, tonalité chaude. */
 :root {
   --background: #faf7f1; /* papier */

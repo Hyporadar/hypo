@@ -31,7 +31,7 @@ export default async function DossierPage({ params }: { params: Promise<{ locale
           <CardContent className="space-y-4 py-12 text-center">
             <p className="text-ink-700 text-sm">{t('noLead')}</p>
             <Button asChild>
-              <Link href="/renouveler">HypoPilot</Link>
+              <Link href="/renouveler">HypoRadar</Link>
             </Button>
           </CardContent>
         </Card>

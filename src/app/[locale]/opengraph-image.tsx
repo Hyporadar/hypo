@@ -3,7 +3,7 @@ import { getTranslations } from 'next-intl/server'
 
 export const size = { width: 1200, height: 630 }
 export const contentType = 'image/png'
-export const alt = 'HypoPilot'
+export const alt = 'HypoRadar'
 
 // Image OG générée — wordmark + proposition de valeur, dans la langue de la page.
 export default async function OpengraphImage({ params }: { params: { locale: string } }) {
@@ -24,7 +24,7 @@ export default async function OpengraphImage({ params }: { params: { locale: str
     >
       <div style={{ display: 'flex', fontSize: 56, fontWeight: 700 }}>
         <span style={{ color: '#211E1A' }}>Hypo</span>
-        <span style={{ color: '#1B6B52' }}>Pilot</span>
+        <span style={{ color: '#1B6B52' }}>Radar</span>
       </div>
       <div
         style={{

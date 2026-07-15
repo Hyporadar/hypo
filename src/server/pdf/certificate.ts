@@ -93,7 +93,7 @@ export async function renderCertificatePdf(certificate: Certificate): Promise<Ui
 
   const doc = await PDFDocument.create()
   doc.setTitle(`${sanitize(t('title'))} ${certificate.number}`)
-  doc.setAuthor('HypoPilot')
+  doc.setAuthor('HypoRadar')
   const page = doc.addPage(A4)
   const [W, H] = A4
   const contentWidth = W - MARGIN * 2
@@ -104,7 +104,7 @@ export async function renderCertificatePdf(certificate: Certificate): Promise<Ui
   // ── En-tête : wordmark + numéro / date
   let y = H - MARGIN
   page.drawText('Hypo', { x: MARGIN, y, size: 22, font: bold, color: INK })
-  page.drawText('Pilot', {
+  page.drawText('Radar', {
     x: MARGIN + bold.widthOfTextAtSize('Hypo', 22),
     y,
     size: 22,

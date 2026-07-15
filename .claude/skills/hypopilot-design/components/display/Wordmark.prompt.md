@@ -1,4 +1,4 @@
-Le logo HypoPilot. Toujours utiliser ce composant — jamais retaper le nom en styles ad hoc.
+Le logo HypoRadar. Toujours utiliser ce composant — jamais retaper le nom en styles ad hoc.
 
 ```jsx
 <Wordmark size={32} />

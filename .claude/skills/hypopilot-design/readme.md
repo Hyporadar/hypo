@@ -1,8 +1,8 @@
-# HypoPilot — Design System & Brand Kit
+# HypoRadar — Design System & Brand Kit
 
 ## Contexte produit
 
-**HypoPilot** est une fintech suisse qui surveille gratuitement l'hypothèque des propriétaires.
+**HypoRadar** est une fintech suisse qui surveille gratuitement l'hypothèque des propriétaires.
 
 - Le client **enregistre son hypothèque en 3 minutes** ; la plateforme suit son taux et sa date d'échéance pendant des années.
 - Elle le **prévient 12–18 mois avant l'échéance** — la seule fenêtre où il peut encore changer de banque.
@@ -49,7 +49,7 @@ Exemples de copy canonique :
 
 ## Logo
 
-Wordmark typographique : **HypoPilot** en Bricolage Grotesque 700, « Hypo » encre / « Pilot » vert-600. Voir `assets/logo.html` (spécimen) et le composant `Wordmark`. Sur fond vert-700 : tout en `--text-on-dark`, « Pilot » en vert-200.
+Wordmark typographique : **HypoRadar** en Bricolage Grotesque 700, « Hypo » encre / « Pilot » vert-600. Voir `assets/logo.html` (spécimen) et le composant `Wordmark`. Sur fond vert-700 : tout en `--text-on-dark`, « Pilot » en vert-200.
 Pas de symbole séparé (choix client : wordmark simple). Fichier vectoriel définitif à produire par un designer — le spécimen HTML fait foi pour la construction.
 
 ## ICONOGRAPHIE

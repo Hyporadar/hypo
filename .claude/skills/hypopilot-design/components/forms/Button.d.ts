@@ -1,5 +1,5 @@
 /**
- * Bouton d'action HypoPilot. Pilule, vert Pilote.
+ * Bouton d'action HypoRadar. Pilule, vert Pilote.
  * @startingPoint section="Formulaires" subtitle="Boutons pilule — primaire, secondaire, ghost, danger" viewport="700x220"
  */
 export interface ButtonProps {

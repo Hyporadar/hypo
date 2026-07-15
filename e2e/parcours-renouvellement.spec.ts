@@ -32,7 +32,7 @@ test.describe('renouvellement chaud, de bout en bout', () => {
   })
 
   test('closer : le signal est dans la file, il le prend et signe', async ({ page }) => {
-    await login(page, 'closer1@hypopilot.ch')
+    await login(page, 'closer1@hyporadar.ch')
     await expect(page.getByRole('heading', { name: 'Ma file' })).toBeVisible()
 
     // Le lead créé au test précédent est dans le pool (non assigné) → claim.
@@ -59,7 +59,7 @@ test.describe('renouvellement chaud, de bout en bout', () => {
   })
 
   test('partner : le gain apparaît dans son espace', async ({ page }) => {
-    await login(page, 'partner1@hypopilot.ch')
+    await login(page, 'partner1@hyporadar.ch')
     await page.goto('/admin/mes-gains')
     const row = page.locator('li', { hasText: clientName })
     await expect(row).toBeVisible()
@@ -69,7 +69,7 @@ test.describe('renouvellement chaud, de bout en bout', () => {
   })
 
   test('admin : commissions closer + partner créées', async ({ page }) => {
-    await login(page, 'admin@hypopilot.ch')
+    await login(page, 'admin@hyporadar.ch')
     await page.goto('/admin/partenaires')
     await expect(page.locator('li', { hasText: clientName }).getByText('CHF 500')).toBeVisible()
     await logout(page)

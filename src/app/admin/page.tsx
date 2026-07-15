@@ -8,7 +8,7 @@ import { SignalQueue } from '@/components/admin/signal-queue'
 import { Card, CardContent } from '@/components/ui/card'
 
 export const metadata: Metadata = {
-  title: 'Panel interne — HypoPilot',
+  title: 'Panel interne — HypoRadar',
   robots: { index: false },
 }
 
