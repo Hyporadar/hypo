@@ -1,9 +1,8 @@
 import type { Metadata } from 'next'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
 import type { Locale } from '@/i18n/routing'
-import { getReferenceRate10y } from '@/lib/rates'
 import { localizedAlternates } from '@/lib/seo'
-import { BuyFunnel } from '@/components/funnel/buy-funnel'
+import { DossierWizard } from '@/components/wizard/dossier-wizard'
 
 export async function generateMetadata({
   params,
@@ -23,7 +22,6 @@ export default async function BuyPage({ params }: { params: Promise<{ locale: st
   const { locale } = await params
   setRequestLocale(locale)
   const t = await getTranslations('buy')
-  const refRate10y = await getReferenceRate10y()
 
   return (
     <section className="mx-auto max-w-[1120px] px-4 py-10 sm:px-6 sm:py-16">
@@ -37,7 +35,7 @@ export default async function BuyPage({ params }: { params: Promise<{ locale: st
         <p className="text-ink-700 leading-relaxed">{t('hero.subtitle')}</p>
       </div>
       <div className="mt-10">
-        <BuyFunnel refRate10y={refRate10y} />
+        <DossierWizard initialFunnel="ACHAT" />
       </div>
     </section>
   )
