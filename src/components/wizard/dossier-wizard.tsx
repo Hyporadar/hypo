@@ -46,11 +46,6 @@ export function DossierWizard({
     }
   }, [wizard])
 
-  function switchFunnel() {
-    const target: Funnel = wizard.funnel === 'ACHAT' ? 'RENOUVELLEMENT_CHAUD' : 'ACHAT'
-    if (window.confirm(t('nav.switchWarning'))) wizard.setFunnel(target)
-  }
-
   if (!wizard.hydrated) {
     return (
       <div className="space-y-4" aria-busy>
@@ -130,7 +125,7 @@ export function DossierWizard({
             />
           )}
 
-          {/* Navigation bas de section + bascule de funnel */}
+          {/* Navigation bas de section */}
           <div className="mt-8 flex items-center justify-between gap-3">
             <Button
               type="button"
@@ -141,13 +136,6 @@ export function DossierWizard({
               <ArrowLeft data-icon="inline-start" />
               {t('nav.back')}
             </Button>
-            <button
-              type="button"
-              onClick={switchFunnel}
-              className="text-ink-400 hover:text-pilot-700 text-xs underline-offset-2 hover:underline"
-            >
-              {wizard.funnel === 'ACHAT' ? t('nav.toRenewal') : t('nav.toBuy')}
-            </button>
             {stepIndex < STEPS.length - 1 ? (
               <Button type="button" onClick={() => setSection(STEPS[stepIndex + 1] ?? 'estimation')}>
                 {t('nav.next')}
