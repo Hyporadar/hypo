@@ -4,6 +4,12 @@ import type { StaticPathname } from '@/i18n/routing'
 import { Wordmark } from '@/components/brand/wordmark'
 import { LocaleSwitcher } from '@/components/layout/locale-switcher'
 
+// Achat / Renouvellement → /dossier avec le funnel pré-sélectionné.
+const FUNNEL_NAV: Array<{ key: string; funnel: 'achat' | 'renouvellement' }> = [
+  { key: 'buy', funnel: 'achat' },
+  { key: 'renew', funnel: 'renouvellement' },
+]
+
 const NAV: Array<{ key: string; href: StaticPathname }> = [
   { key: 'howItWorks', href: '/comment-ca-marche' },
   { key: 'rates', href: '/taux' },
@@ -22,6 +28,15 @@ export async function SiteHeader() {
         </div>
         {/* Nav centrée : flanquée de deux zones flex-1 égales, jamais de chevauchement */}
         <nav className="hidden items-center gap-6 text-sm md:flex">
+          {FUNNEL_NAV.map((item) => (
+            <Link
+              key={item.key}
+              href={{ pathname: '/dossier', query: { funnel: item.funnel } }}
+              className="text-ink-700 hover:text-ink-900 whitespace-nowrap hover:underline"
+            >
+              {t(item.key)}
+            </Link>
+          ))}
           {NAV.map((item) => (
             <Link
               key={item.key}

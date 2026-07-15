@@ -137,7 +137,9 @@ export function useDossierWizard(initialFunnel?: Funnel, testMode = false) {
         const parsed = dossierDataSchema.safeParse(stored.data)
         if (parsed.success) {
           setDossierId(stored.dossierId)
-          setFunnel(stored.funnel)
+          // Un funnel explicite (clic « Achat »/« Renouvellement » du header,
+          // via ?funnel=) prime sur celui du dossier restauré.
+          setFunnel(initialFunnel ?? stored.funnel)
           setData(parsed.data)
           setHydrated(true)
           return
