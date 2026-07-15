@@ -1193,7 +1193,7 @@
       },
       "done": {
         "title": "Convalidato",
-        "body": "La vostra offerta arriva via email e il nostro consulente vi chiama entro 2 ore lavorative.",
+        "body": "Ricevete la vostra offerta via email e il nostro consulente vi richiamerà nella fascia oraria concordata.",
         "close": "Chiudere"
       },
       "error": "Si è verificato un errore. Riprovate tra un istante."

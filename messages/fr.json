@@ -1193,7 +1193,7 @@
       },
       "done": {
         "title": "C'est validé",
-        "body": "Votre offre arrive par email et notre conseiller vous appelle sous 2h ouvrables.",
+        "body": "Vous recevez votre offre par email, et notre conseiller vous rappellera au créneau convenu.",
         "close": "Fermer"
       },
       "error": "Une erreur est survenue. Réessayez dans un instant."

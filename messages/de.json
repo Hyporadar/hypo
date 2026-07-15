@@ -1193,7 +1193,7 @@
       },
       "done": {
         "title": "Bestätigt",
-        "body": "Ihr Angebot kommt per E-Mail und unser Berater ruft Sie innert 2 Arbeitsstunden an.",
+        "body": "Sie erhalten Ihr Angebot per E-Mail, und unser Berater ruft Sie zum vereinbarten Zeitpunkt zurück.",
         "close": "Schliessen"
       },
       "error": "Ein Fehler ist aufgetreten. Bitte versuchen Sie es gleich erneut."
