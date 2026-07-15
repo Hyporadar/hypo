@@ -872,14 +872,25 @@
         }
       },
       "fondsPropres": {
-        "title": "Determinate i vostri fondi propri",
+        "title": "Ipoteca e fondi propri",
         "short": "Fondi propri",
-        "subtitle": "Spostate la maniglia tra ipoteca e fondi propri — entrambi i campi sono modificabili.",
+        "subtitle": "Ripresi dalle vostre risposte — modificate se necessario.",
         "mortgageLabel": "Nuova ipoteca",
         "ownFundsLabel": "Fondi propri",
         "totalLabel": "Prezzo d'acquisto",
         "note": "La composizione dei fondi propri (contanti, 2° pilastro, 3a) sarà precisata durante l'elaborazione del dossier.",
         "prixAchatPrompt": "Indicate il prezzo d'acquisto per ripartire ipoteca e fondi propri."
+      },
+      "preferenceTaux": {
+        "title": "La vostra preferenza di tasso",
+        "short": "Preferenza di tasso",
+        "subtitle": "Alla fine vi faremo proposte precise — indicate solo la vostra preferenza.",
+        "options": {
+          "SARON": "SARON",
+          "FIXE_2": "Fisso 2 anni",
+          "FIXE_5": "Fisso 5 anni",
+          "FIXE_10": "Fisso 10 anni"
+        }
       },
       "tranchesExistantes": {
         "title": "Le vostre ipoteche attuali",

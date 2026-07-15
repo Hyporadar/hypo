@@ -1,41 +1,36 @@
 'use client'
 
 import { useTranslations } from 'next-intl'
-import { Split } from 'lucide-react'
 import type { Funnel } from '@prisma/client'
 import { formatCHF } from '@/lib/format'
-import {
-  deriveMontantTotal,
-  validateTranches,
-  type DossierData,
-} from '@/lib/dossier/schema'
+import { deriveMontantTotal, type DossierData } from '@/lib/dossier/schema'
 import { QuestionCard, type QuestionStatus } from '@/components/wizard/question-card'
 import { AmountInput } from '@/components/wizard/inputs'
 import { OptionList } from '@/components/wizard/option-list'
-import { SplitSlider } from '@/components/wizard/sliders'
-import { RepeatableGroup } from '@/components/wizard/repeatable-group'
-import { Button } from '@/components/ui/button'
 import { Label } from '@/components/ui/label'
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select'
 
 type Tranche = DossierData['tranchesSouhaitees'][number]
 
-const DUREES = Array.from({ length: 20 }, (_, i) => i + 1) // grille 1..20 ans (§3.1)
-const TRANCHE_COLORS = ['bg-pilot-600', 'bg-pilot-400', 'bg-pilot-300', 'bg-pilot-200']
+// Préférence de taux : une seule tranche couvrant tout le montant. Les
+// propositions précises (multi-tranches, split…) sont faites par le
+// conseiller après l'estimation — ici on ne capte qu'une préférence.
+const PREFS = [
+  { key: 'SARON', produit: 'SARON', duree: null },
+  { key: 'FIXE_2', produit: 'FIXE', duree: 2 },
+  { key: 'FIXE_5', produit: 'FIXE', duree: 5 },
+  { key: 'FIXE_10', produit: 'FIXE', duree: 10 },
+] as const
 
-function isoToFr(iso: string | null | undefined): string {
-  if (!iso) return ''
-  const m = iso.match(/^(\d{4})-(\d{2})-(\d{2})$/)
-  return m ? `${m[3]}.${m[2]}.${m[1]}` : ''
+const clamp = (v: number, min: number, max: number) => Math.min(max, Math.max(min, v))
+
+/** Fonds propres repris/dérivés du prix d'achat (défaut 20 % si rien). */
+function derivedFonds(data: DossierData): number | null {
+  const prix = data.bien.prixAchat
+  if (prix == null) return null
+  return data.bien.fondsPropres ?? Math.max(0, prix - (data.montantTotal ?? Math.round(prix * 0.8)))
 }
 
-// ─── Section 3 · L'hypothèque — configurateur (formulaire-complet §3) ──
+// ─── Section 3 · L'hypothèque ──────────────────────────────────────────
 export function HypothequeSection({
   funnel,
   data,
@@ -48,45 +43,80 @@ export function HypothequeSection({
   highlightKey: string | null
 }) {
   const t = useTranslations('wizard.questions')
-  const tc = useTranslations('wizard.common')
 
-  const total = deriveMontantTotal(funnel, data)
+  const prix = data.bien.prixAchat ?? null
+  const fondsPropres = derivedFonds(data)
+  // Montant emprunté : prix − fonds propres (achat) ou dérivé (renouvellement).
+  const montant =
+    funnel === 'ACHAT'
+      ? prix != null
+        ? Math.max(0, prix - (fondsPropres ?? 0))
+        : null
+      : deriveMontantTotal(funnel, data)
   const tranches = data.tranchesSouhaitees
-  const somme = tranches.reduce((s, x) => s + x.montant, 0)
-  const { ok: sumOk, ecart } = validateTranches(data, funnel)
+
+  // Patch + resynchronisation : la tranche de préférence suit toujours le
+  // montant total (sinon la somme ne collerait plus après un ajustement).
+  function patchSync(updater: (prev: DossierData) => DossierData) {
+    patch((prev) => {
+      const next = updater(prev)
+      const nt = deriveMontantTotal(funnel, next)
+      if (next.tranchesSouhaitees.length === 1 && nt != null) {
+        return { ...next, tranchesSouhaitees: [{ ...next.tranchesSouhaitees[0]!, montant: nt }] }
+      }
+      return next
+    })
+  }
 
   const ajustementDone =
     data.ajustement.sens != null &&
     (data.ajustement.sens === 'AUCUN' || data.ajustement.montant != null) &&
     (data.ajustement.sens !== 'AUGMENTER' || data.ajustement.raison != null)
-  const fondsPropresDone = data.bien.fondsPropres != null
-  const tranchesDone =
-    total != null &&
-    tranches.length > 0 &&
-    sumOk &&
-    tranches.every((x) => x.produit !== 'FIXE' || x.dureeAnnees != null)
 
-  const first = funnel === 'ACHAT' ? fondsPropresDone : ajustementDone
+  // Achat : dès que le prix d'achat est connu, la répartition est reprise et
+  // valide (éditable) — pas besoin d'une action pour « valider ».
+  const first = funnel === 'ACHAT' ? prix != null : ajustementDone
+  const prefDone = tranches.length >= 1
+
   const statusFirst: QuestionStatus = first ? 'complete' : 'required'
-  const statusTranches: QuestionStatus = tranchesDone ? 'complete' : first ? 'required' : 'untouched'
+  const statusPref: QuestionStatus = prefDone ? 'complete' : first ? 'required' : 'untouched'
 
-  /** Préremplit le configurateur depuis les tranches existantes (renouvellement). */
-  function fromExisting() {
-    patch((prev) => ({
-      ...prev,
-      tranchesSouhaitees: prev.tranchesExistantes.map((te) => ({
-        produit: te.produit,
-        dureeAnnees: te.produit === 'FIXE' ? 10 : null,
-        montant: te.montant,
-        dateDebut: te.echeance ?? null,
-      })),
-    }))
+  const prefKey = (() => {
+    if (tranches.length !== 1) return null
+    const tr = tranches[0]!
+    if (tr.produit === 'SARON') return 'SARON'
+    if (tr.produit === 'FIXE')
+      return PREFS.find((p) => p.produit === 'FIXE' && p.duree === tr.dureeAnnees)?.key ?? null
+    return null
+  })()
+
+  function setPreference(pref: (typeof PREFS)[number]) {
+    patchSync((prev) => {
+      // Persiste les fonds propres repris (source de vérité) si pas encore fixés.
+      const df = derivedFonds(prev)
+      const bien =
+        funnel === 'ACHAT' && prev.bien.fondsPropres == null && df != null
+          ? { ...prev.bien, fondsPropres: df }
+          : prev.bien
+      return {
+        ...prev,
+        bien,
+        tranchesSouhaitees: [
+          {
+            produit: pref.produit as Tranche['produit'],
+            dureeAnnees: pref.duree,
+            montant: 0,
+            dateDebut: null,
+          },
+        ],
+      }
+    })
   }
 
   return (
     <div className="space-y-4">
       {funnel === 'ACHAT' ? (
-        /* §3.2 — slider fonds propres ↔ hypothèque sur le prix d'achat */
+        /* Hypothèque ↔ fonds propres : repris du début, éditables */
         <QuestionCard
           id="fondsPropres"
           title={t('fondsPropres.title')}
@@ -94,46 +124,53 @@ export function HypothequeSection({
           status={statusFirst}
           highlight={highlightKey === 'fondsPropres'}
         >
-          {data.bien.prixAchat ? (
+          {prix != null ? (
             <div className="space-y-3">
-              <SplitSlider
-                total={data.bien.prixAchat}
-                mortgage={
-                  data.bien.prixAchat - (data.bien.fondsPropres ?? Math.round(data.bien.prixAchat * 0.2))
-                }
-                mortgageLabel={t('fondsPropres.mortgageLabel')}
-                ownFundsLabel={t('fondsPropres.ownFundsLabel')}
-                totalLabel={t('fondsPropres.totalLabel')}
-                onChange={(mortgage) => {
-                  patch((prev) => ({
-                    ...prev,
-                    montantTotal: mortgage,
-                    bien: {
-                      ...prev.bien,
-                      fondsPropres: (prev.bien.prixAchat ?? 0) - mortgage,
-                    },
-                  }))
-                }}
-              />
+              <div className="grid gap-3 sm:grid-cols-2">
+                <div className="space-y-1.5">
+                  <Label htmlFor="w-fp-hyp">{t('fondsPropres.mortgageLabel')}</Label>
+                  <AmountInput
+                    id="w-fp-hyp"
+                    value={montant}
+                    onChange={(v) =>
+                      patchSync((prev) => ({
+                        ...prev,
+                        bien: { ...prev.bien, fondsPropres: clamp(prix - (v ?? 0), 0, prix) },
+                      }))
+                    }
+                  />
+                </div>
+                <div className="space-y-1.5">
+                  <Label htmlFor="w-fp-fp">{t('fondsPropres.ownFundsLabel')}</Label>
+                  <AmountInput
+                    id="w-fp-fp"
+                    value={fondsPropres}
+                    onChange={(v) =>
+                      patchSync((prev) => ({
+                        ...prev,
+                        bien: { ...prev.bien, fondsPropres: clamp(v ?? 0, 0, prix) },
+                      }))
+                    }
+                  />
+                </div>
+              </div>
+              <p className="text-ink-500 text-center text-sm">
+                {t('fondsPropres.totalLabel')} <span className="text-data">{formatCHF(prix)}</span>
+              </p>
               <p className="text-ink-500 text-xs leading-relaxed">{t('fondsPropres.note')}</p>
             </div>
           ) : (
-            /* Pas encore de prix d'achat (ex. bascule depuis le renouvellement) :
-               on le demande ici, puis le curseur apparaît avec un défaut à 20%. */
+            /* Pas de prix d'achat : on le demande (défaut fonds propres 20 %). */
             <div className="space-y-2">
               <Label htmlFor="w-fp-prix">{t('achatInfos.prixAchat')}</Label>
               <AmountInput
                 id="w-fp-prix"
-                value={data.bien.prixAchat ?? null}
+                value={null}
                 onChange={(v) => {
-                  if (!v) {
-                    patch((prev) => ({ ...prev, bien: { ...prev.bien, prixAchat: null } }))
-                    return
-                  }
+                  if (!v) return
                   const fp = Math.round((v * 0.2) / 5000) * 5000
-                  patch((prev) => ({
+                  patchSync((prev) => ({
                     ...prev,
-                    montantTotal: v - fp,
                     bien: { ...prev.bien, prixAchat: v, fondsPropres: fp },
                   }))
                 }}
@@ -145,7 +182,7 @@ export function HypothequeSection({
           )}
         </QuestionCard>
       ) : (
-        /* §3.1 — augmenter / réduire l'hypothèque existante */
+        /* Renouvellement : augmenter / réduire l'hypothèque existante */
         <QuestionCard
           id="ajustement"
           title={t('ajustement.title')}
@@ -160,7 +197,7 @@ export function HypothequeSection({
                 label: t(`ajustement.options.${v}`),
               }))}
               onSelect={(v) => {
-                patch((prev) => ({
+                patchSync((prev) => ({
                   ...prev,
                   ajustement: {
                     sens: v,
@@ -177,7 +214,7 @@ export function HypothequeSection({
                   id="w-aj-montant"
                   value={data.ajustement.montant ?? null}
                   onChange={(v) =>
-                    patch((prev) => ({ ...prev, ajustement: { ...prev.ajustement, montant: v } }))
+                    patchSync((prev) => ({ ...prev, ajustement: { ...prev.ajustement, montant: v } }))
                   }
                 />
               </div>
@@ -190,7 +227,7 @@ export function HypothequeSection({
                     id="w-aj-montant"
                     value={data.ajustement.montant ?? null}
                     onChange={(v) =>
-                      patch((prev) => ({ ...prev, ajustement: { ...prev.ajustement, montant: v } }))
+                      patchSync((prev) => ({ ...prev, ajustement: { ...prev.ajustement, montant: v } }))
                     }
                   />
                 </div>
@@ -202,7 +239,7 @@ export function HypothequeSection({
                       (v) => ({ value: v, label: t(`ajustement.raisons.${v}`) })
                     )}
                     onSelect={(v) =>
-                      patch((prev) => ({ ...prev, ajustement: { ...prev.ajustement, raison: v } }))
+                      patchSync((prev) => ({ ...prev, ajustement: { ...prev.ajustement, raison: v } }))
                     }
                   />
                 </div>
@@ -212,187 +249,28 @@ export function HypothequeSection({
         </QuestionCard>
       )}
 
-      {/* Configurateur de tranches : modèle + durée + montant, split */}
-      {first && total ? (
+      {/* Préférence de taux — une simple préférence, pas de configurateur */}
+      {first && montant ? (
         <QuestionCard
           id="tranchesSouhaitees"
-          title={t('tranchesSouhaitees.title')}
-          subtitle={t('tranchesSouhaitees.subtitle')}
-          info={t('tranchesSouhaitees.info')}
-          status={statusTranches}
+          title={t('preferenceTaux.title')}
+          subtitle={t('preferenceTaux.subtitle')}
+          status={statusPref}
           highlight={highlightKey === 'tranchesSouhaitees'}
         >
-          <div className="space-y-4">
-            {/* Barre de répartition visuelle */}
-            <div>
-              <div className="border-line flex h-8 w-full overflow-hidden rounded-full border">
-                {tranches.map((tranche, i) => (
-                  <div
-                    key={i}
-                    className={TRANCHE_COLORS[i % TRANCHE_COLORS.length]}
-                    style={{ width: `${Math.min(100, (tranche.montant / total) * 100)}%` }}
-                    title={formatCHF(tranche.montant)}
-                  />
-                ))}
-                <div className="bg-surface-alt flex-1" />
-              </div>
-              <p
-                className={
-                  sumOk && tranches.length > 0
-                    ? 'text-pilot-700 mt-2 text-sm'
-                    : 'text-ambre-700 mt-2 text-sm'
-                }
-                aria-live="polite"
-              >
-                {tranches.length === 0 ? (
-                  <>
-                    {t('tranchesSouhaitees.reparti')}{' '}
-                    <span className="text-data">{formatCHF(0)}</span> ·{' '}
-                    {t('tranchesSouhaitees.totalLabel')}{' '}
-                    <span className="text-data">{formatCHF(total)}</span>
-                  </>
-                ) : sumOk ? (
-                  t('tranchesSouhaitees.sumOk')
-                ) : (
-                  <>
-                    {ecart < 0 ? t('tranchesSouhaitees.reste') : t('tranchesSouhaitees.depassement')}{' '}
-                    <span className="text-data">{formatCHF(Math.abs(ecart))}</span>
-                  </>
-                )}
-              </p>
-            </div>
-
-            {/* Renouvellement : reprise en un clic des tranches existantes */}
-            {funnel !== 'ACHAT' && tranches.length === 0 && data.tranchesExistantes.length > 0 ? (
-              <Button type="button" variant="outline" size="sm" onClick={fromExisting}>
-                <Split data-icon="inline-start" />
-                {t('tranchesSouhaitees.fromExisting')}
-              </Button>
-            ) : null}
-
-            <RepeatableGroup<Tranche>
-              items={tranches}
-              onChange={(items) => patch((prev) => ({ ...prev, tranchesSouhaitees: items }))}
-              makeEmpty={() => ({
-                produit: 'FIXE',
-                dureeAnnees: 10,
-                montant: Math.max(0, total - somme),
-                dateDebut: null,
-              })}
-              maxItems={4}
-              labels={{
-                done: tc('done'),
-                add: tc('add'),
-                edit: tc('edit'),
-                remove: tc('remove'),
-                totalLabel: t('tranchesSouhaitees.totalLabel'),
-              }}
-              total={formatCHF(somme)}
-              renderSummary={(item) => (
-                <span>
-                  {t(`tranchesSouhaitees.produits.${item.produit}`)}
-                  {item.produit === 'FIXE' && item.dureeAnnees ? (
-                    <span className="text-ink-500">
-                      {' '}
-                      · {t('tranchesSouhaitees.dureeAnnees', { years: item.dureeAnnees })}
-                    </span>
-                  ) : null}{' '}
-                  · <span className="text-data">{formatCHF(item.montant)}</span>
-                  {item.dateDebut ? (
-                    <span className="text-ink-500"> · {isoToFr(item.dateDebut)}</span>
-                  ) : null}
-                </span>
-              )}
-              renderForm={(item, update) => (
-                <div className="space-y-3">
-                  <div className="grid gap-3 sm:grid-cols-3">
-                    <div className="space-y-1.5">
-                      <Label>{t('tranchesSouhaitees.produit')}</Label>
-                      <Select
-                        value={item.produit}
-                        onValueChange={(v) =>
-                          update({
-                            produit: v as Tranche['produit'],
-                            dureeAnnees: v === 'FIXE' ? (item.dureeAnnees ?? 10) : null,
-                          })
-                        }
-                      >
-                        <SelectTrigger className="h-12 w-full">
-                          <SelectValue />
-                        </SelectTrigger>
-                        <SelectContent>
-                          {(['SARON', 'VARIABLE', 'FIXE'] as const).map((p) => (
-                            <SelectItem key={p} value={p}>
-                              {t(`tranchesSouhaitees.produits.${p}`)}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                    </div>
-                    {item.produit === 'FIXE' ? (
-                      <div className="space-y-1.5">
-                        <Label>{t('tranchesSouhaitees.duree')}</Label>
-                        <Select
-                          value={String(item.dureeAnnees ?? 10)}
-                          onValueChange={(v) => update({ dureeAnnees: Number(v) })}
-                        >
-                          <SelectTrigger className="h-12 w-full">
-                            <SelectValue />
-                          </SelectTrigger>
-                          <SelectContent>
-                            {DUREES.map((years) => (
-                              <SelectItem key={years} value={String(years)}>
-                                {t('tranchesSouhaitees.dureeAnnees', { years })}
-                              </SelectItem>
-                            ))}
-                          </SelectContent>
-                        </Select>
-                      </div>
-                    ) : null}
-                    <div className="space-y-1.5">
-                      <Label>{t('tranchesSouhaitees.montant')}</Label>
-                      <AmountInput
-                        id="w-tranche-montant"
-                        value={item.montant || null}
-                        onChange={(v) => update({ montant: v ?? 0 })}
-                      />
-                    </div>
-                  </div>
-                  {/* Splitter : moitié dans une nouvelle tranche */}
-                  {item.montant > 1 ? (
-                    <Button
-                      type="button"
-                      variant="ghost"
-                      size="sm"
-                      onClick={() => {
-                        const half = Math.round(item.montant / 2 / 5000) * 5000
-                        update({ montant: item.montant - half })
-                        patch((prev) => ({
-                          ...prev,
-                          tranchesSouhaitees: [
-                            ...prev.tranchesSouhaitees,
-                            { produit: 'FIXE', dureeAnnees: 5, montant: half, dateDebut: item.dateDebut },
-                          ],
-                        }))
-                      }}
-                    >
-                      <Split data-icon="inline-start" />
-                      {t('tranchesSouhaitees.split')}
-                    </Button>
-                  ) : null}
-                  {item.dateDebut ? (
-                    <p className="text-ink-500 text-xs">
-                      {t('tranchesSouhaitees.dateDebut')} : {isoToFr(item.dateDebut)} —{' '}
-                      {t('tranchesSouhaitees.dateDebutInfo')}
-                    </p>
-                  ) : null}
-                </div>
-              )}
-            />
-          </div>
+          <OptionList<string>
+            value={prefKey}
+            options={PREFS.map((p) => ({
+              value: p.key,
+              label: t(`preferenceTaux.options.${p.key}`),
+            }))}
+            onSelect={(key) => {
+              const pref = PREFS.find((p) => p.key === key)
+              if (pref) setPreference(pref)
+            }}
+          />
         </QuestionCard>
       ) : null}
     </div>
   )
 }
-

@@ -833,14 +833,25 @@
         }
       },
       "fondsPropres": {
-        "title": "Déterminez vos fonds propres",
+        "title": "Hypothèque et fonds propres",
         "short": "Fonds propres",
-        "subtitle": "Déplacez la poignée entre hypothèque et fonds propres — les deux champs sont éditables.",
+        "subtitle": "Repris de vos réponses — ajustez si besoin.",
         "mortgageLabel": "Nouvelle hypothèque",
         "ownFundsLabel": "Fonds propres",
         "totalLabel": "Prix d'achat",
         "note": "La composition des fonds propres (cash, 2e pilier, 3a) sera précisée lors du traitement de votre dossier.",
         "prixAchatPrompt": "Indiquez le prix d'achat pour répartir hypothèque et fonds propres."
+      },
+      "preferenceTaux": {
+        "title": "Votre préférence de taux",
+        "short": "Préférence de taux",
+        "subtitle": "Nous vous ferons des propositions précises à la fin — indiquez juste votre préférence.",
+        "options": {
+          "SARON": "SARON",
+          "FIXE_2": "Fixe 2 ans",
+          "FIXE_5": "Fixe 5 ans",
+          "FIXE_10": "Fixe 10 ans"
+        }
       },
       "tranchesExistantes": {
         "title": "Vos hypothèques actuelles",

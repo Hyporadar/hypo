@@ -872,14 +872,25 @@
         }
       },
       "fondsPropres": {
-        "title": "Bestimmen Sie Ihre Eigenmittel",
+        "title": "Hypothek und Eigenmittel",
         "short": "Eigenmittel",
-        "subtitle": "Verschieben Sie den Griff zwischen Hypothek und Eigenmitteln — beide Felder sind editierbar.",
+        "subtitle": "Aus Ihren Angaben übernommen — bei Bedarf anpassen.",
         "mortgageLabel": "Neue Hypothek",
         "ownFundsLabel": "Eigenmittel",
         "totalLabel": "Kaufpreis",
         "note": "Die Zusammensetzung der Eigenmittel (Bargeld, 2. Säule, 3a) wird bei der Bearbeitung Ihres Dossiers präzisiert.",
         "prixAchatPrompt": "Geben Sie den Kaufpreis an, um Hypothek und Eigenmittel aufzuteilen."
+      },
+      "preferenceTaux": {
+        "title": "Ihre Zinspräferenz",
+        "short": "Zinspräferenz",
+        "subtitle": "Am Ende machen wir Ihnen genaue Vorschläge — geben Sie einfach Ihre Präferenz an.",
+        "options": {
+          "SARON": "SARON",
+          "FIXE_2": "Fest 2 Jahre",
+          "FIXE_5": "Fest 5 Jahre",
+          "FIXE_10": "Fest 10 Jahre"
+        }
       },
       "tranchesExistantes": {
         "title": "Ihre aktuellen Hypotheken",
