@@ -29,20 +29,10 @@ function loginPath(locale: Locale): string {
 }
 
 export default auth((req) => {
-  const { nextUrl } = req
-
-  // Diagnostic temporaire (à retirer) : confirme quel code tourne + si la
-  // variable SITE_PASSWORD est visible côté middleware.
-  if (nextUrl.pathname === '/__gatecheck') {
-    return new Response(
-      JSON.stringify({ marker: 'gatecheck-v1', sitePassword: Boolean(process.env.SITE_PASSWORD) }),
-      { headers: { 'content-type': 'application/json' } }
-    )
-  }
-
   const gate = siteGate(req)
   if (gate) return gate
 
+  const { nextUrl } = req
   const user = req.auth?.user
 
   // /verify/[id] — page publique de vérification des certificats (URL du QR,
