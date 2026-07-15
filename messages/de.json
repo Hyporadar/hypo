@@ -1235,7 +1235,11 @@
     "valeur": "Wert der Liegenschaft",
     "montant": "Hypothekarbetrag",
     "revenu": "Jährliches Bruttoeinkommen des Haushalts",
-    "cta": "Meine Schätzung ansehen"
+    "cta": "Meine Schätzung ansehen",
+    "funnelInfo": "Kauf: neue Hypothek für eine Immobilie, die Sie kaufen. Verlängerung: Ihre aktuelle Hypothek läuft bald ab.",
+    "infoValeur": "Der Preis oder der geschätzte Wert der Immobilie heute (Verkaufswert).",
+    "infoMontant": "Der bei der Bank aufgenommene Betrag (die Hypothekarschuld), ohne Eigenmittel.",
+    "infoRevenu": "Das jährliche Bruttoeinkommen des gesamten Haushalts, vor Steuern (Löhne und Renten inbegriffen)."
   },
   "funnelChoice": {
     "title": "Kaufen Sie oder verlängern Sie?",

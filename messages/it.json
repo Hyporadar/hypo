@@ -1235,7 +1235,11 @@
     "valeur": "Valore del bene",
     "montant": "Importo dell'ipoteca",
     "revenu": "Reddito annuo lordo del nucleo familiare",
-    "cta": "Vedere la mia stima"
+    "cta": "Vedere la mia stima",
+    "funnelInfo": "Acquisto: nuova ipoteca per un bene che acquistate. Rinnovo: la vostra ipoteca attuale sta per scadere.",
+    "infoValeur": "Il prezzo o il valore stimato del bene oggi (valore di vendita).",
+    "infoMontant": "L'importo preso in prestito dalla banca (il debito ipotecario), esclusi i fondi propri.",
+    "infoRevenu": "Il reddito annuo lordo dell'intero nucleo familiare, al lordo delle imposte (salari e rendite inclusi)."
   },
   "funnelChoice": {
     "title": "Acquistate o rinnovate?",

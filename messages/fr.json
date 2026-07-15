@@ -1235,7 +1235,11 @@
     "valeur": "Valeur du bien",
     "montant": "Montant de l'hypothèque",
     "revenu": "Revenu annuel brut du ménage",
-    "cta": "Voir mon estimation"
+    "cta": "Voir mon estimation",
+    "funnelInfo": "Achat : nouvelle hypothèque pour un bien que vous achetez. Renouvellement : votre hypothèque actuelle arrive bientôt à échéance.",
+    "infoValeur": "Le prix ou la valeur estimée du bien aujourd'hui (ce qu'il vaudrait à la vente).",
+    "infoMontant": "Le montant emprunté à la banque (la dette hypothécaire), hors fonds propres.",
+    "infoRevenu": "Le revenu annuel brut de tout le ménage, avant impôts (salaires et rentes compris)."
   },
   "funnelChoice": {
     "title": "Vous achetez ou vous renouvelez ?",
