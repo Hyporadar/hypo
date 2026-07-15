@@ -1236,5 +1236,17 @@
     "montant": "Montant de l'hypothèque",
     "revenu": "Revenu annuel brut du ménage",
     "cta": "Voir mon estimation"
+  },
+  "funnelChoice": {
+    "title": "Vous achetez ou vous renouvelez ?",
+    "subtitle": "Pour adapter votre estimation à votre situation.",
+    "achat": {
+      "label": "J'achète un bien",
+      "desc": "Nouvelle hypothèque pour un achat."
+    },
+    "renouvellement": {
+      "label": "Je renouvelle mon hypothèque",
+      "desc": "Mon hypothèque actuelle arrive à échéance."
+    }
   }
 }

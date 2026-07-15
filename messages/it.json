@@ -1236,5 +1236,17 @@
     "montant": "Importo dell'ipoteca",
     "revenu": "Reddito annuo lordo del nucleo familiare",
     "cta": "Vedere la mia stima"
+  },
+  "funnelChoice": {
+    "title": "Acquistate o rinnovate?",
+    "subtitle": "Per adattare la vostra stima alla vostra situazione.",
+    "achat": {
+      "label": "Acquisto un bene",
+      "desc": "Nuova ipoteca per un acquisto."
+    },
+    "renouvellement": {
+      "label": "Rinnovo la mia ipoteca",
+      "desc": "La mia ipoteca attuale sta per scadere."
+    }
   }
 }

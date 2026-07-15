@@ -7,6 +7,7 @@ import type { Funnel } from '@prisma/client'
 import type { DossierSection } from '@/lib/dossier/completeness'
 import { useDossierWizard } from '@/components/wizard/use-dossier-wizard'
 import { WizardStepper, type StepStatus } from '@/components/wizard/wizard-stepper'
+import { FunnelChoice } from '@/components/wizard/funnel-choice'
 import { BienSection } from '@/components/wizard/bien-section'
 import { EmprunteursSection } from '@/components/wizard/emprunteurs-section'
 import { HypothequeSection } from '@/components/wizard/hypotheque-section'
@@ -32,6 +33,9 @@ export function DossierWizard({
   const wizard = useDossierWizard(initialFunnel, testMode)
   const [section, setSection] = useState<Step>('bien')
   const [highlightKey, setHighlightKey] = useState<string | null>(null)
+  // Achat/renouvellement demandé avant tout (sauf si le funnel est déjà connu,
+  // ex. entrée via /acheter ou /renouveler qui fixent initialFunnel).
+  const [funnelPicked, setFunnelPicked] = useState(Boolean(initialFunnel))
   const trackedSections = useRef(new Set<string>())
 
   const stepIndex = STEPS.indexOf(section)
@@ -53,6 +57,19 @@ export function DossierWizard({
         <div className="bg-surface-alt h-10 w-2/3 animate-pulse rounded-xl" />
         <div className="bg-surface-alt h-48 animate-pulse rounded-xl" />
         <div className="bg-surface-alt h-48 animate-pulse rounded-xl" />
+      </div>
+    )
+  }
+
+  if (!funnelPicked) {
+    return (
+      <div className="mx-auto max-w-2xl pt-2">
+        <FunnelChoice
+          onChoose={(f) => {
+            wizard.setFunnel(f)
+            setFunnelPicked(true)
+          }}
+        />
       </div>
     )
   }

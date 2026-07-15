@@ -1236,5 +1236,17 @@
     "montant": "Hypothekarbetrag",
     "revenu": "Jährliches Bruttoeinkommen des Haushalts",
     "cta": "Meine Schätzung ansehen"
+  },
+  "funnelChoice": {
+    "title": "Kaufen Sie oder verlängern Sie?",
+    "subtitle": "Damit wir Ihre Schätzung anpassen.",
+    "achat": {
+      "label": "Ich kaufe eine Immobilie",
+      "desc": "Neue Hypothek für einen Kauf."
+    },
+    "renouvellement": {
+      "label": "Ich verlängere meine Hypothek",
+      "desc": "Meine aktuelle Hypothek läuft ab."
+    }
   }
 }

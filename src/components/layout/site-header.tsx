@@ -5,8 +5,6 @@ import { Wordmark } from '@/components/brand/wordmark'
 import { LocaleSwitcher } from '@/components/layout/locale-switcher'
 
 const NAV: Array<{ key: string; href: StaticPathname }> = [
-  { key: 'buy', href: '/acheter' },
-  { key: 'renew', href: '/renouveler' },
   { key: 'howItWorks', href: '/comment-ca-marche' },
   { key: 'rates', href: '/taux' },
 ]

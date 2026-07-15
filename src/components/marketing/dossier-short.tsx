@@ -3,8 +3,10 @@
 import { useMemo, useState } from 'react'
 import { useTranslations } from 'next-intl'
 import { ArrowRight } from 'lucide-react'
+import type { Funnel } from '@prisma/client'
 import type { DossierData } from '@/lib/dossier/schema'
 import { EstimationSection } from '@/components/wizard/estimation-section'
+import { FunnelChoice } from '@/components/wizard/funnel-choice'
 import { AmountInput } from '@/components/wizard/inputs'
 import { Button } from '@/components/ui/button'
 import { Label } from '@/components/ui/label'
@@ -13,6 +15,7 @@ import { Label } from '@/components/ui/label'
 // moteur de taux et l'écran d'estimation (email + rappel) du wizard complet.
 export function DossierShort() {
   const t = useTranslations('dossierShort')
+  const [funnel, setFunnel] = useState<Funnel | null>(null)
   const [valeur, setValeur] = useState<number | null>(null)
   const [montant, setMontant] = useState<number | null>(null)
   const [revenu, setRevenu] = useState<number | null>(null)
@@ -51,10 +54,16 @@ export function DossierShort() {
     [valeur, montant, revenu]
   )
 
-  if (submitted) {
+  if (!funnel) {
     return (
-      <EstimationSection funnel="RENOUVELLEMENT_CHAUD" data={data} dossierId={dossierId} testMode />
+      <div className="mx-auto max-w-md">
+        <FunnelChoice onChoose={setFunnel} />
+      </div>
     )
+  }
+
+  if (submitted) {
+    return <EstimationSection funnel={funnel} data={data} dossierId={dossierId} testMode />
   }
 
   return (
