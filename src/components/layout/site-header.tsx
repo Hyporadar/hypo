@@ -3,7 +3,6 @@ import { Link } from '@/i18n/navigation'
 import type { StaticPathname } from '@/i18n/routing'
 import { Wordmark } from '@/components/brand/wordmark'
 import { LocaleSwitcher } from '@/components/layout/locale-switcher'
-import { Button } from '@/components/ui/button'
 
 const NAV: Array<{ key: string; href: StaticPathname }> = [
   { key: 'buy', href: '/acheter' },
@@ -36,12 +35,6 @@ export async function SiteHeader() {
           ))}
         </nav>
         <div className="flex flex-1 shrink-0 items-center justify-end gap-2">
-          <Button asChild variant="ghost" size="sm">
-            <Link href="/connexion">{t('login')}</Link>
-          </Button>
-          <Button asChild size="sm">
-            <Link href="/inscription">{t('register')}</Link>
-          </Button>
           {/* Sélecteur de langue compact, tout à droite */}
           <LocaleSwitcher />
         </div>
