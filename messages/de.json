@@ -676,7 +676,8 @@
       "switchWarning": "Beim Wechsel der Transaktionsart müssen einzelne Angaben ergänzt oder neu erfasst werden. Fortfahren?",
       "toBuy": "Zum Kauf wechseln",
       "toRenewal": "Zur Ablösung wechseln",
-      "finished": "Dossier vollständig"
+      "finished": "Dossier vollständig",
+      "completeToContinue": "Beantworten Sie alle Fragen dieses Schritts, um fortzufahren."
     },
     "missing": {
       "title": "Fehlende Angaben"

@@ -62,12 +62,24 @@ export function DossierWizard({
     status: (i === stepIndex ? 'current' : i < stepIndex ? 'done' : 'todo') as StepStatus,
   }))
 
+  // On ne peut avancer qu'après avoir répondu à toutes les questions requises
+  // de l'étape. `estimation` (dernière) n'a pas d'exigence propre.
+  const isStepComplete = (s: Step) =>
+    s === 'estimation' || wizard.completeness.missingBySection[s as DossierSection].length === 0
+  const currentComplete = isStepComplete(section)
+  const firstIncomplete = STEPS.findIndex((s) => !isStepComplete(s))
+  const maxReachable = firstIncomplete === -1 ? STEPS.length - 1 : firstIncomplete
+
+  function goTo(target: Step) {
+    if (STEPS.indexOf(target) <= maxReachable) setSection(target)
+  }
+
   return (
     <div>
       {/* Stepper « ligne + points » + état de sauvegarde */}
       <div className="border-line sticky top-0 z-20 -mx-6 border-b bg-[--color-paper]/95 px-6 py-4 backdrop-blur">
         <div className="mx-auto max-w-2xl">
-          <WizardStepper steps={steps} onSelect={(key) => setSection(key as Step)} />
+          <WizardStepper steps={steps} onSelect={(key) => goTo(key as Step)} />
         </div>
       </div>
 
@@ -105,25 +117,35 @@ export function DossierWizard({
             />
           )}
 
-          {/* Navigation bas de section */}
-          <div className="mt-8 flex items-center justify-between gap-3">
-            <Button
-              type="button"
-              variant="outline"
-              disabled={stepIndex === 0}
-              onClick={() => setSection(STEPS[stepIndex - 1] ?? 'bien')}
-            >
-              <ArrowLeft data-icon="inline-start" />
-              {t('nav.back')}
-            </Button>
-            {stepIndex < STEPS.length - 1 ? (
-              <Button type="button" onClick={() => setSection(STEPS[stepIndex + 1] ?? 'estimation')}>
-                {t('nav.next')}
-                <ArrowRight data-icon="inline-end" />
+          {/* Navigation bas de section — « Suivant » verrouillé tant que
+              l'étape courante n'est pas complète. */}
+          <div className="mt-8">
+            <div className="flex items-center justify-between gap-3">
+              <Button
+                type="button"
+                variant="outline"
+                disabled={stepIndex === 0}
+                onClick={() => setSection(STEPS[stepIndex - 1] ?? 'bien')}
+              >
+                <ArrowLeft data-icon="inline-start" />
+                {t('nav.back')}
               </Button>
-            ) : (
-              <span className="w-[92px]" aria-hidden />
-            )}
+              {stepIndex < STEPS.length - 1 ? (
+                <Button
+                  type="button"
+                  disabled={!currentComplete}
+                  onClick={() => goTo(STEPS[stepIndex + 1] ?? 'estimation')}
+                >
+                  {t('nav.next')}
+                  <ArrowRight data-icon="inline-end" />
+                </Button>
+              ) : (
+                <span className="w-[92px]" aria-hidden />
+              )}
+            </div>
+            {stepIndex < STEPS.length - 1 && !currentComplete ? (
+              <p className="text-ink-400 mt-3 text-center text-xs">{t('nav.completeToContinue')}</p>
+            ) : null}
           </div>
         </div>
       </div>

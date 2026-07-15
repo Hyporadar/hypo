@@ -676,7 +676,8 @@
       "switchWarning": "Cambiando tipo di operazione, alcune informazioni dovranno essere completate o reinserite. Continuare?",
       "toBuy": "Passare all'acquisto",
       "toRenewal": "Passare al rinnovo",
-      "finished": "Dossier completo"
+      "finished": "Dossier completo",
+      "completeToContinue": "Rispondete a tutte le domande di questo passaggio per continuare."
     },
     "missing": {
       "title": "Informazioni mancanti"

@@ -676,7 +676,8 @@
       "switchWarning": "En changeant de parcours, certaines informations devront être complétées. Vos réponses sont conservées.",
       "toBuy": "Passer en achat",
       "toRenewal": "Passer en renouvellement",
-      "finished": "Dossier complet"
+      "finished": "Dossier complet",
+      "completeToContinue": "Répondez à toutes les questions de cette étape pour continuer."
     },
     "missing": {
       "title": "Informations manquantes"
