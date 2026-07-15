@@ -12,6 +12,7 @@ import {
   buildRateProfile,
   estimateRate,
   type Duration,
+  type EngineBase,
   type LenderType,
 } from '@/lib/dossier/rate-engine'
 import { saveDossierAction } from '@/server/actions/dossier'
@@ -91,8 +92,27 @@ export function EstimationSection({
   const [nsPending, startNs] = useTransition()
   const emailValid = EMAIL_RE.test(email.trim())
 
+  // Base de taux du jour (BNS) — rendu instantané sur l'ancre, puis affiné
+  // dès que les taux live arrivent (le gros chiffre anime le changement).
+  const [liveBase, setLiveBase] = useState<EngineBase | null>(null)
+  useEffect(() => {
+    let alive = true
+    fetch('/api/rates/today')
+      .then((r) => (r.ok ? r.json() : null))
+      .then((j) => {
+        if (alive && j?.base) setLiveBase(j.base as EngineBase)
+      })
+      .catch(() => undefined)
+    return () => {
+      alive = false
+    }
+  }, [])
+
   const profile = useMemo(() => buildRateProfile(funnel, data), [funnel, data])
-  const result = useMemo(() => estimateRate(profile, duration), [profile, duration])
+  const result = useMemo(
+    () => estimateRate(profile, duration, liveBase ?? undefined),
+    [profile, duration, liveBase]
+  )
 
   const from = result.nonStandard ? null : result.from
   const animatedFrom = useCountUp(from ?? 0)

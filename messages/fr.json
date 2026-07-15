@@ -561,7 +561,8 @@
       "faq3q": "Fixe ou SARON ?",
       "faq3a": "Le SARON est historiquement moins cher mais fluctue ; le fixe verrouille votre budget. La bonne réponse dépend de votre tolérance au risque et de votre horizon — notre guide détaille l'arbitrage.",
       "ctaRenew": "Comparer avec mon taux actuel",
-      "ctaBuy": "Calculer ma capacité d'achat"
+      "ctaBuy": "Calculer ma capacité d'achat",
+      "snbNote": "Taux de référence indicatifs, calculés à partir des données publiques de la BNS et des grilles du marché."
     },
     "guides": {
       "metaTitle": "Guides hypothécaires",

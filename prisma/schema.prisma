@@ -375,6 +375,20 @@ model ReferenceRateChange {
   @@index([type, termYears, recordedAt])
 }
 
+// Historique quotidien des taux dérivés des données publiques BNS
+// (append-only, un enregistrement par jour de données BNS). `yields` =
+// rendements Confédération bruts, `computed` = taux affichés (ancre + delta).
+model RateSnapshot {
+  id        String   @id @default(cuid())
+  date      DateTime @unique @db.Date // date des données BNS
+  saron     Decimal? @db.Decimal(6, 3)
+  yields    Json // { "2": .., "5": .., "10": .., "15": .. }
+  computed  Json // { "saron": .., "2": .., ..., "15": .. }
+  createdAt DateTime @default(now())
+
+  @@index([date])
+}
+
 // ─── Dépenses marketing (CAC par canal, saisie manuelle admin) ─────────
 
 model ChannelSpend {

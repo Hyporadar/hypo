@@ -7,14 +7,101 @@ import { deriveMontantTotal, echeanceProche, totalRevenus, type DossierData } fr
 // (aucun accès réseau, aucune horloge) ; `buildRateProfile` mappe le dossier
 // vers le profil et détermine le forward (échéance > 6 mois).
 
-// CONFIG — mise à jour manuelle hebdomadaire depuis les grilles publiques.
+// Durées affichées sur la page « taux du jour » (années).
+export const DISPLAY_TERMS = [2, 3, 4, 5, 6, 7, 8, 9, 10, 15] as const
+export type DisplayTerm = (typeof DISPLAY_TERMS)[number]
+
+// CONFIG — l'ANCRE est éditée à la main (hebdo) ; les taux affichés dérivent
+// ensuite automatiquement des données publiques BNS :
+//   affiché[durée] = anchor[durée] + (rendement_du_jour − rendement_à_l'ancre)
+// `anchorYields` (rendements Confédération BNS) et `anchorSaron` sont le
+// snapshot BNS capturé au jour de l'ancre (voir scripts/rates:anchor).
 export const RATE_CONFIG = {
-  base: { saron: 0.95, y5: 1.25, y10: 1.55, y15: 1.85 }, // ancres « meilleur du marché »
+  anchorDate: '2026-07-13',
+  // Ancres « meilleur du marché » par durée (édition manuelle) — SARON + fixes.
+  anchor: {
+    saron: 0.95,
+    2: 1.05,
+    3: 1.1,
+    4: 1.18,
+    5: 1.25,
+    6: 1.33,
+    7: 1.4,
+    8: 1.46,
+    9: 1.51,
+    10: 1.55,
+    15: 1.85,
+  } as Record<'saron' | DisplayTerm, number>,
+  // Snapshot BNS au jour de l'ancre (auto — SARON + rendements Confédération).
+  anchorSaron: -0.04,
+  anchorYields: {
+    2: -0.083,
+    3: -0.043,
+    4: 0.013,
+    5: 0.078,
+    6: 0.144,
+    7: 0.209,
+    8: 0.271,
+    9: 0.327,
+    10: 0.378,
+    15: 0.545,
+  } as Record<DisplayTerm, number>,
   avgMarketRate: 2.6, // taux moyen des hypothèques en cours (économie potentielle)
   updatedAt: '2026-07-13',
 } as const
 
-export type Duration = keyof typeof RATE_CONFIG.base // 'saron' | 'y5' | 'y10' | 'y15'
+export type Duration = 'saron' | 'y5' | 'y10' | 'y15'
+export type EngineBase = Record<Duration, number>
+
+// Arrondi d'affichage : 0,01 près, plancher 0,50 %.
+const displayRound = (n: number) => Math.max(0.5, Math.round(n * 100) / 100)
+
+/** Rendement pour une durée : valeur BNS exacte, sinon interpolation/
+    extrapolation linéaire sur les durées connues, sinon rendement d'ancre. */
+function yieldForTerm(yields: Record<number, number>, term: number): number | null {
+  if (yields[term] != null) return yields[term]!
+  const known = Object.keys(yields)
+    .map(Number)
+    .filter((k) => Number.isFinite(yields[k]!))
+    .sort((a, b) => a - b)
+  if (known.length === 0) return null
+  if (term <= known[0]!) return yields[known[0]!]!
+  if (term >= known[known.length - 1]!) return yields[known[known.length - 1]!]!
+  for (let i = 0; i < known.length - 1; i++) {
+    const a = known[i]!
+    const b = known[i + 1]!
+    if (term >= a && term <= b) {
+      const ratio = (term - a) / (b - a)
+      return yields[a]! + (yields[b]! - yields[a]!) * ratio
+    }
+  }
+  return null
+}
+
+/** Taux affichés du jour : ancre + delta de rendement BNS (pur). */
+export function computeDisplayedRates(
+  snbSaron: number | null,
+  snbYields: Record<number, number>
+): { saron: number } & Record<DisplayTerm, number> {
+  const saronDelta = (snbSaron ?? RATE_CONFIG.anchorSaron) - RATE_CONFIG.anchorSaron
+  const out = { saron: displayRound(RATE_CONFIG.anchor.saron + saronDelta) } as {
+    saron: number
+  } & Record<DisplayTerm, number>
+  for (const term of DISPLAY_TERMS) {
+    const y = yieldForTerm(snbYields, term) ?? RATE_CONFIG.anchorYields[term]
+    const delta = y - RATE_CONFIG.anchorYields[term]
+    out[term] = displayRound(RATE_CONFIG.anchor[term] + delta)
+  }
+  return out
+}
+
+/** Base du moteur (wizard) = mêmes taux calculés du jour. Sans argument :
+    valeurs d'ancre (delta 0), pour un rendu instantané hors ligne. */
+export function engineBase(computed?: { saron: number } & Record<number, number>): EngineBase {
+  const c =
+    computed ?? ({ ...RATE_CONFIG.anchor } as { saron: number } & Record<number, number>)
+  return { saron: c.saron, y5: c[5]!, y10: c[10]!, y15: c[15]! }
+}
 export type LenderType = 'BANQUE' | 'CAISSE_PENSION' | 'ASSURANCE'
 export type NonStandardReason = 'ltv' | 'charges' | 'incomplete'
 export type Usage = 'principal' | 'secondaire' | 'rendement'
@@ -53,7 +140,11 @@ export type RateResult = RateEstimate | NonStandardResult
 const round005 = (n: number) => Math.round(n * 20) / 20
 
 /** Cœur pur : profil + durée → taux/fourchettes ou cas non standard. */
-export function estimateRate(profile: RateProfile, duration: Duration): RateResult {
+export function estimateRate(
+  profile: RateProfile,
+  duration: Duration,
+  base: EngineBase = engineBase()
+): RateResult {
   const { montant, valeur, revenusBrutsAnnuels, amortissementAnnuel, usage, forward } = profile
 
   if (!(montant > 0) || !(valeur > 0) || !(revenusBrutsAnnuels > 0)) {
@@ -88,7 +179,7 @@ export function estimateRate(profile: RateProfile, duration: Duration): RateResu
   // Forward (échéance à plus de 6 mois)
   if (forward) delta += 0.08
 
-  const t = RATE_CONFIG.base[duration] + delta
+  const t = base[duration] + delta
 
   // Fourchettes par type de prêteur (institutionnels meilleurs sur le long).
   const long = duration === 'y10' || duration === 'y15'

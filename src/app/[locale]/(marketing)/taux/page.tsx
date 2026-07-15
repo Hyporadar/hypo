@@ -4,6 +4,7 @@ import { Link } from '@/i18n/navigation'
 import type { Locale } from '@/i18n/routing'
 import { formatDate, formatRate } from '@/lib/format'
 import { prisma } from '@/lib/prisma'
+import { loadRateHistory, loadTodayRates } from '@/server/rates/update'
 import { localizedAlternates } from '@/lib/seo'
 import { RateSparkline } from '@/components/marketing/rate-sparkline'
 import { Button } from '@/components/ui/button'
@@ -29,22 +30,14 @@ export default async function RatesPage({ params }: { params: Promise<{ locale: 
   setRequestLocale(locale)
   const t = await getTranslations('content.rates')
 
-  const [rates, history] = await Promise.all([
+  const [rates, history, today] = await Promise.all([
     prisma.referenceRate
       .findMany({ orderBy: [{ type: 'desc' }, { termYears: 'asc' }] })
       .catch(() => []),
-    prisma.referenceRateChange
-      .findMany({
-        where: { type: 'FIXE', termYears: 10 },
-        orderBy: { recordedAt: 'asc' },
-        take: 60,
-      })
-      .catch(() => []),
+    loadRateHistory(90),
+    loadTodayRates(),
   ])
-  const lastUpdate = rates.reduce<Date | null>(
-    (latest, r) => (!latest || r.updatedAt > latest ? r.updatedAt : latest),
-    null
-  )
+  const lastUpdate = today.date ? new Date(today.date) : null
 
   const faqEntries = [1, 2, 3].map((i) => ({
     q: t(`faq${i}q` as 'faq1q'),
@@ -105,6 +98,9 @@ export default async function RatesPage({ params }: { params: Promise<{ locale: 
                 ))}
               </tbody>
             </table>
+            <p className="text-ink-500 border-line border-t px-5 py-3 text-xs leading-relaxed">
+              {t('snbNote')}
+            </p>
           </div>
 
           {/* Historique fixe 10 ans */}
@@ -114,9 +110,7 @@ export default async function RatesPage({ params }: { params: Promise<{ locale: 
             </CardHeader>
             <CardContent className="px-6 pb-6">
               {history.length >= 2 ? (
-                <RateSparkline
-                  points={history.map((h) => ({ rate: Number(h.rate), at: h.recordedAt }))}
-                />
+                <RateSparkline points={history.map((h) => ({ rate: h.rate, at: h.date }))} />
               ) : (
                 <p className="text-ink-500 py-8 text-center text-sm">{t('chartEmpty')}</p>
               )}
