@@ -64,15 +64,19 @@ export function QuestionCard({
     return () => clearTimeout(timer)
   }, [flash])
 
+  // Champ signalé comme manquant (clic « Suivant ») : bordure orange
+  // persistante tant qu'il n'est pas rempli ; flash + défilement au clic.
+  const errored = flash || (highlight && status !== 'complete')
+
   return (
     <div
       ref={ref}
       id={`question-${id}`}
       data-status={status}
-      style={{ boxShadow: STATUS_GLOW[status] }}
+      style={{ boxShadow: errored ? STATUS_GLOW.required : STATUS_GLOW[status] }}
       className={cn(
         'animate-in fade-in slide-in-from-bottom-2 relative scroll-mt-28 rounded-xl border bg-white transition-shadow duration-300',
-        flash ? 'border-pilot-600 ring-pilot-200 ring-3' : 'border-line'
+        errored ? 'border-ambre-500 ring-ambre-300 ring-2' : 'border-line'
       )}
     >
       <div className="p-5 sm:p-6">

@@ -31,6 +31,7 @@ export function DossierWizard({
   const t = useTranslations('wizard')
   const wizard = useDossierWizard(initialFunnel, testMode)
   const [section, setSection] = useState<Step>('bien')
+  const [highlightKey, setHighlightKey] = useState<string | null>(null)
   const trackedSections = useRef(new Set<string>())
 
   const stepIndex = STEPS.indexOf(section)
@@ -71,7 +72,24 @@ export function DossierWizard({
   const maxReachable = firstIncomplete === -1 ? STEPS.length - 1 : firstIncomplete
 
   function goTo(target: Step) {
-    if (STEPS.indexOf(target) <= maxReachable) setSection(target)
+    if (STEPS.indexOf(target) <= maxReachable) {
+      setHighlightKey(null)
+      setSection(target)
+    }
+  }
+
+  // « Suivant » : si l'étape est complète on avance, sinon on met en évidence
+  // le premier champ manquant (défilement + surbrillance orange de la carte).
+  function handleNext() {
+    if (currentComplete) {
+      goTo(STEPS[stepIndex + 1] ?? 'estimation')
+      return
+    }
+    const first = wizard.completeness.missingBySection[section as DossierSection]?.[0]?.key
+    const base = first ? first.replace(/#.*$/, '') : null
+    // Réinitialise puis redéfinit pour re-déclencher le flash à chaque clic.
+    setHighlightKey(null)
+    setTimeout(() => setHighlightKey(base), 40)
   }
 
   return (
@@ -91,7 +109,7 @@ export function DossierWizard({
               data={wizard.data}
               setBien={wizard.setBien}
               patch={wizard.patch}
-              highlightKey={null}
+              highlightKey={highlightKey}
               onAnswered={() => undefined}
             />
           ) : section === 'emprunteurs' ? (
@@ -99,14 +117,14 @@ export function DossierWizard({
               funnel={wizard.funnel}
               data={wizard.data}
               patch={wizard.patch}
-              highlightKey={null}
+              highlightKey={highlightKey}
             />
           ) : section === 'hypotheque' ? (
             <HypothequeSection
               funnel={wizard.funnel}
               data={wizard.data}
               patch={wizard.patch}
-              highlightKey={null}
+              highlightKey={highlightKey}
             />
           ) : (
             <EstimationSection
@@ -117,8 +135,8 @@ export function DossierWizard({
             />
           )}
 
-          {/* Navigation bas de section — « Suivant » verrouillé tant que
-              l'étape courante n'est pas complète. */}
+          {/* Navigation bas de section. « Suivant » reste cliquable : s'il
+              manque des réponses, il met en évidence le champ manquant. */}
           <div className="mt-8">
             <div className="flex items-center justify-between gap-3">
               <Button
@@ -131,11 +149,7 @@ export function DossierWizard({
                 {t('nav.back')}
               </Button>
               {stepIndex < STEPS.length - 1 ? (
-                <Button
-                  type="button"
-                  disabled={!currentComplete}
-                  onClick={() => goTo(STEPS[stepIndex + 1] ?? 'estimation')}
-                >
+                <Button type="button" onClick={handleNext}>
                   {t('nav.next')}
                   <ArrowRight data-icon="inline-end" />
                 </Button>
@@ -144,7 +158,9 @@ export function DossierWizard({
               )}
             </div>
             {stepIndex < STEPS.length - 1 && !currentComplete ? (
-              <p className="text-ink-400 mt-3 text-center text-xs">{t('nav.completeToContinue')}</p>
+              <p className="text-ambre-700 mt-3 text-center text-xs">
+                {t('nav.completeToContinue')}
+              </p>
             ) : null}
           </div>
         </div>
