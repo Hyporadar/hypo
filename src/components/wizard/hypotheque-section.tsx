@@ -19,6 +19,9 @@ const PREFS = [
   { key: 'FIXE_2', produit: 'FIXE', duree: 2 },
   { key: 'FIXE_5', produit: 'FIXE', duree: 5 },
   { key: 'FIXE_10', produit: 'FIXE', duree: 10 },
+  // « Aucune préférence » : tranche par défaut (fixe 10 ans) pour le calcul,
+  // le conseiller proposera la structure.
+  { key: 'AUCUNE', produit: 'FIXE', duree: 10 },
 ] as const
 
 const clamp = (v: number, min: number, max: number) => Math.min(max, Math.max(min, v))
@@ -76,19 +79,12 @@ export function HypothequeSection({
   // Achat : dès que le prix d'achat est connu, la répartition est reprise et
   // valide (éditable) — pas besoin d'une action pour « valider ».
   const first = funnel === 'ACHAT' ? prix != null : ajustementDone
-  const prefDone = tranches.length >= 1
+  const prefDone = data.preferenceTaux != null
 
   const statusFirst: QuestionStatus = first ? 'complete' : 'required'
   const statusPref: QuestionStatus = prefDone ? 'complete' : first ? 'required' : 'untouched'
 
-  const prefKey = (() => {
-    if (tranches.length !== 1) return null
-    const tr = tranches[0]!
-    if (tr.produit === 'SARON') return 'SARON'
-    if (tr.produit === 'FIXE')
-      return PREFS.find((p) => p.produit === 'FIXE' && p.duree === tr.dureeAnnees)?.key ?? null
-    return null
-  })()
+  const prefKey = data.preferenceTaux ?? null
 
   function setPreference(pref: (typeof PREFS)[number]) {
     patchSync((prev) => {
@@ -101,6 +97,7 @@ export function HypothequeSection({
       return {
         ...prev,
         bien,
+        preferenceTaux: pref.key,
         tranchesSouhaitees: [
           {
             produit: pref.produit as Tranche['produit'],

@@ -18,8 +18,12 @@ import {
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import { Textarea } from '@/components/ui/textarea'
+import { cn } from '@/lib/utils'
 
 type Step = 'sending' | 'phone' | 'rateAlert' | 'done'
+const SLOTS = ['matin', 'apres-midi', 'soir'] as const
+type Slot = (typeof SLOTS)[number]
 
 // Numéro suisse : 0XX XXX XX XX ou +41 / 0041 suivi de 9 chiffres.
 function phoneValid(raw: string): boolean {
@@ -65,6 +69,9 @@ export function FinalizeDialog({
   const [step, setStep] = useState<Step>('sending')
   const [phone, setPhone] = useState('')
   const [phoneTouched, setPhoneTouched] = useState(false)
+  const [callbackDate, setCallbackDate] = useState('')
+  const [slot, setSlot] = useState<Slot | null>(null)
+  const [message, setMessage] = useState('')
   const [error, setError] = useState(false)
   const [pending, startTransition] = useTransition()
   const phoneOk = phoneValid(phone)
@@ -100,6 +107,9 @@ export function FinalizeDialog({
       setStep('sending')
       setPhone('')
       setPhoneTouched(false)
+      setCallbackDate('')
+      setSlot(null)
+      setMessage('')
       setError(false)
     }, 200)
   }
@@ -110,14 +120,30 @@ export function FinalizeDialog({
       return
     }
     setError(false)
+    const date = /^\d{4}-\d{2}-\d{2}$/.test(callbackDate) ? callbackDate : undefined
+    const msg = message.trim() || undefined
     startTransition(async () => {
       const result = testMode
-        ? await submitTestLead({ dossierId, funnel, data, email, phone, utm: readUtm() }).catch(
-            () => ({ ok: false as const })
-          )
-        : await requestCallback({ dossierId, email, phone, notify: false }).catch(() => ({
-            ok: false as const,
-          }))
+        ? await submitTestLead({
+            dossierId,
+            funnel,
+            data,
+            email,
+            phone,
+            callbackDate: date,
+            callbackSlot: slot ?? undefined,
+            message: msg,
+            utm: readUtm(),
+          }).catch(() => ({ ok: false as const }))
+        : await requestCallback({
+            dossierId,
+            email,
+            phone,
+            date,
+            slot: slot ?? undefined,
+            message: msg,
+            notify: false,
+          }).catch(() => ({ ok: false as const }))
       if (result.ok) setStep('done')
       else setError(true)
     })
@@ -201,6 +227,49 @@ export function FinalizeDialog({
                   <p className="text-erreur text-xs">{t('phone.phoneError')}</p>
                 ) : null}
               </div>
+
+              {/* Créneau souhaité (facultatif) : date + moment de la journée */}
+              <div className="space-y-2">
+                <Label htmlFor="fin-date">{t('phone.whenLabel')}</Label>
+                <Input
+                  id="fin-date"
+                  type="date"
+                  className="h-12"
+                  value={callbackDate}
+                  onChange={(e) => setCallbackDate(e.target.value)}
+                />
+                <div className="grid grid-cols-3 gap-1.5">
+                  {SLOTS.map((s) => (
+                    <button
+                      key={s}
+                      type="button"
+                      aria-pressed={slot === s}
+                      onClick={() => setSlot((prev) => (prev === s ? null : s))}
+                      className={cn(
+                        'rounded-lg border px-2 py-2 text-xs font-medium transition-colors',
+                        slot === s
+                          ? 'border-pilot-600 bg-pilot-600 text-white'
+                          : 'border-line text-ink-700 hover:bg-surface-alt bg-white'
+                      )}
+                    >
+                      {t(`phone.slots.${s}`)}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Message libre (facultatif) */}
+              <div className="space-y-1.5">
+                <Label htmlFor="fin-message">{t('phone.messageLabel')}</Label>
+                <Textarea
+                  id="fin-message"
+                  rows={2}
+                  placeholder={t('phone.messagePlaceholder')}
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
+                />
+              </div>
+
               {error ? <p className="text-erreur text-sm">{t('error')}</p> : null}
               <Button type="submit" className="w-full" disabled={pending}>
                 {t('phone.cta')}

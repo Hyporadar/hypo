@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react'
 import { useTranslations } from 'next-intl'
-import { ArrowLeft, ArrowRight, Check, Loader2 } from 'lucide-react'
+import { ArrowLeft, ArrowRight } from 'lucide-react'
 import type { Funnel } from '@prisma/client'
 import type { DossierSection } from '@/lib/dossier/completeness'
 import { useDossierWizard } from '@/components/wizard/use-dossier-wizard'
@@ -67,27 +67,7 @@ export function DossierWizard({
       {/* Stepper « ligne + points » + état de sauvegarde */}
       <div className="border-line sticky top-0 z-20 -mx-6 border-b bg-[--color-paper]/95 px-6 py-4 backdrop-blur">
         <div className="mx-auto max-w-2xl">
-          <div className="flex items-center justify-end">
-            <span
-              aria-live="polite"
-              className="text-ink-400 flex shrink-0 items-center gap-1.5 text-xs"
-            >
-              {wizard.saveStatus === 'saving' ? (
-                <>
-                  <Loader2 className="size-3.5 animate-spin" />
-                  {t('nav.save')}
-                </>
-              ) : (
-                <>
-                  <Check className="text-pilot-600 size-3.5" />
-                  {t('nav.saved')}
-                </>
-              )}
-            </span>
-          </div>
-          <div className="mt-2">
-            <WizardStepper steps={steps} onSelect={(key) => setSection(key as Step)} />
-          </div>
+          <WizardStepper steps={steps} onSelect={(key) => setSection(key as Step)} />
         </div>
       </div>
 

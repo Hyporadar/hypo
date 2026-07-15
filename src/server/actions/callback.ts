@@ -25,6 +25,7 @@ const schema = z
     email: z.string().email().max(200).optional(),
     date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/).optional(),
     slot: z.enum(['matin', 'apres-midi', 'soir']).optional(),
+    message: z.string().max(1000).optional(),
     // Envoi du lien par email — une seule fois (à la capture initiale).
     notify: z.boolean().optional(),
   })
@@ -45,7 +46,7 @@ export async function requestCallback(input: z.infer<typeof schema>): Promise<Ca
   if (!parsed.success) return { ok: false, error: 'invalid' }
   const locale = (await getLocale()) as Locale
   const email = parsed.data.email?.toLowerCase() ?? null
-  const { dossierId, phone, date, slot } = parsed.data
+  const { dossierId, phone, date, slot, message } = parsed.data
 
   try {
     const dossier = await prisma.dossier.findUnique({
@@ -54,13 +55,14 @@ export async function requestCallback(input: z.infer<typeof schema>): Promise<Ca
     })
     if (!dossier) return { ok: false, error: 'server' }
 
-    // Note pour le closer : selon qu'un téléphone a été laissé ou non.
-    const note =
+    // Note pour le closer : créneau souhaité + message libre éventuel.
+    const base =
       date && slot
         ? `Rappel souhaité : ${frDate(date)} — ${SLOT_LABELS[slot] ?? slot}`
         : phone
           ? 'Offre à valider — rappel demandé'
           : 'Offre envoyée par email — en attente de numéro'
+    const note = message?.trim() ? `${base}\nMessage : ${message.trim()}` : base
 
     // Lead interne : créé/complété, jamais poussé vers un partenaire.
     if (dossier.leadId) {

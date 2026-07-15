@@ -36,6 +36,7 @@ export default async function CampagneLeadDetail({ params }: { params: Promise<{
       'Rappel souhaité',
       lead.callbackDate ? `${lead.callbackDate} · ${lead.callbackSlot ?? ''}`.trim() : '—',
     ],
+    ['Message', lead.message ?? '—'],
     ['Source', lead.utmSource ?? '—'],
     ['Campagne', lead.utmCampaign ?? '—'],
     ['Medium', lead.utmMedium ?? '—'],

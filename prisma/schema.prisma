@@ -781,6 +781,7 @@ model TestLead {
   phone        String?
   callbackDate String?
   callbackSlot String?
+  message      String?
   utmSource    String?
   utmMedium    String?
   utmCampaign  String?

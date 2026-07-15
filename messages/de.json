@@ -889,7 +889,8 @@
           "SARON": "SARON",
           "FIXE_2": "Fest 2 Jahre",
           "FIXE_5": "Fest 5 Jahre",
-          "FIXE_10": "Fest 10 Jahre"
+          "FIXE_10": "Fest 10 Jahre",
+          "AUCUNE": "Ich habe keine Präferenz"
         }
       },
       "tranchesExistantes": {
@@ -1158,6 +1159,14 @@
         "phoneLabel": "Telefonnummer",
         "phonePlaceholder": "079 123 45 67",
         "phoneError": "Bitte geben Sie eine gültige Schweizer Telefonnummer ein.",
+        "whenLabel": "Wann sollen wir zurückrufen? (optional)",
+        "slots": {
+          "matin": "Morgen (9–12 Uhr)",
+          "apres-midi": "Nachmittag (12–17 Uhr)",
+          "soir": "Abend (17–20 Uhr)"
+        },
+        "messageLabel": "Eine Nachricht? (optional)",
+        "messagePlaceholder": "Eine Präzisierung, eine Frage…",
         "cta": "Zurückgerufen werden",
         "alertLink": "Später? Erhalten Sie Zinsaktualisierungen per E-Mail"
       },

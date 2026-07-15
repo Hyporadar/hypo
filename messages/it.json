@@ -889,7 +889,8 @@
           "SARON": "SARON",
           "FIXE_2": "Fisso 2 anni",
           "FIXE_5": "Fisso 5 anni",
-          "FIXE_10": "Fisso 10 anni"
+          "FIXE_10": "Fisso 10 anni",
+          "AUCUNE": "Non ho preferenze"
         }
       },
       "tranchesExistantes": {
@@ -1158,6 +1159,14 @@
         "phoneLabel": "Numero di telefono",
         "phonePlaceholder": "079 123 45 67",
         "phoneError": "Inserite un numero di telefono svizzero valido.",
+        "whenLabel": "Quando richiamarvi? (facoltativo)",
+        "slots": {
+          "matin": "Mattina (9–12)",
+          "apres-midi": "Pomeriggio (12–17)",
+          "soir": "Sera (17–20)"
+        },
+        "messageLabel": "Un messaggio? (facoltativo)",
+        "messagePlaceholder": "Una precisazione, una domanda…",
         "cta": "Essere richiamato",
         "alertLink": "Più tardi? Ricevete gli aggiornamenti dei tassi via email"
       },

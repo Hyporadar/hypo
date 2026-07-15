@@ -247,6 +247,9 @@ export const dossierDataSchema = z.object({
   ajustement: ajustementSchema.default({}),
   montantTotal: montant.nullish(), // dénormalisé : voir deriveMontantTotal()
   tranchesSouhaitees: z.array(trancheSouhaiteeSchema).default([]),
+  // Préférence de taux exprimée par le client (§3) — « aucune » = laisse
+  // le conseiller proposer. La tranche stockée reste un défaut technique.
+  preferenceTaux: z.enum(['SARON', 'FIXE_2', 'FIXE_5', 'FIXE_10', 'AUCUNE']).nullish(),
   dateDebut: isoDate.nullish(), // héritage (désormais porté par chaque tranche)
   emprunteurs: z.array(emprunteurSchema).default([]),
   autresBiens: z.array(autreBienSchema).default([]),
