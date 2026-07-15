@@ -8,6 +8,20 @@ const { auth } = NextAuth(authConfig)
 
 const ADMIN_ROLES = new Set(['CLOSER', 'PARTNER', 'ADMIN'])
 
+// Verrou pré-lancement : tout le site derrière un mot de passe (Basic Auth),
+// actif uniquement si SITE_PASSWORD est défini. Retirer la variable rouvre le
+// site. Les routes /api (dont le cron) ne sont pas concernées par le matcher.
+const SITE_USER = process.env.SITE_USER ?? 'hyporadar'
+function siteGate(req: Request): Response | undefined {
+  const pw = process.env.SITE_PASSWORD
+  if (!pw) return
+  if (req.headers.get('authorization') === `Basic ${btoa(`${SITE_USER}:${pw}`)}`) return
+  return new Response('Accès protégé', {
+    status: 401,
+    headers: { 'WWW-Authenticate': 'Basic realm="HypoRadar", charset="UTF-8"' },
+  })
+}
+
 // Slug de la page de connexion par locale (les pathnames sont traduits).
 function loginPath(locale: Locale): string {
   const slugs = routing.pathnames['/connexion']
@@ -15,6 +29,9 @@ function loginPath(locale: Locale): string {
 }
 
 export default auth((req) => {
+  const gate = siteGate(req)
+  if (gate) return gate
+
   const { nextUrl } = req
   const user = req.auth?.user
 
