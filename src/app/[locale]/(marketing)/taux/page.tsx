@@ -4,11 +4,9 @@ import { Link } from '@/i18n/navigation'
 import type { Locale } from '@/i18n/routing'
 import { formatDate, formatRate } from '@/lib/format'
 import { prisma } from '@/lib/prisma'
-import { loadRateHistory, loadTodayRates } from '@/server/rates/update'
+import { loadTodayRates } from '@/server/rates/update'
 import { localizedAlternates } from '@/lib/seo'
-import { RateSparkline } from '@/components/marketing/rate-sparkline'
 import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 
 export async function generateMetadata({
   params,
@@ -30,11 +28,10 @@ export default async function RatesPage({ params }: { params: Promise<{ locale: 
   setRequestLocale(locale)
   const t = await getTranslations('content.rates')
 
-  const [rates, history, today] = await Promise.all([
+  const [rates, today] = await Promise.all([
     prisma.referenceRate
       .findMany({ orderBy: [{ type: 'desc' }, { termYears: 'asc' }] })
       .catch(() => []),
-    loadRateHistory(90),
     loadTodayRates(),
   ])
   const lastUpdate = today.date ? new Date(today.date) : null
@@ -72,9 +69,9 @@ export default async function RatesPage({ params }: { params: Promise<{ locale: 
           ) : null}
         </div>
 
-        <div className="mt-10 grid gap-8 lg:grid-cols-5">
+        <div className="mt-10 max-w-2xl">
           {/* Tableau des taux */}
-          <div className="border-line overflow-hidden rounded-xl border bg-white lg:col-span-3">
+          <div className="border-line overflow-hidden rounded-xl border bg-white">
             <table className="w-full text-sm">
               <thead>
                 <tr className="border-line text-ink-500 border-b text-left text-xs">
@@ -102,20 +99,6 @@ export default async function RatesPage({ params }: { params: Promise<{ locale: 
               {t('snbNote')}
             </p>
           </div>
-
-          {/* Historique fixe 10 ans */}
-          <Card className="lg:col-span-2">
-            <CardHeader>
-              <CardTitle className="font-display text-base">{t('chartTitle')}</CardTitle>
-            </CardHeader>
-            <CardContent className="px-6 pb-6">
-              {history.length >= 2 ? (
-                <RateSparkline points={history.map((h) => ({ rate: h.rate, at: h.date }))} />
-              ) : (
-                <p className="text-ink-500 py-8 text-center text-sm">{t('chartEmpty')}</p>
-              )}
-            </CardContent>
-          </Card>
         </div>
 
         <div className="mt-8 flex flex-wrap gap-3">
