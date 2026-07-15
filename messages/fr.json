@@ -1228,5 +1228,13 @@
     "p1": "100% gratuit, sans engagement",
     "p2": "Banques, assurances et caisses de pension comparées",
     "p3": "Réponse rapide par un conseiller"
+  },
+  "dossierShort": {
+    "title": "Votre estimation en 30 secondes",
+    "subtitle": "Trois chiffres suffisent pour une première fourchette de taux.",
+    "valeur": "Valeur du bien",
+    "montant": "Montant de l'hypothèque",
+    "revenu": "Revenu annuel brut du ménage",
+    "cta": "Voir mon estimation"
   }
 }

@@ -1228,5 +1228,13 @@
     "p1": "100% gratuito, senza impegno",
     "p2": "Banche, assicurazioni e casse pensioni a confronto",
     "p3": "Risposta rapida da un consulente"
+  },
+  "dossierShort": {
+    "title": "La vostra stima in 30 secondi",
+    "subtitle": "Tre cifre bastano per una prima forbice di tasso.",
+    "valeur": "Valore del bene",
+    "montant": "Importo dell'ipoteca",
+    "revenu": "Reddito annuo lordo del nucleo familiare",
+    "cta": "Vedere la mia stima"
   }
 }

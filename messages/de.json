@@ -1228,5 +1228,13 @@
     "p1": "100% kostenlos, unverbindlich",
     "p2": "Banken, Versicherungen und Pensionskassen im Vergleich",
     "p3": "Schnelle Antwort durch einen Berater"
+  },
+  "dossierShort": {
+    "title": "Ihre Schätzung in 30 Sekunden",
+    "subtitle": "Drei Zahlen genügen für eine erste Zinsspanne.",
+    "valeur": "Wert der Liegenschaft",
+    "montant": "Hypothekarbetrag",
+    "revenu": "Jährliches Bruttoeinkommen des Haushalts",
+    "cta": "Meine Schätzung ansehen"
   }
 }
