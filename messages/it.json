@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "title": "HypoRadar — la Sua ipoteca, sotto sorveglianza",
+    "title": "HypoRadar, la Sua ipoteca, sotto sorveglianza",
     "description": "HypoRadar sorveglia gratuitamente la Sua ipoteca e La avvisa da 12 a 18 mesi prima della scadenza. Certificato di sostenibilità gratuito in 2 minuti."
   },
   "common": {
@@ -34,7 +34,7 @@
     "footer": {
       "transparency": "Gratuito per Lei. Pagato dai finanziatori. Indicato nero su bianco.",
       "legal": "HypoRadar è remunerato da una commissione del finanziatore scelto. La vede prima di firmare.",
-      "copyright": "HypoRadar — fintech svizzera",
+      "copyright": "HypoRadar, fintech svizzera",
       "nav": {
         "rates": "Tassi di oggi",
         "guides": "Guide",
@@ -52,7 +52,7 @@
     "hero": {
       "overline": "Ipoteche svizzere",
       "title": "La Sua ipoteca al miglior tasso. All'acquisto come al rinnovo.",
-      "subtitle": "Banche, assicurazioni e casse pensioni messe in concorrenza, gratuitamente. Risultato immediato — nessun appuntamento imposto.",
+      "subtitle": "Banche, assicurazioni e casse pensioni messe in concorrenza, gratuitamente. Risultato immediato, nessun appuntamento imposto.",
       "ctaBuy": "Calcolare la sostenibilità",
       "ctaRenew": "Registrare l'ipoteca",
       "cta": "Trovare la mia ipoteca"
@@ -68,7 +68,7 @@
       "buyBody": "Calcoli la Sua sostenibilità e riceva il certificato PDF gratuito. È il documento che le agenzie immobiliari richiedono prima di ogni offerta.",
       "buyCta": "Calcolare la sostenibilità",
       "renewTitle": "Quando scade la Sua ipoteca?",
-      "renewBody": "Registri la Sua ipoteca attuale. In 2 minuti saprà quanto perde ogni anno — e cosa si può fare.",
+      "renewBody": "Registri la Sua ipoteca attuale. In 2 minuti saprà quanto perde ogni anno, e cosa si può fare.",
       "renewCta": "Verificare il mio tasso"
     },
     "steps": {
@@ -77,13 +77,13 @@
       "step1Body": "Acquisto o rinnovo: inserisca la Sua situazione in 2 minuti. Il risultato appare subito.",
       "step2Title": "Mettiamo in concorrenza i finanziatori",
       "step2Body": "Banche, assicurazioni e casse pensioni presentano la loro migliore offerta sul Suo dossier. Lei confronta, nero su bianco.",
-      "step3Title": "Lei sceglie — noi restiamo vigili",
+      "step3Title": "Lei sceglie, noi restiamo vigili",
       "step3Body": "Firma l'offerta migliore, dove vuole Lei. Poi il Suo tasso e la Sua scadenza restano seguiti gratuitamente.",
       "more": "Il funzionamento in dettaglio"
     },
     "transparency": {
       "title": "La trasparenza, nero su bianco",
-      "body": "Il servizio è gratuito per Lei. Riceviamo una commissione dal finanziatore scelto — la vede prima di firmare.",
+      "body": "Il servizio è gratuito per Lei. Riceviamo una commissione dal finanziatore scelto, la vede prima di firmare.",
       "more": "Perché è gratuito"
     },
     "callback": {
@@ -105,7 +105,7 @@
     },
     "leadWidget": {
       "title": "Che tasso può ottenere?",
-      "subtitle": "Inserisca la Sua situazione — il risultato appare subito.",
+      "subtitle": "Inserisca la Sua situazione, il risultato appare subito.",
       "propertyValue": "Valore dell'immobile",
       "mortgage": "Ipoteca",
       "income": "Reddito familiare",
@@ -128,7 +128,7 @@
       "plzPlaceholder": "NPA o località dell'immobile",
       "categoriesTitle": "Le Sue offerte, per tipo di finanziatore",
       "bankDesc": "I tassi più aggressivi del mercato sulle durate corte e medie.",
-      "pensionDesc": "Spesso imbattibili sulle lunghe durate — l'alternativa sottovalutata.",
+      "pensionDesc": "Spesso imbattibili sulle lunghe durate, l'alternativa sottovalutata.",
       "insuranceDesc": "Condizioni stabili e solide sul lungo periodo.",
       "from": "da",
       "perYear": "all'anno",
@@ -168,7 +168,7 @@
       },
       "ownFunds": {
         "label": "Di quanti fondi propri dispone?",
-        "help": "Risparmi, terzo pilastro, donazione, anticipo ereditario — tutto ciò che può apportare.",
+        "help": "Risparmi, terzo pilastro, donazione, anticipo ereditario, tutto ciò che può apportare.",
         "pillar2Label": "Di cui 2° pilastro (cassa pensioni)",
         "pillar2Help": "Le banche esigono almeno il 10% del prezzo al di fuori del 2° pilastro."
       },
@@ -234,7 +234,7 @@
       },
       "propertyValue": {
         "label": "Qual è il valore stimato del Suo immobile?",
-        "help": "Basta una stima attuale di mercato — non il prezzo d'acquisto di dieci anni fa."
+        "help": "Basta una stima attuale di mercato, non il prezzo d'acquisto di dieci anni fa."
       }
     },
     "result": {
@@ -251,7 +251,7 @@
       "hotBody": "La Sua scadenza cade tra meno di 18 mesi: è esattamente il momento di mettere in concorrenza i finanziatori. Gratuito, senza impegno, Lei mantiene il controllo.",
       "hotCta": "Lanciare la gara d'offerte",
       "callbackLabel": "Desidero essere richiamato da un consulente",
-      "coldTitle": "Troppo presto per agire — perfetto per sorvegliare",
+      "coldTitle": "Troppo presto per agire, perfetto per sorvegliare",
       "coldBody": "La Sua scadenza è a più di 18 mesi. Disdire ora costerebbe penali. Sorvegliamo il Suo tasso e La svegliamo al momento giusto, da 12 a 18 mesi prima della scadenza.",
       "coldCta": "Attivare la sorveglianza gratuita",
       "tooLateTitle": "Siamo onesti: per questo ciclo è probabilmente troppo tardi",
@@ -262,7 +262,7 @@
       "hotTitle": "Lanci la Sua gara d'offerte",
       "hotSubtitle": "Un consulente riprende il Suo dossier e mette in concorrenza i finanziatori. Lei riceve le offerte, Lei sceglie.",
       "coldTitle": "Attivi la Sua sorveglianza gratuita",
-      "coldSubtitle": "Seguiamo il Suo tasso e la Sua scadenza. Riceverà un avviso al momento giusto — niente spam, niente telefonate indesiderate.",
+      "coldSubtitle": "Seguiamo il Suo tasso e la Sua scadenza. Riceverà un avviso al momento giusto, niente spam, niente telefonate indesiderate.",
       "name": "Nome completo",
       "email": "Indirizzo e-mail",
       "phone": "Telefono",
@@ -272,7 +272,7 @@
     },
     "done": {
       "hotTitle": "Gara d'offerte lanciata",
-      "hotBody": "Un consulente La contatterà molto rapidamente — conti pochi minuti durante gli orari d'ufficio. Tenga a portata di mano l'ultimo estratto ipotecario, se possibile.",
+      "hotBody": "Un consulente La contatterà molto rapidamente, conti pochi minuti durante gli orari d'ufficio. Tenga a portata di mano l'ultimo estratto ipotecario, se possibile.",
       "coldTitle": "Sorveglianza attivata",
       "coldBody": "Seguiamo il Suo tasso e la Sua scadenza. Riceverà un avviso da 12 a 18 mesi prima della scadenza, quando tutto tornerà possibile.",
       "tooLateTitle": "Sorveglianza attivata per il prossimo ciclo",
@@ -296,39 +296,39 @@
     "hero": {
       "overline": "Il principio",
       "title": "La vostra ipoteca al miglior tasso, senza perderci giornate.",
-      "subtitle": "All'acquisto come al rinnovo, HypoRadar mette in concorrenza banche, assicurazioni e casse pensioni — gratuitamente, con una stima immediata e senza appuntamento imposto."
+      "subtitle": "All'acquisto come al rinnovo, HypoRadar mette in concorrenza banche, assicurazioni e casse pensioni, gratuitamente, con una stima immediata e senza appuntamento imposto."
     },
     "steps": {
       "title": "Tre passi, e basta",
       "step1Title": "Indicate la vostra situazione",
-      "step1Body": "Il bene, il vostro profilo, la vostra ipoteca: circa 3 minuti. Nessuna burocrazia — le vostre cifre approssimative bastano per iniziare.",
+      "step1Body": "Il bene, il vostro profilo, la vostra ipoteca: circa 3 minuti. Nessuna burocrazia, le vostre cifre approssimative bastano per iniziare.",
       "step2Title": "Ricevete subito la vostra stima del tasso",
-      "step2Body": "Al termine del questionario vedete una forbice di tassi calibrata sul vostro dossier — banche, assicurazioni e casse pensioni. Nessun appuntamento, nessuna chiamata da subire.",
+      "step2Body": "Al termine del questionario vedete una forbice di tassi calibrata sul vostro dossier, banche, assicurazioni e casse pensioni. Nessun appuntamento, nessuna chiamata da subire.",
       "step3Title": "Mettiamo in concorrenza i finanziatori",
-      "step3Body": "Un consulente specializzato avvia la gara d'appalto e affina la vostra offerta presso i finanziatori. Confrontate, scegliete, firmate — oppure no. Nessun obbligo."
+      "step3Body": "Un consulente specializzato avvia la gara d'appalto e affina la vostra offerta presso i finanziatori. Confrontate, scegliete, firmate, oppure no. Nessun obbligo."
     },
     "whyFree": {
       "title": "Perché è gratuito",
-      "who": "Chi ci paga? Il finanziatore che Lei sceglie. Quando un dossier si conclude, ci versa una commissione di intermediazione — prassi standard del mercato ipotecario svizzero.",
+      "who": "Chi ci paga? Il finanziatore che Lei sceglie. Quando un dossier si conclude, ci versa una commissione di intermediazione, prassi standard del mercato ipotecario svizzero.",
       "howMuch": "Quanto? Una commissione versata una sola volta dal finanziatore, mai da voi. Ne vedete l'importo esatto prima di firmare, nero su bianco.",
-      "whyItWorks": "Perché per Lei non cambia nulla: la commissione è la stessa qualunque sia il finanziatore scelto. Non abbiamo quindi alcun interesse a spingerLa verso l'uno piuttosto che l'altro — solo a farLe firmare l'offerta migliore.",
+      "whyItWorks": "Perché per Lei non cambia nulla: la commissione è la stessa qualunque sia il finanziatore scelto. Non abbiamo quindi alcun interesse a spingerLa verso l'uno piuttosto che l'altro, solo a farLe firmare l'offerta migliore.",
       "neverSold": "E una regola non negoziabile: i Suoi dati non sono mai venduti né trasmessi grezzi. Solo un dossier completo, da Lei validato, parte verso un finanziatore."
     },
     "proof": {
       "title": "Quanto rende confrontare, in cifre",
       "gapStat": "0,72%",
-      "gapLabel": "è lo scarto medio tra la migliore e la peggiore offerta per lo stesso dossier — circa CHF 4'500 all'anno su un'ipoteca di 650'000 franchi",
+      "gapLabel": "è lo scarto medio tra la migliore e la peggiore offerta per lo stesso dossier, circa CHF 4'500 all'anno su un'ipoteca di 650'000 franchi",
       "compareStat": "meno del 10%",
       "compareLabel": "dei proprietari svizzeri confronta davvero le offerte al momento del rinnovo. Gli altri firmano la proposta della loro banca, così com'è."
     },
     "faq": {
       "title": "Le domande che ci fanno",
       "q1": "Mi impegno a qualcosa?",
-      "a1": "No. La stima e la messa in concorrenza sono gratuite e senza impegno: ricevete offerte e restate liberi di rifiutarle tutte — anche per restare presso la vostra banca attuale.",
+      "a1": "No. La stima e la messa in concorrenza sono gratuite e senza impegno: ricevete offerte e restate liberi di rifiutarle tutte, anche per restare presso la vostra banca attuale.",
       "q2": "Chi vede i miei dati?",
       "a2": "HypoRadar, e nessun altro. I Suoi dati non sono mai venduti. Un finanziatore vede il Suo dossier solo se decide Lei di inviarglielo, una volta completo e da Lei validato.",
       "q3": "Devo cambiare banca?",
-      "a3": "No. Spesso la migliore offerta esterna serve semplicemente da argomento per rinegoziare con la Sua banca attuale — che si allinea. Lei vince in entrambi i casi.",
+      "a3": "No. Spesso la migliore offerta esterna serve semplicemente da argomento per rinegoziare con la Sua banca attuale, che si allinea. Lei vince in entrambi i casi.",
       "q4": "E se la mia scadenza è ancora lontana?",
       "a4": "È il momento giusto per anticipare: ricevete già la vostra stima. E se lo desiderate, sorvegliamo il vostro tasso per avvisarvi 12-18 mesi prima della scadenza, quando tutto torna negoziabile."
     },
@@ -373,7 +373,7 @@
   },
   "certificate": {
     "title": "Certificato di sostenibilità",
-    "issuer": "Emesso da HypoRadar — piattaforma svizzera di finanziamento ipotecario",
+    "issuer": "Emesso da HypoRadar, piattaforma svizzera di finanziamento ipotecario",
     "number": "Certificato n.",
     "issuedOn": "Emesso il",
     "holder": "Intestato a",
@@ -397,7 +397,7 @@
     "validBadge": "Certificato autentico",
     "validBody": "Questo certificato è stato emesso da HypoRadar. Le informazioni sottostanti fanno fede.",
     "invalidTitle": "Certificato non trovato",
-    "invalidBody": "Nessun certificato corrisponde a questo identificativo. Il documento presentatoLe non è stato emesso da HypoRadar — o il suo numero è stato alterato.",
+    "invalidBody": "Nessun certificato corrisponde a questo identificativo. Il documento presentatoLe non è stato emesso da HypoRadar, o il suo numero è stato alterato.",
     "number": "Numero",
     "holder": "Titolare",
     "issuedOn": "Data di emissione",
@@ -411,23 +411,23 @@
       "cta": "Riprendere la simulazione"
     },
     "abandonJ3": {
-      "subject": "Ultimo promemoria — la Sua simulazione è ancora aperta",
+      "subject": "Ultimo promemoria, la Sua simulazione è ancora aperta",
       "body": "Buongiorno {name},\n\nLa Sua simulazione è ancora lì, completata a metà. Dopo questa settimana la archivieremo.\n\nSe il momento non è quello giusto, risponda semplicemente a questa e-mail: un consulente La richiamerà quando preferisce.",
       "cta": "Completare la simulazione"
     },
     "offersUnread": {
       "subject": "Le Sue offerte di finanziamento sono pronte",
-      "body": "Buongiorno {name},\n\nLe Sue offerte sono online nella Sua area. Si prenda il tempo di confrontarle — ma non troppo: ogni offerta ha una data di validità.",
+      "body": "Buongiorno {name},\n\nLe Sue offerte sono online nella Sua area. Si prenda il tempo di confrontarle, ma non troppo: ogni offerta ha una data di validità.",
       "cta": "Vedere le mie offerte"
     },
     "quarterly": {
       "subject": "Il Suo tasso vs il mercato questo trimestre",
-      "body": "Buongiorno {name},\n\nIl punto trimestrale della Sua sorveglianza: Lei paga {rate}, il tasso di riferimento a 10 anni è {refRate}. Differenza potenziale: {savings} all'anno.\n\nNon deve fare nulla — La avviseremo quando la Sua finestra si aprirà.",
+      "body": "Buongiorno {name},\n\nIl punto trimestrale della Sua sorveglianza: Lei paga {rate}, il tasso di riferimento a 10 anni è {refRate}. Differenza potenziale: {savings} all'anno.\n\nNon deve fare nulla, La avviseremo quando la Sua finestra si aprirà.",
       "cta": "Vedere la mia sorveglianza"
     },
     "rateUpdate": {
       "subject": "I tassi ipotecari di oggi",
-      "body": "Il tasso di riferimento fisso a 10 anni è {refRate}.\n\nIl Suo aggiornamento tassi HypoRadar — confronti con il Suo tasso attuale in 2 minuti, senza iscrizione.",
+      "body": "Il tasso di riferimento fisso a 10 anni è {refRate}.\n\nIl Suo aggiornamento tassi HypoRadar, confronti con il Suo tasso attuale in 2 minuti, senza iscrizione.",
       "cta": "Confrontare con il mio tasso"
     },
     "magicLink": {
@@ -466,7 +466,7 @@
         "lastNotice": "Ultimo termine di disdetta",
         "deadline": "Scadenza",
         "today": "Oggi",
-        "stateBeforeTitle": "Troppo presto per agire — sorvegliamo noi",
+        "stateBeforeTitle": "Troppo presto per agire, sorvegliamo noi",
         "stateBeforeBody": "La Sua finestra si apre il {date}. La avviseremo: fino ad allora non deve fare nulla.",
         "stateWindowTitle": "La Sua finestra è aperta",
         "stateWindowBody": "È ora che si decide tutto, fino al termine di disdetta (~{date}). Lanci la gara d'offerte.",
@@ -487,7 +487,7 @@
       "title": "Il mio dossier",
       "documentsTitle": "Documenti",
       "missing": "Manca: {list}",
-      "complete": "Dossier completo — niente da aggiungere.",
+      "complete": "Dossier completo, niente da aggiungere.",
       "upload": "Aggiungere un documento",
       "uploadType": "Tipo di documento",
       "uploadFile": "File (PDF o foto)",
@@ -553,7 +553,7 @@
       "metaTitle": "Tassi ipotecari di oggi",
       "metaDescription": "I tassi di riferimento ipotecari svizzeri di oggi, per durata: fisso da 1 a 15 anni e SARON. Aggiornati dal nostro team.",
       "title": "I tassi ipotecari di oggi",
-      "subtitle": "Tassi di riferimento nazionali, per durata. La base di tutti i nostri calcoli — e dei Suoi risparmi.",
+      "subtitle": "Tassi di riferimento nazionali, per durata. La base di tutti i nostri calcoli, e dei Suoi risparmi.",
       "updated": "Aggiornato il {date}",
       "duration": "Durata",
       "rate": "Tasso di riferimento",
@@ -563,11 +563,11 @@
       "chartEmpty": "Lo storico si costruisce a ogni aggiornamento dei tassi.",
       "faqTitle": "Domande sui tassi",
       "faq1q": "Da dove provengono questi tassi?",
-      "faq1a": "Sono riferimenti nazionali, aggiornati dal nostro team sulla base delle condizioni realmente praticate dai finanziatori svizzeri. Il Suo tasso personale dipende dal Suo dossier — la gara d'offerte serve proprio a ottenerlo sotto il riferimento.",
+      "faq1a": "Sono riferimenti nazionali, aggiornati dal nostro team sulla base delle condizioni realmente praticate dai finanziatori svizzeri. Il Suo tasso personale dipende dal Suo dossier, la gara d'offerte serve proprio a ottenerlo sotto il riferimento.",
       "faq2q": "Perché una fascia invece di un tasso esatto?",
       "faq2a": "Perché un tasso esatto senza dossier è un argomento di marketing, non un'offerta. Mostriamo il riferimento del mercato e negoziamo poi il Suo tasso reale, dossier alla mano.",
       "faq3q": "Fisso o SARON?",
-      "faq3a": "Il SARON è storicamente più conveniente ma fluttua; il fisso blocca il Suo budget. La risposta giusta dipende dalla Sua tolleranza al rischio e dal Suo orizzonte — la nostra guida spiega la scelta.",
+      "faq3a": "Il SARON è storicamente più conveniente ma fluttua; il fisso blocca il Suo budget. La risposta giusta dipende dalla Sua tolleranza al rischio e dal Suo orizzonte, la nostra guida spiega la scelta.",
       "ctaRenew": "Confrontare con il mio tasso",
       "ctaBuy": "Calcolare la sostenibilità",
       "snbNote": "Tassi di riferimento indicativi, calcolati a partire dai dati pubblici della BNS e dalle griglie di mercato."
@@ -587,9 +587,9 @@
       "s1Title": "Gratuito per Lei, davvero",
       "s1Body": "Sorveglianza, simulazione, certificato, gara d'offerte: tutto è gratuito, senza abbonamenti nascosti né spese di dossier. Non Le fatturiamo mai nulla.",
       "s2Title": "Chi ci paga, e quanto",
-      "s2Body": "Il finanziatore che Lei sceglie ci versa una commissione di intermediazione alla firma — una pratica standard del mercato ipotecario svizzero. È identica per qualsiasi finanziatore scelto: non abbiamo quindi alcun interesse a spingerLa verso l'uno o l'altro. E vede sempre l'importo esatto prima di firmare.",
+      "s2Body": "Il finanziatore che Lei sceglie ci versa una commissione di intermediazione alla firma, una pratica standard del mercato ipotecario svizzero. È identica per qualsiasi finanziatore scelto: non abbiamo quindi alcun interesse a spingerLa verso l'uno o l'altro. E vede sempre l'importo esatto prima di firmare.",
       "s3Title": "Perché questo non distorce i nostri consigli",
-      "s3Body": "La commissione è equivalente qualunque sia il finanziatore scelto. Non abbiamo quindi alcun interesse a spingerne uno piuttosto che un altro — solo a farLe firmare l'offerta migliore, dove vuole Lei. Anche presso la Sua banca attuale, se si allinea.",
+      "s3Body": "La commissione è equivalente qualunque sia il finanziatore scelto. Non abbiamo quindi alcun interesse a spingerne uno piuttosto che un altro, solo a farLe firmare l'offerta migliore, dove vuole Lei. Anche presso la Sua banca attuale, se si allinea.",
       "s4Title": "Ciò che non facciamo mai",
       "s4Items": "Vendere i Suoi dati|Trasmettere un lead grezzo a terzi|Fatturare al cliente|Nascondere una remunerazione",
       "cta": "Verificare il mio tasso ora"
@@ -598,7 +598,7 @@
       "metaTitle": "Diventare segnalatore HypoRadar",
       "metaDescription": "Agenzie immobiliari, fiduciarie: inviate i vostri clienti a HypoRadar e seguite le vostre commissioni in piena trasparenza.",
       "title": "Segnalatori: i vostri clienti meritano un tasso migliore",
-      "subtitle": "Agenzie immobiliari, fiduciarie, amministratori: inviateci i vostri clienti proprietari. Li richiamiamo in pochi minuti, voi seguite tutto — stati e commissioni — nella vostra area.",
+      "subtitle": "Agenzie immobiliari, fiduciarie, amministratori: inviateci i vostri clienti proprietari. Li richiamiamo in pochi minuti, voi seguite tutto, stati e commissioni, nella vostra area.",
       "how1": "Inviate un cliente (link personale, QR o inserimento diretto)",
       "how2": "Un consulente HypoRadar lo richiama in pochi minuti",
       "how3": "Dossier firmato: la vostra commissione appare nella vostra area, dovuta poi pagata",
@@ -626,7 +626,7 @@
       "formEmail": "E-mail",
       "formMessage": "Messaggio",
       "formSubmit": "Inviare",
-      "formSuccess": "Messaggio inviato — rispondiamo entro un giorno lavorativo.",
+      "formSuccess": "Messaggio inviato, rispondiamo entro un giorno lavorativo.",
       "formError": "Si è verificato un errore. Riprovate tra un istante."
     },
     "faqPage": {
@@ -635,21 +635,21 @@
       "q5": "Quanto costa HypoRadar?",
       "a5": "Nulla, mai. Il servizio è finanziato da una commissione del finanziatore scelto, indicata prima della firma. Veda la nostra pagina trasparenza.",
       "q6": "In quali lingue lavorate?",
-      "a6": "Italiano, francese e tedesco — moduli, documenti, certificati PDF e consulenti."
+      "a6": "Italiano, francese e tedesco, moduli, documenti, certificati PDF e consulenti."
     },
     "legal": {
       "impressumTitle": "Impressum",
       "privacyTitle": "Protezione dei dati (LPD)",
       "termsTitle": "Condizioni generali d'uso",
-      "lawyerNote": "CONTENUTO PROVVISORIO — DA VALIDARE CON UN AVVOCATO",
+      "lawyerNote": "CONTENUTO PROVVISORIO, DA VALIDARE CON UN AVVOCATO",
       "impressumBody": "HypoRadar SA (in costituzione)|Gestore della piattaforma hyporadar.ch|Indirizzo: da completare, Svizzera|E-mail: contact@hyporadar.ch|Responsabile della pubblicazione: da completare|Iscrizione al registro di commercio: da completare",
-      "privacyBody": "I Suoi dati sono trattati conformemente alla legge federale svizzera sulla protezione dei dati (LPD).|Finalità: calcolo delle simulazioni, sorveglianza dell'ipoteca, gara d'offerte presso i finanziatori con il Suo consenso esplicito, miglioramento del servizio.|I Suoi dati non sono mai venduti. Un dossier è trasmesso a un finanziatore solo completo e da Lei validato.|Hosting dei dati: da completare (Svizzera/UE).|I Suoi diritti: accesso, rettifica, cancellazione — contact@hyporadar.ch.|Durata di conservazione: da completare.",
+      "privacyBody": "I Suoi dati sono trattati conformemente alla legge federale svizzera sulla protezione dei dati (LPD).|Finalità: calcolo delle simulazioni, sorveglianza dell'ipoteca, gara d'offerte presso i finanziatori con il Suo consenso esplicito, miglioramento del servizio.|I Suoi dati non sono mai venduti. Un dossier è trasmesso a un finanziatore solo completo e da Lei validato.|Hosting dei dati: da completare (Svizzera/UE).|I Suoi diritti: accesso, rettifica, cancellazione, contact@hyporadar.ch.|Durata di conservazione: da completare.",
       "termsBody": "Il servizio HypoRadar è gratuito per l'utente e fornito «così com'è».|Simulazioni, certificati e fasce di tassi sono indicativi e non costituiscono né una consulenza finanziaria personalizzata né una promessa di credito.|La decisione di concessione spetta esclusivamente ai finanziatori.|L'utente garantisce l'esattezza delle informazioni inserite.|Foro competente e diritto applicabile: Svizzera, da completare."
     }
   },
   "request": {
     "metaTitle": "La Sua richiesta d'ipoteca",
-    "title": "La Sua richiesta — {category}",
+    "title": "La Sua richiesta, {category}",
     "subtitle": "Ancora qualche dettaglio e il Suo dossier parte in gara d'offerte. Un consulente La accompagna dalla ricezione.",
     "categories": {
       "banque": "Banche",
@@ -662,7 +662,7 @@
   "wizard": {
     "meta": {
       "title": "Il vostro dossier ipotecario",
-      "description": "Compilate il vostro dossier online, al vostro ritmo — senza email né appuntamento. Salvataggio automatico, ripresa in qualsiasi momento."
+      "description": "Compilate il vostro dossier online, al vostro ritmo, senza email né appuntamento. Salvataggio automatico, ripresa in qualsiasi momento."
     },
     "steps": {
       "bien": "L'immobile",
@@ -697,10 +697,10 @@
       "minutesLeft": "Ancora circa {minutes} min.",
       "yourRates": "I vostri tassi",
       "tipsTitle": "Consigli",
-      "noTips": "Tutto in ordine — continuate pure.",
+      "noTips": "Tutto in ordine, continuate pure.",
       "tips": {
         "lpp": "Inserite il vostro capitale della cassa pensioni: rafforza la vostra situazione finanziaria e può portare a tassi migliori.",
-        "coldMonitoring": "La vostra scadenza è ancora lontana — attivate la sorveglianza gratuita, vi contatteremo al momento giusto.",
+        "coldMonitoring": "La vostra scadenza è ancora lontana, attivate la sorveglianza gratuita, vi contatteremo al momento giusto.",
         "ecoLabel": "Da sapere: alcuni finanziatori offrono uno sconto per gli immobili certificati (ipoteca verde)."
       }
     },
@@ -714,7 +714,7 @@
       "empty": "Rispondete alle prime domande per vedere le vostre fasce.",
       "savings": "Potenziale di risparmio",
       "perYear": "all'anno",
-      "noteEstimate": "Stima — si affina con ogni risposta.",
+      "noteEstimate": "Stima, si affina con ogni risposta.",
       "noteCalibrated": "Fascia calibrata sulla base del vostro dossier completo. L'identità dei finanziatori è rivelata dopo la creazione del conto.",
       "lenderTypes": {
         "BANQUE": "Banche",
@@ -730,16 +730,16 @@
       "edit": "Modificare",
       "remove": "Rimuovere",
       "total": "Totale",
-      "sensitive": "Dato protetto — mai trasmesso a un finanziatore senza il vostro consenso esplicito.",
+      "sensitive": "Dato protetto, mai trasmesso a un finanziatore senza il vostro consenso esplicito.",
       "invalidDate": "Formato atteso: GG.MM.AAAA",
       "invalidYear": "Anno non valido",
       "decrement": "Diminuire",
       "increment": "Aumentare",
-      "comingSoon": "Questa sezione arriva subito dopo. Le vostre risposte sono già salvate — continuate con la sezione «L'immobile» o tornate più tardi."
+      "comingSoon": "Questa sezione arriva subito dopo. Le vostre risposte sono già salvate, continuate con la sezione «L'immobile» o tornate più tardi."
     },
     "complexCard": {
       "title": "La vostra situazione merita un consulente",
-      "body": "Nessun problema: il vostro caso richiede semplicemente uno sguardo personalizzato. Un esperto vi contatterà — potete comunque completare il dossier.",
+      "body": "Nessun problema: il vostro caso richiede semplicemente uno sguardo personalizzato. Un esperto vi contatterà, potete comunque completare il dossier.",
       "cta": "Pianificare un colloquio"
     },
     "rateAlert": {
@@ -754,8 +754,8 @@
       },
       "cta": "Abbonarmi",
       "sent": "Quasi fatto! Cliccate sul link inviato a {email} per confermare l'abbonamento.",
-      "confirmed": "Abbonamento confermato — riceverete i prossimi aggiornamenti dei tassi.",
-      "alreadyConfirmed": "Il vostro abbonamento è già attivo — frequenza aggiornata.",
+      "confirmed": "Abbonamento confermato, riceverete i prossimi aggiornamenti dei tassi.",
+      "alreadyConfirmed": "Il vostro abbonamento è già attivo, frequenza aggiornata.",
       "error": "L'abbonamento non è riuscito. Verificate l'indirizzo email e riprovate."
     },
     "account": {
@@ -763,7 +763,7 @@
       "body": "Ricevete un link di accesso via email: il vostro dossier vi segue, senza password. Nessun dato è trasmesso a un finanziatore senza il vostro consenso.",
       "emailPlaceholder": "vostra@email.ch",
       "cta": "Ricevere il mio link di accesso",
-      "sent": "Link inviato a {email} — è valido un'ora.",
+      "sent": "Link inviato a {email}, è valido un'ora.",
       "throttled": "Un link è appena partito. Controllate la posta in arrivo (e la cartella spam).",
       "error": "L'invio non è riuscito. Verificate l'indirizzo email e riprovate."
     },
@@ -814,14 +814,14 @@
           "GRAND_ENSEMBLE_sub": "Immobile a reddito"
         },
         "annexe": "L'immobile ha un appartamento annesso?",
-        "annexeInfo": "Un appartamento annesso è un'unità abitativa indipendente nella casa — il suo affitto può contare come reddito.",
+        "annexeInfo": "Un appartamento annesso è un'unità abitativa indipendente nella casa, il suo affitto può contare come reddito.",
         "annexeLouee": "L'appartamento annesso è locato?",
         "revenuAnnexe": "Reddito locativo dell'annesso (netto/anno)"
       },
       "adresse": {
         "title": "Dove si trova l'immobile?",
         "short": "Ubicazione",
-        "subtitle": "NPA o località — i tassi variano secondo la regione.",
+        "subtitle": "NPA o località, i tassi variano secondo la regione.",
         "info": "L'ubicazione serve alla valutazione dell'immobile e alla scelta dei finanziatori attivi nel vostro cantone.",
         "npaPlaceholder": "es. 6900 o Lugano"
       },
@@ -853,7 +853,7 @@
       "casSpeciaux": {
         "title": "Situazioni particolari",
         "short": "Casi speciali",
-        "subtitle": "Un «sì» non blocca nulla — ci aiuta a scegliere i finanziatori giusti.",
+        "subtitle": "Un «sì» non blocca nulla, ci aiuta a scegliere i finanziatori giusti.",
         "droitHabitation": "È iscritto un diritto di abitazione?",
         "usufruit": "È iscritto un usufrutto?",
         "droitSuperficie": "L'immobile è in diritto di superficie?",
@@ -878,7 +878,7 @@
         "title": "Qual è il valore dell'immobile?",
         "short": "Valore dell'immobile",
         "subtitle": "La vostra migliore stima basta per iniziare.",
-        "info": "Il valore determina il tasso di anticipo (LTV). Una valutazione online dettagliata arriverà presto — nel frattempo indicate la vostra stima e la sua fonte.",
+        "info": "Il valore determina il tasso di anticipo (LTV). Una valutazione online dettagliata arriverà presto, nel frattempo indicate la vostra stima e la sua fonte.",
         "source": "Fonte della stima",
         "sources": {
           "banque": "Banca",
@@ -891,7 +891,7 @@
       "fondsPropres": {
         "title": "Ipoteca e fondi propri",
         "short": "Fondi propri",
-        "subtitle": "Ripresi dalle vostre risposte — modificate se necessario.",
+        "subtitle": "Ripresi dalle vostre risposte, modificate se necessario.",
         "mortgageLabel": "Nuova ipoteca",
         "ownFundsLabel": "Fondi propri",
         "totalLabel": "Prezzo d'acquisto",
@@ -901,7 +901,7 @@
       "preferenceTaux": {
         "title": "La vostra preferenza di tasso",
         "short": "Preferenza di tasso",
-        "subtitle": "Alla fine vi faremo proposte precise — indicate solo la vostra preferenza.",
+        "subtitle": "Alla fine vi faremo proposte precise, indicate solo la vostra preferenza.",
         "options": {
           "SARON": "SARON",
           "FIXE_2": "Fisso 2 anni",
@@ -914,7 +914,7 @@
         "title": "Le vostre ipoteche attuali",
         "short": "Ipoteche esistenti",
         "subtitle": "Tranche con scadenze diverse? Inseritele separatamente.",
-        "info": "La scadenza più vicina determina il momento ideale per il rinnovo — e il vostro margine di negoziazione.",
+        "info": "La scadenza più vicina determina il momento ideale per il rinnovo, e il vostro margine di negoziazione.",
         "lender": "Finanziatore attuale",
         "lenderPlaceholder": "es. UBS, BancaStato, Raiffeisen…",
         "montant": "Importo",
@@ -931,7 +931,7 @@
       "autresPrets": {
         "title": "Ci sono altri prestiti legati all'immobile?",
         "short": "Altri prestiti",
-        "subtitle": "Solo prestiti che servono a finanziare l'immobile — es. prestito privato o del venditore.",
+        "subtitle": "Solo prestiti che servono a finanziare l'immobile, es. prestito privato o del venditore.",
         "montant": "Importo del prestito",
         "libelle": "Descrizione (facoltativa)"
       },
@@ -971,7 +971,7 @@
       "nombreEmprunteurs": {
         "title": "Chi sarà mutuatario?",
         "short": "Numero di mutuatari",
-        "subtitle": "Tutti i mutuatari devono essere registrati — anche senza reddito.",
+        "subtitle": "Tutti i mutuatari devono essere registrati, anche senza reddito.",
         "options": {
           "UNE": "Una persona",
           "PLUSIEURS": "Due o più persone"
@@ -1004,7 +1004,7 @@
       "emprunteurRevenus": {
         "title": "Il mutuatario ha un reddito?",
         "short": "Redditi del mutuatario",
-        "subtitle": "Aggiungete ogni fonte di reddito separatamente — il totale si aggiorna in continuo.",
+        "subtitle": "Aggiungete ogni fonte di reddito separatamente, il totale si aggiorna in continuo.",
         "info": "I redditi determinano la sostenibilità: interessi teorici al 5% + ammortamento + manutenzione non devono superare un terzo dei redditi.",
         "categorie": "Tipo di reddito",
         "categories": {
@@ -1100,7 +1100,7 @@
       "emprunteurPoursuites": {
         "title": "La persona ha esecuzioni in corso o concluse?",
         "short": "Esecuzioni del mutuatario",
-        "subtitle": "Molti finanziatori verificano con un estratto esecuzioni aggiornato — meglio indicarlo.",
+        "subtitle": "Molti finanziatori verificano con un estratto esecuzioni aggiornato, meglio indicarlo.",
         "origine": "Chi ha avviato l'esecuzione?",
         "origines": {
           "FISC": "Amministrazione fiscale",
@@ -1138,7 +1138,7 @@
       "tranchesSouhaitees": {
         "title": "Come strutturare la vostra ipoteca?",
         "short": "Configurazione delle tranche",
-        "subtitle": "Modello e durata per tranche — dividete per attenuare il rischio di tasso.",
+        "subtitle": "Modello e durata per tranche, dividete per attenuare il rischio di tasso.",
         "info": "Suddividere in tranche con scadenze diverse attenua il rischio di tasso, ma può legarvi allo stesso finanziatore. I nostri consulenti vi aiutano a decidere.",
         "produit": "Modello",
         "produits": {
@@ -1200,7 +1200,7 @@
     },
     "estimation": {
       "title": "La vostra stima del tasso",
-      "subtitle": "In base alle vostre risposte — valore indicativo, da confermare con un consulente.",
+      "subtitle": "In base alle vostre risposte, valore indicativo, da confermare con un consulente.",
       "emailPlaceholder": "vostra@email.ch",
       "emailCta": "Ricevere la mia offerta",
       "emailNote": "Solo per inviarvi la vostra offerta e seguire il vostro dossier. Mai trasmesso a terzi.",
@@ -1210,7 +1210,7 @@
         "title": "La vostra situazione merita un'analisi personalizzata",
         "body": "I nostri consulenti conoscono i finanziatori adatti al vostro dossier.",
         "cta": "Essere contattato",
-        "thanks": "Grazie — un consulente vi contatterà a breve."
+        "thanks": "Grazie, un consulente vi contatterà a breve."
       }
     }
   },

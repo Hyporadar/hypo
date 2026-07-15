@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "title": "HypoRadar — Ihre Hypothek, unter Beobachtung",
+    "title": "HypoRadar, Ihre Hypothek, unter Beobachtung",
     "description": "HypoRadar überwacht Ihre Hypothek kostenlos und meldet sich 12 bis 18 Monate vor Ablauf. Kostenloses Tragbarkeitszertifikat in 2 Minuten."
   },
   "common": {
@@ -34,7 +34,7 @@
     "footer": {
       "transparency": "Kostenlos für Sie. Bezahlt von den Kreditgebern. Schwarz auf weiss ausgewiesen.",
       "legal": "HypoRadar wird durch eine Kommission des gewählten Kreditgebers vergütet. Sie sehen sie, bevor Sie unterschreiben.",
-      "copyright": "HypoRadar — Schweizer Fintech",
+      "copyright": "HypoRadar, Schweizer Fintech",
       "nav": {
         "rates": "Zinsen heute",
         "guides": "Leitfäden",
@@ -52,7 +52,7 @@
     "hero": {
       "overline": "Schweizer Hypotheken",
       "title": "Ihre Hypothek zum besten Zinssatz. Beim Kauf wie bei der Verlängerung.",
-      "subtitle": "Banken, Versicherungen und Pensionskassen im Wettbewerb — kostenlos. Sofortiges Ergebnis, kein Termin nötig.",
+      "subtitle": "Banken, Versicherungen und Pensionskassen im Wettbewerb, kostenlos. Sofortiges Ergebnis, kein Termin nötig.",
       "ctaBuy": "Tragbarkeit berechnen",
       "ctaRenew": "Hypothek erfassen",
       "cta": "Hypothek finden"
@@ -68,7 +68,7 @@
       "buyBody": "Berechnen Sie Ihre Tragbarkeit und erhalten Sie Ihr kostenloses PDF-Zertifikat. Das Dokument, das Makler vor jedem Kaufangebot verlangen.",
       "buyCta": "Tragbarkeit berechnen",
       "renewTitle": "Wann läuft Ihre Hypothek ab?",
-      "renewBody": "Erfassen Sie Ihre aktuelle Hypothek. In 2 Minuten wissen Sie, wie viel Sie jedes Jahr verlieren — und was sich dagegen tun lässt.",
+      "renewBody": "Erfassen Sie Ihre aktuelle Hypothek. In 2 Minuten wissen Sie, wie viel Sie jedes Jahr verlieren, und was sich dagegen tun lässt.",
       "renewCta": "Meinen Zinssatz prüfen"
     },
     "steps": {
@@ -77,13 +77,13 @@
       "step1Body": "Kauf oder Verlängerung: Erfassen Sie Ihre Situation in 2 Minuten. Das Ergebnis erscheint sofort.",
       "step2Title": "Wir bringen die Kreditgeber in Konkurrenz",
       "step2Body": "Banken, Versicherungen und Pensionskassen legen ihre beste Offerte für Ihr Dossier vor. Sie vergleichen, schwarz auf weiss.",
-      "step3Title": "Sie wählen — wir bleiben dran",
+      "step3Title": "Sie wählen, wir bleiben dran",
       "step3Body": "Sie unterschreiben die beste Offerte, wo Sie wollen. Danach bleiben Zinssatz und Ablauf kostenlos überwacht.",
       "more": "Das Prinzip im Detail"
     },
     "transparency": {
       "title": "Transparenz, schwarz auf weiss",
-      "body": "Der Service ist für Sie kostenlos. Wir erhalten eine Kommission des gewählten Kreditgebers — Sie sehen sie, bevor Sie unterschreiben.",
+      "body": "Der Service ist für Sie kostenlos. Wir erhalten eine Kommission des gewählten Kreditgebers, Sie sehen sie, bevor Sie unterschreiben.",
       "more": "Warum es kostenlos ist"
     },
     "callback": {
@@ -105,7 +105,7 @@
     },
     "leadWidget": {
       "title": "Welche Zinsen erhalten Sie?",
-      "subtitle": "Erfassen Sie Ihre Situation — das Ergebnis erscheint sofort.",
+      "subtitle": "Erfassen Sie Ihre Situation, das Ergebnis erscheint sofort.",
       "propertyValue": "Immobilienwert",
       "mortgage": "Hypothek",
       "income": "Haushaltseinkommen",
@@ -128,7 +128,7 @@
       "plzPlaceholder": "PLZ oder Ort der Immobilie",
       "categoriesTitle": "Ihre Offerten, nach Kreditgeber-Typ",
       "bankDesc": "Die aggressivsten Zinssätze des Marktes bei kurzen und mittleren Laufzeiten.",
-      "pensionDesc": "Bei langen Laufzeiten oft unschlagbar — die unterschätzte Alternative.",
+      "pensionDesc": "Bei langen Laufzeiten oft unschlagbar, die unterschätzte Alternative.",
       "insuranceDesc": "Stabile und solide Konditionen auf lange Sicht.",
       "from": "ab",
       "perYear": "pro Jahr",
@@ -168,7 +168,7 @@
       },
       "ownFunds": {
         "label": "Über wie viel Eigenkapital verfügen Sie?",
-        "help": "Ersparnisse, Säule 3a, Schenkung, Erbvorbezug — alles, was Sie einbringen können.",
+        "help": "Ersparnisse, Säule 3a, Schenkung, Erbvorbezug, alles, was Sie einbringen können.",
         "pillar2Label": "Davon 2. Säule (Pensionskasse)",
         "pillar2Help": "Die Banken verlangen mindestens 10% des Preises ausserhalb der 2. Säule."
       },
@@ -234,7 +234,7 @@
       },
       "propertyValue": {
         "label": "Wie hoch ist der geschätzte Wert Ihrer Immobilie?",
-        "help": "Eine aktuelle Marktschätzung genügt — nicht der Kaufpreis von vor zehn Jahren."
+        "help": "Eine aktuelle Marktschätzung genügt, nicht der Kaufpreis von vor zehn Jahren."
       }
     },
     "result": {
@@ -251,7 +251,7 @@
       "hotBody": "Ihr Ablauf liegt in weniger als 18 Monaten: genau der richtige Moment, um die Kreditgeber in Konkurrenz zu bringen. Kostenlos, unverbindlich, Sie behalten die Kontrolle.",
       "hotCta": "Ausschreibung starten",
       "callbackLabel": "Ich möchte von einem Berater zurückgerufen werden",
-      "coldTitle": "Zu früh zum Handeln — perfekt zum Überwachen",
+      "coldTitle": "Zu früh zum Handeln, perfekt zum Überwachen",
       "coldBody": "Ihr Ablauf liegt mehr als 18 Monate entfernt. Jetzt zu kündigen würde Vorfälligkeitsentschädigungen kosten. Wir überwachen Ihren Zinssatz und wecken Sie zum richtigen Zeitpunkt, 12 bis 18 Monate vor Ablauf.",
       "coldCta": "Kostenlose Überwachung aktivieren",
       "tooLateTitle": "Ehrlich gesagt: für diesen Zyklus ist es wohl zu spät",
@@ -262,7 +262,7 @@
       "hotTitle": "Starten Sie Ihre Ausschreibung",
       "hotSubtitle": "Ein Berater übernimmt Ihr Dossier und bringt die Kreditgeber in Konkurrenz. Sie erhalten die Offerten, Sie wählen.",
       "coldTitle": "Aktivieren Sie Ihre kostenlose Überwachung",
-      "coldSubtitle": "Wir verfolgen Ihren Zinssatz und Ihren Ablauf. Sie erhalten eine Meldung zum richtigen Zeitpunkt — kein Spam, keine Kaltakquise.",
+      "coldSubtitle": "Wir verfolgen Ihren Zinssatz und Ihren Ablauf. Sie erhalten eine Meldung zum richtigen Zeitpunkt, kein Spam, keine Kaltakquise.",
       "name": "Vollständiger Name",
       "email": "E-Mail-Adresse",
       "phone": "Telefon",
@@ -272,7 +272,7 @@
     },
     "done": {
       "hotTitle": "Ausschreibung gestartet",
-      "hotBody": "Ein Berater kontaktiert Sie sehr rasch — rechnen Sie mit wenigen Minuten während der Geschäftszeiten. Halten Sie wenn möglich Ihren letzten Hypothekarauszug bereit.",
+      "hotBody": "Ein Berater kontaktiert Sie sehr rasch, rechnen Sie mit wenigen Minuten während der Geschäftszeiten. Halten Sie wenn möglich Ihren letzten Hypothekarauszug bereit.",
       "coldTitle": "Überwachung aktiviert",
       "coldBody": "Wir verfolgen Ihren Zinssatz und Ihren Ablauf. Sie erhalten eine Meldung 12 bis 18 Monate vor Ablauf, wenn wieder alles möglich ist.",
       "tooLateTitle": "Überwachung für den nächsten Zyklus aktiviert",
@@ -296,41 +296,41 @@
     "hero": {
       "overline": "Das Prinzip",
       "title": "Ihre Hypothek zum besten Zins, ohne dass Sie Tage investieren.",
-      "subtitle": "Beim Kauf wie bei der Verlängerung bringt HypoRadar Banken, Versicherungen und Pensionskassen in Konkurrenz — kostenlos, mit sofortiger Schätzung und ohne aufgezwungenen Termin."
+      "subtitle": "Beim Kauf wie bei der Verlängerung bringt HypoRadar Banken, Versicherungen und Pensionskassen in Konkurrenz, kostenlos, mit sofortiger Schätzung und ohne aufgezwungenen Termin."
     },
     "steps": {
       "title": "Drei Schritte, mehr braucht es nicht",
       "step1Title": "Erfassen Sie Ihre Situation",
-      "step1Body": "Die Liegenschaft, Ihr Profil, Ihre Hypothek: rund 3 Minuten. Kein Papierkram — Ihre ungefähren Zahlen genügen für den Start.",
+      "step1Body": "Die Liegenschaft, Ihr Profil, Ihre Hypothek: rund 3 Minuten. Kein Papierkram, Ihre ungefähren Zahlen genügen für den Start.",
       "step2Title": "Erhalten Sie sofort Ihre Zinsschätzung",
-      "step2Body": "Direkt nach dem Fragebogen sehen Sie eine auf Ihr Dossier abgestimmte Zinsspanne — Banken, Versicherungen und Pensionskassen. Kein Termin, kein aufgezwungener Anruf.",
+      "step2Body": "Direkt nach dem Fragebogen sehen Sie eine auf Ihr Dossier abgestimmte Zinsspanne, Banken, Versicherungen und Pensionskassen. Kein Termin, kein aufgezwungener Anruf.",
       "step3Title": "Wir bringen die Kreditgeber in Konkurrenz",
-      "step3Body": "Ein Fachberater startet die Ausschreibung und verfeinert Ihr Angebot bei den Kreditgebern. Sie vergleichen, wählen, unterschreiben — oder nicht. Keine Verpflichtung."
+      "step3Body": "Ein Fachberater startet die Ausschreibung und verfeinert Ihr Angebot bei den Kreditgebern. Sie vergleichen, wählen, unterschreiben, oder nicht. Keine Verpflichtung."
     },
     "whyFree": {
       "title": "Warum es kostenlos ist",
-      "who": "Wer bezahlt uns? Der Kreditgeber, den Sie wählen. Kommt ein Dossier zum Abschluss, zahlt er uns eine Vermittlungskommission — im Schweizer Hypothekarmarkt gängige Praxis.",
+      "who": "Wer bezahlt uns? Der Kreditgeber, den Sie wählen. Kommt ein Dossier zum Abschluss, zahlt er uns eine Vermittlungskommission, im Schweizer Hypothekarmarkt gängige Praxis.",
       "howMuch": "Wie viel? Eine einmalige Kommission, gezahlt vom Kreditgeber, nie von Ihnen. Den genauen Betrag sehen Sie vor der Unterschrift, schwarz auf weiss.",
-      "whyItWorks": "Warum das für Sie nichts ändert: die Kommission ist bei jedem Kreditgeber gleich hoch. Wir haben also kein Interesse, Sie zu einem bestimmten Anbieter zu drängen — nur daran, dass Sie die beste Offerte unterschreiben.",
+      "whyItWorks": "Warum das für Sie nichts ändert: die Kommission ist bei jedem Kreditgeber gleich hoch. Wir haben also kein Interesse, Sie zu einem bestimmten Anbieter zu drängen, nur daran, dass Sie die beste Offerte unterschreiben.",
       "neverSold": "Und eine nicht verhandelbare Regel: Ihre Daten werden nie verkauft und nie roh weitergegeben. Nur ein vollständiges, von Ihnen freigegebenes Dossier geht an einen Kreditgeber."
     },
     "proof": {
       "title": "Was Vergleichen bringt, in Zahlen",
       "gapStat": "0,72%",
-      "gapLabel": "beträgt die durchschnittliche Differenz zwischen der besten und der schlechtesten Offerte für dasselbe Dossier — rund CHF 4'500 pro Jahr bei einer Hypothek von 650'000 Franken",
+      "gapLabel": "beträgt die durchschnittliche Differenz zwischen der besten und der schlechtesten Offerte für dasselbe Dossier, rund CHF 4'500 pro Jahr bei einer Hypothek von 650'000 Franken",
       "compareStat": "weniger als 10%",
       "compareLabel": "der Schweizer Eigentümer vergleichen bei der Verlängerung tatsächlich Offerten. Die anderen unterschreiben den Vorschlag ihrer Bank, unverändert."
     },
     "faq": {
       "title": "Häufige Fragen",
       "q1": "Verpflichte ich mich zu etwas?",
-      "a1": "Nein. Die Schätzung und die Ausschreibung sind kostenlos und unverbindlich: Sie erhalten Angebote und können alle ablehnen — auch um bei Ihrer aktuellen Bank zu bleiben.",
+      "a1": "Nein. Die Schätzung und die Ausschreibung sind kostenlos und unverbindlich: Sie erhalten Angebote und können alle ablehnen, auch um bei Ihrer aktuellen Bank zu bleiben.",
       "q2": "Wer sieht meine Daten?",
-      "a2": "HypoRadar, sonst niemand. Ihre Daten werden nie verkauft. Ein Kreditgeber sieht Ihr Dossier nur, wenn Sie es ihm senden — vollständig und von Ihnen freigegeben.",
+      "a2": "HypoRadar, sonst niemand. Ihre Daten werden nie verkauft. Ein Kreditgeber sieht Ihr Dossier nur, wenn Sie es ihm senden, vollständig und von Ihnen freigegeben.",
       "q3": "Muss ich die Bank wechseln?",
-      "a3": "Nein. Oft dient die beste externe Offerte schlicht als Argument, um mit der eigenen Bank nachzuverhandeln — die dann nachzieht. Sie gewinnen in beiden Fällen.",
+      "a3": "Nein. Oft dient die beste externe Offerte schlicht als Argument, um mit der eigenen Bank nachzuverhandeln, die dann nachzieht. Sie gewinnen in beiden Fällen.",
       "q4": "Und wenn meine Fälligkeit noch weit weg ist?",
-      "a4": "Dann ist es ideal, früh dran zu sein: Sie erhalten bereits Ihre Schätzung. Und auf Wunsch überwachen wir Ihren Zins und melden uns 12 bis 18 Monate vor Fälligkeit — genau dann, wenn alles wieder verhandelbar wird."
+      "a4": "Dann ist es ideal, früh dran zu sein: Sie erhalten bereits Ihre Schätzung. Und auf Wunsch überwachen wir Ihren Zins und melden uns 12 bis 18 Monate vor Fälligkeit, genau dann, wenn alles wieder verhandelbar wird."
     },
     "cta": {
       "title": "Zwei Minuten, um zu wissen, wo Sie stehen",
@@ -373,7 +373,7 @@
   },
   "certificate": {
     "title": "Tragbarkeitszertifikat",
-    "issuer": "Ausgestellt von HypoRadar — Schweizer Plattform für Hypothekarfinanzierung",
+    "issuer": "Ausgestellt von HypoRadar, Schweizer Plattform für Hypothekarfinanzierung",
     "number": "Zertifikat Nr.",
     "issuedOn": "Ausgestellt am",
     "holder": "Ausgestellt für",
@@ -397,7 +397,7 @@
     "validBadge": "Echtes Zertifikat",
     "validBody": "Dieses Zertifikat wurde von HypoRadar ausgestellt. Die untenstehenden Angaben sind massgebend.",
     "invalidTitle": "Zertifikat nicht gefunden",
-    "invalidBody": "Kein Zertifikat entspricht dieser Kennung. Das Ihnen vorgelegte Dokument wurde nicht von HypoRadar ausgestellt — oder seine Nummer wurde verändert.",
+    "invalidBody": "Kein Zertifikat entspricht dieser Kennung. Das Ihnen vorgelegte Dokument wurde nicht von HypoRadar ausgestellt, oder seine Nummer wurde verändert.",
     "number": "Nummer",
     "holder": "Inhaber",
     "issuedOn": "Ausstellungsdatum",
@@ -411,23 +411,23 @@
       "cta": "Simulation fortsetzen"
     },
     "abandonJ3": {
-      "subject": "Letzte Erinnerung — Ihre Simulation ist noch offen",
+      "subject": "Letzte Erinnerung, Ihre Simulation ist noch offen",
       "body": "Guten Tag {name}\n\nIhre Simulation ist noch da, zur Hälfte ausgefüllt. Nach dieser Woche archivieren wir sie.\n\nFalls der Zeitpunkt ungünstig ist, antworten Sie einfach auf diese E-Mail: Ein Berater ruft Sie zurück, wann es Ihnen passt.",
       "cta": "Simulation abschliessen"
     },
     "offersUnread": {
       "subject": "Ihre Finanzierungsofferten sind bereit",
-      "body": "Guten Tag {name}\n\nIhre Offerten sind in Ihrem Bereich online. Nehmen Sie sich Zeit zum Vergleichen — aber nicht zu viel: Jede Offerte hat ein Gültigkeitsdatum.",
+      "body": "Guten Tag {name}\n\nIhre Offerten sind in Ihrem Bereich online. Nehmen Sie sich Zeit zum Vergleichen, aber nicht zu viel: Jede Offerte hat ein Gültigkeitsdatum.",
       "cta": "Meine Offerten ansehen"
     },
     "quarterly": {
       "subject": "Ihr Zinssatz vs. der Markt in diesem Quartal",
-      "body": "Guten Tag {name}\n\nDas Quartals-Update Ihrer Überwachung: Sie zahlen {rate}, der 10-Jahres-Referenzzinssatz liegt bei {refRate}. Potenzielle Differenz: {savings} pro Jahr.\n\nSie müssen nichts tun — wir melden uns, sobald sich Ihr Zeitfenster öffnet.",
+      "body": "Guten Tag {name}\n\nDas Quartals-Update Ihrer Überwachung: Sie zahlen {rate}, der 10-Jahres-Referenzzinssatz liegt bei {refRate}. Potenzielle Differenz: {savings} pro Jahr.\n\nSie müssen nichts tun, wir melden uns, sobald sich Ihr Zeitfenster öffnet.",
       "cta": "Meine Überwachung ansehen"
     },
     "rateUpdate": {
       "subject": "Die Hypothekarzinsen von heute",
-      "body": "Der 10-Jahres-Referenzzinssatz liegt bei {refRate}.\n\nIhr HypoRadar-Zinsupdate — vergleichen Sie mit Ihrem aktuellen Zinssatz in 2 Minuten, ohne Anmeldung.",
+      "body": "Der 10-Jahres-Referenzzinssatz liegt bei {refRate}.\n\nIhr HypoRadar-Zinsupdate, vergleichen Sie mit Ihrem aktuellen Zinssatz in 2 Minuten, ohne Anmeldung.",
       "cta": "Mit meinem Zinssatz vergleichen"
     },
     "magicLink": {
@@ -466,8 +466,8 @@
         "lastNotice": "Letzte Kündigungsfrist",
         "deadline": "Ablauf",
         "today": "Heute",
-        "stateBeforeTitle": "Zu früh zum Handeln — wir überwachen",
-        "stateBeforeBody": "Ihr Zeitfenster öffnet sich am {date}. Wir melden uns — bis dahin ist nichts zu tun.",
+        "stateBeforeTitle": "Zu früh zum Handeln, wir überwachen",
+        "stateBeforeBody": "Ihr Zeitfenster öffnet sich am {date}. Wir melden uns, bis dahin ist nichts zu tun.",
         "stateWindowTitle": "Ihr Zeitfenster ist offen",
         "stateWindowBody": "Jetzt entscheidet sich alles, bis zur Kündigungsfrist (~{date}). Starten Sie die Ausschreibung.",
         "stateWindowCta": "Ausschreibung starten",
@@ -487,7 +487,7 @@
       "title": "Mein Dossier",
       "documentsTitle": "Dokumente",
       "missing": "Es fehlt: {list}",
-      "complete": "Dossier vollständig — nichts mehr zu tun.",
+      "complete": "Dossier vollständig, nichts mehr zu tun.",
       "upload": "Dokument hinzufügen",
       "uploadType": "Dokumenttyp",
       "uploadFile": "Datei (PDF oder Foto)",
@@ -553,7 +553,7 @@
       "metaTitle": "Hypothekarzinsen von heute",
       "metaDescription": "Die Schweizer Referenzzinssätze von heute, nach Laufzeit: Festhypothek 1 bis 15 Jahre und SARON. Von unserem Team aktualisiert.",
       "title": "Die Hypothekarzinsen von heute",
-      "subtitle": "Nationale Referenzzinssätze, nach Laufzeit. Die Grundlage all unserer Berechnungen — und Ihrer Ersparnisse.",
+      "subtitle": "Nationale Referenzzinssätze, nach Laufzeit. Die Grundlage all unserer Berechnungen, und Ihrer Ersparnisse.",
       "updated": "Aktualisiert am {date}",
       "duration": "Laufzeit",
       "rate": "Referenzzinssatz",
@@ -563,11 +563,11 @@
       "chartEmpty": "Die Historie entsteht mit jeder Zinsaktualisierung.",
       "faqTitle": "Fragen zu den Zinsen",
       "faq1q": "Woher stammen diese Zinssätze?",
-      "faq1a": "Es sind nationale Referenzwerte, die unser Team anhand der tatsächlich praktizierten Konditionen der Schweizer Kreditgeber aktuell hält. Ihr persönlicher Zinssatz hängt von Ihrem Dossier ab — die Ausschreibung dient genau dazu, ihn unter die Referenz zu bringen.",
+      "faq1a": "Es sind nationale Referenzwerte, die unser Team anhand der tatsächlich praktizierten Konditionen der Schweizer Kreditgeber aktuell hält. Ihr persönlicher Zinssatz hängt von Ihrem Dossier ab, die Ausschreibung dient genau dazu, ihn unter die Referenz zu bringen.",
       "faq2q": "Warum eine Spanne statt eines exakten Zinssatzes?",
       "faq2a": "Weil ein exakter Zinssatz ohne Dossier ein Marketingargument ist, keine Offerte. Wir zeigen die Marktreferenz und verhandeln dann Ihren realen Zinssatz, mit Dossier in der Hand.",
       "faq3q": "Fest oder SARON?",
-      "faq3a": "SARON ist historisch günstiger, schwankt aber; die Festhypothek fixiert Ihr Budget. Die richtige Antwort hängt von Ihrer Risikotoleranz und Ihrem Horizont ab — unser Leitfaden erklärt die Abwägung.",
+      "faq3a": "SARON ist historisch günstiger, schwankt aber; die Festhypothek fixiert Ihr Budget. Die richtige Antwort hängt von Ihrer Risikotoleranz und Ihrem Horizont ab, unser Leitfaden erklärt die Abwägung.",
       "ctaRenew": "Mit meinem Zinssatz vergleichen",
       "ctaBuy": "Tragbarkeit berechnen",
       "snbNote": "Indikative Referenzzinsen, berechnet aus den öffentlichen SNB-Daten und den Marktrastern."
@@ -587,9 +587,9 @@
       "s1Title": "Kostenlos für Sie, wirklich",
       "s1Body": "Überwachung, Simulation, Zertifikat, Ausschreibung: alles ist kostenlos, ohne verstecktes Abo und ohne Dossiergebühren. Wir stellen Ihnen nie etwas in Rechnung.",
       "s2Title": "Wer uns bezahlt, und wie viel",
-      "s2Body": "Der von Ihnen gewählte Kreditgeber zahlt uns bei der Unterzeichnung eine Vermittlungskommission — im Schweizer Hypothekarmarkt üblich. Sie ist bei jedem Kreditgeber gleich: Wir haben also kein Interesse, Sie zum einen oder anderen zu drängen. Und Sie sehen den genauen Betrag immer vor der Unterschrift.",
+      "s2Body": "Der von Ihnen gewählte Kreditgeber zahlt uns bei der Unterzeichnung eine Vermittlungskommission, im Schweizer Hypothekarmarkt üblich. Sie ist bei jedem Kreditgeber gleich: Wir haben also kein Interesse, Sie zum einen oder anderen zu drängen. Und Sie sehen den genauen Betrag immer vor der Unterschrift.",
       "s3Title": "Warum das unsere Beratung nicht verzerrt",
-      "s3Body": "Die Kommission ist bei jedem Kreditgeber gleichwertig. Wir haben also kein Interesse, einen bestimmten Anbieter zu pushen — nur daran, dass Sie die beste Offerte unterschreiben, wo Sie wollen. Auch bei Ihrer aktuellen Bank, wenn sie nachzieht.",
+      "s3Body": "Die Kommission ist bei jedem Kreditgeber gleichwertig. Wir haben also kein Interesse, einen bestimmten Anbieter zu pushen, nur daran, dass Sie die beste Offerte unterschreiben, wo Sie wollen. Auch bei Ihrer aktuellen Bank, wenn sie nachzieht.",
       "s4Title": "Was wir nie tun",
       "s4Items": "Ihre Daten verkaufen|Einen rohen Lead an Dritte weitergeben|Dem Kunden etwas verrechnen|Eine Vergütung verschweigen",
       "cta": "Meinen Zinssatz jetzt prüfen"
@@ -598,7 +598,7 @@
       "metaTitle": "HypoRadar-Vermittler werden",
       "metaDescription": "Makler, Treuhänder: Senden Sie Ihre Kunden an HypoRadar und verfolgen Sie Ihre Kommissionen in voller Transparenz.",
       "title": "Vermittler: Ihre Kunden verdienen einen besseren Zinssatz",
-      "subtitle": "Makler, Treuhänder, Verwalter: Senden Sie uns Ihre Eigentümer-Kunden. Wir rufen sie in Minuten zurück, Sie verfolgen alles — Status und Kommissionen — in Ihrem Bereich.",
+      "subtitle": "Makler, Treuhänder, Verwalter: Senden Sie uns Ihre Eigentümer-Kunden. Wir rufen sie in Minuten zurück, Sie verfolgen alles, Status und Kommissionen, in Ihrem Bereich.",
       "how1": "Sie senden einen Kunden (persönlicher Link, QR oder Direkterfassung)",
       "how2": "Ein HypoRadar-Berater ruft ihn innert Minuten zurück",
       "how3": "Dossier unterschrieben: Ihre Kommission erscheint in Ihrem Bereich, fällig und dann bezahlt",
@@ -626,7 +626,7 @@
       "formEmail": "E-Mail",
       "formMessage": "Nachricht",
       "formSubmit": "Senden",
-      "formSuccess": "Nachricht gesendet — wir antworten innert eines Arbeitstags.",
+      "formSuccess": "Nachricht gesendet, wir antworten innert eines Arbeitstags.",
       "formError": "Ein Fehler ist aufgetreten. Bitte versuchen Sie es gleich erneut."
     },
     "faqPage": {
@@ -635,21 +635,21 @@
       "q5": "Was kostet HypoRadar?",
       "a5": "Nichts, nie. Der Service wird durch eine Kommission des gewählten Kreditgebers finanziert, die vor der Unterschrift ausgewiesen wird. Siehe unsere Transparenz-Seite.",
       "q6": "In welchen Sprachen arbeiten Sie?",
-      "a6": "Deutsch, Französisch und Italienisch — Formulare, Dokumente, PDF-Zertifikate und Berater."
+      "a6": "Deutsch, Französisch und Italienisch, Formulare, Dokumente, PDF-Zertifikate und Berater."
     },
     "legal": {
       "impressumTitle": "Impressum",
       "privacyTitle": "Datenschutz (DSG)",
       "termsTitle": "Allgemeine Geschäftsbedingungen",
-      "lawyerNote": "PROVISORISCHER INHALT — VOM ANWALT ZU PRÜFEN",
+      "lawyerNote": "PROVISORISCHER INHALT, VOM ANWALT ZU PRÜFEN",
       "impressumBody": "HypoRadar AG (in Gründung)|Betreiberin der Plattform hyporadar.ch|Adresse: zu ergänzen, Schweiz|E-Mail: contact@hyporadar.ch|Verantwortlich für die Publikation: zu ergänzen|Handelsregistereintrag: zu ergänzen",
-      "privacyBody": "Ihre Daten werden gemäss dem schweizerischen Datenschutzgesetz (DSG) bearbeitet.|Zwecke: Berechnung Ihrer Simulationen, Überwachung Ihrer Hypothek, Ausschreibung bei Kreditgebern mit Ihrer ausdrücklichen Einwilligung, Verbesserung des Dienstes.|Ihre Daten werden nie verkauft. Ein Dossier geht nur vollständig und von Ihnen freigegeben an einen Kreditgeber.|Datenhosting: zu ergänzen (Schweiz/EU).|Ihre Rechte: Auskunft, Berichtigung, Löschung — contact@hyporadar.ch.|Aufbewahrungsdauer: zu ergänzen.",
+      "privacyBody": "Ihre Daten werden gemäss dem schweizerischen Datenschutzgesetz (DSG) bearbeitet.|Zwecke: Berechnung Ihrer Simulationen, Überwachung Ihrer Hypothek, Ausschreibung bei Kreditgebern mit Ihrer ausdrücklichen Einwilligung, Verbesserung des Dienstes.|Ihre Daten werden nie verkauft. Ein Dossier geht nur vollständig und von Ihnen freigegeben an einen Kreditgeber.|Datenhosting: zu ergänzen (Schweiz/EU).|Ihre Rechte: Auskunft, Berichtigung, Löschung, contact@hyporadar.ch.|Aufbewahrungsdauer: zu ergänzen.",
       "termsBody": "Der HypoRadar-Service ist für Nutzende kostenlos und wird «wie besehen» bereitgestellt.|Simulationen, Zertifikate und Zinsspannen sind indikativ und stellen weder eine persönliche Finanzberatung noch eine Kreditzusage dar.|Der Kreditentscheid liegt ausschliesslich bei den Kreditgebern.|Die Nutzenden garantieren die Richtigkeit der erfassten Angaben.|Gerichtsstand und anwendbares Recht: Schweiz, zu ergänzen."
     }
   },
   "request": {
     "metaTitle": "Ihre Hypothekaranfrage",
-    "title": "Ihre Anfrage — {category}",
+    "title": "Ihre Anfrage, {category}",
     "subtitle": "Noch einige Details, dann geht Ihr Dossier in die Ausschreibung. Ein Berater begleitet Sie ab Eingang.",
     "categories": {
       "banque": "Banken",
@@ -662,7 +662,7 @@
   "wizard": {
     "meta": {
       "title": "Ihr Hypothekardossier",
-      "description": "Erstellen Sie Ihr Dossier online, in Ihrem Tempo — ohne E-Mail und ohne Termin. Automatisch gespeichert, jederzeit fortsetzbar."
+      "description": "Erstellen Sie Ihr Dossier online, in Ihrem Tempo, ohne E-Mail und ohne Termin. Automatisch gespeichert, jederzeit fortsetzbar."
     },
     "steps": {
       "bien": "Die Liegenschaft",
@@ -697,10 +697,10 @@
       "minutesLeft": "Noch etwa {minutes} Min.",
       "yourRates": "Ihre Zinssätze",
       "tipsTitle": "Tipps",
-      "noTips": "Alles in Ordnung — machen Sie einfach weiter.",
+      "noTips": "Alles in Ordnung, machen Sie einfach weiter.",
       "tips": {
         "lpp": "Erfassen Sie Ihr Pensionskassenkapital: Es stärkt Ihre finanzielle Situation und kann zu besseren Zinssätzen führen.",
-        "coldMonitoring": "Ihre Fälligkeit liegt noch in weiter Ferne — aktivieren Sie die kostenlose Überwachung, wir melden uns zum richtigen Zeitpunkt.",
+        "coldMonitoring": "Ihre Fälligkeit liegt noch in weiter Ferne, aktivieren Sie die kostenlose Überwachung, wir melden uns zum richtigen Zeitpunkt.",
         "ecoLabel": "Gut zu wissen: Einige Kreditgeber gewähren einen Rabatt für zertifizierte Liegenschaften (grüne Hypothek)."
       }
     },
@@ -714,7 +714,7 @@
       "empty": "Beantworten Sie die ersten Fragen, um Ihre Bandbreiten zu sehen.",
       "savings": "Sparpotenzial",
       "perYear": "pro Jahr",
-      "noteEstimate": "Schätzung — wird mit jeder Antwort genauer.",
+      "noteEstimate": "Schätzung, wird mit jeder Antwort genauer.",
       "noteCalibrated": "Auf Basis Ihres vollständigen Dossiers kalibrierte Bandbreite. Die Identität der Kreditgeber wird nach Erstellung Ihres Kontos offengelegt.",
       "lenderTypes": {
         "BANQUE": "Banken",
@@ -730,16 +730,16 @@
       "edit": "Bearbeiten",
       "remove": "Entfernen",
       "total": "Total",
-      "sensitive": "Geschützte Angabe — wird ohne Ihre ausdrückliche Zustimmung nie an einen Kreditgeber weitergegeben.",
+      "sensitive": "Geschützte Angabe, wird ohne Ihre ausdrückliche Zustimmung nie an einen Kreditgeber weitergegeben.",
       "invalidDate": "Erwartetes Format: TT.MM.JJJJ",
       "invalidYear": "Ungültiges Jahr",
       "decrement": "Verringern",
       "increment": "Erhöhen",
-      "comingSoon": "Dieser Abschnitt folgt gleich. Ihre Antworten sind bereits gespeichert — fahren Sie mit dem Abschnitt «Die Liegenschaft» fort oder kommen Sie später zurück."
+      "comingSoon": "Dieser Abschnitt folgt gleich. Ihre Antworten sind bereits gespeichert, fahren Sie mit dem Abschnitt «Die Liegenschaft» fort oder kommen Sie später zurück."
     },
     "complexCard": {
       "title": "Ihre Situation verdient einen Berater",
-      "body": "Kein Grund zur Sorge: Ihr Fall braucht einfach einen persönlichen Blick. Ein Experte meldet sich bei Ihnen — Sie können Ihr Dossier trotzdem fertig erfassen.",
+      "body": "Kein Grund zur Sorge: Ihr Fall braucht einfach einen persönlichen Blick. Ein Experte meldet sich bei Ihnen, Sie können Ihr Dossier trotzdem fertig erfassen.",
       "cta": "Gespräch planen"
     },
     "rateAlert": {
@@ -754,8 +754,8 @@
       },
       "cta": "Abonnieren",
       "sent": "Fast geschafft! Klicken Sie auf den Link, den wir an {email} gesendet haben, um Ihr Abo zu bestätigen.",
-      "confirmed": "Abo bestätigt — Sie erhalten die nächsten Zins-Updates.",
-      "alreadyConfirmed": "Ihr Abo ist bereits aktiv — Häufigkeit aktualisiert.",
+      "confirmed": "Abo bestätigt, Sie erhalten die nächsten Zins-Updates.",
+      "alreadyConfirmed": "Ihr Abo ist bereits aktiv, Häufigkeit aktualisiert.",
       "error": "Das Abonnieren ist fehlgeschlagen. Prüfen Sie die E-Mail-Adresse und versuchen Sie es erneut."
     },
     "account": {
@@ -763,7 +763,7 @@
       "body": "Erhalten Sie einen Anmeldelink per E-Mail: Ihr Dossier begleitet Sie, ganz ohne Passwort. Ohne Ihre Zustimmung werden keine Daten an Kreditgeber übermittelt.",
       "emailPlaceholder": "ihre@email.ch",
       "cta": "Anmeldelink erhalten",
-      "sent": "Link an {email} gesendet — er ist eine Stunde gültig.",
+      "sent": "Link an {email} gesendet, er ist eine Stunde gültig.",
       "throttled": "Ein Link wurde soeben verschickt. Prüfen Sie Ihren Posteingang (und den Spam-Ordner).",
       "error": "Der Versand ist fehlgeschlagen. Prüfen Sie die E-Mail-Adresse und versuchen Sie es erneut."
     },
@@ -814,14 +814,14 @@
           "GRAND_ENSEMBLE_sub": "Renditeobjekt"
         },
         "annexe": "Hat die Liegenschaft eine Einliegerwohnung?",
-        "annexeInfo": "Eine Einliegerwohnung ist eine unabhängige Wohneinheit im Haus — ihre Miete kann als Einkommen zählen.",
+        "annexeInfo": "Eine Einliegerwohnung ist eine unabhängige Wohneinheit im Haus, ihre Miete kann als Einkommen zählen.",
         "annexeLouee": "Ist die Einliegerwohnung vermietet?",
         "revenuAnnexe": "Mietertrag der Einliegerwohnung (netto/Jahr)"
       },
       "adresse": {
         "title": "Wo befindet sich die Liegenschaft?",
         "short": "Standort",
-        "subtitle": "PLZ oder Ort — die Zinssätze variieren je nach Region.",
+        "subtitle": "PLZ oder Ort, die Zinssätze variieren je nach Region.",
         "info": "Der Standort dient der Bewertung der Liegenschaft und der Auswahl der in Ihrem Kanton aktiven Kreditgeber.",
         "npaPlaceholder": "z.B. 8001 oder Zürich"
       },
@@ -853,7 +853,7 @@
       "casSpeciaux": {
         "title": "Besondere Situationen",
         "short": "Spezialfälle",
-        "subtitle": "Ein «Ja» blockiert nichts — es hilft uns, die richtigen Kreditgeber zu wählen.",
+        "subtitle": "Ein «Ja» blockiert nichts, es hilft uns, die richtigen Kreditgeber zu wählen.",
         "droitHabitation": "Ist ein Wohnrecht eingetragen?",
         "usufruit": "Ist eine Nutzniessung eingetragen?",
         "droitSuperficie": "Ist die Liegenschaft im Baurecht?",
@@ -878,7 +878,7 @@
         "title": "Was ist der Wert der Liegenschaft?",
         "short": "Liegenschaftswert",
         "subtitle": "Ihre beste Schätzung genügt für den Start.",
-        "info": "Der Wert bestimmt die Belehnung (LTV). Eine detaillierte Online-Bewertung folgt bald — geben Sie einstweilen Ihre Schätzung und deren Quelle an.",
+        "info": "Der Wert bestimmt die Belehnung (LTV). Eine detaillierte Online-Bewertung folgt bald, geben Sie einstweilen Ihre Schätzung und deren Quelle an.",
         "source": "Quelle der Schätzung",
         "sources": {
           "banque": "Bank",
@@ -891,7 +891,7 @@
       "fondsPropres": {
         "title": "Hypothek und Eigenmittel",
         "short": "Eigenmittel",
-        "subtitle": "Aus Ihren Angaben übernommen — bei Bedarf anpassen.",
+        "subtitle": "Aus Ihren Angaben übernommen, bei Bedarf anpassen.",
         "mortgageLabel": "Neue Hypothek",
         "ownFundsLabel": "Eigenmittel",
         "totalLabel": "Kaufpreis",
@@ -901,7 +901,7 @@
       "preferenceTaux": {
         "title": "Ihre Zinspräferenz",
         "short": "Zinspräferenz",
-        "subtitle": "Am Ende machen wir Ihnen genaue Vorschläge — geben Sie einfach Ihre Präferenz an.",
+        "subtitle": "Am Ende machen wir Ihnen genaue Vorschläge, geben Sie einfach Ihre Präferenz an.",
         "options": {
           "SARON": "SARON",
           "FIXE_2": "Fest 2 Jahre",
@@ -914,7 +914,7 @@
         "title": "Ihre aktuellen Hypotheken",
         "short": "Bestehende Hypotheken",
         "subtitle": "Tranchen mit unterschiedlichen Fälligkeiten? Erfassen Sie sie separat.",
-        "info": "Die nächste Fälligkeit bestimmt den idealen Zeitpunkt für die Ablösung — und wie viel Verhandlungsspielraum Sie haben.",
+        "info": "Die nächste Fälligkeit bestimmt den idealen Zeitpunkt für die Ablösung, und wie viel Verhandlungsspielraum Sie haben.",
         "lender": "Aktueller Kreditgeber",
         "lenderPlaceholder": "z.B. UBS, ZKB, Raiffeisen…",
         "montant": "Betrag",
@@ -931,7 +931,7 @@
       "autresPrets": {
         "title": "Gibt es weitere Darlehen im Zusammenhang mit der Liegenschaft?",
         "short": "Weitere Darlehen",
-        "subtitle": "Nur Darlehen zur Finanzierung der Liegenschaft — z.B. Privat- oder Verkäuferdarlehen.",
+        "subtitle": "Nur Darlehen zur Finanzierung der Liegenschaft, z.B. Privat- oder Verkäuferdarlehen.",
         "montant": "Darlehensbetrag",
         "libelle": "Beschreibung (optional)"
       },
@@ -971,7 +971,7 @@
       "nombreEmprunteurs": {
         "title": "Wer wird Kreditnehmer sein?",
         "short": "Anzahl Kreditnehmer",
-        "subtitle": "Alle Kreditnehmer müssen erfasst werden — auch ohne Einkommen.",
+        "subtitle": "Alle Kreditnehmer müssen erfasst werden, auch ohne Einkommen.",
         "options": {
           "UNE": "Eine Person",
           "PLUSIEURS": "Zwei oder mehr Personen"
@@ -1004,7 +1004,7 @@
       "emprunteurRevenus": {
         "title": "Hat der Kreditnehmer ein Einkommen?",
         "short": "Einkommen des Kreditnehmers",
-        "subtitle": "Erfassen Sie jede Einkommensquelle separat — das Total wird laufend aktualisiert.",
+        "subtitle": "Erfassen Sie jede Einkommensquelle separat, das Total wird laufend aktualisiert.",
         "info": "Das Einkommen bestimmt die Tragbarkeit: Kalkulatorische Zinsen zu 5% + Amortisation + Unterhalt dürfen einen Drittel des Einkommens nicht übersteigen.",
         "categorie": "Einkommensart",
         "categories": {
@@ -1100,7 +1100,7 @@
       "emprunteurPoursuites": {
         "title": "Hat die Person offene oder abgeschlossene Betreibungen?",
         "short": "Betreibungen des Kreditnehmers",
-        "subtitle": "Viele Kreditgeber prüfen mit einem aktuellen Betreibungsauszug — besser, Sie geben es an.",
+        "subtitle": "Viele Kreditgeber prüfen mit einem aktuellen Betreibungsauszug, besser, Sie geben es an.",
         "origine": "Wer hat die Betreibung eingeleitet?",
         "origines": {
           "FISC": "Steuerverwaltung",
@@ -1138,7 +1138,7 @@
       "tranchesSouhaitees": {
         "title": "Wie soll Ihre Hypothek strukturiert werden?",
         "short": "Tranchen-Konfiguration",
-        "subtitle": "Modell und Laufzeit pro Tranche — splitten Sie, um das Zinsrisiko zu glätten.",
+        "subtitle": "Modell und Laufzeit pro Tranche, splitten Sie, um das Zinsrisiko zu glätten.",
         "info": "Die Aufteilung in Tranchen mit unterschiedlichen Fälligkeiten glättet das Zinsrisiko, kann Sie aber an denselben Kreditgeber binden. Unsere Berater helfen beim Abwägen.",
         "produit": "Modell",
         "produits": {
@@ -1200,7 +1200,7 @@
     },
     "estimation": {
       "title": "Ihre Zinsschätzung",
-      "subtitle": "Auf Basis Ihrer Angaben — Richtwert, mit einem Berater zu bestätigen.",
+      "subtitle": "Auf Basis Ihrer Angaben, Richtwert, mit einem Berater zu bestätigen.",
       "emailPlaceholder": "ihre@email.ch",
       "emailCta": "Mein Angebot erhalten",
       "emailNote": "Nur um Ihnen Ihr Angebot zu senden und Ihr Dossier zu begleiten. Nie an Dritte weitergegeben.",
@@ -1210,7 +1210,7 @@
         "title": "Ihre Situation verdient eine persönliche Analyse",
         "body": "Unsere Berater kennen die Kreditgeber, die zu Ihrem Dossier passen.",
         "cta": "Kontaktiert werden",
-        "thanks": "Danke — ein Berater meldet sich in Kürze bei Ihnen."
+        "thanks": "Danke, ein Berater meldet sich in Kürze bei Ihnen."
       }
     }
   },

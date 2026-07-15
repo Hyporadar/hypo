@@ -55,7 +55,7 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
               <p className="text-ink-500 text-xs font-semibold tracking-[0.08em] uppercase">
                 {t('addressLabel')}
               </p>
-              <p className="mt-0.5">HypoRadar — Suisse</p>
+              <p className="mt-0.5">HypoRadar, Suisse</p>
             </div>
           </CardContent>
         </Card>

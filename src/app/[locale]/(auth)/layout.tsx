@@ -5,7 +5,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
   return (
     <div className="flex min-h-screen flex-col">
       <header className="mx-auto flex h-16 w-full max-w-[1120px] items-center px-6">
-        <Link href="/" aria-label="HypoRadar — accueil">
+        <Link href="/" aria-label="HypoRadar, accueil">
           <Wordmark />
         </Link>
       </header>

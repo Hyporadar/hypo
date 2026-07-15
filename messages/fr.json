@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "title": "HypoRadar — votre hypothèque, sous surveillance",
+    "title": "HypoRadar, votre hypothèque, sous surveillance",
     "description": "HypoRadar surveille gratuitement votre hypothèque et vous prévient 12 à 18 mois avant l'échéance. Certificat de capacité d'achat gratuit en 2 minutes."
   },
   "common": {
@@ -34,7 +34,7 @@
     "footer": {
       "transparency": "Gratuit pour vous. Payé par les prêteurs. Affiché noir sur blanc.",
       "legal": "HypoRadar est rémunéré par une commission du prêteur retenu. Vous la voyez avant de signer.",
-      "copyright": "HypoRadar — fintech suisse",
+      "copyright": "HypoRadar, fintech suisse",
       "nav": {
         "rates": "Taux du jour",
         "guides": "Guides",
@@ -52,7 +52,7 @@
     "hero": {
       "overline": "Hypothèques suisses",
       "title": "Votre hypothèque au meilleur taux. À l'achat comme au renouvellement.",
-      "subtitle": "Banques, assurances et caisses de pension mises en concurrence, gratuitement. Résultat immédiat — aucun rendez-vous imposé.",
+      "subtitle": "Banques, assurances et caisses de pension mises en concurrence, gratuitement. Résultat immédiat, aucun rendez-vous imposé.",
       "ctaBuy": "Calculer ma capacité d'achat",
       "ctaRenew": "Enregistrer mon hypothèque",
       "cta": "Trouver mon hypothèque"
@@ -68,7 +68,7 @@
       "buyBody": "Calculez votre capacité d'achat et recevez votre certificat PDF gratuit. C'est le document que les agents immobiliers demandent avant toute offre.",
       "buyCta": "Calculer ma capacité",
       "renewTitle": "Votre hypothèque expire quand ?",
-      "renewBody": "Saisissez votre hypothèque actuelle. En 2 minutes, vous savez combien vous perdez chaque année — et ce qu'on peut faire.",
+      "renewBody": "Saisissez votre hypothèque actuelle. En 2 minutes, vous savez combien vous perdez chaque année, et ce qu'on peut faire.",
       "renewCta": "Vérifier mon taux"
     },
     "steps": {
@@ -77,13 +77,13 @@
       "step1Body": "Achat ou renouvellement : saisissez votre situation en 2 minutes. Le résultat s'affiche immédiatement.",
       "step2Title": "Nous mettons les prêteurs en concurrence",
       "step2Body": "Banques, assurances et caisses de pension remettent leur meilleure offre sur votre dossier. Vous comparez, noir sur blanc.",
-      "step3Title": "Vous choisissez — nous restons en veille",
+      "step3Title": "Vous choisissez, nous restons en veille",
       "step3Body": "Vous signez la meilleure offre, chez qui vous voulez. Ensuite, votre taux et votre échéance restent suivis gratuitement.",
       "more": "Voir le fonctionnement en détail"
     },
     "transparency": {
       "title": "La transparence, noir sur blanc",
-      "body": "Le service est gratuit pour vous. Nous touchons une commission du prêteur retenu — vous la voyez avant de signer.",
+      "body": "Le service est gratuit pour vous. Nous touchons une commission du prêteur retenu, vous la voyez avant de signer.",
       "more": "Pourquoi c'est gratuit"
     },
     "callback": {
@@ -105,7 +105,7 @@
     },
     "leadWidget": {
       "title": "Quel taux pouvez-vous obtenir ?",
-      "subtitle": "Saisissez votre situation — le résultat s'affiche immédiatement.",
+      "subtitle": "Saisissez votre situation, le résultat s'affiche immédiatement.",
       "propertyValue": "Valeur du bien",
       "mortgage": "Hypothèque",
       "income": "Revenu du ménage",
@@ -128,7 +128,7 @@
       "plzPlaceholder": "NPA ou localité du bien",
       "categoriesTitle": "Vos offres, par type de prêteur",
       "bankDesc": "Les taux les plus agressifs du marché sur les durées courtes et moyennes.",
-      "pensionDesc": "Souvent imbattables sur les longues durées — l'alternative sous-estimée.",
+      "pensionDesc": "Souvent imbattables sur les longues durées, l'alternative sous-estimée.",
       "insuranceDesc": "Conditions stables et solides sur le long terme.",
       "from": "dès",
       "perYear": "par an",
@@ -168,7 +168,7 @@
       },
       "ownFunds": {
         "label": "De combien de fonds propres disposez-vous ?",
-        "help": "Épargne, 3e pilier, donation, avancement d'hoirie — tout ce que vous pouvez apporter.",
+        "help": "Épargne, 3e pilier, donation, avancement d'hoirie, tout ce que vous pouvez apporter.",
         "pillar2Label": "Dont 2e pilier (caisse de pension)",
         "pillar2Help": "Les banques exigent au moins 10% du prix hors 2e pilier."
       },
@@ -234,7 +234,7 @@
       },
       "propertyValue": {
         "label": "Quelle est la valeur estimée de votre bien ?",
-        "help": "Une estimation actuelle du marché suffit — pas la valeur d'achat d'il y a dix ans."
+        "help": "Une estimation actuelle du marché suffit, pas la valeur d'achat d'il y a dix ans."
       }
     },
     "result": {
@@ -251,7 +251,7 @@
       "hotBody": "Votre échéance tombe dans moins de 18 mois : c'est exactement le moment de mettre les prêteurs en concurrence. Gratuit, sans engagement, vous gardez la main.",
       "hotCta": "Lancer l'appel d'offres",
       "callbackLabel": "Je souhaite être rappelé par un conseiller",
-      "coldTitle": "Trop tôt pour agir — parfait pour surveiller",
+      "coldTitle": "Trop tôt pour agir, parfait pour surveiller",
       "coldBody": "Votre échéance est à plus de 18 mois. Résilier maintenant coûterait des pénalités. Nous surveillons votre taux et nous vous réveillons au bon moment, 12 à 18 mois avant l'échéance.",
       "coldCta": "Activer la surveillance gratuite",
       "tooLateTitle": "Soyons honnêtes : c'est probablement trop tard pour ce cycle",
@@ -262,7 +262,7 @@
       "hotTitle": "Lancez votre appel d'offres",
       "hotSubtitle": "Un conseiller reprend votre dossier et met les prêteurs en concurrence. Vous recevez les offres, vous choisissez.",
       "coldTitle": "Activez votre surveillance gratuite",
-      "coldSubtitle": "Nous suivons votre taux et votre échéance. Vous recevez une alerte au bon moment — pas de spam, pas de démarchage.",
+      "coldSubtitle": "Nous suivons votre taux et votre échéance. Vous recevez une alerte au bon moment, pas de spam, pas de démarchage.",
       "name": "Nom complet",
       "email": "Adresse e-mail",
       "phone": "Téléphone",
@@ -272,7 +272,7 @@
     },
     "done": {
       "hotTitle": "Appel d'offres lancé",
-      "hotBody": "Un conseiller vous contacte très rapidement — comptez quelques minutes pendant les heures ouvrables. Préparez votre dernier relevé hypothécaire si vous l'avez sous la main.",
+      "hotBody": "Un conseiller vous contacte très rapidement, comptez quelques minutes pendant les heures ouvrables. Préparez votre dernier relevé hypothécaire si vous l'avez sous la main.",
       "coldTitle": "Surveillance activée",
       "coldBody": "Nous suivons votre taux et votre échéance. Vous recevrez une alerte 12 à 18 mois avant l'échéance, quand tout redevient possible.",
       "tooLateTitle": "Surveillance activée pour le prochain cycle",
@@ -296,39 +296,39 @@
     "hero": {
       "overline": "Le principe",
       "title": "Votre hypothèque au meilleur taux, sans y passer vos journées.",
-      "subtitle": "À l'achat comme au renouvellement, HypoRadar met banques, assurances et caisses de pension en concurrence — gratuitement, avec une estimation immédiate et aucun rendez-vous imposé."
+      "subtitle": "À l'achat comme au renouvellement, HypoRadar met banques, assurances et caisses de pension en concurrence, gratuitement, avec une estimation immédiate et aucun rendez-vous imposé."
     },
     "steps": {
       "title": "Trois étapes, et c'est réglé",
       "step1Title": "Renseignez votre situation",
-      "step1Body": "Le bien, votre profil, votre hypothèque : environ 3 minutes. Pas de paperasse — vos chiffres approximatifs suffisent pour démarrer.",
+      "step1Body": "Le bien, votre profil, votre hypothèque : environ 3 minutes. Pas de paperasse, vos chiffres approximatifs suffisent pour démarrer.",
       "step2Title": "Recevez votre estimation de taux, tout de suite",
-      "step2Body": "Dès la fin du questionnaire, vous voyez une fourchette de taux calibrée sur votre dossier — banques, assurances et caisses de pension. Aucun rendez-vous, aucun appel à subir.",
+      "step2Body": "Dès la fin du questionnaire, vous voyez une fourchette de taux calibrée sur votre dossier, banques, assurances et caisses de pension. Aucun rendez-vous, aucun appel à subir.",
       "step3Title": "On met les prêteurs en concurrence",
-      "step3Body": "Un conseiller spécialisé lance l'appel d'offres et affine votre offre auprès des prêteurs. Vous comparez, vous choisissez, vous signez — ou pas. Aucune obligation."
+      "step3Body": "Un conseiller spécialisé lance l'appel d'offres et affine votre offre auprès des prêteurs. Vous comparez, vous choisissez, vous signez, ou pas. Aucune obligation."
     },
     "whyFree": {
       "title": "Pourquoi c'est gratuit",
-      "who": "Qui nous paie ? Le prêteur que vous choisissez. Quand un dossier se conclut, il nous verse une commission d'apport — c'est une pratique standard du marché hypothécaire suisse.",
+      "who": "Qui nous paie ? Le prêteur que vous choisissez. Quand un dossier se conclut, il nous verse une commission d'apport, c'est une pratique standard du marché hypothécaire suisse.",
       "howMuch": "Combien ? Une commission versée une seule fois par le prêteur, jamais par vous. Vous en voyez le montant exact avant de signer, noir sur blanc.",
-      "whyItWorks": "Pourquoi ça ne change rien pour vous : la commission est la même quel que soit le prêteur retenu. Nous n'avons donc aucun intérêt à vous pousser vers l'un plutôt que l'autre — seulement à ce que vous signiez la meilleure offre.",
+      "whyItWorks": "Pourquoi ça ne change rien pour vous : la commission est la même quel que soit le prêteur retenu. Nous n'avons donc aucun intérêt à vous pousser vers l'un plutôt que l'autre, seulement à ce que vous signiez la meilleure offre.",
       "neverSold": "Et une règle non négociable : vos données ne sont jamais vendues ni transmises brutes. Seul un dossier complet, que vous avez validé, part chez un prêteur."
     },
     "proof": {
       "title": "Ce que la comparaison rapporte, en chiffres",
       "gapStat": "0,72%",
-      "gapLabel": "l'écart moyen entre la meilleure et la pire offre pour un même dossier — soit environ CHF 4'500 par an sur une hypothèque de 650'000 francs",
+      "gapLabel": "l'écart moyen entre la meilleure et la pire offre pour un même dossier, soit environ CHF 4'500 par an sur une hypothèque de 650'000 francs",
       "compareStat": "moins de 10%",
       "compareLabel": "des propriétaires suisses comparent réellement les offres au moment du renouvellement. Les autres signent la proposition de leur banque, telle quelle."
     },
     "faq": {
       "title": "Les questions qu'on nous pose",
       "q1": "Est-ce que je m'engage à quelque chose ?",
-      "a1": "Non. L'estimation et la mise en concurrence sont gratuites et sans engagement : vous recevez des offres et restez libre de toutes les refuser — y compris pour rester chez votre banque actuelle.",
+      "a1": "Non. L'estimation et la mise en concurrence sont gratuites et sans engagement : vous recevez des offres et restez libre de toutes les refuser, y compris pour rester chez votre banque actuelle.",
       "q2": "Qui voit mes données ?",
       "a2": "HypoRadar, et personne d'autre. Vos données ne sont jamais vendues. Un prêteur ne voit votre dossier que si vous décidez de le lui envoyer, une fois complet et validé par vous.",
       "q3": "Dois-je changer de banque ?",
-      "a3": "Non. Souvent, la meilleure offre externe sert simplement d'argument pour renégocier avec votre banque actuelle — qui s'aligne. Vous gagnez dans les deux cas.",
+      "a3": "Non. Souvent, la meilleure offre externe sert simplement d'argument pour renégocier avec votre banque actuelle, qui s'aligne. Vous gagnez dans les deux cas.",
       "q4": "Et si mon échéance est encore loin ?",
       "a4": "C'est le bon moment pour anticiper : vous recevez déjà votre estimation. Et si vous le souhaitez, nous surveillons votre taux pour vous prévenir 12 à 18 mois avant l'échéance, au moment où tout redevient négociable."
     },
@@ -373,7 +373,7 @@
   },
   "certificate": {
     "title": "Certificat de capacité d'achat",
-    "issuer": "Émis par HypoRadar — plateforme suisse de financement hypothécaire",
+    "issuer": "Émis par HypoRadar, plateforme suisse de financement hypothécaire",
     "number": "Certificat n°",
     "issuedOn": "Émis le",
     "holder": "Établi pour",
@@ -397,7 +397,7 @@
     "validBadge": "Certificat authentique",
     "validBody": "Ce certificat a été émis par HypoRadar. Les informations ci-dessous font foi.",
     "invalidTitle": "Certificat introuvable",
-    "invalidBody": "Aucun certificat ne correspond à cet identifiant. Le document qu'on vous a présenté n'a pas été émis par HypoRadar — ou son numéro a été altéré.",
+    "invalidBody": "Aucun certificat ne correspond à cet identifiant. Le document qu'on vous a présenté n'a pas été émis par HypoRadar, ou son numéro a été altéré.",
     "number": "Numéro",
     "holder": "Porteur",
     "issuedOn": "Date d'émission",
@@ -411,23 +411,23 @@
       "cta": "Reprendre ma simulation"
     },
     "abandonJ3": {
-      "subject": "Dernier rappel — votre simulation reste ouverte",
+      "subject": "Dernier rappel, votre simulation reste ouverte",
       "body": "Bonjour {name},\n\nVotre simulation est toujours là, complète à moitié. Après cette semaine, nous l'archivons.\n\nSi le moment est mal choisi, répondez simplement à cet email : un conseiller vous rappellera quand cela vous arrange.",
       "cta": "Terminer ma simulation"
     },
     "offersUnread": {
       "subject": "Vos offres de financement sont prêtes",
-      "body": "Bonjour {name},\n\nVos offres sont en ligne dans votre espace. Prenez le temps de les comparer — mais pas trop : chaque offre a une date de validité.",
+      "body": "Bonjour {name},\n\nVos offres sont en ligne dans votre espace. Prenez le temps de les comparer, mais pas trop : chaque offre a une date de validité.",
       "cta": "Voir mes offres"
     },
     "quarterly": {
       "subject": "Votre taux vs le marché ce trimestre",
-      "body": "Bonjour {name},\n\nLe point trimestriel de votre surveillance : vous payez {rate}, le taux de référence 10 ans est à {refRate}. Écart potentiel : {savings} par an.\n\nRien à faire de votre côté — nous vous préviendrons quand votre fenêtre s'ouvrira.",
+      "body": "Bonjour {name},\n\nLe point trimestriel de votre surveillance : vous payez {rate}, le taux de référence 10 ans est à {refRate}. Écart potentiel : {savings} par an.\n\nRien à faire de votre côté, nous vous préviendrons quand votre fenêtre s'ouvrira.",
       "cta": "Voir ma surveillance"
     },
     "rateUpdate": {
       "subject": "Les taux hypothécaires du jour",
-      "body": "Le taux de référence fixe 10 ans est à {refRate}.\n\nVotre point taux HypoRadar — comparez avec votre taux actuel en 2 minutes, sans inscription.",
+      "body": "Le taux de référence fixe 10 ans est à {refRate}.\n\nVotre point taux HypoRadar, comparez avec votre taux actuel en 2 minutes, sans inscription.",
       "cta": "Comparer avec mon taux"
     },
     "magicLink": {
@@ -466,7 +466,7 @@
         "lastNotice": "Dernier préavis",
         "deadline": "Échéance",
         "today": "Aujourd'hui",
-        "stateBeforeTitle": "Trop tôt pour agir — on surveille",
+        "stateBeforeTitle": "Trop tôt pour agir, on surveille",
         "stateBeforeBody": "Votre fenêtre s'ouvre le {date}. Nous vous préviendrons : rien à faire d'ici là.",
         "stateWindowTitle": "Votre fenêtre est ouverte",
         "stateWindowBody": "C'est maintenant que tout se joue, jusqu'au préavis (~{date}). Lancez l'appel d'offres.",
@@ -487,7 +487,7 @@
       "title": "Mon dossier",
       "documentsTitle": "Documents",
       "missing": "Il manque : {list}",
-      "complete": "Dossier complet — rien à ajouter.",
+      "complete": "Dossier complet, rien à ajouter.",
       "upload": "Ajouter un document",
       "uploadType": "Type de document",
       "uploadFile": "Fichier (PDF ou photo)",
@@ -553,7 +553,7 @@
       "metaTitle": "Taux hypothécaires du jour",
       "metaDescription": "Les taux de référence hypothécaires suisses du jour, par durée : fixe 1 à 15 ans et SARON. Mis à jour par notre équipe.",
       "title": "Les taux hypothécaires du jour",
-      "subtitle": "Taux de référence nationaux, par durée. C'est la base de tous nos calculs — et de vos économies.",
+      "subtitle": "Taux de référence nationaux, par durée. C'est la base de tous nos calculs, et de vos économies.",
       "updated": "Mis à jour le {date}",
       "duration": "Durée",
       "rate": "Taux de référence",
@@ -563,11 +563,11 @@
       "chartEmpty": "L'historique se construit à chaque mise à jour des taux.",
       "faqTitle": "Questions sur les taux",
       "faq1q": "D'où viennent ces taux ?",
-      "faq1a": "Ce sont des taux de référence nationaux, tenus à jour par notre équipe à partir des conditions réellement pratiquées par les prêteurs suisses. Votre taux personnel dépend de votre dossier — la mise en concurrence sert précisément à l'obtenir sous la référence.",
+      "faq1a": "Ce sont des taux de référence nationaux, tenus à jour par notre équipe à partir des conditions réellement pratiquées par les prêteurs suisses. Votre taux personnel dépend de votre dossier, la mise en concurrence sert précisément à l'obtenir sous la référence.",
       "faq2q": "Pourquoi une fourchette plutôt qu'un taux exact ?",
       "faq2a": "Parce qu'un taux exact sans dossier est un argument marketing, pas une offre. Nous affichons la référence du marché et négocions ensuite votre taux réel, dossier en main.",
       "faq3q": "Fixe ou SARON ?",
-      "faq3a": "Le SARON est historiquement moins cher mais fluctue ; le fixe verrouille votre budget. La bonne réponse dépend de votre tolérance au risque et de votre horizon — notre guide détaille l'arbitrage.",
+      "faq3a": "Le SARON est historiquement moins cher mais fluctue ; le fixe verrouille votre budget. La bonne réponse dépend de votre tolérance au risque et de votre horizon, notre guide détaille l'arbitrage.",
       "ctaRenew": "Comparer avec mon taux actuel",
       "ctaBuy": "Calculer ma capacité d'achat",
       "snbNote": "Taux de référence indicatifs, calculés à partir des données publiques de la BNS et des grilles du marché."
@@ -587,9 +587,9 @@
       "s1Title": "Gratuit pour vous, vraiment",
       "s1Body": "Surveillance, simulation, certificat, appel d'offres : tout est gratuit, sans abonnement caché ni frais de dossier. Nous ne vous facturons jamais rien.",
       "s2Title": "Qui nous paie, et combien",
-      "s2Body": "Le prêteur que vous choisissez nous verse une commission d'apport à la signature — une pratique standard du marché hypothécaire suisse. Elle est identique quel que soit le prêteur retenu : nous n'avons donc aucun intérêt à vous pousser vers l'un plutôt que l'autre. Et vous voyez toujours le montant exact avant de signer.",
+      "s2Body": "Le prêteur que vous choisissez nous verse une commission d'apport à la signature, une pratique standard du marché hypothécaire suisse. Elle est identique quel que soit le prêteur retenu : nous n'avons donc aucun intérêt à vous pousser vers l'un plutôt que l'autre. Et vous voyez toujours le montant exact avant de signer.",
       "s3Title": "Pourquoi ça ne biaise pas nos conseils",
-      "s3Body": "La commission est équivalente quel que soit le prêteur retenu. Nous n'avons donc aucun intérêt à pousser l'un plutôt que l'autre — seulement à ce que vous signiez la meilleure offre, chez qui vous voulez. Y compris chez votre banque actuelle si elle s'aligne.",
+      "s3Body": "La commission est équivalente quel que soit le prêteur retenu. Nous n'avons donc aucun intérêt à pousser l'un plutôt que l'autre, seulement à ce que vous signiez la meilleure offre, chez qui vous voulez. Y compris chez votre banque actuelle si elle s'aligne.",
       "s4Title": "Ce que nous ne faisons jamais",
       "s4Items": "Vendre vos données|Transmettre un lead brut à un tiers|Facturer le client|Cacher une rémunération",
       "cta": "Vérifier mon taux maintenant"
@@ -598,7 +598,7 @@
       "metaTitle": "Devenir apporteur HypoRadar",
       "metaDescription": "Agents immobiliers, fiduciaires : envoyez vos clients à HypoRadar et suivez vos commissions en toute transparence.",
       "title": "Apporteurs : vos clients méritent un meilleur taux",
-      "subtitle": "Agents immobiliers, fiduciaires, gérants : envoyez-nous vos clients propriétaires. Nous les rappelons en minutes, vous suivez tout — statuts et commissions — dans votre espace.",
+      "subtitle": "Agents immobiliers, fiduciaires, gérants : envoyez-nous vos clients propriétaires. Nous les rappelons en minutes, vous suivez tout, statuts et commissions, dans votre espace.",
       "how1": "Vous envoyez un client (lien personnel, QR ou saisie directe)",
       "how2": "Un conseiller HypoRadar le rappelle en quelques minutes",
       "how3": "Dossier signé : votre commission apparaît dans votre espace, due puis payée",
@@ -626,7 +626,7 @@
       "formEmail": "E-mail",
       "formMessage": "Message",
       "formSubmit": "Envoyer",
-      "formSuccess": "Message envoyé — nous vous répondons sous un jour ouvrable.",
+      "formSuccess": "Message envoyé, nous vous répondons sous un jour ouvrable.",
       "formError": "Une erreur est survenue. Réessayez dans un instant."
     },
     "faqPage": {
@@ -635,21 +635,21 @@
       "q5": "Combien coûte HypoRadar ?",
       "a5": "Rien, jamais. Le service est financé par une commission du prêteur retenu, affichée avant signature. Voir notre page transparence.",
       "q6": "Dans quelles langues travaillez-vous ?",
-      "a6": "Français, allemand et italien — formulaires, documents, certificats PDF et conseillers."
+      "a6": "Français, allemand et italien, formulaires, documents, certificats PDF et conseillers."
     },
     "legal": {
       "impressumTitle": "Impressum",
       "privacyTitle": "Protection des données (LPD)",
       "termsTitle": "Conditions générales d'utilisation",
-      "lawyerNote": "CONTENU PROVISOIRE — À VALIDER PAR AVOCAT",
+      "lawyerNote": "CONTENU PROVISOIRE, À VALIDER PAR AVOCAT",
       "impressumBody": "HypoRadar SA (en constitution)|Exploitant de la plateforme hyporadar.ch|Adresse : à compléter, Suisse|E-mail : contact@hyporadar.ch|Responsable de la publication : à compléter|Inscription au registre du commerce : à compléter",
-      "privacyBody": "Vos données sont traitées conformément à la loi fédérale suisse sur la protection des données (LPD).|Finalités : calcul de vos simulations, surveillance de votre hypothèque, mise en concurrence des prêteurs avec votre consentement explicite, amélioration du service.|Vos données ne sont jamais vendues. Un dossier n'est transmis à un prêteur que complet et validé par vous.|Hébergement des données : à compléter (Suisse/UE).|Vos droits : accès, rectification, effacement — contact@hyporadar.ch.|Durée de conservation : à compléter.",
+      "privacyBody": "Vos données sont traitées conformément à la loi fédérale suisse sur la protection des données (LPD).|Finalités : calcul de vos simulations, surveillance de votre hypothèque, mise en concurrence des prêteurs avec votre consentement explicite, amélioration du service.|Vos données ne sont jamais vendues. Un dossier n'est transmis à un prêteur que complet et validé par vous.|Hébergement des données : à compléter (Suisse/UE).|Vos droits : accès, rectification, effacement, contact@hyporadar.ch.|Durée de conservation : à compléter.",
       "termsBody": "Le service HypoRadar est gratuit pour l'utilisateur et fourni « en l'état ».|Les simulations, certificats et fourchettes de taux sont indicatifs et ne constituent ni un conseil financier personnalisé ni une promesse de crédit.|La décision d'octroi appartient exclusivement aux prêteurs.|L'utilisateur garantit l'exactitude des informations saisies.|For juridique et droit applicable : Suisse, à compléter."
     }
   },
   "request": {
     "metaTitle": "Votre demande d'hypothèque",
-    "title": "Votre demande — {category}",
+    "title": "Votre demande, {category}",
     "subtitle": "Encore quelques détails et votre dossier part en mise en concurrence. Un conseiller vous accompagne dès réception.",
     "categories": {
       "banque": "Banques",
@@ -662,7 +662,7 @@
   "wizard": {
     "meta": {
       "title": "Votre dossier hypothécaire",
-      "description": "Constituez votre dossier en ligne, à votre rythme — sans email ni rendez-vous. Enregistrement automatique, reprise à tout moment."
+      "description": "Constituez votre dossier en ligne, à votre rythme, sans email ni rendez-vous. Enregistrement automatique, reprise à tout moment."
     },
     "steps": {
       "bien": "Le bien",
@@ -697,7 +697,7 @@
       "minutesLeft": "Encore environ {minutes} min",
       "yourRates": "Vos taux",
       "tipsTitle": "Conseils",
-      "noTips": "Rien à signaler — continuez, tout est bon.",
+      "noTips": "Rien à signaler, continuez, tout est bon.",
       "tips": {
         "lpp": "Saisissez votre capital de caisse de pension : il peut améliorer votre taux.",
         "coldMonitoring": "Trop tôt pour signer, parfait pour surveiller : activez le suivi gratuit et nous vous réveillerons au bon moment.",
@@ -714,7 +714,7 @@
       "empty": "Répondez aux premières questions pour voir vos fourchettes.",
       "savings": "Économie estimée :",
       "perYear": "par an",
-      "noteEstimate": "Estimation — s'affine avec vos réponses.",
+      "noteEstimate": "Estimation, s'affine avec vos réponses.",
       "noteCalibrated": "Fourchette calibrée sur votre dossier complet. Taux définitif après mise en concurrence réelle.",
       "lenderTypes": {
         "BANQUE": "Banques",
@@ -735,7 +735,7 @@
       "invalidYear": "Année invalide",
       "decrement": "Diminuer",
       "increment": "Augmenter",
-      "comingSoon": "Cette section arrive juste après. Vos réponses sont déjà enregistrées — continuez avec la section « Le bien » ou revenez plus tard, votre dossier vous attend."
+      "comingSoon": "Cette section arrive juste après. Vos réponses sont déjà enregistrées, continuez avec la section « Le bien » ou revenez plus tard, votre dossier vous attend."
     },
     "complexCard": {
       "title": "Votre situation mérite un conseiller",
@@ -789,14 +789,14 @@
           "GRAND_ENSEMBLE_sub": "Immeuble de rapport"
         },
         "annexe": "Le bien a-t-il un appartement annexe ?",
-        "annexeInfo": "Un appartement annexe (Einliegerwohnung) est un logement indépendant dans la maison — son loyer peut compter comme revenu.",
+        "annexeInfo": "Un appartement annexe (Einliegerwohnung) est un logement indépendant dans la maison, son loyer peut compter comme revenu.",
         "annexeLouee": "L'appartement annexe est-il loué ?",
         "revenuAnnexe": "Revenu locatif de l'appartement annexe (net/an)"
       },
       "adresse": {
         "title": "Où se situe le bien ?",
         "short": "Localisation",
-        "subtitle": "NPA ou localité — les taux varient selon la région.",
+        "subtitle": "NPA ou localité, les taux varient selon la région.",
         "info": "La localisation sert à l'évaluation du bien et au choix des prêteurs actifs dans votre canton.",
         "npaPlaceholder": "p.ex. 1003 ou Lausanne"
       },
@@ -828,7 +828,7 @@
       "casSpeciaux": {
         "title": "Situations particulières",
         "short": "Cas spéciaux",
-        "subtitle": "Un « oui » ne bloque rien — il nous aide à choisir les bons prêteurs.",
+        "subtitle": "Un « oui » ne bloque rien, il nous aide à choisir les bons prêteurs.",
         "droitHabitation": "Un droit d'habitation est-il inscrit ?",
         "usufruit": "Un usufruit est-il inscrit ?",
         "droitSuperficie": "Le bien est-il en droit de superficie ?",
@@ -839,7 +839,7 @@
         "title": "Quelle est la valeur du bien ?",
         "short": "Valeur du bien",
         "subtitle": "Votre meilleure estimation suffit pour démarrer.",
-        "info": "La valeur détermine le taux d'avance (LTV). Une évaluation en ligne détaillée arrive bientôt — en attendant, indiquez votre estimation et sa source.",
+        "info": "La valeur détermine le taux d'avance (LTV). Une évaluation en ligne détaillée arrive bientôt, en attendant, indiquez votre estimation et sa source.",
         "source": "Source de l'estimation",
         "sources": {
           "banque": "Banque",
@@ -852,7 +852,7 @@
       "fondsPropres": {
         "title": "Hypothèque et fonds propres",
         "short": "Fonds propres",
-        "subtitle": "Repris de vos réponses — ajustez si besoin.",
+        "subtitle": "Repris de vos réponses, ajustez si besoin.",
         "mortgageLabel": "Nouvelle hypothèque",
         "ownFundsLabel": "Fonds propres",
         "totalLabel": "Prix d'achat",
@@ -862,7 +862,7 @@
       "preferenceTaux": {
         "title": "Votre préférence de taux",
         "short": "Préférence de taux",
-        "subtitle": "Nous vous ferons des propositions précises à la fin — indiquez juste votre préférence.",
+        "subtitle": "Nous vous ferons des propositions précises à la fin, indiquez juste votre préférence.",
         "options": {
           "SARON": "SARON",
           "FIXE_2": "Fixe 2 ans",
@@ -949,7 +949,7 @@
       "emprunteurRevenus": {
         "title": "L'emprunteur a-t-il un revenu ?",
         "short": "Revenus de l'emprunteur",
-        "subtitle": "Ajoutez chaque source de revenu séparément — le total se met à jour en continu.",
+        "subtitle": "Ajoutez chaque source de revenu séparément, le total se met à jour en continu.",
         "info": "Les revenus déterminent la tenue des charges : intérêts théoriques à 5% + amortissement + entretien ne doivent pas dépasser un tiers des revenus.",
         "categorie": "Type de revenu",
         "categories": {
@@ -1028,7 +1028,7 @@
       "emprunteurPoursuites": {
         "title": "La personne a-t-elle des poursuites ouvertes ou terminées ?",
         "short": "Poursuites de l'emprunteur",
-        "subtitle": "Beaucoup de prêteurs vérifient avec un extrait des poursuites actuel — mieux vaut l'indiquer.",
+        "subtitle": "Beaucoup de prêteurs vérifient avec un extrait des poursuites actuel, mieux vaut l'indiquer.",
         "origine": "Qui a initié la poursuite ?",
         "origines": {
           "FISC": "Administration fiscale",
@@ -1045,7 +1045,7 @@
       "tranchesSouhaitees": {
         "title": "Comment structurer votre hypothèque ?",
         "short": "Configuration des tranches",
-        "subtitle": "Modèle et durée par tranche — splittez pour lisser le risque de taux.",
+        "subtitle": "Modèle et durée par tranche, splittez pour lisser le risque de taux.",
         "info": "Fractionner en tranches à échéances différentes lisse le risque de taux, mais peut vous lier au même prêteur. Nos conseillers vous aident à arbitrer.",
         "produit": "Modèle",
         "produits": {
@@ -1103,14 +1103,14 @@
       "autresPrets": {
         "title": "Y a-t-il d'autres prêts liés au bien ?",
         "short": "Autres prêts",
-        "subtitle": "Uniquement des prêts servant à financer le bien — p.ex. prêt privé ou prêt du vendeur.",
+        "subtitle": "Uniquement des prêts servant à financer le bien, p.ex. prêt privé ou prêt du vendeur.",
         "montant": "Montant du prêt",
         "libelle": "Description (facultatif)"
       },
       "nombreEmprunteurs": {
         "title": "Qui sera emprunteur ?",
         "short": "Nombre d'emprunteurs",
-        "subtitle": "Tous les emprunteurs doivent être saisis — même sans revenu.",
+        "subtitle": "Tous les emprunteurs doivent être saisis, même sans revenu.",
         "options": {
           "UNE": "Une personne",
           "PLUSIEURS": "Deux personnes ou plus"
@@ -1147,8 +1147,8 @@
       },
       "cta": "M'abonner",
       "sent": "Presque fini ! Cliquez sur le lien envoyé à {email} pour confirmer votre abonnement.",
-      "confirmed": "Abonnement confirmé — vous recevrez les prochaines mises à jour de taux.",
-      "alreadyConfirmed": "Votre abonnement est déjà actif — fréquence mise à jour.",
+      "confirmed": "Abonnement confirmé, vous recevrez les prochaines mises à jour de taux.",
+      "alreadyConfirmed": "Votre abonnement est déjà actif, fréquence mise à jour.",
       "error": "L'abonnement a échoué. Vérifiez l'adresse email et réessayez."
     },
     "account": {
@@ -1156,7 +1156,7 @@
       "body": "Recevez un lien de connexion par email : votre dossier vous suit, sans mot de passe. Aucune donnée n'est transmise à un prêteur sans votre accord.",
       "emailPlaceholder": "votre@email.ch",
       "cta": "Recevoir mon lien de connexion",
-      "sent": "Lien envoyé à {email} — il est valable une heure.",
+      "sent": "Lien envoyé à {email}, il est valable une heure.",
       "throttled": "Un lien vient déjà de partir. Vérifiez votre boîte de réception (et le dossier spam).",
       "error": "L'envoi a échoué. Vérifiez l'adresse email et réessayez."
     },
@@ -1200,7 +1200,7 @@
     },
     "estimation": {
       "title": "Votre estimation de taux",
-      "subtitle": "Sur la base de vos réponses — fourchette indicative, à confirmer avec un conseiller.",
+      "subtitle": "Sur la base de vos réponses, fourchette indicative, à confirmer avec un conseiller.",
       "emailPlaceholder": "votre@email.ch",
       "emailCta": "Recevoir mon offre",
       "emailNote": "Uniquement pour vous envoyer votre offre et suivre votre dossier. Jamais transmis à des tiers.",
@@ -1210,7 +1210,7 @@
         "title": "Votre situation mérite une analyse personnalisée",
         "body": "Nos conseillers connaissent les prêteurs adaptés à votre dossier.",
         "cta": "Être contacté",
-        "thanks": "Merci — un conseiller vous contactera très vite."
+        "thanks": "Merci, un conseiller vous contactera très vite."
       }
     }
   },
