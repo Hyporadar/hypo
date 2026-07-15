@@ -7,7 +7,6 @@ const NAV_LINKS: Array<{ key: string; href: StaticPathname }> = [
   { key: 'rates', href: '/taux' },
   { key: 'guides', href: '/guides' },
   { key: 'transparency', href: '/transparence' },
-  { key: 'partners', href: '/partenaires' },
   { key: 'contact', href: '/contact' },
   { key: 'faq', href: '/faq' },
 ]

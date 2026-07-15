@@ -42,11 +42,6 @@ export const routing = defineRouting({
       de: '/transparenz',
       it: '/trasparenza',
     },
-    '/partenaires': {
-      fr: '/partenaires',
-      de: '/partner',
-      it: '/partner',
-    },
     '/contact': '/contact',
     '/faq': '/faq',
     '/impressum': '/impressum',

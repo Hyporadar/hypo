@@ -302,7 +302,7 @@
     "whyFree": {
       "title": "Warum es kostenlos ist",
       "who": "Wer bezahlt uns? Der Kreditgeber, den Sie wählen. Kommt ein Dossier zum Abschluss, zahlt er uns eine Vermittlungskommission — im Schweizer Hypothekarmarkt gängige Praxis.",
-      "howMuch": "Wie viel? Typischerweise rund 0,5% der Kreditsumme, einmalig. Den genauen Betrag sehen Sie vor der Unterschrift, schwarz auf weiss.",
+      "howMuch": "Wie viel? Eine einmalige Kommission, gezahlt vom Kreditgeber, nie von Ihnen. Den genauen Betrag sehen Sie vor der Unterschrift, schwarz auf weiss.",
       "whyItWorks": "Warum das für Sie nichts ändert: die Kommission ist bei jedem Kreditgeber gleich hoch. Wir haben also kein Interesse, Sie zu einem bestimmten Anbieter zu drängen — nur daran, dass Sie die beste Offerte unterschreiben.",
       "neverSold": "Und eine nicht verhandelbare Regel: Ihre Daten werden nie verkauft und nie roh weitergegeben. Nur ein vollständiges, von Ihnen freigegebenes Dossier geht an einen Kreditgeber."
     },
@@ -578,7 +578,7 @@
       "s1Title": "Kostenlos für Sie, wirklich",
       "s1Body": "Überwachung, Simulation, Zertifikat, Ausschreibung: alles ist kostenlos, ohne verstecktes Abo und ohne Dossiergebühren. Wir stellen Ihnen nie etwas in Rechnung.",
       "s2Title": "Wer uns bezahlt, und wie viel",
-      "s2Body": "Der von Ihnen gewählte Kreditgeber zahlt uns bei der Unterzeichnung eine Vermittlungskommission — typischerweise rund 0,5% der Kreditsumme, einmalig. Bei einer Hypothek von CHF 650'000 sind das etwa CHF 3'250. Den genauen Betrag sehen Sie vor der Unterschrift.",
+      "s2Body": "Der von Ihnen gewählte Kreditgeber zahlt uns bei der Unterzeichnung eine Vermittlungskommission — im Schweizer Hypothekarmarkt üblich. Sie ist bei jedem Kreditgeber gleich: Wir haben also kein Interesse, Sie zum einen oder anderen zu drängen. Und Sie sehen den genauen Betrag immer vor der Unterschrift.",
       "s3Title": "Warum das unsere Beratung nicht verzerrt",
       "s3Body": "Die Kommission ist bei jedem Kreditgeber gleichwertig. Wir haben also kein Interesse, einen bestimmten Anbieter zu pushen — nur daran, dass Sie die beste Offerte unterschreiben, wo Sie wollen. Auch bei Ihrer aktuellen Bank, wenn sie nachzieht.",
       "s4Title": "Was wir nie tun",
@@ -611,7 +611,14 @@
       "emailLabel": "E-Mail",
       "phoneLabel": "Telefon",
       "addressLabel": "Adresse",
-      "callback": "Oder hinterlassen Sie Ihre Nummer: ein Berater ruft Sie zurück."
+      "callback": "Oder hinterlassen Sie Ihre Nummer: ein Berater ruft Sie zurück.",
+      "formTitle": "Schreiben Sie uns",
+      "formName": "Name",
+      "formEmail": "E-Mail",
+      "formMessage": "Nachricht",
+      "formSubmit": "Senden",
+      "formSuccess": "Nachricht gesendet — wir antworten innert eines Arbeitstags.",
+      "formError": "Ein Fehler ist aufgetreten. Bitte versuchen Sie es gleich erneut."
     },
     "faqPage": {
       "metaTitle": "Häufige Fragen",

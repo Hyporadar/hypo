@@ -302,7 +302,7 @@
     "whyFree": {
       "title": "Perché è gratuito",
       "who": "Chi ci paga? Il finanziatore che Lei sceglie. Quando un dossier si conclude, ci versa una commissione di intermediazione — prassi standard del mercato ipotecario svizzero.",
-      "howMuch": "Quanto? Tipicamente attorno allo 0,5% dell'importo del prestito, una tantum. Vede l'importo esatto prima di firmare, nero su bianco.",
+      "howMuch": "Quanto? Una commissione versata una sola volta dal finanziatore, mai da voi. Ne vedete l'importo esatto prima di firmare, nero su bianco.",
       "whyItWorks": "Perché per Lei non cambia nulla: la commissione è la stessa qualunque sia il finanziatore scelto. Non abbiamo quindi alcun interesse a spingerLa verso l'uno piuttosto che l'altro — solo a farLe firmare l'offerta migliore.",
       "neverSold": "E una regola non negoziabile: i Suoi dati non sono mai venduti né trasmessi grezzi. Solo un dossier completo, da Lei validato, parte verso un finanziatore."
     },
@@ -578,7 +578,7 @@
       "s1Title": "Gratuito per Lei, davvero",
       "s1Body": "Sorveglianza, simulazione, certificato, gara d'offerte: tutto è gratuito, senza abbonamenti nascosti né spese di dossier. Non Le fatturiamo mai nulla.",
       "s2Title": "Chi ci paga, e quanto",
-      "s2Body": "Il finanziatore che Lei sceglie ci versa una commissione di intermediazione alla firma — tipicamente attorno allo 0,5% dell'importo del prestito, una tantum. Su un'ipoteca di CHF 650'000 sono circa CHF 3'250. Vede l'importo esatto prima di firmare.",
+      "s2Body": "Il finanziatore che Lei sceglie ci versa una commissione di intermediazione alla firma — una pratica standard del mercato ipotecario svizzero. È identica per qualsiasi finanziatore scelto: non abbiamo quindi alcun interesse a spingerLa verso l'uno o l'altro. E vede sempre l'importo esatto prima di firmare.",
       "s3Title": "Perché questo non distorce i nostri consigli",
       "s3Body": "La commissione è equivalente qualunque sia il finanziatore scelto. Non abbiamo quindi alcun interesse a spingerne uno piuttosto che un altro — solo a farLe firmare l'offerta migliore, dove vuole Lei. Anche presso la Sua banca attuale, se si allinea.",
       "s4Title": "Ciò che non facciamo mai",
@@ -611,7 +611,14 @@
       "emailLabel": "E-mail",
       "phoneLabel": "Telefono",
       "addressLabel": "Indirizzo",
-      "callback": "Oppure lasci il Suo numero: un consulente La richiama."
+      "callback": "Oppure lasci il Suo numero: un consulente La richiama.",
+      "formTitle": "Scriveteci",
+      "formName": "Nome",
+      "formEmail": "E-mail",
+      "formMessage": "Messaggio",
+      "formSubmit": "Inviare",
+      "formSuccess": "Messaggio inviato — rispondiamo entro un giorno lavorativo.",
+      "formError": "Si è verificato un errore. Riprovate tra un istante."
     },
     "faqPage": {
       "metaTitle": "Domande frequenti",

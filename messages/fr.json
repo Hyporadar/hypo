@@ -302,7 +302,7 @@
     "whyFree": {
       "title": "Pourquoi c'est gratuit",
       "who": "Qui nous paie ? Le prêteur que vous choisissez. Quand un dossier se conclut, il nous verse une commission d'apport — c'est une pratique standard du marché hypothécaire suisse.",
-      "howMuch": "Combien ? Typiquement autour de 0,5% du montant du prêt, versé une fois. Vous voyez le montant exact avant de signer, noir sur blanc.",
+      "howMuch": "Combien ? Une commission versée une seule fois par le prêteur, jamais par vous. Vous en voyez le montant exact avant de signer, noir sur blanc.",
       "whyItWorks": "Pourquoi ça ne change rien pour vous : la commission est la même quel que soit le prêteur retenu. Nous n'avons donc aucun intérêt à vous pousser vers l'un plutôt que l'autre — seulement à ce que vous signiez la meilleure offre.",
       "neverSold": "Et une règle non négociable : vos données ne sont jamais vendues ni transmises brutes. Seul un dossier complet, que vous avez validé, part chez un prêteur."
     },
@@ -578,7 +578,7 @@
       "s1Title": "Gratuit pour vous, vraiment",
       "s1Body": "Surveillance, simulation, certificat, appel d'offres : tout est gratuit, sans abonnement caché ni frais de dossier. Nous ne vous facturons jamais rien.",
       "s2Title": "Qui nous paie, et combien",
-      "s2Body": "Le prêteur que vous choisissez nous verse une commission d'apport à la signature — typiquement autour de 0,5% du montant du prêt, une fois. Sur une hypothèque de CHF 650'000, cela représente environ CHF 3'250. Vous voyez le montant exact avant de signer.",
+      "s2Body": "Le prêteur que vous choisissez nous verse une commission d'apport à la signature — une pratique standard du marché hypothécaire suisse. Elle est identique quel que soit le prêteur retenu : nous n'avons donc aucun intérêt à vous pousser vers l'un plutôt que l'autre. Et vous voyez toujours le montant exact avant de signer.",
       "s3Title": "Pourquoi ça ne biaise pas nos conseils",
       "s3Body": "La commission est équivalente quel que soit le prêteur retenu. Nous n'avons donc aucun intérêt à pousser l'un plutôt que l'autre — seulement à ce que vous signiez la meilleure offre, chez qui vous voulez. Y compris chez votre banque actuelle si elle s'aligne.",
       "s4Title": "Ce que nous ne faisons jamais",
@@ -611,7 +611,14 @@
       "emailLabel": "E-mail",
       "phoneLabel": "Téléphone",
       "addressLabel": "Adresse",
-      "callback": "Ou laissez votre numéro : un conseiller vous rappelle."
+      "callback": "Ou laissez votre numéro : un conseiller vous rappelle.",
+      "formTitle": "Écrivez-nous",
+      "formName": "Nom",
+      "formEmail": "E-mail",
+      "formMessage": "Message",
+      "formSubmit": "Envoyer",
+      "formSuccess": "Message envoyé — nous vous répondons sous un jour ouvrable.",
+      "formError": "Une erreur est survenue. Réessayez dans un instant."
     },
     "faqPage": {
       "metaTitle": "Questions fréquentes",

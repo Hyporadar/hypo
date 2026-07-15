@@ -11,7 +11,6 @@ const PUBLIC_PATHS: StaticPathname[] = [
   '/taux',
   '/guides',
   '/transparence',
-  '/partenaires',
   '/contact',
   '/faq',
 ]
