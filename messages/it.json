@@ -1165,7 +1165,7 @@
       "title": "La vostra stima del tasso",
       "subtitle": "In base alle vostre risposte — valore indicativo, da confermare con un consulente.",
       "emailPlaceholder": "vostra@email.ch",
-      "emailCta": "Ricevere la mia offerta via email",
+      "emailCta": "Ricevere la mia offerta",
       "emailNote": "Solo per inviarvi la vostra offerta e seguire il vostro dossier. Mai trasmesso a terzi.",
       "emailError": "Inserite un indirizzo email valido."
     }

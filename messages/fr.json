@@ -1165,7 +1165,7 @@
       "title": "Votre estimation de taux",
       "subtitle": "Sur la base de vos réponses — fourchette indicative, à confirmer avec un conseiller.",
       "emailPlaceholder": "votre@email.ch",
-      "emailCta": "Recevoir mon offre par email",
+      "emailCta": "Recevoir mon offre",
       "emailNote": "Uniquement pour vous envoyer votre offre et suivre votre dossier. Jamais transmis à des tiers.",
       "emailError": "Entrez une adresse email valide."
     }
