@@ -123,7 +123,6 @@ export function EditPanel({
             patch={patch}
             highlightKey={null}
             onAnswered={() => undefined}
-            complex={false}
           />
         ) : section === 'emprunteurs' ? (
           <EmprunteursSection funnel={funnel} data={data} patch={patch} highlightKey={null} />

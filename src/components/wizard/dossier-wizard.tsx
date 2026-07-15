@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from 'react'
 import { useTranslations } from 'next-intl'
 import { ArrowLeft, ArrowRight, Check, Loader2 } from 'lucide-react'
 import type { Funnel } from '@prisma/client'
-import { detectComplexReasons } from '@/lib/dossier/schema'
 import type { DossierSection } from '@/lib/dossier/completeness'
 import { useDossierWizard } from '@/components/wizard/use-dossier-wizard'
 import { WizardStepper, type StepStatus } from '@/components/wizard/wizard-stepper'
@@ -34,7 +33,6 @@ export function DossierWizard({
   const [section, setSection] = useState<Step>('bien')
   const trackedSections = useRef(new Set<string>())
 
-  const complex = detectComplexReasons(wizard.data).length > 0
   const stepIndex = STEPS.indexOf(section)
 
   // Chaque section terminée une fois → événement WIZARD_STEP_COMPLETED.
@@ -108,7 +106,6 @@ export function DossierWizard({
               patch={wizard.patch}
               highlightKey={null}
               onAnswered={() => undefined}
-              complex={complex}
             />
           ) : section === 'emprunteurs' ? (
             <EmprunteursSection

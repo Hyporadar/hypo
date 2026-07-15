@@ -2,7 +2,7 @@
 
 import { useMemo } from 'react'
 import { useTranslations } from 'next-intl'
-import { CalendarClock, Phone } from 'lucide-react'
+import { CalendarClock } from 'lucide-react'
 import type { Funnel } from '@prisma/client'
 import { formatCHF } from '@/lib/format'
 import type { AutreBienData, DossierData } from '@/lib/dossier/schema'
@@ -11,7 +11,6 @@ import { OptionList, OptionListIllustrated } from '@/components/wizard/option-li
 import { AmountInput, DateInput, YesNoToggle } from '@/components/wizard/inputs'
 import { AutocompleteField } from '@/components/wizard/autocomplete'
 import { RepeatableGroup } from '@/components/wizard/repeatable-group'
-import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import {
@@ -45,7 +44,6 @@ export function BienSection({
   patch,
   highlightKey,
   onAnswered,
-  complex,
 }: {
   funnel: Funnel
   data: DossierData
@@ -53,11 +51,9 @@ export function BienSection({
   patch: (updater: (prev: DossierData) => DossierData) => void
   highlightKey: string | null
   onAnswered: (questionKey: string) => void
-  complex: boolean
 }) {
   const t = useTranslations('wizard.questions')
   const tc = useTranslations('wizard.common')
-  const tx = useTranslations('wizard.complexCard')
   const b = data.bien
 
   // Prédicats « répondue » — mêmes règles que lib/dossier/completeness.ts.
@@ -434,19 +430,6 @@ export function BienSection({
             <p className="text-ink-500 text-xs leading-relaxed">{t('casSpeciaux.noteRF')}</p>
           </div>
         </QuestionCard>
-      ) : null}
-
-      {/* Carte conseiller (cas complexe) — ne bloque jamais */}
-      {complex ? (
-        <div className="border-ambre-500 bg-ambre-50 animate-in fade-in rounded-xl border p-5 duration-300">
-          <h3 className="font-display flex items-center gap-2 font-semibold">
-            <Phone className="text-ambre-600 size-4" /> {tx('title')}
-          </h3>
-          <p className="text-ink-700 mt-1 text-sm leading-relaxed">{tx('body')}</p>
-          <Button size="sm" className="mt-3" asChild>
-            <a href="#offres">{tx('cta')}</a>
-          </Button>
-        </div>
       ) : null}
 
       {/* §1.2 Informations sur l'achat */}
