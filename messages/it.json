@@ -970,10 +970,7 @@
           "HABITE_LE_BIEN": "Abiterà l'immobile",
           "AUTRE_ADRESSE": "In futuro a un altro indirizzo"
         },
-        "anneeNaissance": "Anno di nascita",
-        "email": "Indirizzo email",
-        "emailPlaceholder": "nome.cognome@email.ch",
-        "emailInfo": "Solo per inviarvi la vostra offerta, mai per altri scopi."
+        "anneeNaissance": "Anno di nascita"
       },
       "emprunteurRevenus": {
         "title": "Il mutuatario ha un reddito?",
@@ -1140,16 +1137,26 @@
       "body": "È salvato automaticamente. Finalizzate per essere richiamati gratuitamente da un consulente."
     },
     "finalize": {
-      "form": {
+      "sending": {
         "title": "Offerta inviata",
-        "body": "La ricevete via email nei prossimi minuti. Per andare oltre e convalidarla con il nostro consulente specializzato, lasciateci il vostro numero.",
+        "body": "La ricevete via email tra qualche minuto."
+      },
+      "phone": {
+        "title": "Trasformatela in offerte ferme",
+        "body": "Un consulente specializzato avvia la gara d'appalto presso i finanziatori e vi richiama entro 2 ore lavorative.",
         "phoneLabel": "Numero di telefono",
         "phonePlaceholder": "079 123 45 67",
-        "cta": "Essere richiamato"
+        "phoneError": "Inserite un numero di telefono svizzero valido.",
+        "cta": "Essere richiamato",
+        "alertLink": "Più tardi? Ricevete gli aggiornamenti dei tassi via email"
+      },
+      "rateAlert": {
+        "title": "Annotato",
+        "body": "Riceverete l'evoluzione della vostra stima."
       },
       "done": {
-        "title": "Convalidato!",
-        "body": "Ricevete la vostra offerta via email nei prossimi minuti, e il nostro consulente specializzato vi chiama per convalidarla con voi.",
+        "title": "Convalidato",
+        "body": "La vostra offerta arriva via email e il nostro consulente vi chiama entro 2 ore lavorative.",
         "close": "Chiudere"
       },
       "error": "Si è verificato un errore. Riprovate tra un istante."
@@ -1157,8 +1164,10 @@
     "estimation": {
       "title": "La vostra stima del tasso",
       "subtitle": "In base alle vostre risposte — valore indicativo, da confermare con un consulente.",
-      "cta": "Convalidare la mia offerta definitiva",
-      "ctaHint": "Ricevete la vostra offerta e un consulente vi richiama per convalidarla."
+      "emailPlaceholder": "vostra@email.ch",
+      "emailCta": "Ricevere la mia offerta via email",
+      "emailNote": "Solo per inviarvi la vostra offerta e seguire il vostro dossier. Mai trasmesso a terzi.",
+      "emailError": "Inserite un indirizzo email valido."
     }
   },
   "magicLink": {

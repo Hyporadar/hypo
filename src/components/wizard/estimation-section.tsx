@@ -10,9 +10,11 @@ import type { CalibrationResult, CalibTerm } from '@/lib/dossier/calibration'
 import type { DossierData } from '@/lib/dossier/schema'
 import { FinalizeDialog } from '@/components/wizard/finalize-dialog'
 import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
 
 const LENDER_ICONS = { BANQUE: Landmark, ASSURANCE: Umbrella, CAISSE_PENSION: PiggyBank } as const
 const TERMS: CalibTerm[] = ['saron', 5, 10, 15]
+const EMAIL_RE = /^[^@\s]+@[^@\s]+\.[^@\s]+$/
 
 // Étape 4 : estimation du taux (fourchette calibrée à partir des réponses).
 // Le CTA ouvre la popup de capture du lead — c'est là qu'on récupère
@@ -34,6 +36,9 @@ export function EstimationSection({
   const [loading, setLoading] = useState(true)
   const [term, setTerm] = useState<CalibTerm>(10)
   const [finalizeOpen, setFinalizeOpen] = useState(false)
+  const [email, setEmail] = useState('')
+  const [emailTouched, setEmailTouched] = useState(false)
+  const emailValid = EMAIL_RE.test(email.trim())
 
   useEffect(() => {
     let alive = true
@@ -135,13 +140,39 @@ export function EstimationSection({
           <p className="text-ink-500 mt-6 text-center text-sm">{to('empty')}</p>
         )}
 
-        <div className="mt-8 text-center">
-          <Button size="lg" onClick={() => setFinalizeOpen(true)}>
-            {t('cta')}
-            <ArrowRight data-icon="inline-end" />
-          </Button>
-          <p className="text-ink-500 mt-2 text-xs">{t('ctaHint')}</p>
-        </div>
+        {/* Capture email inline — l'offre part par email, le téléphone
+            n'est demandé qu'ensuite dans la popup. */}
+        <form
+          className="mx-auto mt-8 max-w-md"
+          noValidate
+          onSubmit={(e) => {
+            e.preventDefault()
+            setEmailTouched(true)
+            if (emailValid) setFinalizeOpen(true)
+          }}
+        >
+          <div className="flex flex-col gap-2 sm:flex-row">
+            <Input
+              type="email"
+              inputMode="email"
+              autoComplete="email"
+              aria-label={t('emailPlaceholder')}
+              placeholder={t('emailPlaceholder')}
+              className="h-12 flex-1"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              onBlur={() => setEmailTouched(true)}
+            />
+            <Button type="submit" size="lg" className="h-12 shrink-0">
+              {t('emailCta')}
+              <ArrowRight data-icon="inline-end" />
+            </Button>
+          </div>
+          {emailTouched && !emailValid ? (
+            <p className="text-erreur mt-1.5 text-xs">{t('emailError')}</p>
+          ) : null}
+          <p className="text-ink-500 mt-2 text-center text-xs leading-relaxed">{t('emailNote')}</p>
+        </form>
       </div>
 
       <FinalizeDialog
@@ -150,6 +181,7 @@ export function EstimationSection({
         dossierId={dossierId}
         funnel={funnel}
         data={data}
+        email={email.trim()}
         testMode={testMode}
       />
     </div>

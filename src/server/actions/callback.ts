@@ -18,13 +18,20 @@ const SLOT_LABELS: Record<string, string> = {
   soir: 'Soir (17h–20h)',
 }
 
-const schema = z.object({
-  dossierId: z.string().min(8).max(64),
-  phone: z.string().min(6).max(40),
-  email: z.string().email().max(200).optional(),
-  date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/).optional(),
-  slot: z.enum(['matin', 'apres-midi', 'soir']).optional(),
-})
+const schema = z
+  .object({
+    dossierId: z.string().min(8).max(64),
+    phone: z.string().min(6).max(40).optional(),
+    email: z.string().email().max(200).optional(),
+    date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/).optional(),
+    slot: z.enum(['matin', 'apres-midi', 'soir']).optional(),
+    // Envoi du lien par email — une seule fois (à la capture initiale).
+    notify: z.boolean().optional(),
+  })
+  // Au moins un moyen de contact (l'email est capté avant le téléphone).
+  .refine((v) => Boolean(v.phone) || Boolean(v.email), {
+    message: 'contact requis',
+  })
 
 export type CallbackResult = { ok: boolean; error?: 'invalid' | 'server' }
 
@@ -47,11 +54,13 @@ export async function requestCallback(input: z.infer<typeof schema>): Promise<Ca
     })
     if (!dossier) return { ok: false, error: 'server' }
 
-    // Note pour le closer : rappel à passer pour valider l'offre.
+    // Note pour le closer : selon qu'un téléphone a été laissé ou non.
     const note =
       date && slot
         ? `Rappel souhaité : ${frDate(date)} — ${SLOT_LABELS[slot] ?? slot}`
-        : 'Offre à valider — rappel demandé'
+        : phone
+          ? 'Offre à valider — rappel demandé'
+          : 'Offre envoyée par email — en attente de numéro'
 
     // Lead interne : créé/complété, jamais poussé vers un partenaire.
     if (dossier.leadId) {
@@ -75,12 +84,12 @@ export async function requestCallback(input: z.infer<typeof schema>): Promise<Ca
         dossierId,
         type: 'ACCOUNT_CREATED',
         actorType: 'LEAD',
-        data: { email, phone, date: date ?? null, slot: slot ?? null },
+        data: { email, phone: phone ?? null, date: date ?? null, slot: slot ?? null },
       },
     })
 
-    // Lien d'accès par email — seulement si une adresse a été fournie.
-    if (email) {
+    // Lien d'accès par email — seulement à la capture initiale (notify).
+    if (email && parsed.data.notify !== false) {
       const token = crypto.randomUUID()
       await prisma.magicLinkToken.create({
         data: { token, email, dossierId, expiresAt: new Date(Date.now() + 60 * 60 * 1000) },

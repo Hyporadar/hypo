@@ -915,10 +915,7 @@
           "HABITE_LE_BIEN": "Habitera le bien",
           "AUTRE_ADRESSE": "À l'avenir à une autre adresse"
         },
-        "anneeNaissance": "Année de naissance",
-        "email": "Adresse email",
-        "emailPlaceholder": "prenom.nom@email.ch",
-        "emailInfo": "Uniquement pour vous envoyer votre offre, jamais à d'autres fins."
+        "anneeNaissance": "Année de naissance"
       },
       "emprunteurRevenus": {
         "title": "L'emprunteur a-t-il un revenu ?",
@@ -1140,16 +1137,26 @@
       "body": "Il est enregistré automatiquement. Finalisez pour être rappelé gratuitement par un conseiller."
     },
     "finalize": {
-      "form": {
+      "sending": {
         "title": "Offre envoyée",
-        "body": "Vous la recevez par email dans les prochaines minutes. Pour aller plus loin et la valider avec notre conseiller spécialisé, laissez-nous votre numéro.",
+        "body": "Vous la recevez par email dans quelques minutes."
+      },
+      "phone": {
+        "title": "Transformez-la en offres fermes",
+        "body": "Un conseiller spécialisé lance l'appel d'offres auprès des prêteurs et vous rappelle sous 2h ouvrables.",
         "phoneLabel": "Numéro de téléphone",
         "phonePlaceholder": "079 123 45 67",
-        "cta": "Être rappelé"
+        "phoneError": "Entrez un numéro de téléphone suisse valide.",
+        "cta": "Être rappelé",
+        "alertLink": "Plus tard ? Recevez les mises à jour de taux par email"
+      },
+      "rateAlert": {
+        "title": "C'est noté",
+        "body": "Vous recevrez l'évolution de votre estimation."
       },
       "done": {
-        "title": "C'est validé !",
-        "body": "Vous recevez votre offre par email dans les prochaines minutes, et notre conseiller spécialisé vous appelle pour la valider avec vous.",
+        "title": "C'est validé",
+        "body": "Votre offre arrive par email et notre conseiller vous appelle sous 2h ouvrables.",
         "close": "Fermer"
       },
       "error": "Une erreur est survenue. Réessayez dans un instant."
@@ -1157,8 +1164,10 @@
     "estimation": {
       "title": "Votre estimation de taux",
       "subtitle": "Sur la base de vos réponses — fourchette indicative, à confirmer avec un conseiller.",
-      "cta": "Valider mon offre définitive",
-      "ctaHint": "Recevez votre offre et un conseiller vous rappelle pour la valider."
+      "emailPlaceholder": "votre@email.ch",
+      "emailCta": "Recevoir mon offre par email",
+      "emailNote": "Uniquement pour vous envoyer votre offre et suivre votre dossier. Jamais transmis à des tiers.",
+      "emailError": "Entrez une adresse email valide."
     }
   },
   "magicLink": {

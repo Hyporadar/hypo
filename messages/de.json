@@ -970,10 +970,7 @@
           "HABITE_LE_BIEN": "Wird die Liegenschaft bewohnen",
           "AUTRE_ADRESSE": "Künftig an einer anderen Adresse"
         },
-        "anneeNaissance": "Geburtsjahr",
-        "email": "E-Mail-Adresse",
-        "emailPlaceholder": "vorname.name@email.ch",
-        "emailInfo": "Nur um Ihnen Ihr Angebot zu senden, nie für andere Zwecke."
+        "anneeNaissance": "Geburtsjahr"
       },
       "emprunteurRevenus": {
         "title": "Hat der Kreditnehmer ein Einkommen?",
@@ -1140,16 +1137,26 @@
       "body": "Es wird automatisch gespeichert. Schliessen Sie ab, um kostenlos von einem Berater zurückgerufen zu werden."
     },
     "finalize": {
-      "form": {
+      "sending": {
         "title": "Angebot gesendet",
-        "body": "Sie erhalten es in den nächsten Minuten per E-Mail. Um weiterzugehen und es mit unserem Fachberater zu bestätigen, hinterlassen Sie uns Ihre Nummer.",
+        "body": "Sie erhalten es in wenigen Minuten per E-Mail."
+      },
+      "phone": {
+        "title": "Machen Sie daraus feste Angebote",
+        "body": "Ein Fachberater startet die Ausschreibung bei den Kreditgebern und ruft Sie innert 2 Arbeitsstunden zurück.",
         "phoneLabel": "Telefonnummer",
         "phonePlaceholder": "079 123 45 67",
-        "cta": "Zurückgerufen werden"
+        "phoneError": "Bitte geben Sie eine gültige Schweizer Telefonnummer ein.",
+        "cta": "Zurückgerufen werden",
+        "alertLink": "Später? Erhalten Sie Zinsaktualisierungen per E-Mail"
+      },
+      "rateAlert": {
+        "title": "Notiert",
+        "body": "Sie erhalten die Entwicklung Ihrer Schätzung."
       },
       "done": {
-        "title": "Bestätigt!",
-        "body": "Sie erhalten Ihr Angebot in den nächsten Minuten per E-Mail, und unser Fachberater ruft Sie an, um es mit Ihnen zu bestätigen.",
+        "title": "Bestätigt",
+        "body": "Ihr Angebot kommt per E-Mail und unser Berater ruft Sie innert 2 Arbeitsstunden an.",
         "close": "Schliessen"
       },
       "error": "Ein Fehler ist aufgetreten. Bitte versuchen Sie es gleich erneut."
@@ -1157,8 +1164,10 @@
     "estimation": {
       "title": "Ihre Zinsschätzung",
       "subtitle": "Auf Basis Ihrer Angaben — Richtwert, mit einem Berater zu bestätigen.",
-      "cta": "Mein definitives Angebot bestätigen",
-      "ctaHint": "Sie erhalten Ihr Angebot und ein Berater ruft Sie zur Bestätigung zurück."
+      "emailPlaceholder": "ihre@email.ch",
+      "emailCta": "Mein Angebot per E-Mail erhalten",
+      "emailNote": "Nur um Ihnen Ihr Angebot zu senden und Ihr Dossier zu begleiten. Nie an Dritte weitergegeben.",
+      "emailError": "Bitte geben Sie eine gültige E-Mail-Adresse ein."
     }
   },
   "magicLink": {
