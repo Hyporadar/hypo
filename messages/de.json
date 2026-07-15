@@ -1187,7 +1187,14 @@
       "emailPlaceholder": "ihre@email.ch",
       "emailCta": "Mein Angebot erhalten",
       "emailNote": "Nur um Ihnen Ihr Angebot zu senden und Ihr Dossier zu begleiten. Nie an Dritte weitergegeben.",
-      "emailError": "Bitte geben Sie eine gültige E-Mail-Adresse ein."
+      "emailError": "Bitte geben Sie eine gültige E-Mail-Adresse ein.",
+      "economy": "Mögliche Ersparnis: bis zu {amount}/Jahr",
+      "nonStandard": {
+        "title": "Ihre Situation verdient eine persönliche Analyse",
+        "body": "Unsere Berater kennen die Kreditgeber, die zu Ihrem Dossier passen.",
+        "cta": "Kontaktiert werden",
+        "thanks": "Danke — ein Berater meldet sich in Kürze bei Ihnen."
+      }
     }
   },
   "magicLink": {

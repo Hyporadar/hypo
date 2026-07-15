@@ -1187,7 +1187,14 @@
       "emailPlaceholder": "vostra@email.ch",
       "emailCta": "Ricevere la mia offerta",
       "emailNote": "Solo per inviarvi la vostra offerta e seguire il vostro dossier. Mai trasmesso a terzi.",
-      "emailError": "Inserite un indirizzo email valido."
+      "emailError": "Inserite un indirizzo email valido.",
+      "economy": "Risparmio potenziale: fino a {amount}/anno",
+      "nonStandard": {
+        "title": "La vostra situazione merita un'analisi personalizzata",
+        "body": "I nostri consulenti conoscono i finanziatori adatti al vostro dossier.",
+        "cta": "Essere contattato",
+        "thanks": "Grazie — un consulente vi contatterà a breve."
+      }
     }
   },
   "magicLink": {

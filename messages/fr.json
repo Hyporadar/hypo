@@ -1187,7 +1187,14 @@
       "emailPlaceholder": "votre@email.ch",
       "emailCta": "Recevoir mon offre",
       "emailNote": "Uniquement pour vous envoyer votre offre et suivre votre dossier. Jamais transmis à des tiers.",
-      "emailError": "Entrez une adresse email valide."
+      "emailError": "Entrez une adresse email valide.",
+      "economy": "Économie potentielle : jusqu'à {amount}/an",
+      "nonStandard": {
+        "title": "Votre situation mérite une analyse personnalisée",
+        "body": "Nos conseillers connaissent les prêteurs adaptés à votre dossier.",
+        "cta": "Être contacté",
+        "thanks": "Merci — un conseiller vous contactera très vite."
+      }
     }
   },
   "magicLink": {
