@@ -6,7 +6,7 @@ import { ArrowRight } from 'lucide-react'
 import type { Funnel } from '@prisma/client'
 import type { DossierData } from '@/lib/dossier/schema'
 import { EstimationSection } from '@/components/wizard/estimation-section'
-import { FunnelChoice } from '@/components/wizard/funnel-choice'
+import { FunnelToggle } from '@/components/wizard/funnel-choice'
 import { AmountInput } from '@/components/wizard/inputs'
 import { Button } from '@/components/ui/button'
 import { Label } from '@/components/ui/label'
@@ -26,7 +26,7 @@ export function DossierShort() {
       : `short-${Math.random().toString(36).slice(2)}-${Math.random().toString(36).slice(2)}`
   )
 
-  const valid = (valeur ?? 0) > 0 && (montant ?? 0) > 0 && (revenu ?? 0) > 0
+  const valid = funnel != null && (valeur ?? 0) > 0 && (montant ?? 0) > 0 && (revenu ?? 0) > 0
 
   const data = useMemo(
     () =>
@@ -54,15 +54,7 @@ export function DossierShort() {
     [valeur, montant, revenu]
   )
 
-  if (!funnel) {
-    return (
-      <div className="mx-auto max-w-md">
-        <FunnelChoice onChoose={setFunnel} />
-      </div>
-    )
-  }
-
-  if (submitted) {
+  if (submitted && funnel) {
     return <EstimationSection funnel={funnel} data={data} dossierId={dossierId} testMode />
   }
 
@@ -78,6 +70,7 @@ export function DossierShort() {
           if (valid) setSubmitted(true)
         }}
       >
+        <FunnelToggle value={funnel} onChange={setFunnel} />
         <div className="space-y-1.5">
           <Label htmlFor="q-valeur">{t('valeur')}</Label>
           <AmountInput id="q-valeur" value={valeur} onChange={setValeur} />

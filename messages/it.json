@@ -1242,11 +1242,13 @@
     "subtitle": "Per adattare la vostra stima alla vostra situazione.",
     "achat": {
       "label": "Acquisto un bene",
-      "desc": "Nuova ipoteca per un acquisto."
+      "desc": "Nuova ipoteca per un acquisto.",
+      "short": "Acquisto"
     },
     "renouvellement": {
       "label": "Rinnovo la mia ipoteca",
-      "desc": "La mia ipoteca attuale sta per scadere."
+      "desc": "La mia ipoteca attuale sta per scadere.",
+      "short": "Rinnovo"
     }
   }
 }

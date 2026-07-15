@@ -1242,11 +1242,13 @@
     "subtitle": "Pour adapter votre estimation à votre situation.",
     "achat": {
       "label": "J'achète un bien",
-      "desc": "Nouvelle hypothèque pour un achat."
+      "desc": "Nouvelle hypothèque pour un achat.",
+      "short": "Achat"
     },
     "renouvellement": {
       "label": "Je renouvelle mon hypothèque",
-      "desc": "Mon hypothèque actuelle arrive à échéance."
+      "desc": "Mon hypothèque actuelle arrive à échéance.",
+      "short": "Renouvellement"
     }
   }
 }
