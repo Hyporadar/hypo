@@ -139,13 +139,18 @@ export type RateResult = RateEstimate | NonStandardResult
 // Arrondi à 0.05 près (jamais de fausse précision type 1,73 %).
 const round005 = (n: number) => Math.round(n * 20) / 20
 
-/** Cœur pur : profil + durée → taux/fourchettes ou cas non standard. */
+/** Cœur pur : profil + durée → taux/fourchettes ou cas non standard.
+ *  `allowBorderline` : accepte la zone limite (LTV 80-90 % / charges 33-38 %)
+ *  avec une prime, au lieu de basculer en non standard — utilisé par le
+ *  calculateur de la home qui affiche quand même une fourchette. */
 export function estimateRate(
   profile: RateProfile,
   duration: Duration,
-  base: EngineBase = engineBase()
+  base: EngineBase = engineBase(),
+  opts?: { allowBorderline?: boolean }
 ): RateResult {
   const { montant, valeur, revenusBrutsAnnuels, amortissementAnnuel, usage, forward } = profile
+  const borderline = opts?.allowBorderline === true
 
   if (!(montant > 0) || !(valeur > 0) || !(revenusBrutsAnnuels > 0)) {
     return { nonStandard: true, reason: 'incomplete' }
@@ -159,6 +164,7 @@ export function estimateRate(
   else if (ltv <= 0.65) delta += 0.05
   else if (ltv <= 0.75) delta += 0.1
   else if (ltv <= 0.8) delta += 0.2
+  else if (borderline && ltv <= 0.9) delta += 0.35
   else return { nonStandard: true, reason: 'ltv' }
 
   // Tenue des charges : intérêts théoriques 5 % + entretien 1 % + amortissement
@@ -166,6 +172,7 @@ export function estimateRate(
     (montant * 0.05 + valeur * 0.01 + (ltv > 0.65 ? amortissementAnnuel : 0)) / revenusBrutsAnnuels
   if (affordability <= 0.28) delta += 0
   else if (affordability <= 0.33) delta += 0.05
+  else if (borderline && affordability <= 0.38) delta += 0.15
   else return { nonStandard: true, reason: 'charges' }
 
   // Montant
@@ -181,19 +188,19 @@ export function estimateRate(
 
   const t = base[duration] + delta
 
-  // Fourchettes par type de prêteur (institutionnels meilleurs sur le long).
+  // Fourchettes par type de prêteur. Deux ingrédients :
+  //  • borne basse (offset selon la durée) : institutionnels meilleurs à
+  //    ≥ 10 ans, banques meilleures en dessous → l'ordre s'inverse avec la durée ;
+  //  • largeur propre au type : banques le marché le plus dispersé (cantonales
+  //    vs régionales), assurances le pricing le plus uniforme.
   const long = duration === 'y10' || duration === 'y15'
-  const raw: LenderRange[] = long
-    ? [
-        { type: 'BANQUE', min: t, max: t + 0.2 },
-        { type: 'CAISSE_PENSION', min: t - 0.05, max: t + 0.15 },
-        { type: 'ASSURANCE', min: t - 0.08, max: t + 0.12 },
-      ]
-    : [
-        { type: 'BANQUE', min: t, max: t + 0.2 },
-        { type: 'CAISSE_PENSION', min: t + 0.05, max: t + 0.25 },
-        { type: 'ASSURANCE', min: t + 0.08, max: t + 0.28 },
-      ]
+  const lowOffset: Record<LenderType, number> = long
+    ? { BANQUE: 0, CAISSE_PENSION: -0.05, ASSURANCE: -0.08 }
+    : { BANQUE: 0, CAISSE_PENSION: 0.05, ASSURANCE: 0.08 }
+  const width: Record<LenderType, number> = { BANQUE: 0.28, CAISSE_PENSION: 0.2, ASSURANCE: 0.15 }
+  const raw: LenderRange[] = (['BANQUE', 'CAISSE_PENSION', 'ASSURANCE'] as LenderType[]).map(
+    (type) => ({ type, min: t + lowOffset[type], max: t + lowOffset[type] + width[type] })
+  )
 
   const lenders = raw
     .map((l) => ({ type: l.type, min: round005(l.min), max: round005(l.max) }))

@@ -23,7 +23,7 @@ const NAV: Record<
 > = {
   ADMIN: [
     { href: '/admin', label: 'Vue d’ensemble', icon: Inbox, exact: true },
-    { href: '/admin/leads', label: 'Leads', icon: UsersRound },
+    { href: '/admin/formulaires', label: 'Leads', icon: UsersRound },
     { href: '/admin/dossiers', label: 'Dossiers', icon: FolderOpen },
     { href: '/admin/pipeline', label: 'Pipeline', icon: KanbanSquare },
     { href: '/admin/stats', label: 'Stats', icon: BarChart3 },

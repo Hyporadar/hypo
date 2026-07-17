@@ -114,9 +114,9 @@
       "fixedNote": "Festhypothek",
       "years": "{years} Jahre",
       "savings": "Sparpotenzial",
-      "bank": "Bank",
-      "pension": "Pensionskasse",
-      "insurance": "Versicherung",
+      "bank": "Banken",
+      "pension": "Pensionskassen",
+      "insurance": "Versicherungen",
       "bullet1": "Keine Kontoeröffnung nötig",
       "bullet2": "Indikativer Tageszinssatz",
       "cta": "Diese Offerte erhalten",
@@ -141,7 +141,21 @@
       "freqMonthly": "Monatlich",
       "subscribeEmail": "Ihre E-Mail-Adresse",
       "subscribeCta": "Abonnieren",
-      "subscribeSuccess": "Notiert. Das erste Zinsupdate kommt bei der nächsten Aktualisierung."
+      "subscribeSuccess": "Notiert. Das erste Zinsupdate kommt bei der nächsten Aktualisierung.",
+      "duration": "Laufzeit",
+      "borderlineBanner": "Ihr Dossier liegt an der Grenze der Standardkriterien. Einige Anbieter akzeptieren es, unsere Berater wissen welche.",
+      "borderlineCta": "Termin mit einem Berater vereinbaren",
+      "nonFundableTitle": "Sprechen wir darüber, kostenlos",
+      "nonFundableBody": "Mit diesen Beträgen ist eine klassische Hypothek schwierig zu erhalten: Die Tragbarkeit übersteigt, was Anbieter akzeptieren. Oft gibt es Lösungen (Eigenkapital, Bürge, andere Struktur). Besprechen Sie das kostenlos mit einem unserer Berater.",
+      "nonFundableEmail": "Ihre E-Mail",
+      "nonFundableCta": "Kostenloses Gespräch reservieren",
+      "nonFundableThanks": "Danke, ein Berater meldet sich in Kürze.",
+      "emailError": "Bitte geben Sie eine gültige E-Mail-Adresse ein.",
+      "microBoth": "Mit einem Einkommen von {revenu} oder einer auf {montant} reduzierten Hypothek käme Ihr Dossier wieder in die Standardkriterien.",
+      "microIncome": "Mit einem Einkommen von {revenu} käme Ihr Dossier wieder in die Standardkriterien.",
+      "microMortgage": "Mit einer auf {montant} reduzierten Hypothek käme Ihr Dossier wieder in die Standardkriterien.",
+      "plzError": "Geben Sie eine Schweizer PLZ (4 Ziffern) oder einen Ort ein.",
+      "standardCta": "Verfeinern und Angebote erhalten"
     },
     "rateCards": {
       "saronLabel": "SARON",
@@ -1196,7 +1210,16 @@
         "body": "Sie erhalten Ihr Angebot per E-Mail, und unser Berater ruft Sie zum vereinbarten Zeitpunkt zurück.",
         "close": "Schliessen"
       },
-      "error": "Ein Fehler ist aufgetreten. Bitte versuchen Sie es gleich erneut."
+      "error": "Ein Fehler ist aufgetreten. Bitte versuchen Sie es gleich erneut.",
+      "monitoring": {
+        "title": "Wir überwachen Ihre Fälligkeit",
+        "body": "Wir melden uns zum richtigen Zeitpunkt, mit den aktuellen Zinssätzen.",
+        "cta": "Überwachung aktivieren"
+      },
+      "monitoringDone": {
+        "title": "Überwachung aktiviert",
+        "body": "Wir benachrichtigen Sie, sobald sich Ihr Fenster öffnet, mit den aktuellen Zinssätzen."
+      }
     },
     "estimation": {
       "title": "Ihre Zinsschätzung",
@@ -1239,7 +1262,25 @@
     "funnelInfo": "Kauf: neue Hypothek für eine Immobilie, die Sie kaufen. Verlängerung: Ihre aktuelle Hypothek läuft bald ab.",
     "infoValeur": "Der Preis oder der geschätzte Wert der Immobilie heute (Verkaufswert).",
     "infoMontant": "Der bei der Bank aufgenommene Betrag (die Hypothekarschuld), ohne Eigenmittel.",
-    "infoRevenu": "Das jährliche Bruttoeinkommen des gesamten Haushalts, vor Steuern (Löhne und Renten inbegriffen)."
+    "infoRevenu": "Das jährliche Bruttoeinkommen des gesamten Haushalts, vor Steuern (Löhne und Renten inbegriffen).",
+    "echeance": {
+      "label": "Ihre Hypothek läuft aus in",
+      "info": "Dieses Datum bestimmt, wann Sie den Anbieter ohne Strafzahlung wechseln können.",
+      "options": {
+        "lt6": "< 6 Monate",
+        "mid": "6–18 Monate",
+        "gt18": "> 18 Monate",
+        "unknown": "Ich weiss nicht"
+      }
+    },
+    "ltv": {
+      "body": "Prüfen Sie diese beiden Beträge, oder Ihre Situation liegt ausserhalb des Standardrahmens und verdient eine persönliche Analyse.",
+      "correct": "Korrigieren",
+      "contact": "Kontaktiert werden",
+      "emailPlaceholder": "Ihre E-Mail",
+      "emailError": "Bitte geben Sie eine gültige E-Mail-Adresse ein.",
+      "thanks": "Danke, wir melden uns in Kürze."
+    }
   },
   "funnelChoice": {
     "title": "Kaufen Sie oder verlängern Sie?",

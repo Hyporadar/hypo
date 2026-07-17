@@ -23,6 +23,7 @@ export const routing = defineRouting({
       it: '/come-funziona',
     },
     '/dossier': '/dossier',
+    '/dossier/2': '/dossier/2',
     // Connexion par magic link (lien reçu par email) — slug technique stable.
     '/lien-magique/[token]': '/lien-magique/[token]',
     '/demande': {

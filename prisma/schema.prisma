@@ -796,6 +796,7 @@ model TestLead {
   phone        String?
   callbackDate String?
   callbackSlot String?
+  echeance     String? // tranche d'échéance (parcours court renouvellement)
   message      String?
   utmSource    String?
   utmMedium    String?
@@ -803,4 +804,18 @@ model TestLead {
   referrer     String?
 
   @@index([createdAt])
+}
+
+// Journal d'événements anonymes de l'entonnoir de conversion. Une ligne par
+// (visiteur, étape) : la contrainte d'unicité garantit qu'un visiteur n'est
+// compté qu'une fois par étape. Aucune donnée personnelle (id de session
+// aléatoire côté navigateur).
+model FunnelEvent {
+  id        String   @id @default(cuid())
+  sessionId String
+  step      String // visit | criteria | advance | contact
+  createdAt DateTime @default(now())
+
+  @@unique([sessionId, step])
+  @@index([step, createdAt])
 }

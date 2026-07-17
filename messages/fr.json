@@ -114,9 +114,9 @@
       "fixedNote": "hypothèque fixe",
       "years": "{years} ans",
       "savings": "Économie potentielle",
-      "bank": "Banque",
-      "pension": "Caisse de pension",
-      "insurance": "Assurance",
+      "bank": "Banques",
+      "pension": "Caisses de pension",
+      "insurance": "Assurances",
       "bullet1": "Sans ouverture de compte obligatoire",
       "bullet2": "Taux indicatif du jour",
       "cta": "Obtenir cette offre",
@@ -141,7 +141,21 @@
       "freqMonthly": "Mensuelle",
       "subscribeEmail": "Votre adresse e-mail",
       "subscribeCta": "S'abonner",
-      "subscribeSuccess": "C'est noté. Premier point taux dans votre boîte à la prochaine mise à jour."
+      "subscribeSuccess": "C'est noté. Premier point taux dans votre boîte à la prochaine mise à jour.",
+      "duration": "Durée",
+      "borderlineBanner": "Votre dossier est à la limite des critères standards. Certains prêteurs l'acceptent, nos conseillers savent lesquels.",
+      "borderlineCta": "Prendre rendez-vous avec un conseiller",
+      "nonFundableTitle": "Parlons-en, gratuitement",
+      "nonFundableBody": "Avec ces montants, une hypothèque classique sera difficile à obtenir : la tenue des charges dépasse ce que les prêteurs acceptent. Il existe souvent des solutions (apport, garant, structure différente). Parlez-en gratuitement avec un de nos conseillers.",
+      "nonFundableEmail": "Votre email",
+      "nonFundableCta": "Réserver un échange gratuit",
+      "nonFundableThanks": "Merci, un conseiller vous contacte rapidement.",
+      "emailError": "Entrez une adresse email valide.",
+      "microBoth": "Avec un revenu de {revenu} ou une hypothèque réduite à {montant}, votre dossier repasserait dans les critères standards.",
+      "microIncome": "Avec un revenu de {revenu}, votre dossier repasserait dans les critères standards.",
+      "microMortgage": "Avec une hypothèque réduite à {montant}, votre dossier repasserait dans les critères standards.",
+      "plzError": "Entrez un NPA suisse (4 chiffres) ou une localité.",
+      "standardCta": "Affiner et recevoir mes offres"
     },
     "rateCards": {
       "saronLabel": "SARON",
@@ -1196,7 +1210,16 @@
         "body": "Vous recevez votre offre par email, et notre conseiller vous rappellera au créneau convenu.",
         "close": "Fermer"
       },
-      "error": "Une erreur est survenue. Réessayez dans un instant."
+      "error": "Une erreur est survenue. Réessayez dans un instant.",
+      "monitoring": {
+        "title": "Nous surveillons votre échéance",
+        "body": "Nous vous prévenons au bon moment, avec les taux du jour.",
+        "cta": "Activer la surveillance"
+      },
+      "monitoringDone": {
+        "title": "Surveillance activée",
+        "body": "Nous vous préviendrons dès que votre fenêtre s'ouvre, avec les taux du jour."
+      }
     },
     "estimation": {
       "title": "Votre estimation de taux",
@@ -1239,7 +1262,25 @@
     "funnelInfo": "Achat : nouvelle hypothèque pour un bien que vous achetez. Renouvellement : votre hypothèque actuelle arrive bientôt à échéance.",
     "infoValeur": "Le prix ou la valeur estimée du bien aujourd'hui (ce qu'il vaudrait à la vente).",
     "infoMontant": "Le montant emprunté à la banque (la dette hypothécaire), hors fonds propres.",
-    "infoRevenu": "Le revenu annuel brut de tout le ménage, avant impôts (salaires et rentes compris)."
+    "infoRevenu": "Le revenu annuel brut de tout le ménage, avant impôts (salaires et rentes compris).",
+    "echeance": {
+      "label": "Votre hypothèque arrive à échéance",
+      "info": "C'est la date qui détermine quand vous pouvez changer de prêteur sans pénalité.",
+      "options": {
+        "lt6": "< 6 mois",
+        "mid": "6-18 mois",
+        "gt18": "> 18 mois",
+        "unknown": "Je ne sais pas"
+      }
+    },
+    "ltv": {
+      "body": "Vérifiez ces deux montants, ou votre situation sort du cadre standard et mérite une analyse personnalisée.",
+      "correct": "Corriger",
+      "contact": "Être contacté",
+      "emailPlaceholder": "Votre email",
+      "emailError": "Entrez une adresse email valide.",
+      "thanks": "Merci, nous vous recontactons rapidement."
+    }
   },
   "funnelChoice": {
     "title": "Vous achetez ou vous renouvelez ?",

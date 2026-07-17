@@ -6,8 +6,9 @@ import { ArrowRight, Headset, Landmark, PiggyBank, Umbrella } from 'lucide-react
 import type { Funnel } from '@prisma/client'
 import { formatCHF, formatRate } from '@/lib/format'
 import { cn } from '@/lib/utils'
-import { track } from '@/lib/track'
+import { track, trackFunnel } from '@/lib/track'
 import type { DossierData } from '@/lib/dossier/schema'
+import type { Echeance } from '@/lib/dossier/echeance'
 import {
   buildRateProfile,
   estimateRate,
@@ -74,11 +75,14 @@ export function EstimationSection({
   funnel,
   data,
   dossierId,
+  echeance,
   testMode = false,
 }: {
   funnel: Funnel
   data: DossierData
   dossierId: string
+  /** Tranche d'échéance (branche renouvellement) — pilote la popup de fin. */
+  echeance?: Echeance
   testMode?: boolean
 }) {
   const t = useTranslations('wizard.estimation')
@@ -138,6 +142,7 @@ export function EstimationSection({
     setEmailTouched(true)
     if (!emailValid) return
     track('email_submitted', { estimated_rate: from, duration_selected: duration })
+    trackFunnel('advance')
     setFinalizeOpen(true)
   }
 
@@ -146,11 +151,19 @@ export function EstimationSection({
     if (!emailValid) return
     const e = email.trim()
     const note = `Cas non standard (${nsReason})`
+    trackFunnel('advance')
+    trackFunnel('contact')
     startNs(async () => {
       if (testMode) {
-        await submitTestLead({ dossierId, funnel, data, email: e, message: note, utm: readUtm() }).catch(
-          () => null
-        )
+        await submitTestLead({
+          dossierId,
+          funnel,
+          data,
+          email: e,
+          message: note,
+          echeance,
+          utm: readUtm(),
+        }).catch(() => null)
       } else {
         await saveDossierAction({ dossierId, funnel, data }).catch(() => null)
         await requestCallback({ dossierId, email: e, message: note, notify: true }).catch(() => null)
@@ -333,6 +346,7 @@ export function EstimationSection({
         funnel={funnel}
         data={data}
         email={email.trim()}
+        echeance={echeance}
         testMode={testMode}
       />
     </div>

@@ -19,6 +19,7 @@ const schema = z.object({
   phone: z.string().max(40).optional(),
   callbackDate: z.string().max(20).optional(),
   callbackSlot: z.string().max(20).optional(),
+  echeance: z.enum(['lt6', 'mid', 'gt18', 'unknown']).optional(),
   message: z.string().max(1000).optional(),
   utm: z
     .object({
@@ -38,7 +39,8 @@ export async function submitTestLead(input: z.infer<typeof schema>): Promise<Tes
   const dataParsed = dossierDataSchema.safeParse(parsed.data.data)
   if (!dataParsed.success) return { ok: false }
 
-  const { dossierId, funnel, email, phone, callbackDate, callbackSlot, message, utm } = parsed.data
+  const { dossierId, funnel, email, phone, callbackDate, callbackSlot, echeance, message, utm } =
+    parsed.data
   const completude = computeCompleteness(funnel, dataParsed.data).percent
   const data = dataParsed.data as Prisma.InputJsonValue
 
@@ -54,6 +56,7 @@ export async function submitTestLead(input: z.infer<typeof schema>): Promise<Tes
         phone: phone ?? null,
         callbackDate: callbackDate ?? null,
         callbackSlot: callbackSlot ?? null,
+        echeance: echeance ?? null,
         message: message ?? null,
         utmSource: utm?.source ?? null,
         utmMedium: utm?.medium ?? null,
@@ -68,6 +71,7 @@ export async function submitTestLead(input: z.infer<typeof schema>): Promise<Tes
         phone: phone ?? null,
         callbackDate: callbackDate ?? null,
         callbackSlot: callbackSlot ?? null,
+        echeance: echeance ?? null,
         message: message ?? null,
       },
     })

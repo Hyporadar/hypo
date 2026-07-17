@@ -29,7 +29,17 @@ function phoneValid(raw: string): boolean {
 // Bouton « être rappelé maintenant » : crée un Lead + Signal CALLBACK_DEMANDE
 // qui atterrit dans la file des closers. On capte prénom, nom, téléphone et
 // la plage horaire souhaitée pour le rappel.
-export function CallbackDialog() {
+export function CallbackDialog({
+  triggerLabel,
+  triggerVariant = 'outline',
+  onOpen,
+}: {
+  /** Libellé du bouton déclencheur (défaut : « être rappelé »). */
+  triggerLabel?: string
+  triggerVariant?: 'outline' | 'default'
+  /** Appelé au clic sur le déclencheur (ex. event borderline_lead). */
+  onOpen?: () => void
+} = {}) {
   const t = useTranslations('home.callback')
   const tf = useTranslations('common.form')
   const [firstName, setFirstName] = useState('')
@@ -63,9 +73,9 @@ export function CallbackDialog() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="outline" size="lg">
+        <Button variant={triggerVariant} size="lg" onClick={() => onOpen?.()}>
           <PhoneCall data-icon="inline-start" />
-          {t('button')}
+          {triggerLabel ?? t('button')}
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-md">

@@ -18,6 +18,13 @@ const SLOT_LABELS: Record<string, string> = {
   soir: 'Soir (17h–20h)',
 }
 
+const ECHEANCE_LABELS: Record<string, string> = {
+  lt6: 'Échéance : moins de 6 mois',
+  mid: 'Échéance : 6 à 18 mois',
+  gt18: 'Échéance : plus de 18 mois',
+  unknown: 'Échéance : inconnue',
+}
+
 const schema = z
   .object({
     dossierId: z.string().min(8).max(64),
@@ -25,6 +32,7 @@ const schema = z
     email: z.string().email().max(200).optional(),
     date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/).optional(),
     slot: z.enum(['matin', 'apres-midi', 'soir']).optional(),
+    echeance: z.enum(['lt6', 'mid', 'gt18', 'unknown']).optional(),
     message: z.string().max(1000).optional(),
     // Envoi du lien par email — une seule fois (à la capture initiale).
     notify: z.boolean().optional(),
@@ -46,7 +54,7 @@ export async function requestCallback(input: z.infer<typeof schema>): Promise<Ca
   if (!parsed.success) return { ok: false, error: 'invalid' }
   const locale = (await getLocale()) as Locale
   const email = parsed.data.email?.toLowerCase() ?? null
-  const { dossierId, phone, date, slot, message } = parsed.data
+  const { dossierId, phone, date, slot, echeance, message } = parsed.data
 
   try {
     const dossier = await prisma.dossier.findUnique({
@@ -62,7 +70,10 @@ export async function requestCallback(input: z.infer<typeof schema>): Promise<Ca
         : phone
           ? 'Offre à valider — rappel demandé'
           : 'Offre envoyée par email — en attente de numéro'
-    const note = message?.trim() ? `${base}\nMessage : ${message.trim()}` : base
+    const withEcheance = echeance
+      ? `${base}\n${ECHEANCE_LABELS[echeance] ?? echeance}`
+      : base
+    const note = message?.trim() ? `${withEcheance}\nMessage : ${message.trim()}` : withEcheance
 
     // Lead interne : créé/complété, jamais poussé vers un partenaire.
     if (dossier.leadId) {
@@ -86,7 +97,13 @@ export async function requestCallback(input: z.infer<typeof schema>): Promise<Ca
         dossierId,
         type: 'ACCOUNT_CREATED',
         actorType: 'LEAD',
-        data: { email, phone: phone ?? null, date: date ?? null, slot: slot ?? null },
+        data: {
+          email,
+          phone: phone ?? null,
+          date: date ?? null,
+          slot: slot ?? null,
+          echeance: echeance ?? null,
+        },
       },
     })
 

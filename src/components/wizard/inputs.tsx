@@ -70,11 +70,14 @@ export function AmountInput({
   value,
   onChange,
   placeholder = "p.ex. 750'000",
+  highlight = false,
 }: {
   id: string
   value: number | null
   onChange: (v: number | null) => void
   placeholder?: string
+  /** Surligne le champ en ambre (ex. « Corriger » après un contrôle LTV). */
+  highlight?: boolean
 }) {
   return (
     <div className="flex">
@@ -86,7 +89,10 @@ export function AmountInput({
         inputMode="numeric"
         autoComplete="off"
         placeholder={placeholder}
-        className="text-data h-12 rounded-l-none rounded-r-xl bg-white text-base"
+        className={cn(
+          'text-data h-12 rounded-l-none rounded-r-xl bg-white text-base',
+          highlight && 'border-ambre-500 ring-ambre-300 ring-2'
+        )}
         value={value === null ? '' : formatThousands(String(value))}
         onChange={(e) => onChange(parseMoney(e.target.value))}
       />

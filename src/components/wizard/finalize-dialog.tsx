@@ -2,9 +2,11 @@
 
 import { useEffect, useState, useTransition } from 'react'
 import { useTranslations } from 'next-intl'
-import { CheckCircle2 } from 'lucide-react'
+import { CheckCircle2, Radar } from 'lucide-react'
 import type { Funnel } from '@prisma/client'
 import type { DossierData } from '@/lib/dossier/schema'
+import { needsMonitoring, type Echeance } from '@/lib/dossier/echeance'
+import { track, trackFunnel } from '@/lib/track'
 import { saveDossierAction } from '@/server/actions/dossier'
 import { requestCallback } from '@/server/actions/callback'
 import { submitTestLead } from '@/server/actions/test-lead'
@@ -21,7 +23,7 @@ import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
 import { cn } from '@/lib/utils'
 
-type Step = 'sending' | 'phone' | 'rateAlert' | 'done'
+type Step = 'sending' | 'phone' | 'monitoring' | 'monitoringDone' | 'rateAlert' | 'done'
 const SLOTS = ['matin', 'apres-midi', 'soir'] as const
 type Slot = (typeof SLOTS)[number]
 
@@ -53,6 +55,7 @@ export function FinalizeDialog({
   funnel,
   data,
   email,
+  echeance,
   testMode = false,
 }: {
   open: boolean
@@ -62,10 +65,13 @@ export function FinalizeDialog({
   data: DossierData
   /** Email déjà validé à l'étape 4 (capture inline). */
   email: string
+  /** Tranche d'échéance : > 18 mois / inconnue → surveillance au lieu du tél. */
+  echeance?: Echeance
   /** Site de test : soumission → TestLead (pas de vrai Lead ni email). */
   testMode?: boolean
 }) {
   const t = useTranslations('wizard.finalize')
+  const monitoring = needsMonitoring(echeance)
   const [step, setStep] = useState<Step>('sending')
   const [phone, setPhone] = useState('')
   const [phoneTouched, setPhoneTouched] = useState(false)
@@ -85,14 +91,17 @@ export function FinalizeDialog({
     // Capture email (best-effort — n'interrompt pas l'animation).
     void (async () => {
       if (testMode) {
-        await submitTestLead({ dossierId, funnel, data, email, utm: readUtm() }).catch(() => null)
+        await submitTestLead({ dossierId, funnel, data, email, echeance, utm: readUtm() }).catch(
+          () => null
+        )
       } else {
         await saveDossierAction({ dossierId, funnel, data }).catch(() => null)
-        await requestCallback({ dossierId, email, notify: true }).catch(() => null)
+        await requestCallback({ dossierId, email, echeance, notify: true }).catch(() => null)
       }
     })()
 
-    const timer = setTimeout(() => setStep('phone'), 1500)
+    // Échéance lointaine / inconnue → surveillance ; sinon → rappel téléphone.
+    const timer = setTimeout(() => setStep(monitoring ? 'monitoring' : 'phone'), 1500)
     return () => clearTimeout(timer)
     // Ne (re)démarre que lorsque la popup s'ouvre ; les autres valeurs sont
     // stables le temps de l'ouverture (le wizard n'est pas édité en fond).
@@ -144,8 +153,10 @@ export function FinalizeDialog({
             message: msg,
             notify: false,
           }).catch(() => ({ ok: false as const }))
-      if (result.ok) setStep('done')
-      else setError(true)
+      if (result.ok) {
+        trackFunnel('contact')
+        setStep('done')
+      } else setError(true)
     })
   }
 
@@ -167,10 +178,32 @@ export function FinalizeDialog({
     })
   }
 
-  // Fermeture auto après la confirmation « alerte taux ».
+  // Surveillance de l'échéance (branche > 18 mois / inconnue) : on marque
+  // l'opt-in, l'email est déjà capté (state A) — pas de téléphone demandé.
+  function activateMonitoring() {
+    track('monitoring_optin', { echeance: echeance ?? null })
+    trackFunnel('contact')
+    setStep('monitoringDone')
+    startTransition(async () => {
+      if (testMode) {
+        await submitTestLead({
+          dossierId,
+          funnel,
+          data,
+          email,
+          callbackSlot: 'SURVEILLANCE',
+          echeance,
+          utm: readUtm(),
+        }).catch(() => null)
+      }
+      // Vrai produit : l'email/echeance sont déjà enregistrés (state A).
+    })
+  }
+
+  // Fermeture auto après une confirmation (« alerte taux » / surveillance).
   useEffect(() => {
-    if (step !== 'rateAlert') return
-    const timer = setTimeout(() => close(), 2200)
+    if (step !== 'rateAlert' && step !== 'monitoringDone') return
+    const timer = setTimeout(() => close(), 2600)
     return () => clearTimeout(timer)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [step])
@@ -283,6 +316,31 @@ export function FinalizeDialog({
               {t('phone.alertLink')}
             </button>
           </>
+        ) : step === 'monitoring' ? (
+          <>
+            <DialogHeader>
+              <span className="bg-pilot-50 text-pilot-700 mx-auto flex size-14 items-center justify-center rounded-full">
+                <Radar className="size-7" strokeWidth={1.8} />
+              </span>
+              <DialogTitle className="text-center text-xl">{t('monitoring.title')}</DialogTitle>
+              <DialogDescription className="text-center leading-relaxed">
+                {t('monitoring.body')}
+              </DialogDescription>
+            </DialogHeader>
+            <Button className="w-full" onClick={activateMonitoring} disabled={pending}>
+              {t('monitoring.cta')}
+            </Button>
+          </>
+        ) : step === 'monitoringDone' ? (
+          <DialogHeader>
+            <span className="bg-pilot-50 text-pilot-700 mx-auto flex size-14 items-center justify-center rounded-full">
+              <CheckCircle2 className="size-7" strokeWidth={1.8} />
+            </span>
+            <DialogTitle className="text-center text-xl">{t('monitoringDone.title')}</DialogTitle>
+            <DialogDescription className="text-center leading-relaxed">
+              {t('monitoringDone.body')}
+            </DialogDescription>
+          </DialogHeader>
         ) : step === 'rateAlert' ? (
           <DialogHeader>
             <span className="bg-pilot-50 text-pilot-700 mx-auto flex size-14 items-center justify-center rounded-full">

@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
 import type { Locale } from '@/i18n/routing'
 import { localizedAlternates } from '@/lib/seo'
-import { DossierWizard } from '@/components/wizard/dossier-wizard'
+import { DossierShort } from '@/components/marketing/dossier-short'
 
 export async function generateMetadata({
   params,
@@ -35,7 +35,7 @@ export default async function RenewPage({ params }: { params: Promise<{ locale: 
         <p className="text-ink-700 leading-relaxed">{t('hero.subtitle')}</p>
       </div>
       <div className="mt-10">
-        <DossierWizard initialFunnel="RENOUVELLEMENT_CHAUD" />
+        <DossierShort initialFunnel="RENOUVELLEMENT_CHAUD" />
       </div>
     </section>
   )

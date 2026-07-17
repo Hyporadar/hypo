@@ -34,36 +34,35 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
 
   return (
     <>
-      {/* Hero : titre, sous-titre, UN call-to-action (modèle hypotheke.ch) */}
-      <section className="mx-auto max-w-[1120px] px-6 pt-16 pb-10 md:pt-24">
-        <div className="max-w-2xl space-y-6">
-          <p className="text-pilot-600 text-xs font-semibold tracking-[0.08em] uppercase">
-            {t('hero.overline')}
-          </p>
-          <h1 className="font-display text-3xl leading-[1.1] font-semibold md:text-5xl">
-            {t('hero.title')}
-          </h1>
-          <p className="text-ink-700 text-lg leading-relaxed">{t('hero.subtitle')}</p>
-          <div className="pt-2">
-            <Button asChild size="lg">
-              <a href="#simulateur">{t('hero.cta')}</a>
-            </Button>
+      {/* Hero deux colonnes : titre + CTA à gauche, calculateur à droite */}
+      <section className="mx-auto max-w-[1240px] px-4 pt-16 pb-10 sm:px-6 md:pt-24">
+        <div className="grid items-start gap-10 lg:grid-cols-2 lg:gap-12">
+          <div className="space-y-6 lg:pt-6">
+            <p className="text-pilot-600 text-xs font-semibold tracking-[0.08em] uppercase">
+              {t('hero.overline')}
+            </p>
+            <h1 className="font-display text-3xl leading-[1.1] font-semibold md:text-5xl">
+              {t('hero.title')}
+            </h1>
+            <p className="text-ink-700 text-lg leading-relaxed">{t('hero.subtitle')}</p>
+            <div className="pt-2">
+              <Button asChild size="lg">
+                <a href="#simulateur">{t('hero.cta')}</a>
+              </Button>
+            </div>
           </div>
+
+          {/* Calculateur : bien, hypothèque, revenu, NPA → offres par durée */}
+          <HomeLeadWidget rates={rates} />
         </div>
 
-        {/* Bandeau des 3 taux : SARON / 10 ans / 5 ans */}
+        {/* Prêteurs au-dessus, puis le bandeau des 3 taux (SARON / 10 / 5 ans) */}
         <div className="mt-14">
-          <RateCards rates={rates} />
-        </div>
-
-        {/* Prêteurs (placeholders — logos réels à venir) */}
-        <div className="mt-10">
           <LendersRow />
         </div>
 
-        {/* L'outil : bien, hypothèque, revenu, NPA → offres par durée */}
-        <div className="mt-14">
-          <HomeLeadWidget rates={rates} />
+        <div className="mt-16">
+          <RateCards rates={rates} />
         </div>
 
         {/* Abonnement aux mises à jour de taux */}
