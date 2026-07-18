@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useTransition } from 'react'
+import { useEffect, useState, useTransition } from 'react'
 import { useTranslations } from 'next-intl'
 import { CheckCircle2 } from 'lucide-react'
 import type { Funnel } from '@prisma/client'
@@ -46,6 +46,7 @@ export function HomeContactDialog({
   funnel,
   data,
   isRenew,
+  presetEcheance = null,
 }: {
   open: boolean
   onOpenChange: (o: boolean) => void
@@ -53,6 +54,8 @@ export function HomeContactDialog({
   funnel: Funnel
   data: DossierData
   isRenew: boolean
+  /** Échéance déjà choisie dans le calculateur : masque les pills ici. */
+  presetEcheance?: Echeance | null
 }) {
   const t = useTranslations('home.leadWidget')
   const tf = useTranslations('wizard.finalize')
@@ -61,13 +64,21 @@ export function HomeContactDialog({
 
   const [email, setEmail] = useState('')
   const [phone, setPhone] = useState('')
-  const [echeance, setEcheance] = useState<Echeance | null>(null)
+  const [echeance, setEcheance] = useState<Echeance | null>(presetEcheance)
   const [date, setDate] = useState('')
   const [slot, setSlot] = useState<Slot | null>(null)
   const [message, setMessage] = useState('')
   const [touched, setTouched] = useState(false)
   const [done, setDone] = useState(false)
   const [pending, start] = useTransition()
+
+  // Le dialogue est monté dès le départ : resynchronise l'échéance du
+  // calculateur (choisie après le montage) dans l'état local.
+  /* eslint-disable react-hooks/set-state-in-effect -- sync prop → state */
+  useEffect(() => {
+    if (presetEcheance != null) setEcheance(presetEcheance)
+  }, [presetEcheance])
+  /* eslint-enable react-hooks/set-state-in-effect */
 
   const emailOk = EMAIL_RE.test(email.trim())
   const phoneOk = phoneValid(phone)
@@ -166,7 +177,7 @@ export function HomeContactDialog({
                 ) : null}
               </div>
 
-              {isRenew ? (
+              {isRenew && !presetEcheance ? (
                 <div className="space-y-2">
                   <p className="text-sm font-medium">{ts('echeance.label')}</p>
                   <div className="grid grid-cols-4 gap-1.5">

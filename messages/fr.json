@@ -122,7 +122,7 @@
       "bullet2": "Taux indicatif du jour",
       "cta": "Obtenir cette offre",
       "savingsNote": "Économie estimée sur la durée choisie, par rapport à une offre moyenne du marché (écart moyen constaté : 0,72%). Taux définitif après mise en concurrence réelle.",
-      "emptyHint": "Renseignez votre hypothèque pour voir vos offres.",
+      "emptyHint": "Complétez tous les champs pour voir vos offres.",
       "buyHint": "Vous achetez un bien ?",
       "buyCta": "Calculer ma capacité d'achat",
       "plz": "NPA / Localité",
@@ -160,7 +160,9 @@
       "contactTitle": "Recevez vos offres",
       "contactBody": "Laissez vos coordonnées : un conseiller vous rappelle au créneau choisi.",
       "contactCta": "Recevoir mes offres",
-      "contactDone": "C’est envoyé. Un conseiller vous rappelle au créneau choisi."
+      "contactDone": "C’est envoyé. Un conseiller vous rappelle au créneau choisi.",
+      "echeanceLabel": "Échéance de votre hypothèque",
+      "echeanceRequired": "Sélectionnez l’échéance de votre hypothèque."
     },
     "rateCards": {
       "saronLabel": "SARON",

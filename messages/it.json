@@ -122,7 +122,7 @@
       "bullet2": "Tasso indicativo del giorno",
       "cta": "Ottenere questa offerta",
       "savingsNote": "Risparmio stimato sulla durata scelta rispetto a un'offerta media del mercato (scarto medio osservato: 0,72%). Tasso definitivo dopo la gara d'offerte reale.",
-      "emptyHint": "Inserisca la Sua ipoteca per vedere le Sue offerte.",
+      "emptyHint": "Completa tutti i campi per vedere le tue offerte.",
       "buyHint": "Sta comprando un immobile?",
       "buyCta": "Calcolare la sostenibilità",
       "plz": "NPA / Località",
@@ -160,7 +160,9 @@
       "contactTitle": "Ricevi le tue offerte",
       "contactBody": "Lascia i tuoi recapiti: un consulente ti richiama nella fascia scelta.",
       "contactCta": "Ricevere le offerte",
-      "contactDone": "Inviato. Un consulente ti richiama nella fascia scelta."
+      "contactDone": "Inviato. Un consulente ti richiama nella fascia scelta.",
+      "echeanceLabel": "Scadenza della tua ipoteca",
+      "echeanceRequired": "Seleziona la scadenza della tua ipoteca."
     },
     "rateCards": {
       "saronLabel": "SARON",

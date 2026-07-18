@@ -10,6 +10,7 @@ import { track, trackFunnel } from '@/lib/track'
 import type { Funnel } from '@prisma/client'
 import type { DossierData } from '@/lib/dossier/schema'
 import { computeAffordability, amortissementAnnuel } from '@/lib/dossier/affordability'
+import { ECHEANCES, type Echeance } from '@/lib/dossier/echeance'
 import {
   engineBase,
   estimateRate,
@@ -140,12 +141,14 @@ function useCountUp(target: number, duration = 350): number {
 
 export function HomeLeadWidget({ rates }: { rates: WidgetRates }) {
   const t = useTranslations('home.leadWidget')
+  const ts = useTranslations('dossierShort')
   const [propertyValue, setPropertyValue] = useState(0)
   const [mortgage, setMortgage] = useState(0)
   const [income, setIncome] = useState(0)
   const [plz, setPlz] = useState('')
   const [duration, setDuration] = useState<Duration>('y10')
   const [funnel, setFunnel] = useState<Funnel | null>(null)
+  const [echeance, setEcheance] = useState<Echeance | null>(null)
   const [contactOpen, setContactOpen] = useState(false)
 
   // Recalcul avec 300 ms de debounce : les curseurs restent fluides, le
@@ -301,11 +304,45 @@ export function HomeLeadWidget({ rates }: { rates: WidgetRates }) {
     setContactOpen(true)
   }
 
-  const showResult = aff.state !== 'incomplete'
-
   // La case chiffre s'élargit un peu dès qu'un montant dépasse le million
   // (7 chiffres) pour ne pas couper le dernier zéro ; elle rétrécit en dessous.
   const wideNumbers = Math.max(propertyValue, mortgage, income) >= 1_000_000
+
+  // Échéance (branche renouvellement) : obligatoire, enregistrée dans le lead.
+  const isRenew = funnel === 'RENOUVELLEMENT_CHAUD'
+  const echOk = !isRenew || echeance != null
+  // NPA/localité obligatoire : rempli et au bon format.
+  const plzOk = plzTrimmed !== '' && !plzInvalid
+  // Estimation affichée seulement quand TOUT est rempli.
+  const allFilled =
+    funnel != null && deb.v > 0 && deb.m > 0 && deb.r > 0 && echOk && plzOk
+  function selectEcheance(e: Echeance) {
+    setEcheance(e)
+    track('echeance_selected', { echeance: e })
+  }
+  const echeancePills = isRenew ? (
+    <div className="space-y-1.5">
+      <p className="text-ink-700 text-sm">{t('echeanceLabel')}</p>
+      <div className="grid grid-cols-4 gap-1.5">
+        {ECHEANCES.map((e) => (
+          <button
+            key={e}
+            type="button"
+            aria-pressed={echeance === e}
+            onClick={() => selectEcheance(e)}
+            className={cn(
+              'rounded-lg border px-1.5 py-2 text-center text-xs font-medium transition-colors',
+              echeance === e
+                ? 'border-pilot-600 bg-pilot-600 text-white'
+                : 'border-line text-ink-700 hover:bg-surface-alt bg-white'
+            )}
+          >
+            {ts(`echeance.options.${e}`)}
+          </button>
+        ))}
+      </div>
+    </div>
+  ) : null
 
   // Overlay des résultats : s'ouvre automatiquement dès qu'un résultat est
   // calculable, par-dessus le site (fond flouté). Un clic dehors / Échap le
@@ -371,9 +408,12 @@ export function HomeLeadWidget({ rates }: { rates: WidgetRates }) {
         </span>
         <p className="font-display mt-4 text-lg font-semibold">{t('nonFundableTitle')}</p>
         <p className="text-ink-700 mt-2 text-sm leading-relaxed">{t('nonFundableBody')}</p>
-        <Button size="lg" className="mt-4 w-full" onClick={reserveNonFundable}>
+        <Button size="lg" className="mt-4 w-full" onClick={reserveNonFundable} disabled={!echOk}>
           {t('nonFundableCta')}
         </Button>
+        {!echOk ? (
+          <p className="text-ambre-700 mt-2 text-xs">{t('echeanceRequired')}</p>
+        ) : null}
         {microFeedback ? (
           <p className="text-ink-500 mt-3 text-xs leading-relaxed">{microFeedback}</p>
         ) : null}
@@ -385,17 +425,26 @@ export function HomeLeadWidget({ rates }: { rates: WidgetRates }) {
           <div className="border-ambre-300 bg-ambre-50 mb-4 rounded-xl border p-4">
             <p className="text-ambre-800 text-sm leading-relaxed">{t('borderlineBanner')}</p>
             <div className="mt-3">
-              <CallbackDialog
-                triggerLabel={t('borderlineCta')}
-                onOpen={() => {
-                  track('borderline_lead', {
-                    ltv: Math.round(aff.ltv * 100),
-                    charges: Math.round(aff.charges * 100),
-                  })
-                  trackFunnel('advance')
-                }}
-              />
+              {echOk ? (
+                <CallbackDialog
+                  triggerLabel={t('borderlineCta')}
+                  onOpen={() => {
+                    track('borderline_lead', {
+                      ltv: Math.round(aff.ltv * 100),
+                      charges: Math.round(aff.charges * 100),
+                    })
+                    trackFunnel('advance')
+                  }}
+                />
+              ) : (
+                <Button variant="outline" size="lg" disabled>
+                  {t('borderlineCta')}
+                </Button>
+              )}
             </div>
+            {!echOk ? (
+              <p className="text-ambre-700 mt-2 text-xs">{t('echeanceRequired')}</p>
+            ) : null}
           </div>
         ) : null}
 
@@ -457,10 +506,15 @@ export function HomeLeadWidget({ rates }: { rates: WidgetRates }) {
             </ul>
 
             {aff.state === 'standard' ? (
-              <Button className="mt-5 w-full" onClick={continueToFunnel}>
-                {t('standardCta')}
-                <ArrowRight data-icon="inline-end" />
-              </Button>
+              <>
+                <Button className="mt-5 w-full" onClick={continueToFunnel} disabled={!echOk}>
+                  {t('standardCta')}
+                  <ArrowRight data-icon="inline-end" />
+                </Button>
+                {!echOk ? (
+                  <p className="text-ambre-700 mt-2 text-center text-xs">{t('echeanceRequired')}</p>
+                ) : null}
+              </>
             ) : null}
           </div>
         ) : null}
@@ -515,6 +569,7 @@ export function HomeLeadWidget({ rates }: { rates: WidgetRates }) {
             wide={wideNumbers}
             onChange={setIncome}
           />
+          {echeancePills}
           <div className="grid grid-cols-1 items-center gap-x-3 gap-y-1.5 sm:grid-cols-[150px_1fr] sm:gap-y-0">
             <label htmlFor="hw-plz" className="text-ink-700 text-sm">
               {t('plz')}
@@ -593,9 +648,32 @@ export function HomeLeadWidget({ rates }: { rates: WidgetRates }) {
             />
           </div>
 
+          {echeancePills ? <div className="mt-4">{echeancePills}</div> : null}
+
+          {/* NPA / localité — obligatoire aussi dans la pop-up */}
+          <div className="mt-4 grid grid-cols-1 items-center gap-x-3 gap-y-1.5 sm:grid-cols-[150px_1fr] sm:gap-y-0">
+            <label htmlFor="ov-plz" className="text-ink-700 text-sm">
+              {t('plz')}
+            </label>
+            <div>
+              <AutocompleteField
+                id="ov-plz"
+                value={plz}
+                placeholder={t('plzPlaceholder')}
+                endpoint="/api/localities"
+                onSelect={(item) => {
+                  const p = item.payload as { npa?: string; localite?: string }
+                  setPlz(p.npa && p.localite ? `${p.npa} ${p.localite}` : item.label)
+                }}
+                onTextChange={(text) => setPlz(text.slice(0, 60))}
+              />
+              {plzInvalid ? <p className="text-ambre-700 mt-1 text-xs">{t('plzError')}</p> : null}
+            </div>
+          </div>
+
           <div className="h-5" />
 
-          {showResult ? (
+          {allFilled ? (
             resultContent
           ) : (
             <p className="text-ink-500 text-center text-sm">{t('emptyHint')}</p>
@@ -611,6 +689,7 @@ export function HomeLeadWidget({ rates }: { rates: WidgetRates }) {
       funnel={funnel ?? 'RENOUVELLEMENT_CHAUD'}
       data={data}
       isRenew={funnel !== 'ACHAT'}
+      presetEcheance={echeance}
     />
     </>
   )

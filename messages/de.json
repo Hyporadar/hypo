@@ -122,7 +122,7 @@
       "bullet2": "Indikativer Tageszinssatz",
       "cta": "Diese Offerte erhalten",
       "savingsNote": "Geschätzte Ersparnis über die gewählte Laufzeit gegenüber einer durchschnittlichen Marktofferte (beobachtete Differenz: 0,72%). Definitiver Zinssatz nach der eigentlichen Ausschreibung.",
-      "emptyHint": "Erfassen Sie Ihre Hypothek, um Ihre Offerten zu sehen.",
+      "emptyHint": "Füllen Sie alle Felder aus, um Ihre Angebote zu sehen.",
       "buyHint": "Sie kaufen eine Immobilie?",
       "buyCta": "Tragbarkeit berechnen",
       "plz": "PLZ / Ort",
@@ -160,7 +160,9 @@
       "contactTitle": "Erhalten Sie Ihre Angebote",
       "contactBody": "Hinterlassen Sie Ihre Kontaktdaten – ein Berater ruft Sie zum gewählten Zeitfenster zurück.",
       "contactCta": "Angebote erhalten",
-      "contactDone": "Gesendet. Ein Berater ruft Sie zum gewählten Zeitfenster zurück."
+      "contactDone": "Gesendet. Ein Berater ruft Sie zum gewählten Zeitfenster zurück.",
+      "echeanceLabel": "Fälligkeit Ihrer Hypothek",
+      "echeanceRequired": "Wählen Sie die Fälligkeit Ihrer Hypothek."
     },
     "rateCards": {
       "saronLabel": "SARON",
