@@ -4,7 +4,6 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import { useTranslations } from 'next-intl'
 import { ArrowRight, Headset, Landmark, PiggyBank, Umbrella, X } from 'lucide-react'
 import { useSearchParams } from 'next/navigation'
-import { useRouter } from '@/i18n/navigation'
 import { formatCHF, formatRate } from '@/lib/format'
 import { cn } from '@/lib/utils'
 import { track, trackFunnel } from '@/lib/track'
@@ -42,48 +41,58 @@ interface AmountRowProps {
   max: number
   step: number
   onChange: (v: number) => void
+  /** Élargit la case chiffre (montants ≥ 1 million) sur desktop. */
+  wide?: boolean
 }
 
-// Ligne : libellé + champ CHF + curseur minimaliste. Rend les 3 cellules d'une
-// grille partagée (voir le conteneur) — la colonne des libellés se dimensionne
-// une seule fois sur le plus long, donc toutes les cases sont alignées.
-function AmountRow({ id, label, value, max, step, onChange }: AmountRowProps) {
+// Ligne libellé + champ CHF + curseur. Sur desktop : 3 colonnes alignées
+// (libellé | case | curseur). Sur mobile : libellé au-dessus, puis case et
+// curseur côte à côte sur une même ligne (comme desktop, pas empilés).
+function AmountRow({ id, label, value, max, step, onChange, wide = false }: AmountRowProps) {
   const pct = max > 0 ? Math.min(100, (value / max) * 100) : 0
   return (
-    <>
+    <div
+      className={cn(
+        'grid grid-cols-1 items-center gap-x-3 gap-y-1.5 sm:gap-y-0',
+        wide ? 'sm:grid-cols-[150px_148px_1fr]' : 'sm:grid-cols-[150px_120px_1fr]'
+      )}
+    >
       <label htmlFor={id} className="text-ink-700 text-sm">
         {label}
       </label>
-      <div className="relative">
+      {/* Mobile : case + curseur en flex ; desktop : cellules de la grille */}
+      <div className="flex items-center gap-3 sm:contents">
+        <div className="relative w-32 shrink-0 sm:w-auto">
+          <input
+            id={id}
+            inputMode="numeric"
+            placeholder="0"
+            className="text-data focus-visible:border-pilot-500 border-line placeholder:text-ink-400 h-9 w-full rounded-md border bg-white pr-9 pl-2.5 text-right text-sm focus-visible:outline-none"
+            value={value === 0 ? '' : String(value).replace(/\B(?=(\d{3})+(?!\d))/g, "'")}
+            onChange={(e) => {
+              const digits = e.target.value.replace(/[^\d]/g, '')
+              onChange(Math.min(max, digits ? Number(digits) : 0))
+            }}
+          />
+          <span className="text-ink-400 text-data pointer-events-none absolute inset-y-0 right-2.5 flex items-center text-xs">
+            CHF
+          </span>
+        </div>
         <input
-          id={id}
-          inputMode="numeric"
-          placeholder="0"
-          className="text-data focus-visible:border-pilot-500 border-line placeholder:text-ink-400 h-9 w-full rounded-md border bg-white pr-9 pl-2.5 text-right text-sm focus-visible:outline-none"
-          value={value === 0 ? '' : String(value).replace(/\B(?=(\d{3})+(?!\d))/g, "'")}
-          onChange={(e) => {
-            const digits = e.target.value.replace(/[^\d]/g, '')
-            onChange(Math.min(max, digits ? Number(digits) : 0))
+          type="range"
+          aria-label={label}
+          min={0}
+          max={max}
+          step={step}
+          value={value}
+          onChange={(e) => onChange(Number(e.target.value))}
+          className="hp-range min-w-0 flex-1 sm:w-full"
+          style={{
+            background: `linear-gradient(to right, var(--color-pilot-600) ${pct}%, var(--color-line) ${pct}%)`,
           }}
         />
-        <span className="text-ink-400 text-data pointer-events-none absolute inset-y-0 right-2.5 flex items-center text-xs">
-          CHF
-        </span>
       </div>
-      <input
-        type="range"
-        aria-label={label}
-        min={0}
-        max={max}
-        step={step}
-        value={value}
-        onChange={(e) => onChange(Number(e.target.value))}
-        className="hp-range w-full"
-        style={{
-          background: `linear-gradient(to right, var(--color-pilot-600) ${pct}%, var(--color-line) ${pct}%)`,
-        }}
-      />
-    </>
+    </div>
   )
 }
 
@@ -131,7 +140,6 @@ function useCountUp(target: number, duration = 350): number {
 
 export function HomeLeadWidget({ rates }: { rates: WidgetRates }) {
   const t = useTranslations('home.leadWidget')
-  const router = useRouter()
   const [propertyValue, setPropertyValue] = useState(0)
   const [mortgage, setMortgage] = useState(0)
   const [income, setIncome] = useState(0)
@@ -298,9 +306,6 @@ export function HomeLeadWidget({ rates }: { rates: WidgetRates }) {
   // La case chiffre s'élargit un peu dès qu'un montant dépasse le million
   // (7 chiffres) pour ne pas couper le dernier zéro ; elle rétrécit en dessous.
   const wideNumbers = Math.max(propertyValue, mortgage, income) >= 1_000_000
-  const gridCols = wideNumbers
-    ? 'grid grid-cols-1 items-center gap-x-3 gap-y-4 sm:grid-cols-[auto_144px_1fr]'
-    : 'grid grid-cols-1 items-center gap-x-3 gap-y-4 sm:grid-cols-[auto_116px_1fr]'
 
   // Overlay des résultats : s'ouvre automatiquement dès qu'un résultat est
   // calculable, par-dessus le site (fond flouté). Un clic dehors / Échap le
@@ -330,6 +335,16 @@ export function HomeLeadWidget({ rates }: { rates: WidgetRates }) {
     window.addEventListener('hp-open-calc', onOpen)
     return () => window.removeEventListener('hp-open-calc', onOpen)
   }, [])
+
+  // Verrou du scroll de l'arrière-plan quand la pop-up est ouverte (focus dessus).
+  useEffect(() => {
+    if (!open) return
+    const prev = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    return () => {
+      document.body.style.overflow = prev
+    }
+  }, [open])
 
   // Ouverture depuis le header : /?funnel=achat|renouvellement pré-sélectionne
   // le choix et ouvre la pop-up (même vide, elle montre les curseurs). Réagit
@@ -469,13 +484,14 @@ export function HomeLeadWidget({ rates }: { rates: WidgetRates }) {
           <FunnelToggle value={funnel} onChange={setFunnel} />
         </div>
 
-        <div className={cn('mx-auto mt-4 max-w-2xl', gridCols)}>
+        <div className="mx-auto mt-4 max-w-2xl space-y-4">
           <AmountRow
             id="hw-property"
             label={t('propertyValue')}
             value={propertyValue}
             max={3_000_000}
             step={50_000}
+            wide={wideNumbers}
             onChange={(v) => {
               setPropertyValue(v)
               if (mortgage === 0 && v > 0) setMortgage(Math.round((v * 0.65) / 25_000) * 25_000)
@@ -487,6 +503,7 @@ export function HomeLeadWidget({ rates }: { rates: WidgetRates }) {
             value={mortgage}
             max={2_400_000}
             step={25_000}
+            wide={wideNumbers}
             onChange={setMortgage}
           />
           <AmountRow
@@ -495,41 +512,30 @@ export function HomeLeadWidget({ rates }: { rates: WidgetRates }) {
             value={income}
             max={500_000}
             step={5_000}
+            wide={wideNumbers}
             onChange={setIncome}
           />
-          <label htmlFor="hw-plz" className="text-ink-700 text-sm">
-            {t('plz')}
-          </label>
-          <div className="sm:col-span-2">
-            <AutocompleteField
-              id="hw-plz"
-              value={plz}
-              placeholder={t('plzPlaceholder')}
-              endpoint="/api/localities"
-              onSelect={(item) => {
-                const p = item.payload as { npa?: string; localite?: string }
-                setPlz(p.npa && p.localite ? `${p.npa} ${p.localite}` : item.label)
-              }}
-              onTextChange={(text) => setPlz(text.slice(0, 60))}
-            />
-            {plzInvalid ? <p className="text-ambre-700 mt-1 text-xs">{t('plzError')}</p> : null}
+          <div className="grid grid-cols-1 items-center gap-x-3 gap-y-1.5 sm:grid-cols-[150px_1fr] sm:gap-y-0">
+            <label htmlFor="hw-plz" className="text-ink-700 text-sm">
+              {t('plz')}
+            </label>
+            <div>
+              <AutocompleteField
+                id="hw-plz"
+                value={plz}
+                placeholder={t('plzPlaceholder')}
+                endpoint="/api/localities"
+                onSelect={(item) => {
+                  const p = item.payload as { npa?: string; localite?: string }
+                  setPlz(p.npa && p.localite ? `${p.npa} ${p.localite}` : item.label)
+                }}
+                onTextChange={(text) => setPlz(text.slice(0, 60))}
+              />
+              {plzInvalid ? <p className="text-ambre-700 mt-1 text-xs">{t('plzError')}</p> : null}
+            </div>
           </div>
         </div>
 
-        {!showResult ? (
-          <p className="text-ink-500 mt-8 text-center text-sm">{t('emptyHint')}</p>
-        ) : null}
-
-        <p className="text-ink-700 mt-8 text-center text-sm">
-          {t('buyHint')}{' '}
-          <button
-            type="button"
-            onClick={() => router.push('/acheter')}
-            className="text-pilot-700 font-medium underline-offset-4 hover:underline"
-          >
-            {t('buyCta')}
-          </button>
-        </p>
       </CardContent>
     </Card>
 
@@ -557,13 +563,14 @@ export function HomeLeadWidget({ rates }: { rates: WidgetRates }) {
           </div>
 
           {/* Curseurs réajustables dans la pop-up : le résultat se met à jour en direct */}
-          <div className={gridCols}>
+          <div className="space-y-4">
             <AmountRow
               id="ov-property"
               label={t('propertyValue')}
               value={propertyValue}
               max={3_000_000}
               step={50_000}
+              wide={wideNumbers}
               onChange={setPropertyValue}
             />
             <AmountRow
@@ -572,6 +579,7 @@ export function HomeLeadWidget({ rates }: { rates: WidgetRates }) {
               value={mortgage}
               max={2_400_000}
               step={25_000}
+              wide={wideNumbers}
               onChange={setMortgage}
             />
             <AmountRow
@@ -580,6 +588,7 @@ export function HomeLeadWidget({ rates }: { rates: WidgetRates }) {
               value={income}
               max={500_000}
               step={5_000}
+              wide={wideNumbers}
               onChange={setIncome}
             />
           </div>

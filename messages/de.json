@@ -764,7 +764,7 @@
     "rateAlert": {
       "title": "Bleiben Sie über die Zinsen informiert",
       "body": "Erhalten Sie die Zinsentwicklung in Ihrem Rhythmus. Doppelte Bestätigung per E-Mail, Abmeldung mit einem Klick.",
-      "emailPlaceholder": "ihre@email.ch",
+      "emailPlaceholder": "Ihre E-Mail",
       "frequency": "Häufigkeit",
       "frequencies": {
         "QUOTIDIEN": "Täglich",
@@ -780,7 +780,7 @@
     "account": {
       "title": "Ihr Dossier überall wiederfinden",
       "body": "Erhalten Sie einen Anmeldelink per E-Mail: Ihr Dossier begleitet Sie, ganz ohne Passwort. Ohne Ihre Zustimmung werden keine Daten an Kreditgeber übermittelt.",
-      "emailPlaceholder": "ihre@email.ch",
+      "emailPlaceholder": "Ihre E-Mail",
       "cta": "Anmeldelink erhalten",
       "sent": "Link an {email} gesendet, er ist eine Stunde gültig.",
       "throttled": "Ein Link wurde soeben verschickt. Prüfen Sie Ihren Posteingang (und den Spam-Ordner).",
@@ -1229,7 +1229,7 @@
     "estimation": {
       "title": "Ihre Zinsschätzung",
       "subtitle": "Auf Basis Ihrer Angaben, Richtwert, mit einem Berater zu bestätigen.",
-      "emailPlaceholder": "ihre@email.ch",
+      "emailPlaceholder": "Ihre E-Mail",
       "emailCta": "Mein Angebot erhalten",
       "emailNote": "Nur um Ihnen Ihr Angebot zu senden und Ihr Dossier zu begleiten. Nie an Dritte weitergegeben.",
       "emailError": "Bitte geben Sie eine gültige E-Mail-Adresse ein.",

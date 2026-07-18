@@ -1157,7 +1157,7 @@
     "rateAlert": {
       "title": "Restez informé·e des taux",
       "body": "Recevez l'évolution des taux à votre rythme. Double confirmation par email, désinscription en un clic.",
-      "emailPlaceholder": "votre@email.ch",
+      "emailPlaceholder": "Votre email",
       "frequency": "Fréquence",
       "frequencies": {
         "QUOTIDIEN": "Chaque jour",
@@ -1173,7 +1173,7 @@
     "account": {
       "title": "Retrouvez votre dossier partout",
       "body": "Recevez un lien de connexion par email : votre dossier vous suit, sans mot de passe. Aucune donnée n'est transmise à un prêteur sans votre accord.",
-      "emailPlaceholder": "votre@email.ch",
+      "emailPlaceholder": "Votre email",
       "cta": "Recevoir mon lien de connexion",
       "sent": "Lien envoyé à {email}, il est valable une heure.",
       "throttled": "Un lien vient déjà de partir. Vérifiez votre boîte de réception (et le dossier spam).",
@@ -1229,7 +1229,7 @@
     "estimation": {
       "title": "Votre estimation de taux",
       "subtitle": "Sur la base de vos réponses, fourchette indicative, à confirmer avec un conseiller.",
-      "emailPlaceholder": "votre@email.ch",
+      "emailPlaceholder": "Votre email",
       "emailCta": "Recevoir mon offre",
       "emailNote": "Uniquement pour vous envoyer votre offre et suivre votre dossier. Jamais transmis à des tiers.",
       "emailError": "Entrez une adresse email valide.",
