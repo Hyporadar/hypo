@@ -37,9 +37,9 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
   return (
     <>
       {/* Hero deux colonnes : titre + CTA à gauche, calculateur à droite */}
-      <section className="mx-auto max-w-[1240px] px-4 pt-[3.75rem] pb-10 sm:px-6 md:pt-24">
+      <section className="mx-auto max-w-[1240px] px-4 pt-[3.75rem] pb-10 sm:px-6 md:pt-[5.4rem]">
         <div className="grid items-start gap-10 lg:grid-cols-2 lg:gap-12">
-          <div className="space-y-6 lg:pt-6">
+          <div className="space-y-6">
             <p className="text-pilot-600 text-xs font-semibold tracking-[0.08em] uppercase">
               {t('hero.overline')}
             </p>
