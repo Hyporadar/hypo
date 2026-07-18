@@ -1,12 +1,14 @@
 'use client'
 
-import { useEffect, useMemo, useRef, useState, useTransition } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { useTranslations } from 'next-intl'
 import { ArrowRight, Headset, Landmark, PiggyBank, Umbrella, X } from 'lucide-react'
+import { useSearchParams } from 'next/navigation'
 import { useRouter } from '@/i18n/navigation'
 import { formatCHF, formatRate } from '@/lib/format'
 import { cn } from '@/lib/utils'
 import { track, trackFunnel } from '@/lib/track'
+import type { Funnel } from '@prisma/client'
 import type { DossierData } from '@/lib/dossier/schema'
 import { computeAffordability, amortissementAnnuel } from '@/lib/dossier/affordability'
 import {
@@ -16,12 +18,12 @@ import {
   type EngineBase,
   type LenderType,
 } from '@/lib/dossier/rate-engine'
-import { submitTestLead } from '@/server/actions/test-lead'
 import { AutocompleteField } from '@/components/wizard/autocomplete'
+import { FunnelToggle } from '@/components/wizard/funnel-choice'
 import { CallbackDialog } from '@/components/marketing/callback-dialog'
+import { HomeContactDialog } from '@/components/marketing/home-contact-dialog'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
-import { Input } from '@/components/ui/input'
 
 // Le calculateur de la home (« Quel taux pouvez-vous obtenir ? ») : curseurs +
 // NPA/localité, résultat en temps réel branché sur le moteur `estimateRate`.
@@ -85,8 +87,6 @@ function AmountRow({ id, label, value, max, step, onChange }: AmountRowProps) {
   )
 }
 
-const EMAIL_RE = /^[^@\s]+@[^@\s]+\.[^@\s]+$/
-
 const DURATIONS: Array<{ key: Duration; years?: number }> = [
   { key: 'saron' },
   { key: 'y5', years: 5 },
@@ -129,14 +129,6 @@ function useCountUp(target: number, duration = 350): number {
   return value
 }
 
-function readUtm(): Record<string, string> | undefined {
-  try {
-    return JSON.parse(window.localStorage.getItem('hp-test-utm') ?? 'null') ?? undefined
-  } catch {
-    return undefined
-  }
-}
-
 export function HomeLeadWidget({ rates }: { rates: WidgetRates }) {
   const t = useTranslations('home.leadWidget')
   const router = useRouter()
@@ -145,6 +137,8 @@ export function HomeLeadWidget({ rates }: { rates: WidgetRates }) {
   const [income, setIncome] = useState(0)
   const [plz, setPlz] = useState('')
   const [duration, setDuration] = useState<Duration>('y10')
+  const [funnel, setFunnel] = useState<Funnel | null>(null)
+  const [contactOpen, setContactOpen] = useState(false)
 
   // Recalcul avec 300 ms de debounce : les curseurs restent fluides, le
   // résultat (et le tracking) ne se met à jour qu'après une courte pause.
@@ -262,33 +256,15 @@ export function HomeLeadWidget({ rates }: { rates: WidgetRates }) {
     })
   }, [aff, deb])
 
-  // Non finançable : capture d'email « échange gratuit ».
-  const [nfEmail, setNfEmail] = useState('')
-  const [nfTouched, setNfTouched] = useState(false)
-  const [nfDone, setNfDone] = useState(false)
-  const [nfPending, startNf] = useTransition()
-
-  function submitNonFundable() {
-    setNfTouched(true)
-    const e = nfEmail.trim()
-    if (!EMAIL_RE.test(e)) return
+  // Non finançable : « Réserver un échange gratuit » ouvre la 2e pop-up de contact.
+  function reserveNonFundable() {
     track('non_fundable_lead', {
       ltv: Math.round(aff.ltv * 100),
       charges: Math.round(aff.charges * 100),
     })
     trackFunnel('advance')
-    trackFunnel('contact')
-    startNf(async () => {
-      await submitTestLead({
-        dossierId,
-        funnel: 'RENOUVELLEMENT_CHAUD',
-        data,
-        email: e,
-        message: 'Non finançable (calculateur home)',
-        utm: readUtm(),
-      }).catch(() => null)
-      setNfDone(true)
-    })
+    setOpen(false)
+    setContactOpen(true)
   }
 
   // Micro-feedback pédagogique (états limite / non finançable) : les leviers
@@ -311,32 +287,20 @@ export function HomeLeadWidget({ rates }: { rates: WidgetRates }) {
 
   function continueToFunnel() {
     trackFunnel('advance')
-    // Préremplit le brouillon partagé — le parcours court repart de ces
-    // montants sans ressaisie.
-    try {
-      window.localStorage.setItem(
-        'hp-draft-renouvellement',
-        JSON.stringify({
-          draftId: crypto.randomUUID(),
-          step: 0,
-          values: {
-            amount: mortgage || null,
-            propertyValue: propertyValue || null,
-            income: income || null,
-            plz: plz || null,
-            endMonth: '',
-          },
-          attribution: {},
-          updatedAt: new Date().toISOString(),
-        })
-      )
-    } catch {
-      // stockage indisponible : la demande partira vide
-    }
-    router.push('/demande')
+    // Ouvre la 2e pop-up de contact (email, téléphone, créneau de rappel)
+    // par-dessus, sans quitter la page.
+    setOpen(false)
+    setContactOpen(true)
   }
 
   const showResult = aff.state !== 'incomplete'
+
+  // La case chiffre s'élargit un peu dès qu'un montant dépasse le million
+  // (7 chiffres) pour ne pas couper le dernier zéro ; elle rétrécit en dessous.
+  const wideNumbers = Math.max(propertyValue, mortgage, income) >= 1_000_000
+  const gridCols = wideNumbers
+    ? 'grid grid-cols-1 items-center gap-x-3 gap-y-4 sm:grid-cols-[auto_144px_1fr]'
+    : 'grid grid-cols-1 items-center gap-x-3 gap-y-4 sm:grid-cols-[auto_116px_1fr]'
 
   // Overlay des résultats : s'ouvre automatiquement dès qu'un résultat est
   // calculable, par-dessus le site (fond flouté). Un clic dehors / Échap le
@@ -360,6 +324,28 @@ export function HomeLeadWidget({ rates }: { rates: WidgetRates }) {
     return () => document.removeEventListener('keydown', onKey)
   }, [open])
 
+  // Ouverture de la pop-up depuis le CTA « Trouver mon hypothèque » du hero.
+  useEffect(() => {
+    const onOpen = () => setOpen(true)
+    window.addEventListener('hp-open-calc', onOpen)
+    return () => window.removeEventListener('hp-open-calc', onOpen)
+  }, [])
+
+  // Ouverture depuis le header : /?funnel=achat|renouvellement pré-sélectionne
+  // le choix et ouvre la pop-up (même vide, elle montre les curseurs). Réagit
+  // au paramètre d'URL (fonctionne aussi si on est déjà sur l'accueil).
+  const funnelParam = useSearchParams().get('funnel')
+  const handledFunnelRef = useRef<string | null>(null)
+  /* eslint-disable react-hooks/set-state-in-effect -- pilotage par l'URL */
+  useEffect(() => {
+    if (!funnelParam || funnelParam === handledFunnelRef.current) return
+    handledFunnelRef.current = funnelParam
+    if (funnelParam === 'achat') setFunnel('ACHAT')
+    else if (funnelParam === 'renouvellement') setFunnel('RENOUVELLEMENT_CHAUD')
+    if (funnelParam === 'achat' || funnelParam === 'renouvellement') setOpen(true)
+  }, [funnelParam])
+  /* eslint-enable react-hooks/set-state-in-effect */
+
   // Contenu du résultat (3 états) affiché dans l'overlay.
   const resultContent =
     aff.state === 'nonfundable' ? (
@@ -370,38 +356,9 @@ export function HomeLeadWidget({ rates }: { rates: WidgetRates }) {
         </span>
         <p className="font-display mt-4 text-lg font-semibold">{t('nonFundableTitle')}</p>
         <p className="text-ink-700 mt-2 text-sm leading-relaxed">{t('nonFundableBody')}</p>
-        {nfDone ? (
-          <p className="text-pilot-700 mt-4 text-sm font-medium">{t('nonFundableThanks')}</p>
-        ) : (
-          <form
-            className="mt-4"
-            noValidate
-            onSubmit={(e) => {
-              e.preventDefault()
-              submitNonFundable()
-            }}
-          >
-            <div className="flex flex-col gap-2 sm:flex-row">
-              <Input
-                type="email"
-                inputMode="email"
-                autoComplete="email"
-                aria-label={t('nonFundableEmail')}
-                placeholder={t('nonFundableEmail')}
-                className="h-12 flex-1"
-                value={nfEmail}
-                onChange={(e) => setNfEmail(e.target.value)}
-                onBlur={() => setNfTouched(true)}
-              />
-              <Button type="submit" size="lg" className="h-12 shrink-0" disabled={nfPending}>
-                {t('nonFundableCta')}
-              </Button>
-            </div>
-            {nfTouched && !EMAIL_RE.test(nfEmail.trim()) ? (
-              <p className="text-erreur mt-1.5 text-left text-xs">{t('emailError')}</p>
-            ) : null}
-          </form>
-        )}
+        <Button size="lg" className="mt-4 w-full" onClick={reserveNonFundable}>
+          {t('nonFundableCta')}
+        </Button>
         {microFeedback ? (
           <p className="text-ink-500 mt-3 text-xs leading-relaxed">{microFeedback}</p>
         ) : null}
@@ -508,7 +465,11 @@ export function HomeLeadWidget({ rates }: { rates: WidgetRates }) {
           <p className="text-ink-700 mt-1">{t('subtitle')}</p>
         </div>
 
-        <div className="mx-auto mt-6 grid max-w-2xl grid-cols-1 items-center gap-x-3 gap-y-4 sm:grid-cols-[auto_120px_1fr]">
+        <div className="mx-auto mt-5 max-w-2xl">
+          <FunnelToggle value={funnel} onChange={setFunnel} />
+        </div>
+
+        <div className={cn('mx-auto mt-4 max-w-2xl', gridCols)}>
           <AmountRow
             id="hw-property"
             label={t('propertyValue')}
@@ -573,7 +534,7 @@ export function HomeLeadWidget({ rates }: { rates: WidgetRates }) {
     </Card>
 
     {/* Overlay des résultats : par-dessus le site, fond flouté, clic dehors = fermer */}
-    {open && showResult ? (
+    {open ? (
       <div className="fixed inset-0 z-50 flex items-center justify-center p-4" role="dialog" aria-modal="true">
         <button
           type="button"
@@ -581,7 +542,7 @@ export function HomeLeadWidget({ rates }: { rates: WidgetRates }) {
           onClick={() => setOpen(false)}
           className="bg-ink-900/50 absolute inset-0 backdrop-blur-lg"
         />
-        <div className="animate-in fade-in zoom-in-95 border-line relative z-10 max-h-[90vh] w-full max-w-md overflow-auto rounded-2xl border bg-white p-6 shadow-xl duration-200 sm:p-7">
+        <div className="animate-in fade-in zoom-in-95 border-line relative z-10 max-h-[90vh] w-full max-w-lg overflow-auto rounded-2xl border bg-white p-6 shadow-xl duration-200 sm:p-7">
           <button
             type="button"
             aria-label="Fermer"
@@ -591,8 +552,12 @@ export function HomeLeadWidget({ rates }: { rates: WidgetRates }) {
             <X className="size-5" />
           </button>
 
+          <div className="mb-4">
+            <FunnelToggle value={funnel} onChange={setFunnel} />
+          </div>
+
           {/* Curseurs réajustables dans la pop-up : le résultat se met à jour en direct */}
-          <div className="grid grid-cols-1 items-center gap-x-3 gap-y-3 sm:grid-cols-[auto_120px_1fr]">
+          <div className={gridCols}>
             <AmountRow
               id="ov-property"
               label={t('propertyValue')}
@@ -621,10 +586,23 @@ export function HomeLeadWidget({ rates }: { rates: WidgetRates }) {
 
           <div className="h-5" />
 
-          {resultContent}
+          {showResult ? (
+            resultContent
+          ) : (
+            <p className="text-ink-500 text-center text-sm">{t('emptyHint')}</p>
+          )}
         </div>
       </div>
     ) : null}
+
+    <HomeContactDialog
+      open={contactOpen}
+      onOpenChange={setContactOpen}
+      dossierId={dossierId}
+      funnel={funnel ?? 'RENOUVELLEMENT_CHAUD'}
+      data={data}
+      isRenew={funnel !== 'ACHAT'}
+    />
     </>
   )
 }

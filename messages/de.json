@@ -101,7 +101,8 @@
         "matin": "Morgen (9–12 Uhr)",
         "apres-midi": "Nachmittag (12–17 Uhr)",
         "soir": "Abend (17–20 Uhr)"
-      }
+      },
+      "emailOptional": "E-Mail (optional)"
     },
     "leadWidget": {
       "title": "Welche Zinsen erhalten Sie?",
@@ -146,7 +147,7 @@
       "borderlineBanner": "Ihr Dossier liegt an der Grenze der Standardkriterien. Einige Anbieter akzeptieren es, unsere Berater wissen welche.",
       "borderlineCta": "Termin mit einem Berater vereinbaren",
       "nonFundableTitle": "Sprechen wir darüber, kostenlos",
-      "nonFundableBody": "Mit diesen Beträgen ist eine klassische Hypothek schwierig zu erhalten: Die Tragbarkeit übersteigt, was Anbieter akzeptieren. Oft gibt es Lösungen (Eigenkapital, Bürge, andere Struktur). Besprechen Sie das kostenlos mit einem unserer Berater.",
+      "nonFundableBody": "Mit diesen Beträgen ist eine klassische Hypothek schwierig. Oft gibt es Lösungen: sprechen wir kostenlos darüber.",
       "nonFundableEmail": "Ihre E-Mail",
       "nonFundableCta": "Kostenloses Gespräch reservieren",
       "nonFundableThanks": "Danke, ein Berater meldet sich in Kürze.",
@@ -155,7 +156,11 @@
       "microIncome": "Mit einem Einkommen von {revenu} käme Ihr Dossier wieder in die Standardkriterien.",
       "microMortgage": "Mit einer auf {montant} reduzierten Hypothek käme Ihr Dossier wieder in die Standardkriterien.",
       "plzError": "Geben Sie eine Schweizer PLZ (4 Ziffern) oder einen Ort ein.",
-      "standardCta": "Verfeinern und Angebote erhalten"
+      "standardCta": "Verfeinern und Angebote erhalten",
+      "contactTitle": "Erhalten Sie Ihre Angebote",
+      "contactBody": "Hinterlassen Sie Ihre Kontaktdaten – ein Berater ruft Sie zum gewählten Zeitfenster zurück.",
+      "contactCta": "Angebote erhalten",
+      "contactDone": "Gesendet. Ein Berater ruft Sie zum gewählten Zeitfenster zurück."
     },
     "rateCards": {
       "saronLabel": "SARON",

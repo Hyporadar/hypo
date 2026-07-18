@@ -101,7 +101,8 @@
         "matin": "Mattina (9–12)",
         "apres-midi": "Pomeriggio (12–17)",
         "soir": "Sera (17–20)"
-      }
+      },
+      "emailOptional": "E-mail (facoltativo)"
     },
     "leadWidget": {
       "title": "Che tasso può ottenere?",
@@ -146,7 +147,7 @@
       "borderlineBanner": "Il tuo dossier è al limite dei criteri standard. Alcuni istituti lo accettano, i nostri consulenti sanno quali.",
       "borderlineCta": "Fissare un appuntamento con un consulente",
       "nonFundableTitle": "Parliamone, gratuitamente",
-      "nonFundableBody": "Con questi importi, un'ipoteca classica sarà difficile da ottenere: la sostenibilità supera quanto gli istituti accettano. Spesso esistono soluzioni (capitale proprio, garante, struttura diversa). Parlane gratuitamente con uno dei nostri consulenti.",
+      "nonFundableBody": "Con questi importi, un'ipoteca classica è difficile. Spesso esistono soluzioni: parliamone gratuitamente.",
       "nonFundableEmail": "La tua email",
       "nonFundableCta": "Riservare un colloquio gratuito",
       "nonFundableThanks": "Grazie, un consulente ti contatta a breve.",
@@ -155,7 +156,11 @@
       "microIncome": "Con un reddito di {revenu}, il tuo dossier rientrerebbe nei criteri standard.",
       "microMortgage": "Con un'ipoteca ridotta a {montant}, il tuo dossier rientrerebbe nei criteri standard.",
       "plzError": "Inserisci un NPA svizzero (4 cifre) o una località.",
-      "standardCta": "Affinare e ricevere le offerte"
+      "standardCta": "Affinare e ricevere le offerte",
+      "contactTitle": "Ricevi le tue offerte",
+      "contactBody": "Lascia i tuoi recapiti: un consulente ti richiama nella fascia scelta.",
+      "contactCta": "Ricevere le offerte",
+      "contactDone": "Inviato. Un consulente ti richiama nella fascia scelta."
     },
     "rateCards": {
       "saronLabel": "SARON",

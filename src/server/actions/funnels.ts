@@ -397,6 +397,7 @@ export async function submitContractUpload(formData: FormData): Promise<UploadRe
 const callbackSchema = z.object({
   name: z.string().min(2).max(120),
   phone: z.string().min(6).max(30),
+  email: z.string().email().max(200).optional(),
   date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/).optional(),
   slot: z.enum(['matin', 'apres-midi', 'soir']).optional(),
   attribution: attributionSchema.optional(),
@@ -436,6 +437,7 @@ export async function requestCallback(
           locale,
           name: parsed.data.name,
           phone: parsed.data.phone,
+          email: parsed.data.email?.toLowerCase() ?? null,
           notes: note,
           partnerId: (await resolveReferrer(attribution?.ref)).partnerId,
           ...(attribution ? utmData(attribution) : {}),

@@ -2,6 +2,7 @@ import Link from 'next/link'
 import type { Prisma } from '@prisma/client'
 import { formatAge, FUNNEL_LABELS } from '@/lib/admin-labels'
 import { formatCHF } from '@/lib/format'
+import { cn } from '@/lib/utils'
 import { prisma } from '@/lib/prisma'
 import { PAGE_SIZE, parseTableParams } from '@/lib/table'
 import {
@@ -14,6 +15,7 @@ import { requireRole } from '@/server/admin/guard'
 import { DataTable, type ColumnDef } from '@/components/admin/data-table'
 import { MiniBarChart, type DayPoint } from '@/components/admin/mini-bar-chart'
 import { FunnelChart } from '@/components/admin/funnel-chart'
+import { DateRangeFilter } from '@/components/admin/date-range-filter'
 import { TableToolbar } from '@/components/admin/table-toolbar'
 import { Badge } from '@/components/ui/badge'
 import { Card, CardContent } from '@/components/ui/card'
@@ -25,6 +27,35 @@ const SORT_MAP: Record<string, keyof Prisma.TestLeadOrderByWithRelationInput> = 
   completude: 'completude',
 }
 
+const FREQ_LABELS: Record<string, string> = {
+  QUOTIDIEN: 'Journalière',
+  HEBDOMADAIRE: 'Hebdomadaire',
+  MENSUEL: 'Mensuelle',
+}
+
+type SubRow = Prisma.RateSubscriptionGetPayload<object>
+
+// Onglets : leads du formulaire court · abonnés aux mises à jour de taux.
+function TabBar({ tab }: { tab: 'leads' | 'abonnes' }) {
+  const item = (href: string, key: 'leads' | 'abonnes', label: string) => (
+    <Link
+      href={href}
+      className={cn(
+        'rounded-md px-3 py-1.5 transition-colors',
+        tab === key ? 'bg-pilot-50 text-pilot-700 font-medium' : 'text-ink-600 hover:text-ink-900'
+      )}
+    >
+      {label}
+    </Link>
+  )
+  return (
+    <div className="border-line inline-flex rounded-lg border bg-white p-1 text-sm">
+      {item('/admin/formulaires', 'leads', 'Leads')}
+      {item('/admin/formulaires?tab=abonnes', 'abonnes', 'Abonnés aux taux')}
+    </div>
+  )
+}
+
 // Leads issus du formulaire court (TestLead) : téléphone, email, hypothèque,
 // revenu, échéance + finançabilité calculée. Vue admin principale.
 export default async function FormLeadsPage({
@@ -33,9 +64,100 @@ export default async function FormLeadsPage({
   searchParams: Promise<Record<string, string | string[] | undefined>>
 }) {
   await requireRole('ADMIN')
-  const params = parseTableParams(await searchParams, 'createdAt')
+  const sp = await searchParams
+  const tab = sp.tab === 'abonnes' ? 'abonnes' : 'leads'
+  const params = parseTableParams(sp, 'createdAt')
+
+  // Période sélectionnée (?from&to) — défaut : 30 derniers jours.
+  const day = (s?: string | string[]) =>
+    typeof s === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(s) ? s : null
+  const fromStr = day(sp.from)
+  const toStr = day(sp.to)
+  const nowD = new Date()
+  const todayUtc = Date.UTC(nowD.getUTCFullYear(), nowD.getUTCMonth(), nowD.getUTCDate())
+  const fromMs = fromStr ? Date.parse(`${fromStr}T00:00:00.000Z`) : todayUtc - 29 * 86_400_000
+  const toMs = toStr ? Date.parse(`${toStr}T00:00:00.000Z`) : todayUtc
+  const dateWhere = { gte: new Date(fromMs), lte: new Date(toMs + 86_400_000 - 1) }
+  const periodLabel = fromStr || toStr ? 'Période sélectionnée' : '30 derniers jours'
+
+  const filterBar = (
+    <div className="flex flex-wrap items-center justify-between gap-3">
+      <TabBar tab={tab} />
+      <DateRangeFilter />
+    </div>
+  )
+
+  // ── Onglet « Abonnés aux taux » : email + fréquence (RateSubscription) ──
+  if (tab === 'abonnes') {
+    const subWhere: Prisma.RateSubscriptionWhereInput = {
+      createdAt: dateWhere,
+      ...(params.q ? { email: { contains: params.q, mode: 'insensitive' } } : {}),
+      ...(params.filters.freq ? { frequency: params.filters.freq as never } : {}),
+    }
+    const [subs, subTotal] = await Promise.all([
+      prisma.rateSubscription.findMany({
+        where: subWhere,
+        orderBy: { createdAt: params.dir },
+        skip: (params.page - 1) * PAGE_SIZE,
+        take: PAGE_SIZE,
+      }),
+      prisma.rateSubscription.count({ where: subWhere }),
+    ])
+    const subColumns: Array<ColumnDef<SubRow>> = [
+      { key: 'email', label: 'E-mail', render: (s) => <span className="text-data">{s.email}</span> },
+      {
+        key: 'frequency',
+        label: 'Fréquence',
+        render: (s) => <Badge variant="secondary">{FREQ_LABELS[s.frequency] ?? s.frequency}</Badge>,
+      },
+      {
+        key: 'statut',
+        label: 'Statut',
+        render: (s) =>
+          s.unsubscribedAt ? (
+            <Badge variant="outline">Désinscrit</Badge>
+          ) : s.confirmedAt ? (
+            <Badge>Confirmé</Badge>
+          ) : (
+            <Badge variant="outline">En attente</Badge>
+          ),
+      },
+      {
+        key: 'createdAt',
+        label: 'Inscrit',
+        sortable: true,
+        className: 'text-data',
+        render: (s) => formatAge(s.createdAt),
+      },
+    ]
+    return (
+      <div className="space-y-5">
+        <h1 className="font-display text-2xl font-semibold">Leads</h1>
+        {filterBar}
+        <TableToolbar
+          searchPlaceholder="E-mail…"
+          filters={[
+            {
+              key: 'freq',
+              label: 'Fréquence',
+              options: Object.entries(FREQ_LABELS).map(([value, label]) => ({ value, label })),
+            },
+          ]}
+        />
+        <DataTable
+          columns={subColumns}
+          rows={subs}
+          total={subTotal}
+          basePath="/admin/formulaires"
+          params={params}
+          emptyLabel="Aucun abonné ne correspond."
+        />
+      </div>
+    )
+  }
 
   const where: Prisma.TestLeadWhereInput = {
+    createdAt: dateWhere,
     ...(params.q
       ? {
           OR: [
@@ -69,20 +191,21 @@ export default async function FormLeadsPage({
   ])
 
   // ── KPIs & graphiques : valeur totale des hypothèques demandées + volume,
-  // le tout par jour sur 30 jours (agrégat global, hors filtres du tableau).
-  const statLeads = await prisma.testLead.findMany({ select: { createdAt: true, data: true } })
+  // par jour, sur la période sélectionnée (?from&to, défaut 30 jours).
+  const statLeads = await prisma.testLead.findMany({
+    where: { createdAt: dateWhere },
+    select: { createdAt: true, data: true },
+  })
   let totalValue = 0
   const totalCount = statLeads.length
   for (const l of statLeads) totalValue += shortLeadFigures(l.data).montant ?? 0
 
-  const DAYS = 30
   const dayKey = (d: Date) => d.toISOString().slice(0, 10)
-  const now = new Date()
-  const todayUtc = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate())
+  const dayCount = Math.min(370, Math.max(1, Math.floor((toMs - fromMs) / 86_400_000) + 1))
   const days: DayPoint[] = []
   const byKey = new Map<string, DayPoint>()
-  for (let i = DAYS - 1; i >= 0; i--) {
-    const key = dayKey(new Date(todayUtc - i * 86_400_000))
+  for (let i = 0; i < dayCount; i++) {
+    const key = dayKey(new Date(fromMs + i * 86_400_000))
     const point: DayPoint = { key, label: `${key.slice(8, 10)}.${key.slice(5, 7)}`, count: 0, value: 0 }
     byKey.set(key, point)
     days.push(point)
@@ -94,12 +217,11 @@ export default async function FormLeadsPage({
     p.value += shortLeadFigures(l.data).montant ?? 0
   }
 
-  // ── Entonnoir de conversion (30 derniers jours), visiteurs uniques / étape.
-  const funnelSince = new Date(todayUtc - (DAYS - 1) * 86_400_000)
+  // ── Entonnoir de conversion sur la période, visiteurs uniques / étape.
   const funnelGroups = await prisma.funnelEvent.groupBy({
     by: ['step'],
     _count: { _all: true },
-    where: { createdAt: { gte: funnelSince } },
+    where: { createdAt: dateWhere },
   })
   const funnelCount = (step: string) =>
     funnelGroups.find((g) => g.step === step)?._count._all ?? 0
@@ -183,6 +305,7 @@ export default async function FormLeadsPage({
   return (
     <div className="space-y-5">
       <h1 className="font-display text-2xl font-semibold">Leads</h1>
+      {filterBar}
 
       {/* Synthèse : valeur totale des hypothèques demandées + volume, par jour */}
       <div className="grid gap-4 md:grid-cols-2">
@@ -209,7 +332,7 @@ export default async function FormLeadsPage({
               <p className="text-ink-500 text-xs font-semibold tracking-[0.08em] uppercase">
                 Demandes
               </p>
-              <p className="text-ink-400 text-xs">30 derniers jours</p>
+              <p className="text-ink-400 text-xs">{periodLabel}</p>
             </div>
             <p className="text-data text-pilot-700 mt-1 text-3xl font-semibold">{totalCount}</p>
             <p className="text-ink-500 mt-3 mb-1 text-xs">Nombre de demandes par jour</p>
@@ -225,7 +348,7 @@ export default async function FormLeadsPage({
             <p className="text-ink-500 text-xs font-semibold tracking-[0.08em] uppercase">
               Entonnoir de conversion
             </p>
-            <p className="text-ink-400 text-xs">30 derniers jours</p>
+            <p className="text-ink-400 text-xs">{periodLabel}</p>
           </div>
           <FunnelChart steps={funnelSteps} />
           <p className="text-ink-400 mt-3 text-xs leading-relaxed">

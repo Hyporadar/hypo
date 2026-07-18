@@ -101,7 +101,8 @@
         "matin": "Matin (9h–12h)",
         "apres-midi": "Après-midi (12h–17h)",
         "soir": "Soir (17h–20h)"
-      }
+      },
+      "emailOptional": "E-mail (optionnel)"
     },
     "leadWidget": {
       "title": "Quel taux pouvez-vous obtenir ?",
@@ -146,7 +147,7 @@
       "borderlineBanner": "Votre dossier est à la limite des critères standards. Certains prêteurs l'acceptent, nos conseillers savent lesquels.",
       "borderlineCta": "Prendre rendez-vous avec un conseiller",
       "nonFundableTitle": "Parlons-en, gratuitement",
-      "nonFundableBody": "Avec ces montants, une hypothèque classique sera difficile à obtenir : la tenue des charges dépasse ce que les prêteurs acceptent. Il existe souvent des solutions (apport, garant, structure différente). Parlez-en gratuitement avec un de nos conseillers.",
+      "nonFundableBody": "Avec ces montants, une hypothèque classique est difficile. Des solutions existent souvent : parlons-en gratuitement.",
       "nonFundableEmail": "Votre email",
       "nonFundableCta": "Réserver un échange gratuit",
       "nonFundableThanks": "Merci, un conseiller vous contacte rapidement.",
@@ -155,7 +156,11 @@
       "microIncome": "Avec un revenu de {revenu}, votre dossier repasserait dans les critères standards.",
       "microMortgage": "Avec une hypothèque réduite à {montant}, votre dossier repasserait dans les critères standards.",
       "plzError": "Entrez un NPA suisse (4 chiffres) ou une localité.",
-      "standardCta": "Affiner et recevoir mes offres"
+      "standardCta": "Affiner et recevoir mes offres",
+      "contactTitle": "Recevez vos offres",
+      "contactBody": "Laissez vos coordonnées : un conseiller vous rappelle au créneau choisi.",
+      "contactCta": "Recevoir mes offres",
+      "contactDone": "C’est envoyé. Un conseiller vous rappelle au créneau choisi."
     },
     "rateCards": {
       "saronLabel": "SARON",

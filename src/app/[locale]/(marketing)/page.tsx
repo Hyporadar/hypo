@@ -1,9 +1,11 @@
+import { Suspense } from 'react'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { ArrowRight } from 'lucide-react'
 import { Link } from '@/i18n/navigation'
 import { prisma } from '@/lib/prisma'
 import { CallbackDialog } from '@/components/marketing/callback-dialog'
 import { HomeLeadWidget, type WidgetRates } from '@/components/marketing/home-lead-widget'
+import { OpenCalcButton } from '@/components/marketing/open-calc-button'
 import { LendersRow, RateCards } from '@/components/marketing/rate-cards'
 import { RateSubscribe } from '@/components/marketing/rate-subscribe'
 import { Button } from '@/components/ui/button'
@@ -46,14 +48,14 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
             </h1>
             <p className="text-ink-700 text-lg leading-relaxed">{t('hero.subtitle')}</p>
             <div className="pt-2">
-              <Button asChild size="lg">
-                <a href="#simulateur">{t('hero.cta')}</a>
-              </Button>
+              <OpenCalcButton label={t('hero.cta')} />
             </div>
           </div>
 
           {/* Calculateur : bien, hypothèque, revenu, NPA → offres par durée */}
-          <HomeLeadWidget rates={rates} />
+          <Suspense fallback={null}>
+            <HomeLeadWidget rates={rates} />
+          </Suspense>
         </div>
 
         {/* Prêteurs au-dessus, puis le bandeau des 3 taux (SARON / 10 / 5 ans) */}

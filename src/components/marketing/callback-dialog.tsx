@@ -44,6 +44,7 @@ export function CallbackDialog({
   const tf = useTranslations('common.form')
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
+  const [email, setEmail] = useState('')
   const [phone, setPhone] = useState('')
   const [date, setDate] = useState('')
   const [slot, setSlot] = useState<Slot | null>(null)
@@ -59,9 +60,11 @@ export function CallbackDialog({
     setError(null)
     if (!valid) return
     startTransition(async () => {
+      const cleanEmail = email.trim()
       const res = await requestCallback({
         name: `${firstName.trim()} ${lastName.trim()}`,
         phone: phone.trim(),
+        email: /^\S+@\S+\.\S+$/.test(cleanEmail) ? cleanEmail : undefined,
         date: /^\d{4}-\d{2}-\d{2}$/.test(date) ? date : undefined,
         slot: slot ?? undefined,
       }).catch(() => ({ ok: false }))
@@ -119,6 +122,19 @@ export function CallbackDialog({
                     onChange={(e) => setLastName(e.target.value)}
                   />
                 </div>
+              </div>
+              <div className="space-y-1.5">
+                <Label htmlFor="cb-email">{t('emailOptional')}</Label>
+                <Input
+                  id="cb-email"
+                  type="email"
+                  inputMode="email"
+                  autoComplete="email"
+                  placeholder="prenom@exemple.ch"
+                  className="h-12"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
               </div>
               <div className="space-y-1.5">
                 <Label htmlFor="cb-phone">{t('phone')}</Label>
