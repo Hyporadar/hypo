@@ -223,3 +223,22 @@
 .hp-range:focus-visible::-moz-range-thumb {
   box-shadow: 0 0 0 3px var(--color-pilot-200);
 }
+
+/* Défilement automatique des logos de prêteurs (mobile) : piste dupliquée,
+   translation de -50% pour une boucle continue. */
+@keyframes hp-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.hp-marquee {
+  animation: hp-marquee 30s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .hp-marquee {
+    animation: none;
+  }
+}

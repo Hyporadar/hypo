@@ -52,23 +52,42 @@ const LENDERS = [
 export async function LendersRow() {
   const t = await getTranslations('home.lenders')
 
+  const logo = (lender: (typeof LENDERS)[number], prefix: string) => (
+    <li key={prefix + lender.name} className="shrink-0 opacity-80">
+      <Image
+        src={`/lenders/${lender.file}`}
+        alt={lender.name}
+        width={Math.round(lender.h * 3.5)}
+        height={lender.h}
+        className="w-auto"
+        style={{ height: lender.h }}
+      />
+    </li>
+  )
+
   return (
-    <div className="text-center">
-      <ul className="flex flex-wrap items-center justify-center gap-x-9 gap-y-4">
-        {LENDERS.map((lender) => (
-          <li key={lender.name} className="opacity-80 transition-opacity hover:opacity-100">
-            <Image
-              src={`/lenders/${lender.file}`}
-              alt={lender.name}
-              width={Math.round(lender.h * 3.5)}
-              height={lender.h}
-              className="w-auto"
-              style={{ height: lender.h }}
-            />
+    <>
+      {/* Desktop : logos sur plusieurs lignes centrées */}
+      <div className="hidden text-center md:block">
+        <ul className="flex flex-wrap items-center justify-center gap-x-9 gap-y-4">
+          {LENDERS.map((lender) => logo(lender, 'd-'))}
+          <li className="text-ink-500 text-sm font-medium">{t('more')}</li>
+        </ul>
+      </div>
+
+      {/* Mobile : une seule ligne qui défile automatiquement (piste dupliquée) */}
+      <div className="overflow-hidden md:hidden">
+        <ul className="hp-marquee flex w-max items-center gap-x-9">
+          {LENDERS.map((lender) => logo(lender, 'a-'))}
+          <li key="a-more" className="text-ink-500 shrink-0 pr-9 text-sm font-medium">
+            {t('more')}
           </li>
-        ))}
-        <li className="text-ink-500 text-sm font-medium">{t('more')}</li>
-      </ul>
-    </div>
+          {LENDERS.map((lender) => logo(lender, 'b-'))}
+          <li key="b-more" className="text-ink-500 shrink-0 pr-9 text-sm font-medium" aria-hidden>
+            {t('more')}
+          </li>
+        </ul>
+      </div>
+    </>
   )
 }

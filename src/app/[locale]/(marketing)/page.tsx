@@ -37,16 +37,18 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
   return (
     <>
       {/* Hero deux colonnes : titre + CTA à gauche, calculateur à droite */}
-      <section className="mx-auto max-w-[1240px] px-4 pt-16 pb-10 sm:px-6 md:pt-24">
+      <section className="mx-auto max-w-[1240px] px-4 pt-[3.75rem] pb-10 sm:px-6 md:pt-24">
         <div className="grid items-start gap-10 lg:grid-cols-2 lg:gap-12">
           <div className="space-y-6 lg:pt-6">
             <p className="text-pilot-600 text-xs font-semibold tracking-[0.08em] uppercase">
               {t('hero.overline')}
             </p>
-            <h1 className="font-display text-3xl leading-[1.1] font-semibold md:text-5xl">
-              {t('hero.title')}
+            <h1 className="font-display text-3xl leading-[1.18] font-bold md:text-5xl">
+              {t.rich('hero.title', {
+                hl: (chunks) => <span className="text-pilot-600">{chunks}</span>,
+              })}
             </h1>
-            <p className="text-ink-700 text-lg leading-relaxed">{t('hero.subtitle')}</p>
+            <p className="text-ink-700 text-lg leading-normal">{t('hero.subtitle')}</p>
             <div className="pt-2">
               <OpenCalcButton label={t('hero.cta')} />
             </div>
