@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Script from 'next/script'
 import { notFound } from 'next/navigation'
 import { hasLocale, NextIntlClientProvider } from 'next-intl'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
@@ -6,6 +7,9 @@ import { fontClasses } from '@/app/fonts'
 import { routing, type Locale } from '@/i18n/routing'
 import { BASE_URL, localizedAlternates } from '@/lib/seo'
 import '@/app/globals.css'
+
+// Google Ads (gtag.js) — chargé uniquement sur le site public (pas admin/campagne/verify).
+const GADS_ID = 'AW-18336759881'
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }))
@@ -97,6 +101,20 @@ export default async function LocaleLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         <NextIntlClientProvider>{children}</NextIntlClientProvider>
+
+        {/* Google Ads (gtag.js) */}
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=${GADS_ID}`}
+          strategy="afterInteractive"
+        />
+        <Script id="gtag-init" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${GADS_ID}');
+          `}
+        </Script>
       </body>
     </html>
   )
