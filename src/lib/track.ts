@@ -8,6 +8,22 @@ export function track(event: string, props: Record<string, unknown> = {}): void 
   w.dataLayer.push({ event, ...props })
 }
 
+// ─── Conversion Google Ads « Envoi de formulaire de lead » ───────────────
+// Étiquette fournie par Google Ads. Déclenchée à chaque lead réellement
+// enregistré (email/téléphone soumis). No-op si gtag n'est pas chargé.
+const GADS_LEAD_CONVERSION = 'AW-18336759881/A27UCPS4pNMcEMmA06dE'
+
+export function trackLeadConversion(): void {
+  if (typeof window === 'undefined') return
+  const w = window as unknown as { gtag?: (...args: unknown[]) => void }
+  if (typeof w.gtag !== 'function') return
+  w.gtag('event', 'conversion', {
+    send_to: GADS_LEAD_CONVERSION,
+    value: 1.0,
+    currency: 'CHF',
+  })
+}
+
 // ─── Entonnoir de conversion (persisté en base, dédupliqué par visiteur) ──
 // Les 4 étapes du parcours, dans l'ordre.
 export const FUNNEL_STEPS = ['visit', 'criteria', 'advance', 'contact'] as const

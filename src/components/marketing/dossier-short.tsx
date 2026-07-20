@@ -6,7 +6,7 @@ import { ArrowRight, Info } from 'lucide-react'
 import type { Funnel } from '@prisma/client'
 import type { DossierData } from '@/lib/dossier/schema'
 import { ECHEANCES, type Echeance } from '@/lib/dossier/echeance'
-import { track, trackFunnel } from '@/lib/track'
+import { track, trackFunnel, trackLeadConversion } from '@/lib/track'
 import { submitTestLead } from '@/server/actions/test-lead'
 import { EstimationSection } from '@/components/wizard/estimation-section'
 import { FunnelToggle } from '@/components/wizard/funnel-choice'
@@ -168,7 +168,7 @@ export function DossierShort({ initialFunnel }: { initialFunnel?: Funnel }) {
     track('non_standard_lead', { reason: 'ltv' })
     trackFunnel('contact')
     startLtv(async () => {
-      await submitTestLead({
+      const res = await submitTestLead({
         dossierId,
         funnel: (funnel ?? 'ACHAT') as Exclude<Funnel, never>,
         data,
@@ -176,6 +176,7 @@ export function DossierShort({ initialFunnel }: { initialFunnel?: Funnel }) {
         message: 'Cas non standard (ltv) - parcours court',
         echeance: isRenew ? (echeance ?? undefined) : undefined,
       }).catch(() => null)
+      if (res?.ok) trackLeadConversion()
       setLtvDone(true)
     })
   }

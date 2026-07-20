@@ -6,7 +6,7 @@ import { CheckCircle2, Radar } from 'lucide-react'
 import type { Funnel } from '@prisma/client'
 import type { DossierData } from '@/lib/dossier/schema'
 import { needsMonitoring, type Echeance } from '@/lib/dossier/echeance'
-import { track, trackFunnel } from '@/lib/track'
+import { track, trackFunnel, trackLeadConversion } from '@/lib/track'
 import { saveDossierAction } from '@/server/actions/dossier'
 import { requestCallback } from '@/server/actions/callback'
 import { submitTestLead } from '@/server/actions/test-lead'
@@ -90,14 +90,27 @@ export function FinalizeDialog({
 
     // Capture email (best-effort — n'interrompt pas l'animation).
     void (async () => {
+      let ok = false
       if (testMode) {
-        await submitTestLead({ dossierId, funnel, data, email, echeance, utm: readUtm() }).catch(
-          () => null
-        )
+        const r = await submitTestLead({
+          dossierId,
+          funnel,
+          data,
+          email,
+          echeance,
+          utm: readUtm(),
+        }).catch(() => null)
+        ok = !!r?.ok
       } else {
         await saveDossierAction({ dossierId, funnel, data }).catch(() => null)
-        await requestCallback({ dossierId, email, echeance, notify: true }).catch(() => null)
+        const r = await requestCallback({ dossierId, email, echeance, notify: true }).catch(
+          () => null
+        )
+        ok = !!r?.ok
       }
+      // Lead réellement enregistré → conversion Google Ads (une fois par lead ;
+      // téléphone/alerte ajoutés ensuite portent sur le même TestLead).
+      if (ok) trackLeadConversion()
     })()
 
     // Échéance lointaine / inconnue → surveillance ; sinon → rappel téléphone.

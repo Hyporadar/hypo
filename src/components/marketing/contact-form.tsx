@@ -4,6 +4,7 @@ import { useState, useTransition } from 'react'
 import { useTranslations } from 'next-intl'
 import { CheckCircle2 } from 'lucide-react'
 import { sendContactMessage } from '@/server/actions/contact'
+import { trackLeadConversion } from '@/lib/track'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -33,8 +34,10 @@ export function ContactForm() {
         email: email.trim(),
         message: message.trim(),
       }).catch(() => ({ ok: false }))
-      if (result.ok) setDone(true)
-      else setError(true)
+      if (result.ok) {
+        trackLeadConversion()
+        setDone(true)
+      } else setError(true)
     })
   }
 

@@ -6,7 +6,7 @@ import { ArrowRight, Headset, Landmark, PiggyBank, Umbrella } from 'lucide-react
 import type { Funnel } from '@prisma/client'
 import { formatCHF, formatRate } from '@/lib/format'
 import { cn } from '@/lib/utils'
-import { track, trackFunnel } from '@/lib/track'
+import { track, trackFunnel, trackLeadConversion } from '@/lib/track'
 import type { DossierData } from '@/lib/dossier/schema'
 import type { Echeance } from '@/lib/dossier/echeance'
 import {
@@ -154,8 +154,9 @@ export function EstimationSection({
     trackFunnel('advance')
     trackFunnel('contact')
     startNs(async () => {
+      let ok = false
       if (testMode) {
-        await submitTestLead({
+        const r = await submitTestLead({
           dossierId,
           funnel,
           data,
@@ -164,10 +165,15 @@ export function EstimationSection({
           echeance,
           utm: readUtm(),
         }).catch(() => null)
+        ok = !!r?.ok
       } else {
         await saveDossierAction({ dossierId, funnel, data }).catch(() => null)
-        await requestCallback({ dossierId, email: e, message: note, notify: true }).catch(() => null)
+        const r = await requestCallback({ dossierId, email: e, message: note, notify: true }).catch(
+          () => null
+        )
+        ok = !!r?.ok
       }
+      if (ok) trackLeadConversion()
       setNsDone(true)
     })
   }

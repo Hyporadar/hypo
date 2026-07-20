@@ -6,7 +6,7 @@ import { CheckCircle2 } from 'lucide-react'
 import type { Funnel } from '@prisma/client'
 import type { DossierData } from '@/lib/dossier/schema'
 import { ECHEANCES, type Echeance } from '@/lib/dossier/echeance'
-import { trackFunnel } from '@/lib/track'
+import { trackFunnel, trackLeadConversion } from '@/lib/track'
 import { submitTestLead } from '@/server/actions/test-lead'
 import {
   Dialog,
@@ -90,7 +90,7 @@ export function HomeContactDialog({
     if (!valid) return
     trackFunnel('contact')
     start(async () => {
-      await submitTestLead({
+      const res = await submitTestLead({
         dossierId,
         funnel,
         data,
@@ -102,6 +102,7 @@ export function HomeContactDialog({
         message: message.trim() || undefined,
         utm: readUtm(),
       }).catch(() => null)
+      if (res?.ok) trackLeadConversion()
       setDone(true)
     })
   }
