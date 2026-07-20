@@ -2,9 +2,9 @@
 
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { useTranslations } from 'next-intl'
-import { ArrowRight, Headset, Landmark, PiggyBank, Umbrella, X } from 'lucide-react'
+import { ArrowRight, Landmark, PiggyBank, Umbrella, X } from 'lucide-react'
 import { useSearchParams } from 'next/navigation'
-import { formatCHF, formatRate } from '@/lib/format'
+import { formatRate } from '@/lib/format'
 import { cn } from '@/lib/utils'
 import { track, trackFunnel } from '@/lib/track'
 import type { Funnel } from '@prisma/client'
@@ -20,7 +20,6 @@ import {
 } from '@/lib/dossier/rate-engine'
 import { AutocompleteField } from '@/components/wizard/autocomplete'
 import { FunnelToggle } from '@/components/wizard/funnel-choice'
-import { CallbackDialog } from '@/components/marketing/callback-dialog'
 import { HomeContactDialog } from '@/components/marketing/home-contact-dialog'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
@@ -267,35 +266,6 @@ export function HomeLeadWidget({ rates }: { rates: WidgetRates }) {
     })
   }, [aff, deb])
 
-  // Non finançable : « Réserver un échange gratuit » ouvre la 2e pop-up de contact.
-  function reserveNonFundable() {
-    track('non_fundable_lead', {
-      ltv: Math.round(aff.ltv * 100),
-      charges: Math.round(aff.charges * 100),
-    })
-    trackFunnel('advance')
-    setOpen(false)
-    setContactOpen(true)
-  }
-
-  // Micro-feedback pédagogique (états limite / non finançable) : les leviers
-  // qui font repasser le dossier dans les critères standards.
-  const microFeedback = useMemo(() => {
-    if (aff.state !== 'borderline' && aff.state !== 'nonfundable') return null
-    const revenuOk = aff.revenuMin != null && aff.revenuMin > deb.r
-    const hMax = Math.floor(aff.hypothequeMax / 5000) * 5000
-    const mortgageOk = hMax > 0 && hMax < deb.m
-    if (revenuOk && mortgageOk) {
-      return t('microBoth', {
-        revenu: formatCHF(Math.ceil(aff.revenuMin! / 1000) * 1000),
-        montant: formatCHF(hMax),
-      })
-    }
-    if (revenuOk) return t('microIncome', { revenu: formatCHF(Math.ceil(aff.revenuMin! / 1000) * 1000) })
-    if (mortgageOk) return t('microMortgage', { montant: formatCHF(hMax) })
-    return null
-  }, [aff, deb, t])
-
   function continueToFunnel() {
     trackFunnel('advance')
     // Ouvre la 2e pop-up de contact (email, téléphone, créneau de rappel)
@@ -398,132 +368,75 @@ export function HomeLeadWidget({ rates }: { rates: WidgetRates }) {
   }, [funnelParam])
   /* eslint-enable react-hooks/set-state-in-effect */
 
-  // Contenu du résultat (3 états) affiché dans l'overlay.
-  const resultContent =
-    aff.state === 'nonfundable' ? (
-      // ── Non finançable en l'état : pas de taux, prise de contact douce ──
-      <div className="text-center">
-        <span className="bg-pilot-50 text-pilot-700 mx-auto flex size-12 items-center justify-center rounded-full">
-          <Headset className="size-6" strokeWidth={1.8} />
+  // Résultat standard pour tous les cas : le visiteur voit toujours une
+  // estimation. La finançabilité (limite / non finançable) est calculée et
+  // visible côté admin (colonne « Finançabilité »), pas affichée au visiteur.
+  const resultContent = result.nonStandard ? null : (
+    <div>
+      <p className="text-center">
+        <span className="text-ink-500 text-sm">{t('from')} </span>
+        <span className="text-data text-pilot-700 text-4xl font-semibold">
+          {formatRate(animatedFrom)}
         </span>
-        <p className="font-display mt-4 text-lg font-semibold">{t('nonFundableTitle')}</p>
-        <p className="text-ink-700 mt-2 text-sm leading-relaxed">{t('nonFundableBody')}</p>
-        <Button size="lg" className="mt-4 w-full" onClick={reserveNonFundable} disabled={!echOk}>
-          {t('nonFundableCta')}
-        </Button>
-        {!echOk ? (
-          <p className="text-ambre-700 mt-2 text-xs">{t('echeanceRequired')}</p>
-        ) : null}
-        {microFeedback ? (
-          <p className="text-ink-500 mt-3 text-xs leading-relaxed">{microFeedback}</p>
-        ) : null}
+      </p>
+
+      {/* Sélecteur de durée */}
+      <div
+        role="radiogroup"
+        aria-label={t('duration')}
+        className="mt-4 flex flex-wrap justify-center gap-1.5"
+      >
+        {DURATIONS.map((d) => (
+          <button
+            key={d.key}
+            type="button"
+            role="radio"
+            aria-checked={duration === d.key}
+            onClick={() => setDuration(d.key)}
+            className={cn(
+              'rounded-full border px-3 py-1 text-xs font-medium transition-colors',
+              duration === d.key
+                ? 'border-pilot-600 bg-pilot-600 text-white'
+                : 'border-line text-ink-700 hover:bg-surface-alt bg-white'
+            )}
+          >
+            {d.years ? t('years', { years: d.years }) : 'SARON'}
+          </button>
+        ))}
       </div>
-    ) : (
-      // ── Standard / limite : fourchette calibrée ──
-      <div>
-        {aff.state === 'borderline' ? (
-          <div className="border-ambre-300 bg-ambre-50 mb-4 rounded-xl border p-4">
-            <p className="text-ambre-800 text-sm leading-relaxed">{t('borderlineBanner')}</p>
-            <div className="mt-3">
-              {echOk ? (
-                <CallbackDialog
-                  triggerLabel={t('borderlineCta')}
-                  onOpen={() => {
-                    track('borderline_lead', {
-                      ltv: Math.round(aff.ltv * 100),
-                      charges: Math.round(aff.charges * 100),
-                    })
-                    trackFunnel('advance')
-                  }}
-                />
-              ) : (
-                <Button variant="outline" size="lg" disabled>
-                  {t('borderlineCta')}
-                </Button>
-              )}
-            </div>
-            {!echOk ? (
-              <p className="text-ambre-700 mt-2 text-xs">{t('echeanceRequired')}</p>
-            ) : null}
-          </div>
-        ) : null}
 
-        {!result.nonStandard ? (
-          <div>
-            <p className="text-center">
-              <span className="text-ink-500 text-sm">{t('from')} </span>
-              <span className="text-data text-pilot-700 text-4xl font-semibold">
-                {formatRate(animatedFrom)}
-              </span>
-            </p>
-
-            {/* Sélecteur de durée */}
-            <div
-              role="radiogroup"
-              aria-label={t('duration')}
-              className="mt-4 flex flex-wrap justify-center gap-1.5"
+      {/* Fourchettes par type de prêteur */}
+      <ul className="mt-5 space-y-2.5">
+        {result.lenders.map((offer) => {
+          const Icon = LENDER_ICONS[offer.type]
+          return (
+            <li
+              key={offer.type}
+              className="border-line flex items-center gap-3 rounded-xl border p-3.5"
             >
-              {DURATIONS.map((d) => (
-                <button
-                  key={d.key}
-                  type="button"
-                  role="radio"
-                  aria-checked={duration === d.key}
-                  onClick={() => setDuration(d.key)}
-                  className={cn(
-                    'rounded-full border px-3 py-1 text-xs font-medium transition-colors',
-                    duration === d.key
-                      ? 'border-pilot-600 bg-pilot-600 text-white'
-                      : 'border-line text-ink-700 hover:bg-surface-alt bg-white'
-                  )}
-                >
-                  {d.years ? t('years', { years: d.years }) : 'SARON'}
-                </button>
-              ))}
-            </div>
+              <span className="bg-pilot-50 text-pilot-700 flex size-9 shrink-0 items-center justify-center rounded-full">
+                <Icon className="size-4.5" strokeWidth={1.8} />
+              </span>
+              <div className="flex-1">
+                <p className="text-sm font-medium">{t(LENDER_KEYS[offer.type])}</p>
+                <p className="text-ink-500 text-xs">
+                  {t('from')} {formatRate(offer.min)} – {formatRate(offer.max)}
+                </p>
+              </div>
+            </li>
+          )
+        })}
+      </ul>
 
-            {/* Fourchettes par type de prêteur */}
-            <ul className="mt-5 space-y-2.5">
-              {result.lenders.map((offer) => {
-                const Icon = LENDER_ICONS[offer.type]
-                return (
-                  <li
-                    key={offer.type}
-                    className="border-line flex items-center gap-3 rounded-xl border p-3.5"
-                  >
-                    <span className="bg-pilot-50 text-pilot-700 flex size-9 shrink-0 items-center justify-center rounded-full">
-                      <Icon className="size-4.5" strokeWidth={1.8} />
-                    </span>
-                    <div className="flex-1">
-                      <p className="text-sm font-medium">{t(LENDER_KEYS[offer.type])}</p>
-                      <p className="text-ink-500 text-xs">
-                        {t('from')} {formatRate(offer.min)} – {formatRate(offer.max)}
-                      </p>
-                    </div>
-                  </li>
-                )
-              })}
-            </ul>
-
-            {aff.state === 'standard' ? (
-              <>
-                <Button className="mt-5 w-full" onClick={continueToFunnel} disabled={!echOk}>
-                  {t('standardCta')}
-                  <ArrowRight data-icon="inline-end" />
-                </Button>
-                {!echOk ? (
-                  <p className="text-ambre-700 mt-2 text-center text-xs">{t('echeanceRequired')}</p>
-                ) : null}
-              </>
-            ) : null}
-          </div>
-        ) : null}
-
-        {microFeedback ? (
-          <p className="text-ink-500 mt-3 text-center text-xs leading-relaxed">{microFeedback}</p>
-        ) : null}
-      </div>
-    )
+      <Button className="mt-5 w-full" onClick={continueToFunnel} disabled={!echOk}>
+        {t('standardCta')}
+        <ArrowRight data-icon="inline-end" />
+      </Button>
+      {!echOk ? (
+        <p className="text-ambre-700 mt-2 text-center text-xs">{t('echeanceRequired')}</p>
+      ) : null}
+    </div>
+  )
 
   return (
     <>

@@ -165,6 +165,7 @@ export function estimateRate(
   else if (ltv <= 0.75) delta += 0.1
   else if (ltv <= 0.8) delta += 0.2
   else if (borderline && ltv <= 0.9) delta += 0.35
+  else if (borderline) delta += 0.6 // hors cadre : prime, mais on affiche un taux
   else return { nonStandard: true, reason: 'ltv' }
 
   // Tenue des charges : intérêts théoriques 5 % + entretien 1 % + amortissement
@@ -173,6 +174,7 @@ export function estimateRate(
   if (affordability <= 0.28) delta += 0
   else if (affordability <= 0.33) delta += 0.05
   else if (borderline && affordability <= 0.38) delta += 0.15
+  else if (borderline) delta += 0.35 // hors cadre : prime, mais on affiche un taux
   else return { nonStandard: true, reason: 'charges' }
 
   // Montant
