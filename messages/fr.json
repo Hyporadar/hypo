@@ -1,7 +1,8 @@
 {
   "metadata": {
-    "title": "HypoRadar, votre hypothèque, sous surveillance",
-    "description": "HypoRadar surveille gratuitement votre hypothèque et vous prévient 12 à 18 mois avant l'échéance. Certificat de capacité d'achat gratuit en 2 minutes."
+    "title": "Hypothèque au meilleur taux en Suisse | HypoRadar",
+    "description": "Comparez gratuitement banques, assurances et caisses de pension pour votre hypothèque en Suisse. Estimation de taux immédiate, à l’achat comme au renouvellement, sans engagement.",
+    "keywords": "hypothèque, taux hypothécaire, hypothèque Suisse, renouvellement hypothèque, achat immobilier, meilleur taux, comparateur hypothèque, SARON, taux fixe, capacité d’achat"
   },
   "common": {
     "nav": {
@@ -648,7 +649,8 @@
       "formMessage": "Message",
       "formSubmit": "Envoyer",
       "formSuccess": "Message envoyé, nous vous répondons sous un jour ouvrable.",
-      "formError": "Une erreur est survenue. Réessayez dans un instant."
+      "formError": "Une erreur est survenue. Réessayez dans un instant.",
+      "metaDescription": "Une question sur votre hypothèque, votre dossier ou notre modèle ? Écrivez-nous, réponse sous un jour ouvrable."
     },
     "faqPage": {
       "metaTitle": "Questions fréquentes",
@@ -656,7 +658,8 @@
       "q5": "Combien coûte HypoRadar ?",
       "a5": "Rien, jamais. Le service est financé par une commission du prêteur retenu, affichée avant signature. Voir notre page transparence.",
       "q6": "Dans quelles langues travaillez-vous ?",
-      "a6": "Français, allemand et italien, formulaires, documents, certificats PDF et conseillers."
+      "a6": "Français, allemand et italien, formulaires, documents, certificats PDF et conseillers.",
+      "metaDescription": "Questions fréquentes sur les hypothèques en Suisse : taux, renouvellement, achat, capacité d’achat et fonctionnement de HypoRadar."
     },
     "legal": {
       "impressumTitle": "Impressum",

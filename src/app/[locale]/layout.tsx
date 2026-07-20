@@ -18,6 +18,8 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: 'metadata' })
+  const ogLocale = locale === 'de' ? 'de_CH' : locale === 'it' ? 'it_CH' : 'fr_CH'
+  const url = `${BASE_URL}/${locale}`
 
   return {
     metadataBase: new URL(BASE_URL),
@@ -26,7 +28,27 @@ export async function generateMetadata({
       template: '%s · HypoRadar',
     },
     description: t('description'),
+    applicationName: 'HypoRadar',
+    keywords: t('keywords').split(',').map((k) => k.trim()),
     alternates: localizedAlternates('/', locale as Locale),
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: { index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1 },
+    },
+    openGraph: {
+      type: 'website',
+      siteName: 'HypoRadar',
+      locale: ogLocale,
+      url,
+      title: t('title'),
+      description: t('description'),
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: t('title'),
+      description: t('description'),
+    },
   }
 }
 
@@ -42,10 +64,38 @@ export default async function LocaleLayout({
     notFound()
   }
   setRequestLocale(locale)
+  const t = await getTranslations({ locale, namespace: 'metadata' })
+
+  // Données structurées (Organization + WebSite) pour la recherche.
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'Organization',
+        '@id': `${BASE_URL}/#organization`,
+        name: 'HypoRadar',
+        url: BASE_URL,
+        description: t('description'),
+        areaServed: { '@type': 'Country', name: 'Switzerland' },
+      },
+      {
+        '@type': 'WebSite',
+        '@id': `${BASE_URL}/#website`,
+        name: 'HypoRadar',
+        url: `${BASE_URL}/${locale}`,
+        inLanguage: locale,
+        publisher: { '@id': `${BASE_URL}/#organization` },
+      },
+    ],
+  }
 
   return (
     <html lang={locale} className={fontClasses}>
       <body className="bg-paper text-ink-900 flex min-h-screen flex-col antialiased">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         <NextIntlClientProvider>{children}</NextIntlClientProvider>
       </body>
     </html>

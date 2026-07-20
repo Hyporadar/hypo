@@ -1,7 +1,8 @@
 {
   "metadata": {
-    "title": "HypoRadar, Ihre Hypothek, unter Beobachtung",
-    "description": "HypoRadar überwacht Ihre Hypothek kostenlos und meldet sich 12 bis 18 Monate vor Ablauf. Kostenloses Tragbarkeitszertifikat in 2 Minuten."
+    "title": "Hypothek zum besten Zinssatz in der Schweiz | HypoRadar",
+    "description": "Vergleichen Sie kostenlos Banken, Versicherungen und Pensionskassen für Ihre Hypothek in der Schweiz. Sofortige Zinsschätzung, beim Kauf wie bei der Verlängerung, unverbindlich.",
+    "keywords": "Hypothek, Hypothekarzins, Hypothek Schweiz, Hypothek verlängern, Immobilienkauf, bester Zinssatz, Hypothekenvergleich, SARON, Festhypothek, Tragbarkeit"
   },
   "common": {
     "nav": {
@@ -648,7 +649,8 @@
       "formMessage": "Nachricht",
       "formSubmit": "Senden",
       "formSuccess": "Nachricht gesendet, wir antworten innert eines Arbeitstags.",
-      "formError": "Ein Fehler ist aufgetreten. Bitte versuchen Sie es gleich erneut."
+      "formError": "Ein Fehler ist aufgetreten. Bitte versuchen Sie es gleich erneut.",
+      "metaDescription": "Eine Frage zu Ihrer Hypothek, Ihrem Dossier oder unserem Modell? Schreiben Sie uns, Antwort innert einem Werktag."
     },
     "faqPage": {
       "metaTitle": "Häufige Fragen",
@@ -656,7 +658,8 @@
       "q5": "Was kostet HypoRadar?",
       "a5": "Nichts, nie. Der Service wird durch eine Kommission des gewählten Kreditgebers finanziert, die vor der Unterschrift ausgewiesen wird. Siehe unsere Transparenz-Seite.",
       "q6": "In welchen Sprachen arbeiten Sie?",
-      "a6": "Deutsch, Französisch und Italienisch, Formulare, Dokumente, PDF-Zertifikate und Berater."
+      "a6": "Deutsch, Französisch und Italienisch, Formulare, Dokumente, PDF-Zertifikate und Berater.",
+      "metaDescription": "Häufige Fragen zu Hypotheken in der Schweiz: Zinsen, Verlängerung, Kauf, Tragbarkeit und wie HypoRadar funktioniert."
     },
     "legal": {
       "impressumTitle": "Impressum",

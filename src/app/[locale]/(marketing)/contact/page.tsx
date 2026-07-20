@@ -13,6 +13,7 @@ export async function generateMetadata({
   const t = await getTranslations({ locale, namespace: 'content.contact' })
   return {
     title: t('metaTitle'),
+    description: t('metaDescription'),
     alternates: localizedAlternates('/contact', locale as Locale),
   }
 }

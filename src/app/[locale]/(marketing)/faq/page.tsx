@@ -12,6 +12,7 @@ export async function generateMetadata({
   const t = await getTranslations({ locale, namespace: 'content.faqPage' })
   return {
     title: t('metaTitle'),
+    description: t('metaDescription'),
     alternates: localizedAlternates('/faq', locale as Locale),
   }
 }

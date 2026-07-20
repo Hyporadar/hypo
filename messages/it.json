@@ -1,7 +1,8 @@
 {
   "metadata": {
-    "title": "HypoRadar, la Sua ipoteca, sotto sorveglianza",
-    "description": "HypoRadar sorveglia gratuitamente la Sua ipoteca e La avvisa da 12 a 18 mesi prima della scadenza. Certificato di sostenibilità gratuito in 2 minuti."
+    "title": "Ipoteca al miglior tasso in Svizzera | HypoRadar",
+    "description": "Confronta gratuitamente banche, assicurazioni e casse pensioni per la tua ipoteca in Svizzera. Stima del tasso immediata, all’acquisto e al rinnovo, senza impegno.",
+    "keywords": "ipoteca, tasso ipotecario, ipoteca Svizzera, rinnovo ipoteca, acquisto immobiliare, miglior tasso, comparatore ipoteca, SARON, tasso fisso, sostenibilità"
   },
   "common": {
     "nav": {
@@ -648,7 +649,8 @@
       "formMessage": "Messaggio",
       "formSubmit": "Inviare",
       "formSuccess": "Messaggio inviato, rispondiamo entro un giorno lavorativo.",
-      "formError": "Si è verificato un errore. Riprovate tra un istante."
+      "formError": "Si è verificato un errore. Riprovate tra un istante.",
+      "metaDescription": "Una domanda sulla tua ipoteca, sul tuo dossier o sul nostro modello? Scrivici, risposta entro un giorno lavorativo."
     },
     "faqPage": {
       "metaTitle": "Domande frequenti",
@@ -656,7 +658,8 @@
       "q5": "Quanto costa HypoRadar?",
       "a5": "Nulla, mai. Il servizio è finanziato da una commissione del finanziatore scelto, indicata prima della firma. Veda la nostra pagina trasparenza.",
       "q6": "In quali lingue lavorate?",
-      "a6": "Italiano, francese e tedesco, moduli, documenti, certificati PDF e consulenti."
+      "a6": "Italiano, francese e tedesco, moduli, documenti, certificati PDF e consulenti.",
+      "metaDescription": "Domande frequenti sulle ipoteche in Svizzera: tassi, rinnovo, acquisto, sostenibilità e come funziona HypoRadar."
     },
     "legal": {
       "impressumTitle": "Impressum",
