@@ -531,7 +531,7 @@ export function HomeLeadWidget({ rates }: { rates: WidgetRates }) {
       <CardContent className="p-6 sm:p-8">
         <div className="text-center">
           <h2 className="font-display text-xl font-semibold text-balance sm:text-2xl">{t('title')}</h2>
-          <p className="text-ink-700 mt-1">{t('subtitle')}</p>
+          <p className="text-ink-700 mt-1 hidden sm:block">{t('subtitle')}</p>
         </div>
 
         <div className="mx-auto mt-5 max-w-2xl">

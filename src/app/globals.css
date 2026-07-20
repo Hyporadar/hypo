@@ -192,6 +192,8 @@
   height: 6px;
   border-radius: 9999px;
   outline: none;
+  /* Le toucher pilote le curseur (pas de scroll parasite) sur mobile. */
+  touch-action: none;
 }
 .hp-range::-webkit-slider-thumb {
   -webkit-appearance: none;
