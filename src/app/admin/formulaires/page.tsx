@@ -288,6 +288,17 @@ export default async function FormLeadsPage({
       },
     },
     {
+      key: 'npa',
+      label: 'NPA / Localité',
+      render: (r) => {
+        const f = shortLeadFigures(r.data)
+        if (!f.npa && !f.localite) return '—'
+        return (
+          <span className="text-data">{[f.npa, f.localite].filter(Boolean).join(' ')}</span>
+        )
+      },
+    },
+    {
       key: 'state',
       label: 'Finançabilité',
       render: (r) => {

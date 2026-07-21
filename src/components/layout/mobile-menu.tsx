@@ -65,8 +65,8 @@ export function MobileMenu() {
         />
         <div
           className={cn(
-            'bg-paper absolute top-0 right-0 flex h-full w-[82%] max-w-xs flex-col p-5 shadow-2xl transition-transform duration-200 ease-out',
-            open ? 'translate-x-0' : 'translate-x-full'
+            'bg-paper absolute top-0 left-0 flex h-full w-[82%] max-w-xs flex-col p-5 shadow-2xl transition-transform duration-200 ease-out',
+            open ? 'translate-x-0' : '-translate-x-full'
           )}
           role="dialog"
           aria-modal="true"

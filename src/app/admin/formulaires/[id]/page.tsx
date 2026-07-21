@@ -57,6 +57,10 @@ export default async function FormLeadDetailPage({ params }: { params: Promise<{
               <Row label="Valeur du bien" value={f.valeur ? formatCHF(f.valeur) : '—'} />
               <Row label="Hypothèque" value={f.montant ? formatCHF(f.montant) : '—'} />
               <Row label="Revenu du ménage" value={f.revenu ? formatCHF(f.revenu) : '—'} />
+              <Row
+                label="NPA / Localité"
+                value={[f.npa, f.localite].filter(Boolean).join(' ') || '—'}
+              />
               <div className="border-line my-1 border-t" />
               <Row label="LTV" value={f.state === 'incomplete' ? '—' : formatRate(f.ltv * 100)} />
               <Row

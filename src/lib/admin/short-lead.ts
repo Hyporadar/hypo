@@ -7,9 +7,15 @@ export interface ShortLeadFigures {
   valeur: number | null
   montant: number | null
   revenu: number | null
+  npa: string | null
+  localite: string | null
   ltv: number
   charges: number
   state: AffordabilityState
+}
+
+function str(v: unknown): string | null {
+  return typeof v === 'string' && v.trim() ? v.trim() : null
 }
 
 function num(v: unknown): number | null {
@@ -19,11 +25,13 @@ function num(v: unknown): number | null {
 export function shortLeadFigures(data: unknown): ShortLeadFigures {
   const d = (data ?? {}) as {
     montantTotal?: unknown
-    bien?: { valeur?: unknown; prixAchat?: unknown }
+    bien?: { valeur?: unknown; prixAchat?: unknown; npa?: unknown; localite?: unknown }
     emprunteurs?: Array<{ revenus?: Array<{ montantAnnuel?: unknown }> }>
   }
   const valeur = num(d.bien?.valeur) ?? num(d.bien?.prixAchat)
   const montant = num(d.montantTotal)
+  const npa = str(d.bien?.npa)
+  const localite = str(d.bien?.localite)
   let revenu = 0
   for (const e of Array.isArray(d.emprunteurs) ? d.emprunteurs : []) {
     for (const r of Array.isArray(e?.revenus) ? e.revenus : []) {
@@ -35,6 +43,8 @@ export function shortLeadFigures(data: unknown): ShortLeadFigures {
     valeur,
     montant,
     revenu: revenu > 0 ? revenu : null,
+    npa,
+    localite,
     ltv: aff.ltv,
     charges: aff.charges,
     state: aff.state,
