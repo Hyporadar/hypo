@@ -13,7 +13,9 @@
       "register": "Créer un compte",
       "app": "Mon espace",
       "logout": "Se déconnecter",
-      "rates": "Taux du jour"
+      "rates": "Taux du jour",
+      "openMenu": "Ouvrir le menu",
+      "closeMenu": "Fermer le menu"
     },
     "language": {
       "label": "Langue"
@@ -56,7 +58,8 @@
       "subtitle": "Banques, assurances et caisses de pension mises en concurrence, gratuitement. Résultat immédiat, aucun rendez-vous imposé.",
       "ctaBuy": "Calculer ma capacité d'achat",
       "ctaRenew": "Enregistrer mon hypothèque",
-      "cta": "Trouver mon hypothèque"
+      "cta": "Analyser mon opportunité",
+      "reviews": "avis clients"
     },
     "dailyRate": {
       "overline": "Le chiffre du jour",
@@ -175,6 +178,23 @@
     },
     "lenders": {
       "more": "+29 prêteurs"
+    },
+    "trust": {
+      "title": "Ils nous font confiance",
+      "average": "de moyenne",
+      "reviews": [
+        "Certificat de capacité d'achat en deux minutes. L'agence a pris notre offre au sérieux immédiatement.",
+        "Nous connaissions notre budget maximal avant même de visiter. Ça change tout dans les négociations.",
+        "Première hypothèque : tout est expliqué simplement, sans jargon. Et la commission s'affiche noir sur blanc.",
+        "Trois offres reçues en 48 heures pour notre achat. La caisse de pension était 0,2 % sous notre banque.",
+        "Le calcul de capacité est précis : l'offre finale correspondait à l'estimation au dixième près.",
+        "Simple, rapide, gratuit. Le résultat s'affiche immédiatement et le conseiller rappelle vraiment sous 24 h.",
+        "Je pensais qu'obtenir un financement serait compliqué. Dossier envoyé, offres comparées, signé en trois semaines.",
+        "Aucun démarchage, aucune pression. On choisit librement son prêteur et on garde le suivi gratuit ensuite.",
+        "Estimation immédiate, certificat le jour même. Notre offre d'achat a été retenue grâce à ça.",
+        "Avec des revenus variables, on pensait que c'était perdu. Le comparatif a trouvé un prêteur adapté.",
+        "Acheteur pour la première fois : le certificat PDF gratuit m'a ouvert les portes des visites."
+      ]
     }
   },
   "buy": {
@@ -331,16 +351,20 @@
     },
     "whyFree": {
       "title": "Pourquoi c'est gratuit",
-      "who": "Qui nous paie ? Le prêteur que vous choisissez. Quand un dossier se conclut, il nous verse une commission d'apport, c'est une pratique standard du marché hypothécaire suisse.",
-      "howMuch": "Combien ? Une commission versée une seule fois par le prêteur, jamais par vous. Vous en voyez le montant exact avant de signer, noir sur blanc.",
-      "whyItWorks": "Pourquoi ça ne change rien pour vous : la commission est la même quel que soit le prêteur retenu. Nous n'avons donc aucun intérêt à vous pousser vers l'un plutôt que l'autre, seulement à ce que vous signiez la meilleure offre.",
+      "subtitle": "Notre rémunération, en clair. Rien n'est caché, rien n'est facturé.",
+      "whoTitle": "Qui nous paie ?",
+      "who": "Le prêteur que vous choisissez. Quand un dossier se conclut, il nous verse une commission d'apport, c'est une pratique standard du marché hypothécaire suisse.",
+      "howMuchTitle": "Combien ?",
+      "howMuch": "Une commission versée une seule fois par le prêteur, jamais par vous. Vous en voyez le montant exact avant de signer, noir sur blanc.",
+      "whyItWorksTitle": "Pourquoi ça ne change rien pour vous",
+      "whyItWorks": "La commission est la même quel que soit le prêteur retenu. Nous n'avons donc aucun intérêt à vous pousser vers l'un plutôt que l'autre, seulement à ce que vous signiez la meilleure offre.",
       "neverSold": "Et une règle non négociable : vos données ne sont jamais vendues ni transmises brutes. Seul un dossier complet, que vous avez validé, part chez un prêteur."
     },
     "proof": {
       "title": "Ce que la comparaison rapporte, en chiffres",
-      "gapStat": "0,72%",
+      "gapStat": "0,7 %",
       "gapLabel": "l'écart moyen entre la meilleure et la pire offre pour un même dossier, soit environ CHF 4'500 par an sur une hypothèque de 650'000 francs",
-      "compareStat": "moins de 10%",
+      "compareStat": "moins de 10 %",
       "compareLabel": "des propriétaires suisses comparent réellement les offres au moment du renouvellement. Les autres signent la proposition de leur banque, telle quelle."
     },
     "faq": {
@@ -592,7 +616,12 @@
       "faq3a": "Le SARON est historiquement moins cher mais fluctue ; le fixe verrouille votre budget. La bonne réponse dépend de votre tolérance au risque et de votre horizon, notre guide détaille l'arbitrage.",
       "ctaRenew": "Comparer avec mon taux actuel",
       "ctaBuy": "Calculer ma capacité d'achat",
-      "snbNote": "Taux de référence indicatifs, calculés à partir des données publiques de la BNS et des grilles du marché."
+      "snbNote": "Taux de référence indicatifs, calculés à partir des données publiques de la BNS et des grilles du marché.",
+      "overline": "Référence du marché",
+      "saronSub": "marge dès",
+      "refNote": "Votre taux personnel dépend de votre dossier : la mise en concurrence sert précisément à l'obtenir sous la référence.",
+      "pillVariable": "variable",
+      "pillPopular": "populaire"
     },
     "guides": {
       "metaTitle": "Guides hypothécaires",

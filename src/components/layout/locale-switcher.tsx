@@ -34,7 +34,7 @@ export function LocaleSwitcher() {
       <SelectTrigger className="text-data w-auto min-w-0 px-2.5" aria-label={t('label')} size="sm">
         <span className="uppercase">{locale}</span>
       </SelectTrigger>
-      <SelectContent align="end">
+      <SelectContent position="popper" align="end" sideOffset={6}>
         {routing.locales.map((l) => (
           <SelectItem key={l} value={l}>
             {LOCALE_LABELS[l]}

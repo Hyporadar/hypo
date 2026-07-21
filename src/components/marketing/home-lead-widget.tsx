@@ -336,9 +336,15 @@ export function HomeLeadWidget({ rates }: { rates: WidgetRates }) {
     return () => document.removeEventListener('keydown', onKey)
   }, [open])
 
-  // Ouverture de la pop-up depuis le CTA « Trouver mon hypothèque » du hero.
+  // Ouverture de la pop-up depuis les CTA (hero + « Par où commencer »).
+  // detail.funnel pré-sélectionne achat/renouvellement le cas échéant.
   useEffect(() => {
-    const onOpen = () => setOpen(true)
+    const onOpen = (e: Event) => {
+      const f = (e as CustomEvent<{ funnel?: string }>).detail?.funnel
+      if (f === 'achat') setFunnel('ACHAT')
+      else if (f === 'renouvellement') setFunnel('RENOUVELLEMENT_CHAUD')
+      setOpen(true)
+    }
     window.addEventListener('hp-open-calc', onOpen)
     return () => window.removeEventListener('hp-open-calc', onOpen)
   }, [])

@@ -13,7 +13,9 @@
       "register": "Creare un conto",
       "app": "La mia area",
       "logout": "Disconnettersi",
-      "rates": "Tassi di oggi"
+      "rates": "Tassi di oggi",
+      "openMenu": "Apri il menu",
+      "closeMenu": "Chiudi il menu"
     },
     "language": {
       "label": "Lingua"
@@ -56,7 +58,8 @@
       "subtitle": "Banche, assicurazioni e casse pensioni messe in concorrenza, gratuitamente. Risultato immediato, nessun appuntamento imposto.",
       "ctaBuy": "Calcolare la sostenibilità",
       "ctaRenew": "Registrare l'ipoteca",
-      "cta": "Trovare la mia ipoteca"
+      "cta": "Analizzare la mia opportunità",
+      "reviews": "recensioni clienti"
     },
     "dailyRate": {
       "overline": "La cifra del giorno",
@@ -175,6 +178,23 @@
     },
     "lenders": {
       "more": "+29 finanziatori"
+    },
+    "trust": {
+      "title": "Si fidano di noi",
+      "average": "di media",
+      "reviews": [
+        "Certificato di capacità d'acquisto in due minuti. L'agenzia ha preso subito sul serio la nostra offerta.",
+        "Conoscevamo il nostro budget massimo prima ancora di visitare. Cambia tutto nelle trattative.",
+        "Prima ipoteca: tutto spiegato in modo semplice, senza gergo. E la commissione è scritta nero su bianco.",
+        "Tre offerte ricevute in 48 ore per il nostro acquisto. La cassa pensioni era 0,2 % sotto la nostra banca.",
+        "Il calcolo della sostenibilità è preciso: l'offerta finale corrispondeva alla stima al decimo.",
+        "Semplice, rapido, gratuito. Il risultato appare subito e il consulente richiama davvero entro 24 h.",
+        "Pensavo che ottenere un finanziamento fosse complicato. Dossier inviato, offerte confrontate, firmato in tre settimane.",
+        "Nessun contatto commerciale, nessuna pressione. Si sceglie liberamente il finanziatore e si mantiene il monitoraggio gratuito.",
+        "Stima immediata, certificato in giornata. La nostra offerta d'acquisto è stata accettata grazie a questo.",
+        "Con redditi variabili pensavamo fosse perso. Il confronto ha trovato un finanziatore adatto.",
+        "Da acquirente per la prima volta: il certificato PDF gratuito mi ha aperto le porte delle visite."
+      ]
     }
   },
   "buy": {
@@ -317,45 +337,49 @@
     "metaDescription": "Ottenete il miglior tasso ipotecario, all'acquisto come al rinnovo: stima immediata e messa in concorrenza dei finanziatori, gratuitamente e senza appuntamento imposto.",
     "hero": {
       "overline": "Il principio",
-      "title": "La vostra ipoteca al miglior tasso, senza perderci giornate.",
-      "subtitle": "All'acquisto come al rinnovo, HypoRadar mette in concorrenza banche, assicurazioni e casse pensioni, gratuitamente, con una stima immediata e senza appuntamento imposto."
+      "title": "La tua ipoteca al miglior tasso, senza perderci giornate.",
+      "subtitle": "All'acquisto come al rinnovo, HypoRadar mette in concorrenza banche, assicurazioni e casse pensioni, gratuitamente, con una stima immediata e nessun appuntamento imposto."
     },
     "steps": {
-      "title": "Tre passi, e basta",
-      "step1Title": "Indicate la vostra situazione",
-      "step1Body": "Il bene, il vostro profilo, la vostra ipoteca: circa 3 minuti. Nessuna burocrazia, le vostre cifre approssimative bastano per iniziare.",
-      "step2Title": "Ricevete subito la vostra stima del tasso",
-      "step2Body": "Al termine del questionario vedete una forbice di tassi calibrata sul vostro dossier, banche, assicurazioni e casse pensioni. Nessun appuntamento, nessuna chiamata da subire.",
-      "step3Title": "Mettiamo in concorrenza i finanziatori",
-      "step3Body": "Un consulente specializzato avvia la gara d'appalto e affina la vostra offerta presso i finanziatori. Confrontate, scegliete, firmate, oppure no. Nessun obbligo."
+      "title": "Tre passi, ed è fatta",
+      "step1Title": "Indica la tua situazione",
+      "step1Body": "L'immobile, il tuo profilo, la tua ipoteca: circa 3 minuti. Nessuna scartoffia, bastano cifre approssimative per iniziare.",
+      "step2Title": "Ricevi subito la tua stima di tasso",
+      "step2Body": "Alla fine del questionario vedi una forbice di tassi calibrata sul tuo dossier – banche, assicurazioni e casse pensioni. Nessun appuntamento, nessuna telefonata da subire.",
+      "step3Title": "Mettiamo i finanziatori in concorrenza",
+      "step3Body": "Un consulente specializzato avvia la gara e affina la tua offerta presso i finanziatori. Confronti, scegli, firmi, oppure no. Nessun obbligo."
     },
     "whyFree": {
       "title": "Perché è gratuito",
-      "who": "Chi ci paga? Il finanziatore che Lei sceglie. Quando un dossier si conclude, ci versa una commissione di intermediazione, prassi standard del mercato ipotecario svizzero.",
-      "howMuch": "Quanto? Una commissione versata una sola volta dal finanziatore, mai da voi. Ne vedete l'importo esatto prima di firmare, nero su bianco.",
-      "whyItWorks": "Perché per Lei non cambia nulla: la commissione è la stessa qualunque sia il finanziatore scelto. Non abbiamo quindi alcun interesse a spingerLa verso l'uno piuttosto che l'altro, solo a farLe firmare l'offerta migliore.",
-      "neverSold": "E una regola non negoziabile: i Suoi dati non sono mai venduti né trasmessi grezzi. Solo un dossier completo, da Lei validato, parte verso un finanziatore."
+      "subtitle": "La nostra remunerazione, in chiaro. Niente di nascosto, niente da pagare.",
+      "whoTitle": "Chi ci paga?",
+      "who": "Il finanziatore che scegli. Quando un dossier si conclude, ci versa una commissione d'intermediazione: è una pratica standard del mercato ipotecario svizzero.",
+      "howMuchTitle": "Quanto?",
+      "howMuch": "Una commissione versata una sola volta dal finanziatore, mai da te. Ne vedi l'importo esatto prima di firmare, nero su bianco.",
+      "whyItWorksTitle": "Perché per te non cambia nulla",
+      "whyItWorks": "La commissione è la stessa qualunque finanziatore scelga. Non abbiamo quindi alcun interesse a spingerti verso l'uno o l'altro, solo a farti firmare l'offerta migliore.",
+      "neverSold": "E una regola non negoziabile: i tuoi dati non vengono mai venduti né trasmessi grezzi. Solo un dossier completo, che hai convalidato, arriva a un finanziatore."
     },
     "proof": {
-      "title": "Quanto rende confrontare, in cifre",
-      "gapStat": "0,72%",
-      "gapLabel": "è lo scarto medio tra la migliore e la peggiore offerta per lo stesso dossier, circa CHF 4'500 all'anno su un'ipoteca di 650'000 franchi",
-      "compareStat": "meno del 10%",
+      "title": "Cosa rende il confronto, in cifre",
+      "gapStat": "0,7 %",
+      "gapLabel": "lo scarto medio tra la migliore e la peggiore offerta per lo stesso dossier, ossia circa CHF 4'500 all'anno su un'ipoteca da 650'000 franchi",
+      "compareStat": "meno del 10 %",
       "compareLabel": "dei proprietari svizzeri confronta davvero le offerte al momento del rinnovo. Gli altri firmano la proposta della loro banca, così com'è."
     },
     "faq": {
       "title": "Le domande che ci fanno",
       "q1": "Mi impegno a qualcosa?",
-      "a1": "No. La stima e la messa in concorrenza sono gratuite e senza impegno: ricevete offerte e restate liberi di rifiutarle tutte, anche per restare presso la vostra banca attuale.",
+      "a1": "No. La stima e la messa in concorrenza sono gratuite e senza impegno: ricevi offerte e resti libero di rifiutarle tutte, anche per restare nella tua banca attuale.",
       "q2": "Chi vede i miei dati?",
-      "a2": "HypoRadar, e nessun altro. I Suoi dati non sono mai venduti. Un finanziatore vede il Suo dossier solo se decide Lei di inviarglielo, una volta completo e da Lei validato.",
+      "a2": "HypoRadar, e nessun altro. I tuoi dati non vengono mai venduti. Un finanziatore vede il tuo dossier solo se decidi di inviarglielo, una volta completo e convalidato da te.",
       "q3": "Devo cambiare banca?",
-      "a3": "No. Spesso la migliore offerta esterna serve semplicemente da argomento per rinegoziare con la Sua banca attuale, che si allinea. Lei vince in entrambi i casi.",
+      "a3": "No. Spesso la migliore offerta esterna serve semplicemente come argomento per rinegoziare con la tua banca attuale, che si allinea. Guadagni in entrambi i casi.",
       "q4": "E se la mia scadenza è ancora lontana?",
-      "a4": "È il momento giusto per anticipare: ricevete già la vostra stima. E se lo desiderate, sorvegliamo il vostro tasso per avvisarvi 12-18 mesi prima della scadenza, quando tutto torna negoziabile."
+      "a4": "È il momento giusto per anticipare: ricevi già la tua stima. E se lo desideri, monitoriamo il tuo tasso per avvisarti 12-18 mesi prima della scadenza, quando tutto torna negoziabile."
     },
     "cta": {
-      "title": "Due minuti per sapere a che punto è",
+      "title": "Due minuti per sapere a che punto sei",
       "buy": "Voglio comprare un immobile",
       "renew": "La mia ipoteca sta per scadere"
     }
@@ -592,7 +616,12 @@
       "faq3a": "Il SARON è storicamente più conveniente ma fluttua; il fisso blocca il Suo budget. La risposta giusta dipende dalla Sua tolleranza al rischio e dal Suo orizzonte, la nostra guida spiega la scelta.",
       "ctaRenew": "Confrontare con il mio tasso",
       "ctaBuy": "Calcolare la sostenibilità",
-      "snbNote": "Tassi di riferimento indicativi, calcolati a partire dai dati pubblici della BNS e dalle griglie di mercato."
+      "snbNote": "Tassi di riferimento indicativi, calcolati a partire dai dati pubblici della BNS e dalle griglie di mercato.",
+      "overline": "Riferimento di mercato",
+      "saronSub": "margine da",
+      "refNote": "Il tuo tasso personale dipende dal tuo dossier: la messa in concorrenza serve proprio a ottenerlo sotto il riferimento.",
+      "pillVariable": "variabile",
+      "pillPopular": "popolare"
     },
     "guides": {
       "metaTitle": "Guide ipotecarie",

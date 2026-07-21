@@ -1,6 +1,6 @@
 import { Suspense } from 'react'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
-import { ArrowRight } from 'lucide-react'
+import { CalendarClock, FileCheck } from 'lucide-react'
 import { Link } from '@/i18n/navigation'
 import { prisma } from '@/lib/prisma'
 import { CallbackDialog } from '@/components/marketing/callback-dialog'
@@ -8,8 +8,9 @@ import { HomeLeadWidget, type WidgetRates } from '@/components/marketing/home-le
 import { OpenCalcButton } from '@/components/marketing/open-calc-button'
 import { LendersRow, RateCards } from '@/components/marketing/rate-cards'
 import { RateSubscribe } from '@/components/marketing/rate-subscribe'
-import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+
+// Conteneur : largeur de la maquette (frame 1280) avec 56px de marge.
+const WRAP = 'mx-auto w-full max-w-[1280px] px-6 md:px-14'
 
 // Taux du jour pour le bandeau et le widget (repli si la table est vide).
 async function getWidgetRates(): Promise<WidgetRates> {
@@ -28,132 +29,220 @@ async function getWidgetRates(): Promise<WidgetRates> {
   }
 }
 
+const Stars = ({ className = '' }: { className?: string }) => (
+  <span className={`text-amber-500 tracking-[2px] ${className}`} aria-hidden>
+    ★★★★★
+  </span>
+)
+
+// Avis clients (carrousel « Ils nous font confiance »). Nom / note / couleur
+// sont indépendants de la langue ; la citation vient des messages (trust.reviews).
+const REVIEW_META = [
+  { n: 'Claire D.', i: 'CD', r: '5,0', c: '#1B6B52' },
+  { n: 'Marc B.', i: 'MB', r: '4,5', c: '#155843' },
+  { n: 'Sophie M.', i: 'SM', r: '5,0', c: '#2E7D64' },
+  { n: 'Nicolas R.', i: 'NR', r: '4,8', c: '#0D3A2E' },
+  { n: 'Isabelle T.', i: 'IT', r: '4,9', c: '#3A8A6E' },
+  { n: 'David F.', i: 'DF', r: '5,0', c: '#1B6B52' },
+  { n: 'Laurent P.', i: 'LP', r: '4,5', c: '#155843' },
+  { n: 'Anne V.', i: 'AV', r: '5,0', c: '#2E7D64' },
+  { n: 'Julien S.', i: 'JS', r: '4,7', c: '#0D3A2E' },
+  { n: 'Mélanie H.', i: 'MH', r: '5,0', c: '#3A8A6E' },
+  { n: 'Pierre G.', i: 'PG', r: '4,5', c: '#1B6B52' },
+]
+
 export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params
   setRequestLocale(locale)
   const t = await getTranslations('home')
   const rates = await getWidgetRates()
 
+  const steps = [1, 2, 3] as const
+  const stepAnim = ['hr-p1', 'hr-p2', 'hr-p3']
+  const textAnim = ['hr-t1', 'hr-t2', 'hr-t3']
+
+  const reviewQuotes = t.raw('trust.reviews') as string[]
+  const testimonials = REVIEW_META.map((m, i) => ({ ...m, q: reviewQuotes[i] ?? '' }))
+
   return (
     <>
-      {/* Hero deux colonnes : titre + CTA à gauche, calculateur à droite */}
-      <section className="mx-auto max-w-[1240px] px-4 pt-[3.2rem] pb-10 sm:px-6 md:pt-[5.4rem]">
-        <div className="grid items-start gap-10 lg:grid-cols-2 lg:gap-12">
-          <div className="space-y-6">
-            <p className="text-pilot-600 text-xs font-semibold tracking-[0.08em] uppercase">
+      {/* Hero : texte + CTA à gauche, calculateur à droite, logos en marquee */}
+      <section className={`${WRAP} pt-14 pb-14 md:pt-[72px]`}>
+        <div className="grid items-start gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-14">
+          <div>
+            <p className="text-pilot-700 mb-5 text-xs font-semibold tracking-[0.12em] uppercase">
               {t('hero.overline')}
             </p>
-            <h1 className="font-display text-3xl leading-[1.18] font-bold md:text-5xl">
+            <h1 className="font-display text-[34px] leading-[1.06] font-medium tracking-[-0.025em] md:text-[52px]">
               {t.rich('hero.title', {
                 hl: (chunks) => <span className="text-pilot-600">{chunks}</span>,
               })}
             </h1>
-            <p className="text-ink-700 text-lg leading-normal">{t('hero.subtitle')}</p>
-            <div className="pt-2">
+            <p className="text-ink-700 mt-6 mb-8 max-w-[520px] text-lg leading-[1.6]">
+              {t('hero.subtitle')}
+            </p>
+            <div className="flex flex-wrap items-center gap-5">
               <OpenCalcButton label={t('hero.cta')} />
+              <span className="inline-flex items-center gap-2">
+                <Stars className="text-base" />
+                <span className="font-mono text-sm font-medium">4,9/5</span>
+                <span className="text-ink-500 text-[13px]">{t('hero.reviews')}</span>
+              </span>
             </div>
           </div>
 
-          {/* Calculateur : bien, hypothèque, revenu, NPA → offres par durée */}
           <Suspense fallback={null}>
             <HomeLeadWidget rates={rates} />
           </Suspense>
         </div>
 
-        {/* Prêteurs au-dessus, puis le bandeau des 3 taux (SARON / 10 / 5 ans) */}
-        <div className="mt-14">
+        <div className="mt-10">
           <LendersRow />
         </div>
-
-        <div className="mt-16">
-          <RateCards rates={rates} />
-        </div>
-
-        {/* Abonnement aux mises à jour de taux */}
-        <div className="mt-16">
-          <RateSubscribe />
-        </div>
       </section>
 
-      {/* Routage vers les deux funnels */}
-      <section className="mx-auto max-w-[1120px] px-6 py-16">
-        <h2 className="font-display text-2xl font-semibold md:text-3xl">{t('routing.title')}</h2>
-        <div className="mt-8 grid gap-4 md:grid-cols-2">
-          <Card className="flex flex-col">
-            <CardHeader>
-              <CardTitle className="font-display text-xl">{t('routing.buyTitle')}</CardTitle>
-            </CardHeader>
-            <CardContent className="text-ink-700 flex flex-1 flex-col justify-between gap-6 text-sm leading-relaxed">
-              {t('routing.buyBody')}
-              <Button asChild className="self-start">
-                <Link href="/acheter">
-                  {t('routing.buyCta')}
-                  <ArrowRight data-icon="inline-end" />
-                </Link>
-              </Button>
-            </CardContent>
-          </Card>
-          <Card className="flex flex-col">
-            <CardHeader>
-              <CardTitle className="font-display text-xl">{t('routing.renewTitle')}</CardTitle>
-            </CardHeader>
-            <CardContent className="text-ink-700 flex flex-1 flex-col justify-between gap-6 text-sm leading-relaxed">
-              {t('routing.renewBody')}
-              <Button asChild className="self-start">
-                <Link href="/renouveler">
-                  {t('routing.renewCta')}
-                  <ArrowRight data-icon="inline-end" />
-                </Link>
-              </Button>
-            </CardContent>
-          </Card>
-        </div>
+      {/* Trois taux phares */}
+      <section className={`${WRAP} pb-11`}>
+        <RateCards rates={rates} />
       </section>
 
-      {/* Étapes */}
-      <section className="bg-surface-alt/60 border-line border-y">
-        <div className="mx-auto max-w-[1120px] px-6 py-16">
-          <h2 className="font-display text-2xl font-semibold md:text-3xl">{t('steps.title')}</h2>
-          <div className="mt-8 grid gap-4 md:grid-cols-3">
-            {([1, 2, 3] as const).map((i) => (
-              <Card key={i}>
-                <CardHeader>
-                  <p className="text-data text-pilot-600 text-sm">0{i}</p>
-                  <CardTitle className="font-display text-lg">{t(`steps.step${i}Title`)}</CardTitle>
-                </CardHeader>
-                <CardContent className="text-ink-700 text-sm leading-relaxed">
-                  {t(`steps.step${i}Body`)}
-                </CardContent>
-              </Card>
+      {/* Comment ça marche — frise animée */}
+      <section className={`${WRAP} pt-4 pb-14`}>
+        <h2 className="font-display mb-11 text-[26px] font-medium tracking-[-0.015em] md:text-[32px]">
+          {t('steps.title')}
+        </h2>
+        <div className="relative">
+          <div className="bg-line absolute top-5 right-5 left-5 hidden h-0.5 md:block" />
+          <div
+            className="bg-pilot-600 absolute top-5 left-5 hidden h-0.5 max-w-[calc(100%-40px)] md:block"
+            style={{ animation: 'hr-line 12s ease-in-out infinite' }}
+          />
+          <div className="relative grid gap-11 md:grid-cols-3">
+            {steps.map((i, idx) => (
+              <div key={i}>
+                <div
+                  className="border-pilot-600 bg-paper text-pilot-700 relative z-[1] flex size-10 items-center justify-center rounded-full border-[1.5px] font-mono text-sm font-medium"
+                  style={{ animation: `${stepAnim[idx]} 12s ease infinite` }}
+                >
+                  0{i}
+                </div>
+                <div style={{ animation: `${textAnim[idx]} 12s ease infinite` }}>
+                  <h3 className="font-display mt-[18px] mb-2 text-lg font-semibold">
+                    {t(`steps.step${i}Title`)}
+                  </h3>
+                  <p className="text-ink-700 text-[15px] leading-[1.55]">
+                    {t(`steps.step${i}Body`)}
+                  </p>
+                </div>
+              </div>
             ))}
           </div>
-          <Link
-            href="/comment-ca-marche"
-            className="text-pilot-700 mt-6 inline-flex items-center gap-1 text-sm font-medium hover:underline"
-          >
-            {t('steps.more')}
-            <ArrowRight className="size-4" />
-          </Link>
         </div>
       </section>
 
-      {/* Transparence + rappel immédiat */}
-      <section className="mx-auto max-w-[1120px] px-6 py-16">
-        <div className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
-          <div className="max-w-2xl space-y-4">
-            <h2 className="font-display text-2xl font-semibold md:text-3xl">
+      {/* Abonnement aux mises à jour de taux */}
+      <section className={`${WRAP} pb-12`}>
+        <RateSubscribe />
+      </section>
+
+      {/* Ils nous font confiance — carrousel d'avis */}
+      <section className="py-4">
+        <div className={`${WRAP} mb-8 flex items-baseline justify-between`}>
+          <h2 className="font-display text-[26px] font-medium tracking-[-0.015em] md:text-[32px]">
+            {t('trust.title')}
+          </h2>
+          <span className="inline-flex items-center gap-2">
+            <Stars className="text-[15px]" />
+            <span className="font-mono text-sm font-medium">4,9/5</span>
+            <span className="text-ink-500 hidden text-[13px] sm:inline">{t('trust.average')}</span>
+          </span>
+        </div>
+        <div className="overflow-hidden [-webkit-mask-image:linear-gradient(90deg,transparent,#000_6%,#000_94%,transparent)] [mask-image:linear-gradient(90deg,transparent,#000_6%,#000_94%,transparent)]">
+          <div
+            className="flex w-max gap-5"
+            style={{ animation: 'hr-marquee 90s linear infinite' }}
+          >
+            {[...testimonials, ...testimonials].map((rev, idx) => (
+              <div
+                key={idx}
+                className="border-line w-[340px] shrink-0 rounded-xl border bg-white px-[26px] py-[22px] shadow-[0_1px_2px_rgba(33,30,26,0.05),0_4px_16px_rgba(33,30,26,0.06)]"
+              >
+                <div className="flex items-center justify-between">
+                  <Stars className="text-sm" />
+                  <span className="font-mono text-[13px] font-medium">{rev.r}</span>
+                </div>
+                <p className="text-ink-700 my-4 text-[15px] leading-[1.55]">{rev.q}</p>
+                <div className="flex items-center gap-2.5">
+                  <span
+                    className="text-paper flex size-8 shrink-0 items-center justify-center rounded-full text-xs font-semibold"
+                    style={{ background: rev.c }}
+                  >
+                    {rev.i}
+                  </span>
+                  <span className="text-[13px] font-semibold">{rev.n}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* La transparence, noir sur blanc — carte verte */}
+      <section className={`${WRAP} py-12`}>
+        <div className="bg-pilot-700 flex flex-col gap-6 rounded-[20px] px-8 py-12 text-[#f7f4ec] shadow-[0_2px_6px_rgba(13,58,46,0.12),0_18px_44px_rgba(13,58,46,0.22)] md:flex-row md:items-center md:justify-between md:px-14 md:py-[52px]">
+          <div className="max-w-[640px]">
+            <h2 className="font-display text-[26px] font-medium tracking-[-0.015em] md:text-[32px]">
               {t('transparency.title')}
             </h2>
-            <p className="text-ink-700 leading-relaxed">{t('transparency.body')}</p>
+            <p className="mt-3.5 text-base leading-[1.6] opacity-85">{t('transparency.body')}</p>
+          </div>
+          <div className="flex flex-shrink-0 flex-wrap gap-3">
             <Link
               href="/comment-ca-marche"
-              className="text-pilot-700 inline-flex items-center gap-1 text-sm font-medium hover:underline"
+              className="inline-flex h-11 items-center rounded-full border border-[#f7f4ec]/40 px-[22px] text-sm font-semibold text-[#f7f4ec] transition-colors hover:bg-[#f7f4ec]/10"
             >
               {t('transparency.more')}
-              <ArrowRight className="size-4" />
             </Link>
+            <CallbackDialog triggerClassName="bg-paper text-pilot-900 hover:bg-paper/90 h-11 rounded-full border-transparent px-[22px] text-sm font-semibold" />
           </div>
-          <CallbackDialog />
+        </div>
+      </section>
+
+      {/* Par où commencer ? — deux cartes vers les funnels */}
+      <section className={`${WRAP} border-line border-b pt-4 pb-16`}>
+        <h2 className="font-display mb-9 text-[26px] font-medium tracking-[-0.015em] md:text-[32px]">
+          {t('routing.title')}
+        </h2>
+        <div className="grid gap-6 md:grid-cols-2">
+          <div className="border-line rounded-[20px] border bg-white px-8 py-9 shadow-[0_1px_2px_rgba(33,30,26,0.04),0_8px_24px_rgba(33,30,26,0.06)] transition-[transform,box-shadow] duration-200 hover:-translate-y-1 hover:shadow-[0_2px_6px_rgba(33,30,26,0.07),0_18px_40px_rgba(33,30,26,0.10)]">
+            <div className="bg-pilot-50 border-pilot-200 mb-5 flex size-12 items-center justify-center rounded-[14px] border">
+              <FileCheck className="text-pilot-700 size-[22px]" strokeWidth={2} />
+            </div>
+            <h3 className="font-display text-xl font-semibold">{t('routing.buyTitle')}</h3>
+            <p className="text-ink-700 mt-2.5 mb-6 max-w-[440px] text-[15px] leading-[1.55]">
+              {t('routing.buyBody')}
+            </p>
+            <OpenCalcButton
+              funnel="achat"
+              label={t('routing.buyCta')}
+              className="h-11 rounded-full px-6 text-sm font-semibold"
+            />
+          </div>
+          <div className="border-line rounded-[20px] border bg-white px-8 py-9 shadow-[0_1px_2px_rgba(33,30,26,0.04),0_8px_24px_rgba(33,30,26,0.06)] transition-[transform,box-shadow] duration-200 hover:-translate-y-1 hover:shadow-[0_2px_6px_rgba(33,30,26,0.07),0_18px_40px_rgba(33,30,26,0.10)]">
+            <div className="bg-pilot-50 border-pilot-200 mb-5 flex size-12 items-center justify-center rounded-[14px] border">
+              <CalendarClock className="text-pilot-700 size-[22px]" strokeWidth={2} />
+            </div>
+            <h3 className="font-display text-xl font-semibold">{t('routing.renewTitle')}</h3>
+            <p className="text-ink-700 mt-2.5 mb-6 max-w-[440px] text-[15px] leading-[1.55]">
+              {t('routing.renewBody')}
+            </p>
+            <OpenCalcButton
+              funnel="renouvellement"
+              label={t('routing.renewCta')}
+              variant="outline"
+              className="border-pilot-600 text-pilot-700 h-11 rounded-full px-6 text-sm font-semibold"
+            />
+          </div>
         </div>
       </section>
     </>

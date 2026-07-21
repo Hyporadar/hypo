@@ -32,11 +32,14 @@ function phoneValid(raw: string): boolean {
 export function CallbackDialog({
   triggerLabel,
   triggerVariant = 'outline',
+  triggerClassName,
   onOpen,
 }: {
   /** Libellé du bouton déclencheur (défaut : « être rappelé »). */
   triggerLabel?: string
   triggerVariant?: 'outline' | 'default'
+  /** Classes additionnelles sur le déclencheur (ex. pilule claire sur fond vert). */
+  triggerClassName?: string
   /** Appelé au clic sur le déclencheur (ex. event borderline_lead). */
   onOpen?: () => void
 } = {}) {
@@ -76,7 +79,12 @@ export function CallbackDialog({
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant={triggerVariant} size="lg" onClick={() => onOpen?.()}>
+        <Button
+          variant={triggerVariant}
+          size="lg"
+          className={triggerClassName}
+          onClick={() => onOpen?.()}
+        >
           <PhoneCall data-icon="inline-start" />
           {triggerLabel ?? t('button')}
         </Button>

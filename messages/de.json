@@ -13,7 +13,9 @@
       "register": "Konto erstellen",
       "app": "Mein Bereich",
       "logout": "Abmelden",
-      "rates": "Zinsen heute"
+      "rates": "Zinsen heute",
+      "openMenu": "Menü öffnen",
+      "closeMenu": "Menü schliessen"
     },
     "language": {
       "label": "Sprache"
@@ -56,7 +58,8 @@
       "subtitle": "Banken, Versicherungen und Pensionskassen im Wettbewerb, kostenlos. Sofortiges Ergebnis, kein Termin nötig.",
       "ctaBuy": "Tragbarkeit berechnen",
       "ctaRenew": "Hypothek erfassen",
-      "cta": "Hypothek finden"
+      "cta": "Meine Gelegenheit analysieren",
+      "reviews": "Kundenbewertungen"
     },
     "dailyRate": {
       "overline": "Die Zahl des Tages",
@@ -175,6 +178,23 @@
     },
     "lenders": {
       "more": "+29 Anbieter"
+    },
+    "trust": {
+      "title": "Sie vertrauen uns",
+      "average": "im Schnitt",
+      "reviews": [
+        "Kaufkraftzertifikat in zwei Minuten. Die Agentur hat unser Angebot sofort ernst genommen.",
+        "Wir kannten unser maximales Budget schon vor der ersten Besichtigung. Das ändert alles bei den Verhandlungen.",
+        "Erste Hypothek: alles einfach erklärt, ohne Fachjargon. Und die Provision steht schwarz auf weiss da.",
+        "Drei Angebote innert 48 Stunden für unseren Kauf. Die Pensionskasse lag 0,2 % unter unserer Bank.",
+        "Die Tragbarkeitsberechnung ist präzise: Das finale Angebot entsprach der Schätzung auf die Nachkommastelle.",
+        "Einfach, schnell, gratis. Das Ergebnis erscheint sofort und der Berater ruft wirklich innert 24 Std. zurück.",
+        "Ich dachte, eine Finanzierung zu bekommen sei kompliziert. Dossier gesendet, Angebote verglichen, in drei Wochen unterschrieben.",
+        "Keine Kaltakquise, kein Druck. Man wählt seinen Kreditgeber frei und behält danach die kostenlose Überwachung.",
+        "Sofortige Schätzung, Zertifikat noch am selben Tag. Unser Kaufangebot wurde dank dessen angenommen.",
+        "Mit variablem Einkommen dachten wir, es sei aussichtslos. Der Vergleich fand einen passenden Kreditgeber.",
+        "Zum ersten Mal Käufer: Das kostenlose PDF-Zertifikat öffnete mir die Türen zu den Besichtigungen."
+      ]
     }
   },
   "buy": {
@@ -317,47 +337,51 @@
     "metaDescription": "Sichern Sie sich den besten Hypothekarzins – beim Kauf wie bei der Verlängerung: sofortige Schätzung und Ausschreibung bei den Kreditgebern, kostenlos und ohne aufgezwungenen Termin.",
     "hero": {
       "overline": "Das Prinzip",
-      "title": "Ihre Hypothek zum besten Zins, ohne dass Sie Tage investieren.",
-      "subtitle": "Beim Kauf wie bei der Verlängerung bringt HypoRadar Banken, Versicherungen und Pensionskassen in Konkurrenz, kostenlos, mit sofortiger Schätzung und ohne aufgezwungenen Termin."
+      "title": "Ihre Hypothek zum besten Zins, ohne dass Sie Tage damit verbringen.",
+      "subtitle": "Beim Kauf wie bei der Verlängerung lässt HypoRadar Banken, Versicherungen und Pensionskassen gegeneinander antreten – kostenlos, mit sofortiger Schätzung und ohne aufgezwungenen Termin."
     },
     "steps": {
-      "title": "Drei Schritte, mehr braucht es nicht",
-      "step1Title": "Erfassen Sie Ihre Situation",
-      "step1Body": "Die Liegenschaft, Ihr Profil, Ihre Hypothek: rund 3 Minuten. Kein Papierkram, Ihre ungefähren Zahlen genügen für den Start.",
-      "step2Title": "Erhalten Sie sofort Ihre Zinsschätzung",
-      "step2Body": "Direkt nach dem Fragebogen sehen Sie eine auf Ihr Dossier abgestimmte Zinsspanne, Banken, Versicherungen und Pensionskassen. Kein Termin, kein aufgezwungener Anruf.",
-      "step3Title": "Wir bringen die Kreditgeber in Konkurrenz",
-      "step3Body": "Ein Fachberater startet die Ausschreibung und verfeinert Ihr Angebot bei den Kreditgebern. Sie vergleichen, wählen, unterschreiben, oder nicht. Keine Verpflichtung."
+      "title": "Drei Schritte, und es ist erledigt",
+      "step1Title": "Beschreiben Sie Ihre Situation",
+      "step1Body": "Objekt, Profil, Hypothek: rund 3 Minuten. Kein Papierkram, Ihre ungefähren Zahlen genügen zum Start.",
+      "step2Title": "Erhalten Sie Ihre Zinsschätzung, sofort",
+      "step2Body": "Sobald der Fragebogen fertig ist, sehen Sie eine auf Ihr Dossier abgestimmte Zinsspanne – Banken, Versicherungen und Pensionskassen. Kein Termin, kein Anruf, den Sie über sich ergehen lassen müssen.",
+      "step3Title": "Wir lassen die Kreditgeber konkurrieren",
+      "step3Body": "Ein spezialisierter Berater startet die Ausschreibung und verfeinert Ihr Angebot bei den Kreditgebern. Sie vergleichen, Sie wählen, Sie unterschreiben – oder nicht. Keine Verpflichtung."
     },
     "whyFree": {
       "title": "Warum es kostenlos ist",
-      "who": "Wer bezahlt uns? Der Kreditgeber, den Sie wählen. Kommt ein Dossier zum Abschluss, zahlt er uns eine Vermittlungskommission, im Schweizer Hypothekarmarkt gängige Praxis.",
-      "howMuch": "Wie viel? Eine einmalige Kommission, gezahlt vom Kreditgeber, nie von Ihnen. Den genauen Betrag sehen Sie vor der Unterschrift, schwarz auf weiss.",
-      "whyItWorks": "Warum das für Sie nichts ändert: die Kommission ist bei jedem Kreditgeber gleich hoch. Wir haben also kein Interesse, Sie zu einem bestimmten Anbieter zu drängen, nur daran, dass Sie die beste Offerte unterschreiben.",
-      "neverSold": "Und eine nicht verhandelbare Regel: Ihre Daten werden nie verkauft und nie roh weitergegeben. Nur ein vollständiges, von Ihnen freigegebenes Dossier geht an einen Kreditgeber."
+      "subtitle": "Unsere Vergütung, klar erklärt. Nichts wird versteckt, nichts wird Ihnen berechnet.",
+      "whoTitle": "Wer bezahlt uns?",
+      "who": "Der Kreditgeber, den Sie wählen. Kommt ein Dossier zustande, zahlt er uns eine Vermittlungsprovision – gängige Praxis im Schweizer Hypothekarmarkt.",
+      "howMuchTitle": "Wie viel?",
+      "howMuch": "Eine einmalige Provision, gezahlt vom Kreditgeber, nie von Ihnen. Sie sehen den genauen Betrag vor der Unterschrift, schwarz auf weiss.",
+      "whyItWorksTitle": "Warum das für Sie nichts ändert",
+      "whyItWorks": "Die Provision ist bei jedem Kreditgeber gleich. Wir haben also kein Interesse daran, Sie zum einen oder anderen zu drängen – nur daran, dass Sie das beste Angebot unterschreiben.",
+      "neverSold": "Und eine nicht verhandelbare Regel: Ihre Daten werden nie verkauft oder roh weitergegeben. Nur ein vollständiges Dossier, das Sie freigegeben haben, geht an einen Kreditgeber."
     },
     "proof": {
-      "title": "Was Vergleichen bringt, in Zahlen",
-      "gapStat": "0,72%",
-      "gapLabel": "beträgt die durchschnittliche Differenz zwischen der besten und der schlechtesten Offerte für dasselbe Dossier, rund CHF 4'500 pro Jahr bei einer Hypothek von 650'000 Franken",
-      "compareStat": "weniger als 10%",
-      "compareLabel": "der Schweizer Eigentümer vergleichen bei der Verlängerung tatsächlich Offerten. Die anderen unterschreiben den Vorschlag ihrer Bank, unverändert."
+      "title": "Was der Vergleich bringt, in Zahlen",
+      "gapStat": "0,7 %",
+      "gapLabel": "der durchschnittliche Unterschied zwischen dem besten und dem schlechtesten Angebot für dasselbe Dossier – rund CHF 4'500 pro Jahr bei einer Hypothek von 650'000 Franken",
+      "compareStat": "weniger als 10 %",
+      "compareLabel": "der Schweizer Eigentümer vergleichen bei der Verlängerung wirklich die Angebote. Die anderen unterschreiben den Vorschlag ihrer Bank, so wie er ist."
     },
     "faq": {
-      "title": "Häufige Fragen",
+      "title": "Die Fragen, die man uns stellt",
       "q1": "Verpflichte ich mich zu etwas?",
-      "a1": "Nein. Die Schätzung und die Ausschreibung sind kostenlos und unverbindlich: Sie erhalten Angebote und können alle ablehnen, auch um bei Ihrer aktuellen Bank zu bleiben.",
+      "a1": "Nein. Schätzung und Ausschreibung sind kostenlos und unverbindlich: Sie erhalten Angebote und können alle ablehnen – auch um bei Ihrer aktuellen Bank zu bleiben.",
       "q2": "Wer sieht meine Daten?",
-      "a2": "HypoRadar, sonst niemand. Ihre Daten werden nie verkauft. Ein Kreditgeber sieht Ihr Dossier nur, wenn Sie es ihm senden, vollständig und von Ihnen freigegeben.",
+      "a2": "HypoRadar, und niemand sonst. Ihre Daten werden nie verkauft. Ein Kreditgeber sieht Ihr Dossier nur, wenn Sie es ihm senden – vollständig und von Ihnen freigegeben.",
       "q3": "Muss ich die Bank wechseln?",
-      "a3": "Nein. Oft dient die beste externe Offerte schlicht als Argument, um mit der eigenen Bank nachzuverhandeln, die dann nachzieht. Sie gewinnen in beiden Fällen.",
+      "a3": "Nein. Oft dient das beste externe Angebot einfach als Argument, um mit Ihrer aktuellen Bank nachzuverhandeln, die dann nachzieht. Sie gewinnen in beiden Fällen.",
       "q4": "Und wenn meine Fälligkeit noch weit weg ist?",
-      "a4": "Dann ist es ideal, früh dran zu sein: Sie erhalten bereits Ihre Schätzung. Und auf Wunsch überwachen wir Ihren Zins und melden uns 12 bis 18 Monate vor Fälligkeit, genau dann, wenn alles wieder verhandelbar wird."
+      "a4": "Genau der richtige Moment, um vorauszuplanen: Sie erhalten schon Ihre Schätzung. Und auf Wunsch überwachen wir Ihren Zins, um Sie 12 bis 18 Monate vor Fälligkeit zu warnen – wenn alles wieder verhandelbar wird."
     },
     "cta": {
       "title": "Zwei Minuten, um zu wissen, wo Sie stehen",
-      "buy": "Ich will eine Immobilie kaufen",
-      "renew": "Meine Hypothek läuft ab"
+      "buy": "Ich möchte ein Objekt kaufen",
+      "renew": "Meine Hypothek läuft bald ab"
     }
   },
   "auth": {
@@ -592,7 +616,12 @@
       "faq3a": "SARON ist historisch günstiger, schwankt aber; die Festhypothek fixiert Ihr Budget. Die richtige Antwort hängt von Ihrer Risikotoleranz und Ihrem Horizont ab, unser Leitfaden erklärt die Abwägung.",
       "ctaRenew": "Mit meinem Zinssatz vergleichen",
       "ctaBuy": "Tragbarkeit berechnen",
-      "snbNote": "Indikative Referenzzinsen, berechnet aus den öffentlichen SNB-Daten und den Marktrastern."
+      "snbNote": "Indikative Referenzzinsen, berechnet aus den öffentlichen SNB-Daten und den Marktrastern.",
+      "overline": "Marktreferenz",
+      "saronSub": "Marge ab",
+      "refNote": "Ihr persönlicher Zins hängt von Ihrem Dossier ab: Die Ausschreibung dient genau dazu, ihn unter die Referenz zu drücken.",
+      "pillVariable": "variabel",
+      "pillPopular": "beliebt"
     },
     "guides": {
       "metaTitle": "Hypotheken-Leitfäden",

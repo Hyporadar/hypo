@@ -123,6 +123,90 @@
   --sidebar-ring: #bfdece;
 }
 
+/* ─── Tokens « bruts » du design raffiné (pages marketing refondues) ──────
+   Variables utilisées en inline-style par les pages Landing / Comment ça
+   marche / Taux du jour, portées telles quelles depuis le fichier design.
+   Noms distincts des tokens Tailwind (@theme utilise --color-*), donc aucun
+   impact sur les utilitaires générés. On n' (re)définit PAS --radius-sm/md/lg
+   (réservés à Tailwind) : les valeurs littérales sont inline dans le markup. */
+:root {
+  --ink-900: #211e1a;
+  --ink-700: #45413a;
+  --ink-500: #6f6960;
+  --ink-400: #8d867b;
+
+  --paper: #faf7f1;
+  --surface: #ffffff;
+  --surface-alt: #f2ede4;
+  --line: #e6e0d4;
+  --line-strong: #cfc7b8;
+
+  --green-900: #0d3a2e;
+  --green-700: #155843;
+  --green-600: #1b6b52;
+  --green-500: #248064;
+  --green-200: #bfdece;
+  --green-100: #ddeee4;
+  --green-50: #eef6f0;
+
+  --amber-700: #96651a;
+  --amber-600: #b97e1e;
+  --amber-500: #d99a33;
+  --amber-100: #f8e8c8;
+  --amber-50: #fbf3e2;
+
+  --text-on-dark: #f7f4ec;
+  --text-muted: #6f6960;
+
+  --font-ui: var(--font-instrument);
+
+  /* Raccourcis « font: » (police + graisse + taille/interligne) */
+  --text-overline: 600 12px/1.2 var(--font-ui);
+  --text-label: 600 13px/1.2 var(--font-ui);
+  --text-body-sm: 400 13px/1.5 var(--font-ui);
+  --text-body-md: 400 15px/1.55 var(--font-ui);
+  --text-body-lg: 400 18px/1.55 var(--font-ui);
+
+  --radius-pill: 999px;
+  --shadow-card: 0 1px 2px rgba(33, 30, 26, 0.05), 0 4px 16px rgba(33, 30, 26, 0.06);
+  --shadow-raised: 0 2px 6px rgba(33, 30, 26, 0.08), 0 12px 32px rgba(33, 30, 26, 0.1);
+}
+
+/* Animation de la frise « Trois étapes » (page Comment ça marche). */
+@keyframes hr-line {
+  0% { width: 0; }
+  28% { width: 36%; }
+  40% { width: 36%; }
+  68% { width: 72%; }
+  80% { width: 72%; }
+  96%, 100% { width: 100%; }
+}
+@keyframes hr-p1 {
+  0% { background: #fff; color: var(--green-700); transform: scale(1); box-shadow: none; }
+  3%, 96% { background: var(--green-600); color: #fff; transform: scale(1.1); box-shadow: 0 6px 16px rgba(27, 107, 82, 0.3); }
+  100% { background: #fff; color: var(--green-700); transform: scale(1); box-shadow: none; }
+}
+@keyframes hr-p2 {
+  0%, 20% { background: #fff; color: var(--green-700); transform: scale(1); box-shadow: none; }
+  24%, 96% { background: var(--green-600); color: #fff; transform: scale(1.1); box-shadow: 0 6px 16px rgba(27, 107, 82, 0.3); }
+  100% { background: #fff; color: var(--green-700); transform: scale(1); box-shadow: none; }
+}
+@keyframes hr-p3 {
+  0%, 60% { background: #fff; color: var(--green-700); transform: scale(1); box-shadow: none; }
+  64%, 96% { background: var(--green-600); color: #fff; transform: scale(1.1); box-shadow: 0 6px 16px rgba(27, 107, 82, 0.3); }
+  100% { background: #fff; color: var(--green-700); transform: scale(1); box-shadow: none; }
+}
+@keyframes hr-marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+@keyframes hr-t1 { 0% { opacity: 0.55; } 3%, 96% { opacity: 1; } 100% { opacity: 0.55; } }
+@keyframes hr-t2 { 0%, 20% { opacity: 0.55; } 24%, 96% { opacity: 1; } 100% { opacity: 0.55; } }
+@keyframes hr-t3 { 0%, 60% { opacity: 0.55; } 64%, 96% { opacity: 1; } 100% { opacity: 0.55; } }
+@media (prefers-reduced-motion: reduce) {
+  [style*="hr-line"], [style*="hr-p"], [style*="hr-t"] { animation: none !important; }
+}
+
 /* Mode sombre : surfaces de marque vert foncé (usage limité). */
 .dark {
   --background: #0d3a2e;

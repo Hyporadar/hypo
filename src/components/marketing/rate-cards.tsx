@@ -15,21 +15,19 @@ export async function RateCards({ rates }: { rates: WidgetRates }) {
   ]
 
   return (
-    <div className="mx-auto grid max-w-3xl gap-3 sm:grid-cols-3">
+    <div className="grid gap-6 md:grid-cols-3">
       {cards.map((card) => (
         <div
           key={card.label}
-          className={
-            card.featured
-              ? 'border-pilot-600 rounded-xl border bg-white p-4 text-center shadow-sm'
-              : 'border-line rounded-xl border bg-white p-4 text-center'
-          }
+          className={`rounded-[20px] border bg-white px-8 py-7 text-center shadow-[0_1px_2px_rgba(33,30,26,0.04),0_8px_24px_rgba(33,30,26,0.06)] transition-[transform,box-shadow] duration-200 hover:-translate-y-1 hover:shadow-[0_2px_6px_rgba(33,30,26,0.07),0_18px_40px_rgba(33,30,26,0.10)] ${
+            card.featured ? 'border-pilot-700 border-[1.5px]' : 'border-line'
+          }`}
         >
-          <p className="font-display text-base font-semibold">{card.label}</p>
-          <p className="text-ink-500 text-xs">{card.sub}</p>
-          <p className="text-data text-pilot-700 mt-1 text-2xl sm:text-3xl">
+          <div className="text-lg font-semibold">{card.label}</div>
+          <div className="text-ink-500 mt-1 text-[15px]">{card.sub}</div>
+          <div className="text-pilot-700 mt-2.5 font-mono text-[40px] leading-[1.1] font-medium">
             {formatRate(card.rate)}
-          </p>
+          </div>
         </div>
       ))}
     </div>
@@ -49,14 +47,13 @@ const LENDERS = [
   { name: 'BCV', file: 'bcv.svg', h: 22 },
 ]
 
+// Ligne de prêteurs : marquee continu masqué sur les bords (cf. design).
 export async function LendersRow() {
-  const t = await getTranslations('home.lenders')
-
   const logo = (lender: (typeof LENDERS)[number], prefix: string) => (
-    <li key={prefix + lender.name} className="shrink-0 opacity-80">
+    <li key={prefix + lender.name} className="shrink-0 opacity-80" aria-hidden={prefix !== 'a-'}>
       <Image
         src={`/lenders/${lender.file}`}
-        alt={lender.name}
+        alt={prefix === 'a-' ? lender.name : ''}
         width={Math.round(lender.h * 3.5)}
         height={lender.h}
         className="w-auto"
@@ -66,28 +63,14 @@ export async function LendersRow() {
   )
 
   return (
-    <>
-      {/* Desktop : logos sur plusieurs lignes centrées */}
-      <div className="hidden text-center md:block">
-        <ul className="flex flex-wrap items-center justify-center gap-x-9 gap-y-4">
-          {LENDERS.map((lender) => logo(lender, 'd-'))}
-          <li className="text-ink-500 text-sm font-medium">{t('more')}</li>
-        </ul>
-      </div>
-
-      {/* Mobile : une seule ligne qui défile automatiquement (piste dupliquée) */}
-      <div className="overflow-hidden md:hidden">
-        <ul className="hp-marquee flex w-max items-center gap-x-9">
-          {LENDERS.map((lender) => logo(lender, 'a-'))}
-          <li key="a-more" className="text-ink-500 shrink-0 pr-9 text-sm font-medium">
-            {t('more')}
-          </li>
-          {LENDERS.map((lender) => logo(lender, 'b-'))}
-          <li key="b-more" className="text-ink-500 shrink-0 pr-9 text-sm font-medium" aria-hidden>
-            {t('more')}
-          </li>
-        </ul>
-      </div>
-    </>
+    <div className="overflow-hidden [-webkit-mask-image:linear-gradient(90deg,transparent,#000_8%,#000_92%,transparent)] [mask-image:linear-gradient(90deg,transparent,#000_8%,#000_92%,transparent)]">
+      <ul
+        className="flex w-max items-center gap-x-14"
+        style={{ animation: 'hr-marquee 28s linear infinite' }}
+      >
+        {LENDERS.map((lender) => logo(lender, 'a-'))}
+        {LENDERS.map((lender) => logo(lender, 'b-'))}
+      </ul>
+    </div>
   )
 }
