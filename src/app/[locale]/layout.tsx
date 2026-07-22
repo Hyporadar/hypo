@@ -8,8 +8,10 @@ import { routing, type Locale } from '@/i18n/routing'
 import { BASE_URL, localizedAlternates } from '@/lib/seo'
 import '@/app/globals.css'
 
-// Google Ads (gtag.js) — chargé uniquement sur le site public (pas admin/campagne/verify).
+// Google Ads + Google Analytics 4 (gtag.js) — chargés uniquement sur le site
+// public (pas admin/campagne/verify). Une seule lib gtag.js, deux configs.
 const GADS_ID = 'AW-18336759881'
+const GA4_ID = 'G-5WHBK3XTMH'
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }))
@@ -102,9 +104,9 @@ export default async function LocaleLayout({
         />
         <NextIntlClientProvider>{children}</NextIntlClientProvider>
 
-        {/* Google Ads (gtag.js) */}
+        {/* Google Ads + Google Analytics 4 (gtag.js) */}
         <Script
-          src={`https://www.googletagmanager.com/gtag/js?id=${GADS_ID}`}
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA4_ID}`}
           strategy="afterInteractive"
         />
         <Script id="gtag-init" strategy="afterInteractive">
@@ -113,6 +115,7 @@ export default async function LocaleLayout({
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
             gtag('config', '${GADS_ID}');
+            gtag('config', '${GA4_ID}');
           `}
         </Script>
       </body>
